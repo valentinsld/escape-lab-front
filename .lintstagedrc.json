@@ -1,0 +1,5 @@
+{
+  "package.json": "sort-package-json",
+  "*.{js,vue}": "yarn lint:fix",
+  "*.{css,scss}": "yarn lint:css:fix"
+}

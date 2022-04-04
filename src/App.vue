@@ -2,6 +2,11 @@
   <div id="app">
     <h1>Le lab de l'arnaque</h1>
     <Sample text="sample component" />
+
+    <!-- Views -->
+    <transition name="fade-page" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 <script>
