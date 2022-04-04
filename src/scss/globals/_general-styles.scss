@@ -1,0 +1,40 @@
+.app {
+  width: 100%;
+  color: var(--color-text);
+
+  a {
+    color: inherit;
+  }
+
+  h1,
+  .f-h1 {
+    @include f-h1(); }
+
+  h2,
+  .f-h2 {
+    @include f-h2(); }
+
+  h3,
+  .f-h3 {
+    @include f-h3(); }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a {
+    font-style: normal !important;
+    color: inherit;
+  }
+
+  p,
+  .f-body {
+    @include f-body(); }
+
+  .f-link {
+    @include f-link(); }
+}
+

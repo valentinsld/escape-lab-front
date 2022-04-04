@@ -46,12 +46,12 @@ export default {
 
 <style lang="scss">
 .link {
-  /* @include f-link();
+  @include f-link();
+
   color: var(--color-text-link);
 
   &:hover {
     color: var(--color-text-link-hover);
-    text-decoration-color: rgba(0, 0, 0, 0.7);
-  } */
+  }
 }
 </style>

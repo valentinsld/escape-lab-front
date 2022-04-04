@@ -1,0 +1,26 @@
+$serif-font: serif;
+$sans-serif-font: arial, sans-serif;
+
+$avenir: 'Avenir', #{$sans-serif-font};
+$arial: 'Arial', #{$sans-serif-font};
+
+@mixin f-h1() {
+  font-family: $avenir;
+}
+
+@mixin f-h2() {
+  font-family: $avenir;
+}
+
+@mixin f-h3() {
+  font-family: $avenir;
+}
+
+@mixin f-body() {
+  font-family: $avenir;
+}
+
+@mixin f-link() {
+  font-family: $arial;
+  font-size: 0.9rem;
+}

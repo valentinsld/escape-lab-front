@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <h1>Le lab de l'arnaque</h1>
     <Sample text="sample component" />
 
@@ -13,14 +13,13 @@
 import Sample from '@/components/Sample'
 export default {
   name: 'App',
-  comments: {
-    Sample
-  },
   components: { Sample }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'scss/app';
+
 #app {
   margin-top: 60px;
   font-family: Avenir, Helvetica, Arial, sans-serif;

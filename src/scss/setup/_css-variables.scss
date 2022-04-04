@@ -1,0 +1,15 @@
+:root {
+    // Base colors
+    --color-white: #fff;
+    --color-black: #000;
+
+    // Text colors
+    --color-text: var(--color-black);
+    --color-text-secondary: var(--color-black);
+    --color-text-link: var(--color-black);
+    --color-text-link-hover: var(--color-black);
+
+    // Background colors
+    --color-background: var(--color-white);
+    --color-background-inverse: var(--color-black);
+}
