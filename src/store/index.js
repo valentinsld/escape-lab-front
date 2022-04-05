@@ -14,7 +14,8 @@ export const state = {
     : STATE_SCREEN.player,
   [STATE.socketID]: null,
   [STATE.idRoom]: null,
-  [STATE.listUsers]: {}
+  [STATE.listUsers]: {},
+  [STATE.isStart]: false
 }
 
 export const mutations = {
@@ -40,6 +41,9 @@ export const mutations = {
   },
   [MUTATIONS.listUsers](state, newVal) {
     state[STATE.listUsers] = newVal
+  },
+  [MUTATIONS.isStart](state, newVal) {
+    state[STATE.isStart] = newVal
   }
 }
 export const getters = {}

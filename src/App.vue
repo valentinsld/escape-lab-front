@@ -6,14 +6,24 @@
     <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
+
+    <UserDisconnected v-if="listUsers.length < 3 && isStart" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
+import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 
 export default {
   name: 'App',
+  components: {
+    UserDisconnected
+  },
+  computed: mapState([S.listUsers, S.isStart]),
   mounted() {
     this.initSubscribeConnexion()
   },
@@ -24,9 +34,14 @@ export default {
         this.$store.commit(M.socketID, this.$socket.id)
       })
 
-      this.sockets.subscribe('userConnected', ({ idRoom, listUsers }) => {
+      this.sockets.subscribe('userConnected', ({ idRoom, listUsers, isStart }) => {
         this.$store.commit(M.idRoom, idRoom)
         this.$store.commit(M.listUsers, listUsers)
+
+        console.log('isStart', isStart)
+        if (isStart) {
+          this.$router.push('/game')
+        }
       })
 
       this.sockets.subscribe('userDisconnected', ({ listUsers }) => {

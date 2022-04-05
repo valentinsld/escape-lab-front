@@ -5,7 +5,8 @@ export const STATE = {
   stateScreen: 'stateScreen',
   socketID: 'socketID',
   idRoom: 'idRoom',
-  listUsers: 'listUsers'
+  listUsers: 'listUsers',
+  isStart: 'isStart'
 }
 
 export const MUTATIONS = {
@@ -15,7 +16,8 @@ export const MUTATIONS = {
   stateScreen: 'M_STATE_SCREEN',
   socketID: 'M_SOCKET_ID',
   idRoom: 'M_ID_ROOM',
-  listUsers: 'M_LIST_USERS'
+  listUsers: 'M_LIST_USERS',
+  isStart: 'M_IS_START'
 }
 
 export const STATE_SCREEN = {
