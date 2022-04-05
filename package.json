@@ -10,7 +10,8 @@
     "lint:css:fix": "stylelint --fix ./**/*.vue ./**/*.scss",
     "lint:fix": "vue-cli-service lint --fix --cache && yarn lint:css:fix",
     "prepare": "husky install",
-    "serve": "vue-cli-service serve"
+    "serve": "vue-cli-service serve",
+    "start": "node server.js"
   },
   "config": {
     "commitizen": {
