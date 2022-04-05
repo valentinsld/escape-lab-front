@@ -1,4 +1,4 @@
-# escape-lab
+# Escape Lab
 
 ## Project setup
 ```
