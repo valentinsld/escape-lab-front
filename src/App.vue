@@ -8,9 +8,32 @@
     </transition>
   </div>
 </template>
+
 <script>
+import { MUTATIONS as M } from '@/store/helpers'
+
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    this.initSubscribeConnexion()
+  },
+  methods: {
+    initSubscribeConnexion() {
+      this.sockets.subscribe('connect', () => {
+        console.log(this.$socket.id)
+        this.$store.commit(M.socketID, this.$socket.id)
+      })
+
+      this.sockets.subscribe('userConnected', ({ idRoom, listUsers }) => {
+        this.$store.commit(M.idRoom, idRoom)
+        this.$store.commit(M.listUsers, listUsers)
+      })
+
+      this.sockets.subscribe('userDisconnected', ({ listUsers }) => {
+        this.$store.commit(M.listUsers, listUsers)
+      })
+    }
+  }
 }
 </script>
 
