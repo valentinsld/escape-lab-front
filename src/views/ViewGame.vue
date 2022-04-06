@@ -31,7 +31,7 @@ import OutroPlayer from '@/components/Game/Outro/OutroPlayer.vue'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE as S } from '@/store/helpers'
 
-const DEBUG = true
+const DEBUG = process.env.NODE_ENV === 'development'
 
 export default {
   name: 'ViewGame',
