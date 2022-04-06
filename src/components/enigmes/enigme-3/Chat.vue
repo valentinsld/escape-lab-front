@@ -2,9 +2,9 @@
   <div class="chat">
     <p class="chat__title">Chat interface</p>
     <ul class="chat__messages">
-      <li v-for="(item, index) in messages" :key="index" v-html="item" />
+      <li v-for="(item, index) in messages" ref="messages" :key="index" v-html="item" />
     </ul>
-    <div class="chat__choices">
+    <div ref="choice-buttons" class="chat__choices">
       <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].chat.question"></button>
       <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].chat.question"></button>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import Anime from 'animejs'
 export default {
   name: 'Chat',
   props: {
@@ -22,18 +23,57 @@ export default {
   },
   data() {
     return {
+      choicePos: null,
+      buttons: null,
       choices: [],
       messages: ['Le premier message', 'le second mesg']
     }
   },
-  mounted() {},
+  mounted() {
+    this.$nextTick(() => {
+      this.buttons = this.$refs?.['choice-buttons']
+      console.log(this.buttons)
+    })
+  },
   methods: {
     chooseQuestion(pos) {
-      this.messages.push(this.questions[pos].chat.question)
+      this.choicePos = pos
+      this.messages.push(this.questions[this.choicePos].chat.question)
+      this.$nextTick(() => {
+        this.msgAnimation()
+      })
+    },
+    nextChoice() {
       // remove choice and place non selected question at the end
-      this.$props.questions.splice(pos, 1)
+      this.$props.questions.splice(this.choicePos, 1)
       this.$props.questions.splice(this.$props.questions.length, 0, this.$props.questions.splice(0, 1)[0])
       console.log(this.$props.questions, 'question')
+    },
+    msgAnimation() {
+      const tl = Anime.timeline({
+        autoplay: false,
+        easing: 'easeInExpo'
+      })
+      tl.add({
+        targets: this.buttons,
+        opacity: [1, 0],
+        duration: 200,
+        complete: () => {
+          this.nextChoice()
+        }
+      })
+      tl.add({
+        targets: this.$refs?.messages[this.messages.length - 1],
+        opacity: [0, 1],
+        duration: 300,
+        delay: 100
+      })
+      tl.add({
+        targets: this.buttons,
+        opacity: [0, 1],
+        duration: 250
+      })
+      tl.restart()
     }
   }
 }
@@ -42,5 +82,12 @@ export default {
 <style lang="scss" scoped>
 .chat {
   background: var(--color-grey-light);
+}
+
+.chat__choices {
+  position: fixed;
+  bottom: 5vh;
+  left: 50%;
+  transform: translate(-50%);
 }
 </style>
