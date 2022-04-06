@@ -30,6 +30,7 @@ import OutroPlayer from '@/components/Game/Outro/OutroPlayer.vue'
 // Stores
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE as S } from '@/store/helpers'
+import { STATE_SCREEN } from '@/store/helpers'
 
 const DEBUG = process.env.NODE_ENV === 'development'
 
@@ -80,7 +81,7 @@ export default {
   },
   methods: {
     initPane() {
-      if (!DEBUG) return
+      if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane
