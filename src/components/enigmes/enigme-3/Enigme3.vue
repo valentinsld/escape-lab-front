@@ -1,7 +1,7 @@
 <template>
   <div class="enigme-3">
     <p>Enigme 3</p>
-    <Chat />
+    <Chat :questions="questions" />
   </div>
 </template>
 
