@@ -14,7 +14,8 @@ export default {
   data() {
     return {
       isBot: false,
-      trueRules: []
+      trueRules: [],
+      questions: []
     }
   },
   mounted() {
@@ -24,21 +25,23 @@ export default {
     generateAnnonce() {
       // choose if fake annonce or not
       this.isBot = Math.random() < 0.5
-
-      console.log(this.isBot)
-
-      this.pickRules()
+      this.pickValidRules()
+      this.generateQuestions()
+      console.log('CONFIG bot:', this.isBot, 'trueRules:', this.trueRules, 'questions:', this.questions)
     },
-    pickRules() {
+    pickValidRules() {
       const trueRulesNumber = this.isBot ? enigme3Data().config.rulesToDetectBot : 2
-      // choose true rules
-      /*for (let i = 0; i < trueRulesNumber; i++) {
-        this.trueRules.push(Math.floor(Math.random() * enigme3Data().rules.length) + 1)
-      }*/
       this.trueRules = enigme3Data()
         .rules.sort(() => Math.random() - Math.random())
         .slice(0, trueRulesNumber)
-      console.log(this.trueRules, 'rules')
+    },
+    generateQuestions() {
+      this.questions = enigme3Data()
+        .rules.filter(function (obj) {
+          return obj.chat
+        })
+        .sort(() => Math.random() - Math.random())
+        .slice(0, enigme3Data().config.questionsToDisplay)
     }
   }
 }
