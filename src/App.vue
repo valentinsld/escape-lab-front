@@ -34,9 +34,10 @@ export default {
         this.$store.commit(M.socketID, this.$socket.id)
       })
 
-      this.sockets.subscribe('userConnected', ({ idRoom, listUsers, isStart, newUser }) => {
+      this.sockets.subscribe('userConnected', ({ idRoom, listUsers, isStart, newUser, stepGame }) => {
         this.$store.commit(M.idRoom, idRoom)
         this.$store.commit(M.listUsers, listUsers)
+        this.$store.commit(M.stepGame, stepGame)
 
         // if is you
         console.log(this.$store.state[S.typeScreen])
