@@ -12,10 +12,12 @@ export const state = {
   [STATE.stateScreen]: !/iPhone|iPod|Android/i.test(navigator.userAgent)
     ? STATE_SCREEN.mainScreen
     : STATE_SCREEN.player,
+  [STATE.typeScreen]: null,
   [STATE.socketID]: null,
   [STATE.idRoom]: null,
   [STATE.listUsers]: {},
-  [STATE.isStart]: false
+  [STATE.isStart]: false,
+  [STATE.stepGame]: null
 }
 
 export const mutations = {
@@ -32,6 +34,9 @@ export const mutations = {
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal
   },
+  [MUTATIONS.typeScreen](state, newVal) {
+    state[STATE.typeScreen] = newVal.charAt(0).toUpperCase() + newVal.slice(1)
+  },
 
   [MUTATIONS.socketID](state, newVal) {
     state[STATE.socketID] = newVal
@@ -44,6 +49,10 @@ export const mutations = {
   },
   [MUTATIONS.isStart](state, newVal) {
     state[STATE.isStart] = newVal
+  },
+
+  [MUTATIONS.stepGame](state, newVal) {
+    state[STATE.stepGame] = newVal
   }
 }
 export const getters = {}

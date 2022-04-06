@@ -13,6 +13,7 @@
 import { mapState } from 'vuex'
 
 import { STATE as S } from '@/store/helpers'
+import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 
 export default {
@@ -33,6 +34,7 @@ export default {
 
     this.sockets.subscribe('startGame', () => {
       console.log('startGame !!!')
+      this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
     })
   }
