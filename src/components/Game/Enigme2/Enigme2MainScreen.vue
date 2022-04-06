@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>Enigme 1 MainScreen</h1>
+    <h1>Enigme 2 MainScreen</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Enigme1MainScreen'
+  name: 'Enigme2MainScreen'
 }
 </script>
