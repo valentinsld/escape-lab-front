@@ -17,6 +17,7 @@
 import Link from '@/components/primitives/Link'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
+
 export default {
   name: 'Sample',
   components: {
