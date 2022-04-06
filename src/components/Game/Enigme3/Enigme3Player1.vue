@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>Enigme 1 Player1</h1>
+    <h1>Enigme 3 Player1</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Enigme1Player1'
+  name: 'Enigme3Player1'
 }
 </script>
