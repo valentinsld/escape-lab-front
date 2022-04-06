@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <h1>Le lab de l'arnaque</h1>
-    <Sample text="sample component" />
+    <!--    <Sample text="sample component" />-->
 
     <!-- Views -->
     <transition name="fade-page" mode="out-in">

@@ -1,10 +1,14 @@
 <template>
-  <p>View Connection</p>
+  <ViewContainer name="connection">
+    <p>View Connection</p>
+  </ViewContainer>
 </template>
 
 <script>
+import ViewContainer from '@/views/ViewContainer'
 export default {
-  name: 'ViewConnection'
+  name: 'ViewConnection',
+  components: { ViewContainer }
 }
 </script>
 
