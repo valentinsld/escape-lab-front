@@ -1,19 +1,64 @@
 <template>
   <div id="app" class="app">
     <h1>Le lab de l'arnaque</h1>
-    <!--    <Sample text="sample component" />-->
 
     <!-- Views -->
     <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
+
+    <UserDisconnected v-if="listUsers.length < 3 && isStart" />
   </div>
 </template>
+
 <script>
-import Sample from '@/components/Sample'
+import { mapState } from 'vuex'
+
+import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
+import { STATE as S } from '@/store/helpers'
+import { MUTATIONS as M } from '@/store/helpers'
+
 export default {
   name: 'App',
-  components: { Sample }
+  components: {
+    UserDisconnected
+  },
+  computed: mapState({
+    listUsers: (state) => state[S.listUsers],
+    isStart: (state) => state[S.isStart]
+  }),
+  mounted() {
+    this.initSubscribeConnexion()
+  },
+  methods: {
+    initSubscribeConnexion() {
+      this.sockets.subscribe('connect', () => {
+        console.log(this.$socket.id)
+        this.$store.commit(M.socketID, this.$socket.id)
+      })
+
+      this.sockets.subscribe('userConnected', ({ idRoom, listUsers, isStart, newUser, stepGame }) => {
+        this.$store.commit(M.idRoom, idRoom)
+        this.$store.commit(M.listUsers, listUsers)
+        this.$store.commit(M.stepGame, stepGame)
+
+        // if is you
+        console.log(this.$store.state[S.typeScreen])
+        if (!this.$store.state[S.typeScreen]) {
+          this.$store.commit(M.typeScreen, newUser.type)
+        }
+
+        console.log('isStart', isStart)
+        if (isStart) {
+          this.$router.push('/game')
+        }
+      })
+
+      this.sockets.subscribe('userDisconnected', ({ listUsers }) => {
+        this.$store.commit(M.listUsers, listUsers)
+      })
+    }
+  }
 }
 </script>
 
