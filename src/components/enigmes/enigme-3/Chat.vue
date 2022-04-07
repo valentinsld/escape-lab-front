@@ -2,7 +2,13 @@
   <div class="chat">
     <p class="chat__title">Chat interface</p>
     <ul class="chat__messages">
-      <li v-for="(item, index) in messages" ref="messages" :key="index" v-html="item" />
+      <li
+        v-for="(item, index) in messages"
+        ref="messages"
+        :key="index"
+        :is-received="item.isReceived"
+        v-html="item.content"
+      />
     </ul>
     <div ref="choice-buttons" class="chat__choices">
       <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].chat.question"></button>
@@ -26,7 +32,10 @@ export default {
       choicePos: null,
       buttons: null,
       choices: [],
-      messages: ['Le premier message', 'le second mesg']
+      messages: [
+        { isReceived: false, content: 'Le premier message' },
+        { isReceived: true, content: 'le second mesg' }
+      ]
     }
   },
   mounted() {
@@ -38,7 +47,8 @@ export default {
   methods: {
     chooseQuestion(pos) {
       this.choicePos = pos
-      this.messages.push(this.questions[this.choicePos].chat.question)
+      this.messages.push({ isReceived: false, content: this.questions[this.choicePos].chat.question })
+      this.getResponse()
       this.$nextTick(() => {
         this.msgAnimation()
       })
@@ -48,6 +58,12 @@ export default {
       this.$props.questions.splice(this.choicePos, 1)
       this.$props.questions.splice(this.$props.questions.length, 0, this.$props.questions.splice(0, 1)[0])
       console.log(this.$props.questions, 'question')
+    },
+    getResponse() {
+      this.messages.push({ isReceived: true, content: this.questions[this.choicePos].chat.normalAnswer })
+    },
+    getLastMsgIndex(isReceived) {
+      return this.messages.map((obj) => obj.isReceived === isReceived).lastIndexOf(true)
     },
     msgAnimation() {
       const tl = Anime.timeline({
@@ -63,10 +79,16 @@ export default {
         }
       })
       tl.add({
-        targets: this.$refs?.messages[this.messages.length - 1],
+        targets: this.$refs?.messages[this.getLastMsgIndex(false)],
+        opacity: [0, 1],
+        duration: 200,
+        delay: 50
+      })
+      tl.add({
+        targets: this.$refs?.messages[this.getLastMsgIndex(true)],
         opacity: [0, 1],
         duration: 300,
-        delay: 100
+        delay: 350
       })
       tl.add({
         targets: this.buttons,
