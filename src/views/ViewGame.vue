@@ -58,7 +58,10 @@ export default {
       pane: null
     }
   },
-  computed: mapState([S.typeScreen, S.stepGame]),
+  computed: mapState({
+    typeScreen: (state) => state[S.typeScreen],
+    stepGame: (state) => state[S.stepGame]
+  }),
   beforeMount() {
     console.log(this.$store.state[S.idRoom])
     if (!this.$store.state[S.idRoom]) {
@@ -74,9 +77,7 @@ export default {
       this.$store.commit(M.stepGame, stepGame)
     })
   },
-  unmounted() {
-    // TODO : fix it, not working
-    console.log('unmounted GAME')
+  beforeDestroy() {
     this.$data.pane.remove()
   },
   methods: {

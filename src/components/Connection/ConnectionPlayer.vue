@@ -1,8 +1,11 @@
 <template>
   <div>
     <h1>Connexion Player</h1>
+
+    <p>idRoomFromUrl : {{ idRoomFromUrl }}</p>
+
     <div v-if="!idRoom">
-      <input ref="inputIdRoom" />
+      <input ref="inputIdRoom" :value="idRoomFromUrl" />
       <button @click="connectToRoom">Connect to room</button>
     </div>
 
@@ -24,9 +27,26 @@ import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 
+const getIdRoomFromUrl = () => {
+  const searchParams = new URLSearchParams(window.location.search)
+
+  if (searchParams.has('room')) {
+    return searchParams.get('room')
+  }
+  return ''
+}
+
 export default {
   name: 'ConnectionPlayer',
-  computed: mapState([S.idRoom, S.listUsers]),
+  data() {
+    return {
+      idRoomFromUrl: getIdRoomFromUrl()
+    }
+  },
+  computed: mapState({
+    idRoom: (state) => state[S.idRoom],
+    listUsers: (state) => state[S.listUsers]
+  }),
   mounted() {
     console.log('mounted', this.$socket)
 
@@ -37,6 +57,10 @@ export default {
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
     })
+
+    if (this.$data.idRoomFromUrl) {
+      this.connectToRoom()
+    }
   },
   methods: {
     connectToRoom() {
