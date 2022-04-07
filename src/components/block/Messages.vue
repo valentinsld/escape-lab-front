@@ -46,15 +46,20 @@ export default {
     getFirstMsgIndex() {
       return this.$props.messages.map((obj) => obj.isReveal === false).indexOf(true)
     },
-    restart() {
-      this.getFirstMsgIndex() > 0 ? this.msgAnimation() : (this.animLogComplete = 0)
+    checkEnd() {
+      if (this.getFirstMsgIndex() > 0) {
+        this.msgAnimation()
+      } else {
+        this.animLogComplete = 0
+        this.$emit('onanimation:iscomplete', true)
+      }
     },
     msgAnimation() {
       const tl = Anime.timeline({
         easing: 'easeInExpo',
         complete: () => {
           this.animLogComplete++
-          this.restart()
+          this.checkEnd()
         }
       })
       tl.add({
