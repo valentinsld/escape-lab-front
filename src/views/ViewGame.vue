@@ -1,7 +1,7 @@
+/* eslint-disable vue/no-multiple-template-root */
 <template>
   <div>
     <p>View Game</p>
-
     <Components :is="stepGame + typeScreen" />
   </div>
 </template>
