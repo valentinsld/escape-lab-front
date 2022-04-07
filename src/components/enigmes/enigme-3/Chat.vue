@@ -37,10 +37,7 @@ export default {
       choicePos: null,
       buttons: null,
       choices: [],
-      messages: [
-        { isReceived: false, content: 'Le premier message' },
-        { isReceived: true, content: 'le second mesg' }
-      ]
+      messages: [{ isReveal: true, isReceived: false, content: 'Le premier message' }]
     }
   },
   mounted() {
@@ -52,8 +49,9 @@ export default {
   methods: {
     chooseQuestion(pos) {
       this.choicePos = pos
-      this.messages.push({ isReceived: false, content: this.questions[this.choicePos].chat.question })
+      this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].chat.question })
       this.getResponse()
+      this.nextChoice()
       /*this.$nextTick(() => {
         this.msgAnimation()
       })*/
@@ -65,7 +63,11 @@ export default {
       console.log(this.$props.questions, 'question')
     },
     getResponse() {
-      this.messages.push({ isReceived: true, content: this.questions[this.choicePos].chat.normalAnswer })
+      this.messages.push({
+        isReveal: false,
+        isReceived: true,
+        content: this.questions[this.choicePos].chat.normalAnswer
+      })
     },
     getLastMsgIndex(isReceived) {
       return this.messages.map((obj) => obj.isReceived === isReceived).lastIndexOf(true)

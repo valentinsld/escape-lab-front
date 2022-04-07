@@ -5,6 +5,7 @@
       ref="messages"
       :key="index"
       class="message"
+      :is-reveal="item.isReveal"
       :is-received="item.isReceived"
       v-html="item.content"
     />
@@ -22,28 +23,38 @@ export default {
     }
   },
   watch: {
-    messages: function (newVal) {
-      console.log(this.$props.messages, newVal, 'haaa')
-      this.msgAnimation()
+    messages: function () {
+      this.$nextTick(() => {
+        this.msgAnimation()
+      })
     }
   },
   methods: {
-    getLastMsgIndex() {
-      console.log(this.messages.map().lastIndexOf(true), 'ça passe ?')
-      return this.messages.map().lastIndexOf(true)
+    getFirstMsgIndex() {
+      return this.$props.messages.map((obj) => obj.isReveal === false).indexOf(true)
+    },
+    restart() {
+      if (this.getFirstMsgIndex() > 0) this.msgAnimation()
     },
     msgAnimation() {
       const tl = Anime.timeline({
-        autoplay: false,
-        easing: 'easeInExpo'
+        easing: 'easeInExpo',
+        complete: () => {
+          this.restart()
+        }
       })
       tl.add({
-        targets: this.$refs?.messages[0],
+        targets: this.$refs?.messages[this.getFirstMsgIndex()],
         opacity: [0, 1],
-        duration: 2000,
-        delay: 50
+        duration: 250,
+        delay: 50,
+        complete: () => {
+          this.$props.messages[this.getFirstMsgIndex()] = {
+            ...this.$props.messages[this.getFirstMsgIndex()],
+            isReveal: true
+          }
+        }
       })
-      tl.restart()
     }
   }
 }
@@ -57,10 +68,15 @@ export default {
 
 .message {
   margin-left: auto;
+  opacity: 0;
 
   &[is-received='true'] {
     margin-right: auto;
     margin-left: 0;
+  }
+
+  &[is-reveal='true'] {
+    opacity: 1;
   }
 }
 </style>
