@@ -1,14 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { MUTATIONS, STATE } from '@/store/helpers'
+import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
 
 Vue.use(Vuex)
 
 export const state = {
   [STATE.windowH]: window.innerHeight,
   [STATE.windowW]: window.innerWidth,
-  [STATE.myState]: 0
+  [STATE.myState]: 0,
+  [STATE.stateScreen]: !/iPhone|iPod|Android/i.test(navigator.userAgent)
+    ? STATE_SCREEN.mainScreen
+    : STATE_SCREEN.player,
+  [STATE.typeScreen]: null,
+  [STATE.socketID]: null,
+  [STATE.idRoom]: null,
+  [STATE.listUsers]: {},
+  [STATE.isStart]: false,
+  [STATE.stepGame]: null
 }
 
 export const mutations = {
@@ -20,6 +29,30 @@ export const mutations = {
   },
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
+  },
+
+  [MUTATIONS.stateScreen](state, newVal) {
+    state[STATE.stateScreen] = newVal
+  },
+  [MUTATIONS.typeScreen](state, newVal) {
+    state[STATE.typeScreen] = newVal.charAt(0).toUpperCase() + newVal.slice(1)
+  },
+
+  [MUTATIONS.socketID](state, newVal) {
+    state[STATE.socketID] = newVal
+  },
+  [MUTATIONS.idRoom](state, newVal) {
+    state[STATE.idRoom] = newVal
+  },
+  [MUTATIONS.listUsers](state, newVal) {
+    state[STATE.listUsers] = newVal
+  },
+  [MUTATIONS.isStart](state, newVal) {
+    state[STATE.isStart] = newVal
+  },
+
+  [MUTATIONS.stepGame](state, newVal) {
+    state[STATE.stepGame] = newVal
   }
 }
 export const getters = {}
