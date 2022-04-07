@@ -20,6 +20,10 @@ export default {
     questions: {
       type: Array,
       default: null
+    },
+    trueRules: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -41,7 +45,6 @@ export default {
       this.choicePos = pos
       this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].chat.question })
       this.getResponse()
-      this.nextChoice()
     },
     nextChoice() {
       // remove choice btn and place non selected question btn at the end of questions
@@ -49,13 +52,20 @@ export default {
       this.$props.questions.splice(this.$props.questions.length, 0, this.$props.questions.splice(0, 1)[0])
     },
     getResponse() {
+      const answer =
+        this.trueRules.filter((e) => e.id === this.questions[this.choicePos].id).length > 0
+          ? 'botAnswer'
+          : 'normalAnswer'
+      console.log('answer :', answer, 'rules :', this.trueRules, 'response :', this.questions[this.choicePos].id)
+      //const answer =
       this.messages.push({
         isReveal: false,
         isReceived: true,
-        content: this.questions[this.choicePos].chat.normalAnswer
+        content: this.questions[this.choicePos].chat[answer]
       })
     },
     handleMessagesComplete() {
+      this.nextChoice()
       // Show back choices buttons
       const tl = Anime.timeline({
         easing: 'easeInExpo'

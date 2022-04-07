@@ -1,7 +1,7 @@
 <template>
   <div class="enigme-3">
     <p>Enigme 3</p>
-    <Chat :questions="questions" />
+    <Chat :questions="questions" :true-rules="trueRules" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     generateAnnonce() {
-      // choose if fake annonce or not
+      // choose if will be fake annonce or not
       this.isBot = Math.random() < 0.5
       this.pickValidRules()
       this.generateQuestions()
