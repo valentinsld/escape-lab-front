@@ -20,6 +20,19 @@ export default {
     messages: {
       type: Array,
       default: null
+    },
+    delay: {
+      type: Object,
+      default: () => ({ default: 400, firstMsg: 50 })
+    },
+    duration: {
+      type: Object,
+      default: () => ({ default: 300, firstMsg: null })
+    }
+  },
+  data() {
+    return {
+      animLogComplete: 0
     }
   },
   watch: {
@@ -34,20 +47,21 @@ export default {
       return this.$props.messages.map((obj) => obj.isReveal === false).indexOf(true)
     },
     restart() {
-      if (this.getFirstMsgIndex() > 0) this.msgAnimation()
+      this.getFirstMsgIndex() > 0 ? this.msgAnimation() : (this.animLogComplete = 0)
     },
     msgAnimation() {
       const tl = Anime.timeline({
         easing: 'easeInExpo',
         complete: () => {
+          this.animLogComplete++
           this.restart()
         }
       })
       tl.add({
         targets: this.$refs?.messages[this.getFirstMsgIndex()],
         opacity: [0, 1],
-        duration: 250,
-        delay: 50,
+        duration: this.duration.firstMsg && this.animLogComplete === 0 ? this.duration.firstMsg : this.duration.default,
+        delay: this.delay.firstMsg && this.animLogComplete === 0 ? this.delay.firstMsg : this.delay.default,
         complete: () => {
           this.$props.messages[this.getFirstMsgIndex()] = {
             ...this.$props.messages[this.getFirstMsgIndex()],
