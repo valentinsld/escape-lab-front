@@ -77,9 +77,7 @@ export default {
       this.$store.commit(M.stepGame, stepGame)
     })
   },
-  unmounted() {
-    // TODO : fix it, not working
-    console.log('unmounted GAME')
+  beforeDestroy() {
     this.$data.pane.remove()
   },
   methods: {
