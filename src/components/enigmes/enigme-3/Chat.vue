@@ -1,15 +1,17 @@
 <template>
   <div class="chat">
     <p class="chat__title">Chat interface</p>
-    <ul class="chat__messages">
-      <li
+    <Messages :messages="messages" />
+    <!--    <div class="chat__messages">
+      <p
         v-for="(item, index) in messages"
         ref="messages"
         :key="index"
+        class="chat__message"
         :is-received="item.isReceived"
         v-html="item.content"
       />
-    </ul>
+    </div>-->
     <div ref="choice-buttons" class="chat__choices">
       <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].chat.question"></button>
       <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].chat.question"></button>
@@ -19,8 +21,11 @@
 
 <script>
 import Anime from 'animejs'
+
+import Messages from '@/components/block/Messages'
 export default {
   name: 'Chat',
+  components: { Messages },
   props: {
     questions: {
       type: Array,
@@ -49,9 +54,9 @@ export default {
       this.choicePos = pos
       this.messages.push({ isReceived: false, content: this.questions[this.choicePos].chat.question })
       this.getResponse()
-      this.$nextTick(() => {
+      /*this.$nextTick(() => {
         this.msgAnimation()
-      })
+      })*/
     },
     nextChoice() {
       // remove choice and place non selected question at the end
@@ -104,6 +109,20 @@ export default {
 <style lang="scss" scoped>
 .chat {
   background: var(--color-grey-light);
+}
+
+.chat__messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat__message {
+  margin-left: auto;
+
+  &[is-received='true'] {
+    margin-right: auto;
+    margin-left: 0;
+  }
 }
 
 .chat__choices {
