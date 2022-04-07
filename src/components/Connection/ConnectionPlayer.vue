@@ -26,7 +26,10 @@ import { STATE_SCREEN } from '@/store/helpers'
 
 export default {
   name: 'ConnectionPlayer',
-  computed: mapState([S.idRoom, S.listUsers]),
+  computed: mapState({
+    idRoom: (state) => state[S.idRoom],
+    listUsers: (state) => state[S.listUsers]
+  }),
   mounted() {
     console.log('mounted', this.$socket)
 

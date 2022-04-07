@@ -58,7 +58,10 @@ export default {
       pane: null
     }
   },
-  computed: mapState([S.typeScreen, S.stepGame]),
+  computed: mapState({
+    typeScreen: (state) => state[S.typeScreen],
+    stepGame: (state) => state[S.stepGame]
+  }),
   beforeMount() {
     console.log(this.$store.state[S.idRoom])
     if (!this.$store.state[S.idRoom]) {

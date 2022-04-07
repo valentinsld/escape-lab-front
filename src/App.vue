@@ -23,7 +23,10 @@ export default {
   components: {
     UserDisconnected
   },
-  computed: mapState([S.listUsers, S.isStart]),
+  computed: mapState({
+    listUsers: (state) => state[S.listUsers],
+    isStart: (state) => state[S.isStart]
+  }),
   mounted() {
     this.initSubscribeConnexion()
   },
