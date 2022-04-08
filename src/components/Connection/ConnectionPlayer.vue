@@ -2,8 +2,6 @@
   <div>
     <h1>Connexion Player</h1>
 
-    <p>idRoomFromUrl : {{ idRoomFromUrl }}</p>
-
     <div v-if="!idRoom">
       <input ref="inputIdRoom" :value="idRoomFromUrl" />
       <button @click="connectToRoom">Connect to room</button>
