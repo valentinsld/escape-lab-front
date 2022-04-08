@@ -1,14 +1,13 @@
 <template>
   <div class="enigme-3">
     <p>Enigme 3</p>
-    <Chat :if="typeScreen === 'Player1'" :questions="questions" :true-rules="trueRules" />
+    <Enigme3Player1 v-if="typeScreen === 'Player1'" :questions="questions" :true-rules="trueRules" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 
-import Chat from '@/components/enigmes/enigme-3/Chat'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
@@ -16,7 +15,7 @@ import { enigme3Data } from '@/data/enigme3'
 import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3',
-  components: { Chat, Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
+  components: { Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
   data() {
     return {
       isBot: false,
@@ -28,7 +27,6 @@ export default {
     typeScreen: (state) => state[S.typeScreen]
   }),
   mounted() {
-    console.log(this.typeScreen, 'type')
     this.generateAnnonce()
   },
   methods: {
