@@ -14,10 +14,7 @@ Vue.config.productionTip = false
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: SocketIO(
-      process.env.NODE_ENV === 'development' ? 'http://localhost:5050/' : 'https://escape-lab-back.herokuapp.com/',
-      optionsSocket
-    )
+    connection: SocketIO('https://escape-lab-back.herokuapp.com/', optionsSocket)
     // vuex: {
     //   store,
     //   actionPrefix: 'SOCKET_',

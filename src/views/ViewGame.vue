@@ -1,57 +1,39 @@
 <template>
-  <div>
+  <ViewContainer name="game">
     <p>View Game</p>
-
-    <Components :is="stepGame + typeScreen" />
-  </div>
+    <Components :is="stepGame" />
+  </ViewContainer>
 </template>
 
 <script>
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
-// enigme 1
-import Enigme1MainScreen from '@/components/Game/Enigme1/Enigme1MainScreen.vue'
-import Enigme1Player1 from '@/components/Game/Enigme1/Enigme1Player1.vue'
-import Enigme1Player2 from '@/components/Game/Enigme1/Enigme1Player2.vue'
-// enigme 2
-import Enigme2MainScreen from '@/components/Game/Enigme2/Enigme2MainScreen.vue'
-import Enigme2Player from '@/components/Game/Enigme2/Enigme2Player.vue'
-// enigme 3
-import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
-import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
-import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
+// enigmes
+import Enigme1 from '@/components/Game/Enigme1/Enigme1'
+import Enigme2 from '@/components/Game/Enigme2/Enigme2'
+import Enigme3 from '@/components/Game/Enigme3/Enigme3'
 // intro
-import IntroMainScreen from '@/components/Game/Intro/IntroMainScreen.vue'
-import IntroPlayer from '@/components/Game/Intro/IntroPlayer.vue'
-// Outro
-import OutroMainScreen from '@/components/Game/Outro/OutroMainScreen.vue'
-import OutroPlayer from '@/components/Game/Outro/OutroPlayer.vue'
+import Intro from '@/components/Game/Intro/Intro'
+// outro
+import Outro from '@/components/Game/Outro/Outro'
 // Stores
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
+import ViewContainer from '@/views/ViewContainer'
 
 const DEBUG = process.env.NODE_ENV === 'development'
 
 export default {
   name: 'ViewGame',
   components: {
-    IntroMainScreen,
-    IntroPlayer1: IntroPlayer,
-    IntroPlayer2: IntroPlayer,
-    Enigme1MainScreen,
-    Enigme1Player1,
-    Enigme1Player2,
-    Enigme2MainScreen,
-    Enigme2Player1: Enigme2Player,
-    Enigme2Player2: Enigme2Player,
-    Enigme3MainScreen,
-    Enigme3Player1,
-    Enigme3Player2,
-    OutroMainScreen,
-    OutroPlayer1: OutroPlayer,
-    OutroPlayer2: OutroPlayer
+    Intro,
+    Enigme3,
+    Enigme2,
+    Enigme1,
+    Outro,
+    ViewContainer
   },
   data() {
     return {
