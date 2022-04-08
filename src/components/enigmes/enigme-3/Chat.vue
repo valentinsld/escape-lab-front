@@ -14,7 +14,7 @@ import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
 export default {
-  name: 'Enigme3player1',
+  name: 'Chat',
   components: { Messages },
   props: {
     questions: {
