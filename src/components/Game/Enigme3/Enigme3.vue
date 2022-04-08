@@ -28,6 +28,7 @@ export default {
     typeScreen: (state) => state[S.typeScreen]
   }),
   mounted() {
+    console.log(this.typeScreen, 'type')
     this.generateAnnonce()
   },
   methods: {
