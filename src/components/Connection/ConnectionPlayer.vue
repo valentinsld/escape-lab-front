@@ -46,8 +46,6 @@ export default {
     listUsers: (state) => state[S.listUsers]
   }),
   mounted() {
-    console.log('mounted', this.$socket)
-
     this.$socket.emit('connection')
 
     this.sockets.subscribe('startGame', () => {
