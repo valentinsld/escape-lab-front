@@ -18,6 +18,20 @@ import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 
+const ERROR_SOCKETS = [
+  'error',
+  'reconnect',
+  'reconnect_attempt',
+  'reconnecting',
+  'reconnect_error',
+  'reconnect_failed',
+  'connect_error',
+  'connect_timeout',
+  'connecting',
+  'ping',
+  'pong'
+]
+
 export default {
   name: 'App',
   components: {
@@ -56,6 +70,22 @@ export default {
 
       this.sockets.subscribe('userDisconnected', ({ listUsers }) => {
         this.$store.commit(M.listUsers, listUsers)
+      })
+
+      this.$socket.on('disconnect', () => {
+        console.error('YOU ARE DISCONNECTED')
+        if (process.env.NODE_ENV !== 'development') return
+        this.$router.push('/')
+        this.$store.commit(M.resetRoom)
+        setTimeout(() => {
+          window.location.reload()
+        }, 100)
+      })
+
+      ERROR_SOCKETS.forEach((err) => {
+        this.$socket.on(err, () => {
+          console.error('Socket : ', err)
+        })
       })
     }
   }
