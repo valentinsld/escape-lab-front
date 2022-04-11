@@ -65,7 +65,7 @@ export default {
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
-      this.connectToRoom('DEV001')
+      this.connectToRoom(null, 'DEV001')
       return
     }
 
@@ -81,7 +81,8 @@ export default {
     seeJoinRoomClick() {
       this.$data.seeJoinRoom = true
     },
-    connectToRoom(id = null) {
+    connectToRoom(ev, id = null) {
+      console.log('connectToRoom', ev, id)
       const idRoom = id || this.$refs.inputIdRoom.value
       this.$data.seeJoinRoom = false
 
