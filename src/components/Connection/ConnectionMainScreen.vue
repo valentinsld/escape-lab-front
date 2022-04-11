@@ -29,6 +29,8 @@ import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
 export default {
   name: 'ConnectionMainScreen',
   components: {
@@ -48,6 +50,18 @@ export default {
   mounted() {
     this.$socket.emit('connection')
 
+    this.sockets.subscribe('startGame', () => {
+      console.log('startGame !!!')
+      this.$store.commit(M.stepGame, 'Intro')
+      this.$router.push('/game')
+    })
+
+    // Si c'est en developpement se connecter direct à la room
+    if (IS_DEV) {
+      this.connectToRoom('DEV001')
+      return
+    }
+
     const loginData = {
       isMainScreen: this.$store.state[S.stateScreen] === STATE_SCREEN.mainScreen,
       isPlayer: this.$store.state[S.stateScreen] === STATE_SCREEN.player
@@ -55,19 +69,13 @@ export default {
     this.$socket.emit('connectToRoom', loginData, () => {
       console.log('connectToRoom', this.$socket.id)
     })
-
-    this.sockets.subscribe('startGame', () => {
-      console.log('startGame !!!')
-      this.$store.commit(M.stepGame, 'Intro')
-      this.$router.push('/game')
-    })
   },
   methods: {
     seeJoinRoomClick() {
       this.$data.seeJoinRoom = true
     },
-    connectToRoom() {
-      const idRoom = this.$refs.inputIdRoom.value
+    connectToRoom(id = null) {
+      const idRoom = id || this.$refs.inputIdRoom.value
       this.$data.seeJoinRoom = false
 
       const loginData = {

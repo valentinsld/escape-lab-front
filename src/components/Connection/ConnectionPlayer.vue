@@ -34,6 +34,8 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
 export default {
   name: 'ConnectionPlayer',
   data() {
@@ -46,8 +48,6 @@ export default {
     listUsers: (state) => state[S.listUsers]
   }),
   mounted() {
-    console.log('mounted', this.$socket)
-
     this.$socket.emit('connection')
 
     this.sockets.subscribe('startGame', () => {
@@ -59,10 +59,15 @@ export default {
     if (this.$data.idRoomFromUrl) {
       this.connectToRoom()
     }
+
+    // Si c'est en developpement se connecter direct à la room
+    if (IS_DEV) {
+      this.connectToRoom('DEV001')
+    }
   },
   methods: {
-    connectToRoom() {
-      const idRoom = this.$refs.inputIdRoom.value
+    connectToRoom(id = null) {
+      const idRoom = id || this.$refs.inputIdRoom.value
 
       const loginData = {
         isMainScreen: this.$store.state[S.stateScreen] === STATE_SCREEN.mainScreen,
