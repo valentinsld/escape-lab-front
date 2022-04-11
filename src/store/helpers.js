@@ -21,7 +21,8 @@ export const MUTATIONS = {
   idRoom: 'M_ID_ROOM',
   listUsers: 'M_LIST_USERS',
   isStart: 'M_IS_START',
-  stepGame: 'M_STEP_GAME'
+  stepGame: 'M_STEP_GAME',
+  resetRoom: 'M_RESET_ROOM'
 }
 
 export const STATE_SCREEN = {
