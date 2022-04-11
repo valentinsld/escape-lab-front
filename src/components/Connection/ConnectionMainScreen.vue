@@ -8,9 +8,12 @@
 
       <div v-if="!idRoom">Pas de connexion</div>
       <p>{{ idRoom }}</p>
-      <p v-if="listUsers.player1">Player 1 :{{ listUsers.player1 }}</p>
-      <p v-if="listUsers.player2">Player 2 :{{ listUsers.player2 }}</p>
-
+      <p v-if="listUsers.player1">
+        Player 1 :{{ listUsers.player1 }} {{ playerIsReady.includes(listUsers.player1) ? 'PRET' : '' }}
+      </p>
+      <p v-if="listUsers.player2">
+        Player 2 :{{ listUsers.player2 }} {{ playerIsReady.includes(listUsers.player2) ? 'PRET' : '' }}
+      </p>
       <button v-if="!seeJoinRoom" @click="seeJoinRoomClick">Rejoindre une room en cours</button>
       <div v-if="seeJoinRoom">
         <p>Rejoindre une room</p>
@@ -44,6 +47,7 @@ export default {
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
+    playerIsReady: (state) => state[S.playerIsReady],
 
     urlQrCode: () => window.location.origin + '?room='
   }),
@@ -54,6 +58,9 @@ export default {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
+    })
+    this.sockets.subscribe('playerIsReady', (data) => {
+      this.$store.commit(M.playerIsReady, data)
     })
 
     // Si c'est en developpement se connecter direct à la room
