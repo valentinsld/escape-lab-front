@@ -62,11 +62,11 @@ export default {
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
-      this.connectToRoom('DEV001')
+      this.connectToRoom(null, 'DEV001')
     }
   },
   methods: {
-    connectToRoom(id = null) {
+    connectToRoom(ev, id = null) {
       const idRoom = id || this.$refs.inputIdRoom.value
 
       const loginData = {
