@@ -1,7 +1,9 @@
 <template>
   <div class="enigme-3">
     <p>Enigme 3</p>
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" />
     <Enigme3Player1 v-if="typeScreen === 'Player1'" :questions="questions" :true-rules="trueRules" />
+    <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>
 </template>
 

@@ -1,11 +1,22 @@
 <template>
-  <div>
-    <h1>Enigme 3 Player2</h1>
+  <div class="notice">
+    <div v-for="(rule, i) in rules" :key="i" class="notice__rules-container">
+      <div class="notice__rule">
+        <h2 class="notice__rule__title" v-html="rule.name" />
+        <p class="notice__rule__description" v-html="rule.description" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { enigme3Data } from '@/data/enigme3'
 export default {
-  name: 'Enigme3Player2'
+  name: 'Enigme3Player2',
+  data() {
+    return {
+      rules: enigme3Data().notice_rules
+    }
+  }
 }
 </script>

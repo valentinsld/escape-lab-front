@@ -59,6 +59,48 @@ export const enigme3Data = () => ({
       }
     }
   ],
+  notice_rules: [
+    {
+      name: 'La règle 1',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 2',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 3',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 4',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 5',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 6',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 7',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 8',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 9',
+      description: 'Description de la règle'
+    },
+    {
+      name: 'La règle 10',
+      description: 'Description de la règle'
+    }
+  ],
   products: [
     {
       type: 'clothing',
@@ -69,12 +111,20 @@ export const enigme3Data = () => ({
       name: 'Pantalon'
     },
     {
-      type: 'vehicle',
-      name: ''
+      type: 'housing',
+      name: 'appartement'
+    },
+    {
+      type: 'housing',
+      name: 'maison'
     },
     {
       type: 'vehicle',
-      name: ''
+      name: 'belle voiture'
+    },
+    {
+      type: 'vehicle',
+      name: 'petite voiture'
     }
   ],
   config: {
@@ -82,7 +132,8 @@ export const enigme3Data = () => ({
     rulesToDetectBot: 3,
     prices: {
       clothing: [10, 500],
-      vehicle: [1000, 200000]
+      vehicle: [1000, 200000],
+      housing: [40000, 500000]
     }
   }
 })
