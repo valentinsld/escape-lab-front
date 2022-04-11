@@ -10,8 +10,12 @@
     <div v-else>
       <p>idRoom : {{ idRoom }}</p>
       <p v-if="listUsers.mainScreen">mainScreen :{{ listUsers.mainScreen }}</p>
-      <p v-if="listUsers.player1">Player 1 :{{ listUsers.player1 }}</p>
-      <p v-if="listUsers.player2">Player 2 :{{ listUsers.player2 }}</p>
+      <p v-if="listUsers.player1">
+        Player 1 :{{ listUsers.player1 }} {{ playerIsReady.includes(listUsers.player1) ? 'PRET' : '' }}
+      </p>
+      <p v-if="listUsers.player2">
+        Player 2 :{{ listUsers.player2 }} {{ playerIsReady.includes(listUsers.player2) ? 'PRET' : '' }}
+      </p>
     </div>
 
     <button v-if="listUsers.player1 && listUsers.player2" @click="isReady">isReady</button>
@@ -45,7 +49,8 @@ export default {
   },
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
-    listUsers: (state) => state[S.listUsers]
+    listUsers: (state) => state[S.listUsers],
+    playerIsReady: (state) => state[S.playerIsReady]
   }),
   mounted() {
     this.$socket.emit('connection')
@@ -54,6 +59,9 @@ export default {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
+    })
+    this.sockets.subscribe('playerIsReady', (data) => {
+      this.$store.commit(M.playerIsReady, data)
     })
 
     if (this.$data.idRoomFromUrl) {
@@ -78,6 +86,7 @@ export default {
       this.$socket.emit('connectToRoom', loginData)
     },
     isReady() {
+      console.log('isReady !!!')
       this.$socket.emit('isReady')
     }
   }

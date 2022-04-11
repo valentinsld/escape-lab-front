@@ -8,6 +8,7 @@ export const STATE = {
   idRoom: 'idRoom',
   listUsers: 'listUsers',
   isStart: 'isStart',
+  playerIsReady: 'playerIsReady',
   stepGame: 'stepGame'
 }
 
@@ -20,7 +21,8 @@ export const MUTATIONS = {
   socketID: 'M_SOCKET_ID',
   idRoom: 'M_ID_ROOM',
   listUsers: 'M_LIST_USERS',
-  isStart: 'M_IS_START',
+  isStart: 'isStart',
+  playerIsReady: 'M_PLAYER_IS_READY',
   stepGame: 'M_STEP_GAME',
   resetRoom: 'M_RESET_ROOM'
 }

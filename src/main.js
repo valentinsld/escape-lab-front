@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(
   new VueSocketIO({
-    debug: true,
+    debug: process.env.NODE_ENV === 'development',
     connection: SocketIO(
       process.env.NODE_ENV === 'development' ? 'http://localhost:5050/' : 'https://escape-lab-back.herokuapp.com/',
       optionsSocket
