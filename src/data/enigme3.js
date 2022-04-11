@@ -1,6 +1,6 @@
 export const enigme3Data = () => ({
   rules: [
-    { id: 1, name: 'price' },
+    { id: 1, name: 'stock' },
     { id: 2, name: '2' },
     { id: 3, name: '3' },
     { id: 4, name: '4' },
@@ -104,27 +104,24 @@ export const enigme3Data = () => ({
   products: [
     {
       type: 'clothing',
-      name: 'Pull en laine'
-    },
-    {
-      type: 'clothing',
-      name: 'Pantalon'
-    },
-    {
-      type: 'housing',
-      name: 'appartement'
+      name: 'Pull en laine',
+      normalImg: 'image normale vêtement',
+      botImg: 'image stock vêtement',
+      description: 'description vêtement'
     },
     {
       type: 'housing',
-      name: 'maison'
+      name: 'appartement',
+      normalImg: 'image normale appartement',
+      botImg: 'image stock appartement',
+      description: 'description appartement'
     },
     {
       type: 'vehicle',
-      name: 'belle voiture'
-    },
-    {
-      type: 'vehicle',
-      name: 'petite voiture'
+      name: 'belle voiture',
+      normalImg: 'image normale véhicule',
+      botImg: 'image stock véhicule',
+      description: 'description véhicule'
     }
   ],
   config: {

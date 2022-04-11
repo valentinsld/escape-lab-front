@@ -1,7 +1,7 @@
 <template>
   <div class="enigme-3">
     <p>Enigme 3</p>
-    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" />
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="product" />
     <Enigme3Player1 v-if="typeScreen === 'Player1'" :questions="questions" :true-rules="trueRules" />
     <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>
@@ -20,7 +20,9 @@ export default {
   components: { Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
   data() {
     return {
+      data: enigme3Data(),
       isBot: false,
+      product: null,
       trueRules: [],
       questions: []
     }
@@ -29,29 +31,45 @@ export default {
     typeScreen: (state) => state[S.typeScreen]
   }),
   mounted() {
-    this.generateAnnonce()
+    this.generateConfig()
   },
   methods: {
-    generateAnnonce() {
+    generateConfig() {
       // choose if will be fake annonce or not
       this.isBot = Math.random() < 0.5
       this.pickValidRules()
       this.generateQuestions()
-      console.log('CONFIG bot:', this.isBot, 'trueRules:', this.trueRules, 'questions:', this.questions)
+      this.generateAnnonce()
+      console.log(
+        'CONFIG bot:',
+        this.isBot,
+        'trueRules:',
+        this.trueRules,
+        'questions:',
+        this.questions,
+        'product:',
+        this.product
+      )
     },
     pickValidRules() {
-      const trueRulesNumber = this.isBot ? enigme3Data().config.rulesToDetectBot : 2
-      this.trueRules = enigme3Data()
-        .rules.sort(() => Math.random() - Math.random())
-        .slice(0, trueRulesNumber)
+      const trueRulesNumber = this.isBot ? this.data.config.rulesToDetectBot : 2
+      this.trueRules = this.data.rules.sort(() => Math.random() - Math.random()).slice(0, trueRulesNumber)
     },
     generateQuestions() {
-      this.questions = enigme3Data()
-        .rules.filter(function (obj) {
+      this.questions = this.data.rules
+        .filter(function (obj) {
           return obj.chat
         })
         .sort(() => Math.random() - Math.random())
-        .slice(0, enigme3Data().config.questionsToDisplay)
+        .slice(0, this.data.config.questionsToDisplay)
+    },
+    generateAnnonce() {
+      // select random product
+      const product = this.data.products[Math.floor(Math.random() * this.data.products.length)]
+      // check if has normal or bot image
+      const image = this.trueRules.some((obj) => obj.id === 1) ? product.botImg : product.normalImg
+      // check rules to see
+      this.product = { name: product.name, description: product.description, img: image }
     }
   }
 }
