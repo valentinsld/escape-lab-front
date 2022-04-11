@@ -16,6 +16,7 @@ export const state = {
   [STATE.socketID]: null,
   [STATE.idRoom]: null,
   [STATE.listUsers]: {},
+  [STATE.playerIsReady]: [],
   [STATE.isStart]: false,
   [STATE.stepGame]: null
 }
@@ -46,6 +47,9 @@ export const mutations = {
   },
   [MUTATIONS.listUsers](state, newVal) {
     state[STATE.listUsers] = newVal
+  },
+  [MUTATIONS.playerIsReady](state, newVal) {
+    state[STATE.playerIsReady] = newVal
   },
   [MUTATIONS.isStart](state, newVal) {
     state[STATE.isStart] = newVal
