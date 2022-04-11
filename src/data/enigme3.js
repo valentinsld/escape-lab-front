@@ -59,8 +59,30 @@ export const enigme3Data = () => ({
       }
     }
   ],
+  products: [
+    {
+      type: 'clothing',
+      name: 'Pull en laine'
+    },
+    {
+      type: 'clothing',
+      name: 'Pantalon'
+    },
+    {
+      type: 'vehicle',
+      name: ''
+    },
+    {
+      type: 'vehicle',
+      name: ''
+    }
+  ],
   config: {
     questionsToDisplay: 6,
-    rulesToDetectBot: 3
+    rulesToDetectBot: 3,
+    prices: {
+      clothing: [10, 500],
+      vehicle: [1000, 200000]
+    }
   }
 })

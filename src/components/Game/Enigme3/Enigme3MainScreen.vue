@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Enigme 3 MainScreen</h1>
+    <h1>Annonce</h1>
   </div>
 </template>
 
