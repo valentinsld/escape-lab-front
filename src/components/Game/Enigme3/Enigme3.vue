@@ -67,7 +67,7 @@ export default {
       // select random product
       const product = this.data.products[Math.floor(Math.random() * this.data.products.length)]
       // check if has normal or bot image
-      const image = this.trueRules.some((obj) => obj.id === 1) ? product.botImg : product.normalImg
+      const image = this.trueRules.some((obj) => obj.slug === 'stock') ? product.botImg : product.normalImg
       // check rules to see
       this.product = { name: product.name, description: product.description, img: image }
     }

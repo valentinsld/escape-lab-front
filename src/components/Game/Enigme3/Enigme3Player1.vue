@@ -53,10 +53,10 @@ export default {
     },
     getResponse() {
       const answer =
-        this.trueRules.filter((e) => e.id === this.questions[this.choicePos].id).length > 0
+        this.trueRules.filter((e) => e.slug === this.questions[this.choicePos].slug).length > 0
           ? 'botAnswer'
           : 'normalAnswer'
-      console.log('answer :', answer, 'rules :', this.trueRules, 'response :', this.questions[this.choicePos].id)
+      console.log('answer :', answer, 'rules :', this.trueRules, 'response :', this.questions[this.choicePos])
       //const answer =
       this.messages.push({
         isReveal: false,

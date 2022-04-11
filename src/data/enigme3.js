@@ -1,21 +1,19 @@
 export const enigme3Data = () => ({
   rules: [
-    { id: 1, name: 'stock' },
-    { id: 2, name: '2' },
-    { id: 3, name: '3' },
-    { id: 4, name: '4' },
+    { slug: 'stock' },
+    { slug: '2' },
+    { slug: '3' },
+    { slug: '4' },
     {
-      id: 5,
-      name: '5',
+      slug: 'price',
       chat: {
-        question: 'La question 5',
+        question: 'Quel est le prix du produit ?',
         normalAnswer: 'La bonne réponse',
         botAnswer: 'La réponse qui montre le bot'
       }
     },
     {
-      id: 6,
-      name: '6',
+      slug: '6',
       chat: {
         question: 'La question 6',
         normalAnswer: 'La bonne réponse',
@@ -23,8 +21,7 @@ export const enigme3Data = () => ({
       }
     },
     {
-      id: 7,
-      name: '7',
+      slug: '7',
       chat: {
         question: 'La question 7',
         normalAnswer: 'La bonne réponse',
@@ -32,8 +29,7 @@ export const enigme3Data = () => ({
       }
     },
     {
-      id: 8,
-      name: '8',
+      slug: '8',
       chat: {
         question: 'La question 8',
         normalAnswer: 'La bonne réponse',
@@ -41,8 +37,7 @@ export const enigme3Data = () => ({
       }
     },
     {
-      id: 9,
-      name: '9',
+      slug: '9',
       chat: {
         question: 'La question 9',
         normalAnswer: 'La bonne réponse',
@@ -50,8 +45,7 @@ export const enigme3Data = () => ({
       }
     },
     {
-      id: 10,
-      name: '10',
+      slug: '10',
       chat: {
         question: 'La question 10',
         normalAnswer: 'La bonne réponse',
