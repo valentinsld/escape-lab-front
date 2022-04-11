@@ -53,6 +53,13 @@ export const mutations = {
 
   [MUTATIONS.stepGame](state, newVal) {
     state[STATE.stepGame] = newVal
+  },
+  // reset room
+  [MUTATIONS.resetRoom](state) {
+    state[STATE.idRoom] = null
+    state[STATE.listUsers] = {}
+    state[STATE.stepGame] = null
+    state[STATE.typeScreen] = null
   }
 }
 export const getters = {}
