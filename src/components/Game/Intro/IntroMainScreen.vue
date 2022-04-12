@@ -18,17 +18,13 @@ export default {
       startVideo: false
     }
   },
-  mounted() {
-    this.initSocketsMessage()
+  sockets: {
+    'intro-startVideo': function () {
+      console.log('intro-startVideo !!!!!!')
+      this.$data.startVideo = true
+    }
   },
   methods: {
-    initSocketsMessage() {
-      // startVideo
-      this.sockets.subscribe('intro-startVideo', () => {
-        console.log('intro-startVideo !!!!!!')
-        this.$data.startVideo = true
-      })
-    },
     sendEndVideo() {
       this.$socket.emit('intro-endVideo')
     }

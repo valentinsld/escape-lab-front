@@ -22,22 +22,22 @@ export default {
   mounted() {
     this.initSocketsMessage()
   },
+  sockets: {
+    // subscribe new message
+    'intro-message': function (props) {
+      this.$data.messages.push(props)
+      this.$socket.emit('intro-recevedMessage')
+    },
+    // startVideo
+    'intro-startVideo': function () {
+      console.log('intro-startVideo !!!!!!')
+      this.$data.startVideo = true
+    }
+  },
   methods: {
     initSocketsMessage() {
       // launch start
       this.$socket.emit('intro-recevedMessage')
-
-      // subscribe new message
-      this.sockets.subscribe('intro-message', (props) => {
-        this.$data.messages.push(props)
-        this.$socket.emit('intro-recevedMessage')
-      })
-
-      // startVideo
-      this.sockets.subscribe('intro-startVideo', () => {
-        console.log('intro-startVideo !!!!!!')
-        this.$data.startVideo = true
-      })
     }
   }
 }

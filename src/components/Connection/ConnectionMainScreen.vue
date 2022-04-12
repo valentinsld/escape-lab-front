@@ -28,7 +28,7 @@ import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 
-const IS_DEV = process.env.NODE_ENV === 'development'
+const IS_DEV = process.env.NODE_ENV === 'development' && false
 
 export default {
   name: 'ConnectionMainScreen',
@@ -53,17 +53,18 @@ export default {
       return this.listUsers.player2 ? (this.playerIsReady.includes(this.listUsers.player2) ? 'PRET' : 'connected') : ''
     }
   }),
-  mounted() {
-    this.$socket.emit('connection')
-
-    this.sockets.subscribe('startGame', () => {
+  sockets: {
+    startGame: function () {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
-    })
-    this.sockets.subscribe('playerIsReady', (data) => {
+    },
+    playerIsReady: function (data) {
       this.$store.commit(M.playerIsReady, data)
-    })
+    }
+  },
+  mounted() {
+    this.$socket.emit('connection')
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {

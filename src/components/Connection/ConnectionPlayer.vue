@@ -35,7 +35,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development'
+const IS_DEV = process.env.NODE_ENV === 'development' && false
 
 export default {
   name: 'ConnectionPlayer',
@@ -49,17 +49,18 @@ export default {
     listUsers: (state) => state[S.listUsers],
     playerIsReady: (state) => state[S.playerIsReady]
   }),
-  mounted() {
-    this.$socket.emit('connection')
-
-    this.sockets.subscribe('startGame', () => {
+  sockets: {
+    startGame: function () {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
-    })
-    this.sockets.subscribe('playerIsReady', (data) => {
+    },
+    playerIsReady: function (data) {
       this.$store.commit(M.playerIsReady, data)
-    })
+    }
+  },
+  mounted() {
+    this.$socket.emit('connection')
 
     if (this.$data.idRoomFromUrl) {
       this.connectToRoom()
