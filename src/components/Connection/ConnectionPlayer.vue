@@ -14,7 +14,7 @@
 
     <div v-else>
       <p>Etes vous prêt ?</p>
-      <button @click="isReady">isReady</button>
+      <button :disabled="playerIsReady.includes(socketID)" @click="isReady">Je suis prêt !!</button>
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ export default {
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
+    socketID: (state) => state[S.socketID],
     playerIsReady: (state) => state[S.playerIsReady]
   }),
   sockets: {
