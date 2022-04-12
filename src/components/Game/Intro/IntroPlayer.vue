@@ -8,7 +8,7 @@
     <h1>Intro Player</h1>
 
     <div v-if="!startVideo">
-      <Messages :messages="messages" />
+      <Messages :messages="messages" :delay="{ default: 0, firstMsg: 0 }" />
     </div>
 
     <p v-else>{{ textIntro }}</p>
