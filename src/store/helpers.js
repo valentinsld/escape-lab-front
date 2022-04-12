@@ -8,7 +8,9 @@ export const STATE = {
   idRoom: 'idRoom',
   listUsers: 'listUsers',
   isStart: 'isStart',
-  stepGame: 'stepGame'
+  stepGame: 'stepGame',
+  // enigme 3
+  enigme3Config: 'enigme3Config'
 }
 
 export const MUTATIONS = {
@@ -22,7 +24,9 @@ export const MUTATIONS = {
   listUsers: 'M_LIST_USERS',
   isStart: 'M_IS_START',
   stepGame: 'M_STEP_GAME',
-  resetRoom: 'M_RESET_ROOM'
+  resetRoom: 'M_RESET_ROOM',
+  // enigme 3
+  enigme3Config: 'M_ENIGME_3_CONFIG'
 }
 
 export const STATE_SCREEN = {

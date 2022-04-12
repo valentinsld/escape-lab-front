@@ -1,8 +1,13 @@
 <template>
-  <div class="enigme-3">
-    <p>Enigme 3</p>
-    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="trueRules" />
-    <Enigme3Player1 v-if="typeScreen === 'Player1'" :true-rules="trueRules" />
+  <div v-if="config" class="enigme-3">
+    <div class="enigme-3__helper">
+      <h2>Config generated :</h2>
+      <div class="enigme-3__helper__rules">
+        <p v-for="(rule, i) in config" :key="i" v-html="` Règle ${rule.slug}`" />
+      </div>
+    </div>
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="config" />
+    <Enigme3Player1 v-if="typeScreen === 'Player1'" :true-rules="config" />
     <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>
 </template>
@@ -14,7 +19,7 @@ import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
 import { enigme3Data } from '@/data/enigme3'
-import { STATE as S } from '@/store/helpers'
+import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3',
   components: { Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
@@ -25,23 +30,43 @@ export default {
     }
   },
   computed: mapState({
-    typeScreen: (state) => state[S.typeScreen]
+    typeScreen: (state) => state[S.typeScreen],
+    config: (state) => state[S.enigme3Config]
   }),
   watch: {
-    trueRules: function (newVal, oldVal) {
-      // watch it
-      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    config: function (newVal) {
+      console.log('true rules enigme 3 : ', newVal)
     }
   },
   mounted() {
     //if main screen get config rules from back
-    this.typeScreen === 'MainScreen' &&
-      this.sockets.subscribe('sendEnigme3Config', (config) => {
-        console
-        this.trueRules = config
-      })
+    if (this.typeScreen === 'MainScreen') {
+      this.$socket.emit('sendEnigme3Config')
+    }
+    this.sockets.subscribe('sendEnigme3Config', (config) => {
+      this.$store.commit(M.enigme3Config, config)
+    })
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.enigme-3__helper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  display: block;
+  padding: 1em;
+  background: var(--color-grey-light);
+  transform: translateX(-50%);
+}
+
+.enigme-3__helper__rules {
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin: 10px;
+  }
+}
+</style>

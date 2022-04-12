@@ -28,12 +28,13 @@ export default {
       data: enigme3Data(),
       choicePos: null,
       buttons: null,
-      questions: null,
+      questions: [],
       choices: [],
       messages: [{ isReveal: true, isReceived: false, content: 'Le premier message' }]
     }
   },
   mounted() {
+    console.log('trueRules from player 1', this.trueRules)
     this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
