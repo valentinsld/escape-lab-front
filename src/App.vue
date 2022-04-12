@@ -1,7 +1,5 @@
 <template>
   <div id="app" class="app">
-    <h1>Le lab de l'arnaque</h1>
-
     <!-- Views -->
     <transition name="fade-page" mode="out-in">
       <router-view />
