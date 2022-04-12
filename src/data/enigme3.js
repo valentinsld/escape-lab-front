@@ -118,6 +118,10 @@ export const enigme3Data = () => ({
       description: 'description véhicule'
     }
   ],
+  finalAnswer: {
+    bot: 'Non, je vois clair dans ton jeu, t’es le bot arnaqueur !',
+    normal: 'Oui, je vous fais confiance, on y va !'
+  },
   config: {
     questionsToDisplay: 6,
     rulesToDetectBot: 3,

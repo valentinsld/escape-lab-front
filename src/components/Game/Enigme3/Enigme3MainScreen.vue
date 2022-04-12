@@ -38,3 +38,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.annonce-product {
+  border: 5px solid var(--color-black);
+}
+</style>
