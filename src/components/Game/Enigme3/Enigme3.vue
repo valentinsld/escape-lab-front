@@ -2,12 +2,13 @@
   <div v-if="config" class="enigme-3">
     <div class="enigme-3__helper">
       <h2>Config generated :</h2>
+      <h4 v-html="` is Bot : ${config.isBot}`" />
       <div class="enigme-3__helper__rules">
-        <p v-for="(rule, i) in config" :key="i" v-html="` Règle ${rule.slug}`" />
+        <p v-for="(rule, i) in config.trueRules" :key="i" v-html="` Règle ${rule.slug}`" />
       </div>
     </div>
-    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="config" />
-    <Enigme3Player1 v-if="typeScreen === 'Player1'" :true-rules="config" />
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="config.trueRules" />
+    <Enigme3Player1 v-if="typeScreen === 'Player1'" :true-rules="config.trueRules" />
     <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>
 </template>
