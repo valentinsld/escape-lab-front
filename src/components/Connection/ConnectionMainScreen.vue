@@ -28,7 +28,7 @@ import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 
-const IS_DEV = process.env.NODE_ENV === 'development' && false
+const IS_DEV = process.env.NODE_ENV === 'development'
 
 export default {
   name: 'ConnectionMainScreen',
