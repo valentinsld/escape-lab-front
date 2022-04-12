@@ -13,14 +13,11 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
+import { enigme3Data } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   components: { Messages },
   props: {
-    questions: {
-      type: Array,
-      default: null
-    },
     trueRules: {
       type: Array,
       default: () => []
@@ -28,18 +25,29 @@ export default {
   },
   data() {
     return {
+      data: enigme3Data(),
       choicePos: null,
       buttons: null,
+      questions: null,
       choices: [],
       messages: [{ isReveal: true, isReceived: false, content: 'Le premier message' }]
     }
   },
   mounted() {
+    this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
     })
   },
   methods: {
+    generateQuestions() {
+      this.questions = this.data.rules
+        .filter(function (obj) {
+          return obj.chat
+        })
+        .sort(() => Math.random() - Math.random())
+        .slice(0, this.data.config.questionsToDisplay)
+    },
     chooseQuestion(pos) {
       this.hideButtons()
       this.choicePos = pos
@@ -48,8 +56,8 @@ export default {
     },
     nextChoice() {
       // remove choice btn and place non selected question btn at the end of questions
-      this.$props.questions.splice(this.choicePos, 1)
-      this.$props.questions.splice(this.$props.questions.length, 0, this.$props.questions.splice(0, 1)[0])
+      this.questions.splice(this.choicePos, 1)
+      this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
     },
     getResponse() {
       const answer =
