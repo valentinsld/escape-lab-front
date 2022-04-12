@@ -35,7 +35,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development' && false
+const IS_DEV = process.env.NODE_ENV === 'development'
 
 export default {
   name: 'ConnectionPlayer',
