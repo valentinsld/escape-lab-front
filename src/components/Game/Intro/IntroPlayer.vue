@@ -1,22 +1,31 @@
 <template>
-  <div>
+  <div class="introPlayer">
     <h1>Intro Player</h1>
 
-    <div v-for="m in messages" :key="`message${m.id}`">
-      {{ m.text }}
+    <div v-if="!startVideo">
+      <Messages :messages="messages" />
     </div>
 
-    <h2 v-if="startVideo">VIdeo is started</h2>
+    <p v-else>{{ textIntro }}</p>
   </div>
 </template>
 
 <script>
+import Messages from '@/components/block/Messages'
+import { STATE as S } from '@/store/helpers'
+import { STATE_SCREEN } from '@/store/helpers'
+
 export default {
   name: 'IntroPlayer',
+  components: { Messages },
   data() {
     return {
       messages: [],
-      startVideo: false
+      startVideo: false,
+      textIntro:
+        this.$store.state[S.typeScreen] === STATE_SCREEN.player + '1'
+          ? 'Ce n’est pas très poli de regarder son téléphone quand quelqu’un vous parle !'
+          : 'Vous devriez écouter le vendeur qui vous parle, c’est plus poli …'
     }
   },
   mounted() {
@@ -24,8 +33,13 @@ export default {
   },
   sockets: {
     // subscribe new message
-    'intro-message': function (props) {
-      this.$data.messages.push(props)
+    'intro-message': function ({ user, message }) {
+      const newMessage = {
+        isReceived: user === this.$store.state[S.typeScreen],
+        isReveal: false,
+        content: message
+      }
+      this.$data.messages.push(newMessage)
       this.$socket.emit('intro-recevedMessage')
     },
     // startVideo
