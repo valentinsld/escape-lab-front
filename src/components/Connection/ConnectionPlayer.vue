@@ -7,18 +7,15 @@
       <button @click="connectToRoom">Connect to room</button>
     </div>
 
-    <div v-else>
-      <p>idRoom : {{ idRoom }}</p>
-      <p v-if="listUsers.mainScreen">mainScreen :{{ listUsers.mainScreen }}</p>
-      <p v-if="listUsers.player1">
-        Player 1 :{{ listUsers.player1 }} {{ playerIsReady.includes(listUsers.player1) ? 'PRET' : '' }}
-      </p>
-      <p v-if="listUsers.player2">
-        Player 2 :{{ listUsers.player2 }} {{ playerIsReady.includes(listUsers.player2) ? 'PRET' : '' }}
-      </p>
+    <div v-else-if="!(listUsers.player1 && listUsers.player2)">
+      <p>Vous etes connecté à la room {{ idRoom }}</p>
+      <p>En attente du second joueur</p>
     </div>
 
-    <button v-if="listUsers.player1 && listUsers.player2" @click="isReady">isReady</button>
+    <div v-else>
+      <p>Etes vous prêt ?</p>
+      <button :disabled="playerIsReady.includes(socketID)" @click="isReady">Je suis prêt !!</button>
+    </div>
   </div>
 </template>
 
@@ -50,19 +47,21 @@ export default {
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
+    socketID: (state) => state[S.socketID],
     playerIsReady: (state) => state[S.playerIsReady]
   }),
-  mounted() {
-    this.$socket.emit('connection')
-
-    this.sockets.subscribe('startGame', () => {
+  sockets: {
+    startGame: function () {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
-    })
-    this.sockets.subscribe('playerIsReady', (data) => {
+    },
+    playerIsReady: function (data) {
       this.$store.commit(M.playerIsReady, data)
-    })
+    }
+  },
+  mounted() {
+    this.$socket.emit('connection')
 
     if (this.$data.idRoomFromUrl) {
       this.connectToRoom()

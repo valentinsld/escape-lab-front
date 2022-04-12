@@ -1,6 +1,5 @@
 <template>
   <div class="intro">
-    <p>intro</p>
     <Components :is="'Intro' + typeScreen" />
   </div>
 </template>

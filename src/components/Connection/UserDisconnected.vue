@@ -1,12 +1,20 @@
 <template>
   <div class="userDisconnected">
     <p>Utilisateur déconnecter</p>
+    <p>Pour se reconnecter utilisez le code : {{ idRoom }}</p>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+import { STATE as S } from '@/store/helpers'
+
 export default {
-  name: 'UserDisconnected'
+  name: 'UserDisconnected',
+  computed: mapState({
+    idRoom: (state) => state[S.idRoom]
+  })
 }
 </script>
 
@@ -17,6 +25,7 @@ export default {
   left: 50%;
   z-index: 10;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 300px;

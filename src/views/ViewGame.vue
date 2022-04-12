@@ -54,10 +54,11 @@ export default {
   },
   mounted() {
     this.initPane()
-
-    this.sockets.subscribe('setStepGame', ({ stepGame }) => {
+  },
+  sockets: {
+    setStepGame: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
-    })
+    }
   },
   beforeDestroy() {
     this.$data.pane.remove()
