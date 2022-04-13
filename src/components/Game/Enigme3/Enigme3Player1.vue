@@ -5,8 +5,8 @@
     <div ref="choice-buttons" class="chat__choices">
       <h4 v-html="'Répondez au vendeur'" />
       <div class="chat__choices__buttons">
-        <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].chat.question"></button>
-        <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].chat.question"></button>
+        <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
+        <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
         <!-- if last question to choose bot -->
         <button
           v-if="finalAnswers[0]"
@@ -29,7 +29,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { enigme3Data } from '@/data/enigme3'
+import { enigme3Data, questionsData } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   components: { Messages },
@@ -42,6 +42,10 @@ export default {
       type: String,
       default: null
     },
+    product: {
+      type: Object,
+      default: () => {}
+    },
     questionsToDisplay: {
       type: Number,
       default: 6
@@ -49,7 +53,7 @@ export default {
   },
   data() {
     return {
-      data: enigme3Data(),
+      data: questionsData(this.product),
       choicePos: null,
       buttons: null,
       questions: [],
@@ -66,17 +70,12 @@ export default {
   },
   methods: {
     generateQuestions() {
-      this.questions = this.data.rules
-        .filter(function (obj) {
-          return obj.chat
-        })
-        .sort(() => Math.random() - Math.random())
-        .slice(0, this.questionsToDisplay)
+      this.questions = this.data.sort(() => Math.random() - Math.random()).slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
       this.hideButtons()
       this.choicePos = pos
-      this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].chat.question })
+      this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].question })
       this.getResponse()
     },
     nextChoice() {
@@ -94,7 +93,7 @@ export default {
       this.messages.push({
         isReveal: false,
         isReceived: true,
-        content: this.questions[this.choicePos].chat[answer]
+        content: this.questions[this.choicePos][answer]
       })
     },
     handleMessagesComplete() {
@@ -121,7 +120,7 @@ export default {
     },
     finalChoice() {
       // push final choices
-      this.finalAnswers = [this.data.finalAnswer.bot, this.data.finalAnswer.normal]
+      this.finalAnswers = [enigme3Data().finalAnswer.bot, enigme3Data().finalAnswer.normal]
     },
     chooseBotAnswer(sellerType) {
       sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')

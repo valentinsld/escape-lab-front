@@ -12,6 +12,7 @@
       v-if="typeScreen === 'Player1'"
       :true-rules="config.trueRules"
       :seller-type="config.sellerType"
+      :product="config.product"
       :questions-to-display="config.settings.questionsToDisplay"
     />
     <Enigme3Player2 v-if="typeScreen === 'Player2'" />
