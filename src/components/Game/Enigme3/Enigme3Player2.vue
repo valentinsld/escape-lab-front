@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import { enigme3Data } from '@/data/enigme3'
+import { noticeData } from '@/data/enigme3'
 export default {
   name: 'Enigme3Player2',
   data() {
     return {
-      rules: enigme3Data().notice_rules
+      rules: noticeData()
     }
   }
 }

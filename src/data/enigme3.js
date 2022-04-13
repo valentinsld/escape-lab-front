@@ -55,48 +55,6 @@ export const enigme3Data = () => ({
       }
     }
   ],
-  notice_rules: [
-    {
-      name: 'La règle 1',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 2',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 3',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 4',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 5',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 6',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 7',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 8',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 9',
-      description: 'Description de la règle'
-    },
-    {
-      name: 'La règle 10',
-      description: 'Description de la règle'
-    }
-  ],
   products: [
     {
       type: 'clothing',
@@ -128,6 +86,49 @@ export const enigme3Data = () => ({
     normal: 'Oui, je vous fais confiance, on y va !'
   }
 })
+
+export const noticeData = () => [
+  {
+    name: 'La règle 1',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 2',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 3',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 4',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 5',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 6',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 7',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 8',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 9',
+    description: 'Description de la règle'
+  },
+  {
+    name: 'La règle 10',
+    description: 'Description de la règle'
+  }
+]
 
 export const questionsData = (product) => [
   {
