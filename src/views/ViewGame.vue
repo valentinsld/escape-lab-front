@@ -2,7 +2,7 @@
   <ViewContainer name="game">
     <p>View Game</p>
     <Components :is="stepGame" />
-    <VideoMainScreen />
+    <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
 </template>
 
@@ -45,7 +45,8 @@ export default {
   },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen],
-    stepGame: (state) => state[S.stepGame]
+    stepGame: (state) => state[S.stepGame],
+    mainScreen: () => STATE_SCREEN.mainScreen
   }),
   beforeMount() {
     console.log(this.$store.state[S.idRoom])
