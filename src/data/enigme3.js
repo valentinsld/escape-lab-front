@@ -1,3 +1,5 @@
+import { getPrice } from '@/helpers/enigme3Rules'
+
 export const enigme3Data = () => ({
   rules: [
     { slug: 'stock' },
@@ -9,7 +11,7 @@ export const enigme3Data = () => ({
       chat: {
         question: 'Quel est le prix du produit ?',
         normalAnswer: 'La bonne réponse',
-        botAnswer: 'La réponse qui montre le bot'
+        botAnswer: getPrice(false)
       }
     },
     {
