@@ -25,14 +25,12 @@ import { mapState } from 'vuex'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
-import { enigme3Data } from '@/data/enigme3'
 import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3',
   components: { Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
   data() {
     return {
-      data: enigme3Data(),
       trueRules: null
     }
   },

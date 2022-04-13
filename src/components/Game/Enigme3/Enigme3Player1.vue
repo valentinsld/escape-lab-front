@@ -29,7 +29,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { enigme3Data, questionsData } from '@/data/enigme3'
+import { finalAnswer, questionsData } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   components: { Messages },
@@ -120,7 +120,7 @@ export default {
     },
     finalChoice() {
       // push final choices
-      this.finalAnswers = [enigme3Data().finalAnswer.bot, enigme3Data().finalAnswer.normal]
+      this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
     },
     chooseBotAnswer(sellerType) {
       sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
