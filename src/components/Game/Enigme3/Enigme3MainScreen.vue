@@ -10,14 +10,13 @@
 export default {
   name: 'Enigme3MainScreen',
   props: {
-    trueRules: {
-      type: Array,
-      default: () => []
-    },
     product: {
       type: Object,
       default: () => {}
     }
+  },
+  mounted() {
+    console.log(this.product, 'product annonce')
   }
 }
 </script>

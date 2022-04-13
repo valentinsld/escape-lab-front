@@ -53,7 +53,6 @@ export default {
   },
   data() {
     return {
-      data: questionsData(this.product),
       choicePos: null,
       buttons: null,
       questions: [],
@@ -63,6 +62,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.product, 'data')
     this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
@@ -70,7 +70,9 @@ export default {
   },
   methods: {
     generateQuestions() {
-      this.questions = this.data.sort(() => Math.random() - Math.random()).slice(0, this.questionsToDisplay)
+      this.questions = questionsData(this.product)
+        .sort(() => Math.random() - Math.random())
+        .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
       this.hideButtons()
