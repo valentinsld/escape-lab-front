@@ -41,6 +41,10 @@ export default {
     sellerType: {
       type: String,
       default: null
+    },
+    questionsToDisplay: {
+      type: Number,
+      default: 6
     }
   },
   data() {
@@ -67,7 +71,7 @@ export default {
           return obj.chat
         })
         .sort(() => Math.random() - Math.random())
-        .slice(0, this.data.config.questionsToDisplay)
+        .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
       this.hideButtons()
@@ -78,7 +82,6 @@ export default {
     nextChoice() {
       // remove choice btn and place non selected question btn at the end of questions
       this.questions.splice(this.choicePos, 1)
-      console.log(this.questions, 'next choice', this.questions.length)
       this.questions.length > 0
         ? this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
         : this.finalChoice()
@@ -117,10 +120,11 @@ export default {
       })
     },
     finalChoice() {
+      // push final choices
       this.finalAnswers = [this.data.finalAnswer.bot, this.data.finalAnswer.normal]
     },
-    chooseBotAnswer(isBotChoose) {
-      isBotChoose === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
+    chooseBotAnswer(sellerType) {
+      sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
     }
   }
 }

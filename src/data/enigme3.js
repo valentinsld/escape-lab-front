@@ -129,11 +129,16 @@ export const enigme3Data = () => ({
   },
   config: {
     questionsToDisplay: 6,
-    rulesToDetectBot: 3,
     prices: {
       clothing: [10, 500],
       vehicle: [1000, 200000],
       housing: [40000, 500000]
     }
   }
+})
+
+export const prices = () => ({
+  clothing: [10, 500],
+  vehicle: [1000, 200000],
+  housing: [40000, 500000]
 })
