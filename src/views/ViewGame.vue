@@ -2,6 +2,7 @@
   <ViewContainer name="game">
     <p>View Game</p>
     <Components :is="stepGame" />
+    <VideoMainScreen />
   </ViewContainer>
 </template>
 
@@ -17,6 +18,7 @@ import Enigme3 from '@/components/Game/Enigme3/Enigme3'
 import Intro from '@/components/Game/Intro/Intro'
 // outro
 import Outro from '@/components/Game/Outro/Outro'
+import VideoMainScreen from '@/components/Game/VideoMainScreen.vue'
 // Stores
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE as S } from '@/store/helpers'
@@ -33,7 +35,8 @@ export default {
     Enigme2,
     Enigme1,
     Outro,
-    ViewContainer
+    ViewContainer,
+    VideoMainScreen
   },
   data() {
     return {
