@@ -7,7 +7,7 @@
         <p v-for="(rule, i) in config.trueRules" :key="i" v-html="` Règle ${rule.slug}`" />
       </div>
     </div>
-    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="config.trueRules" />
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :true-rules="config.trueRules" :product="config.product" />
     <Enigme3Player1 v-if="typeScreen === 'Player1'" :true-rules="config.trueRules" :seller-type="config.sellerType" />
     <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>

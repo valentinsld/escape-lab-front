@@ -98,6 +98,7 @@ export const enigme3Data = () => ({
   products: [
     {
       type: 'clothing',
+      slug: 'pull',
       name: 'Pull en laine',
       normalImg: 'image normale vêtement',
       botImg: 'image stock vêtement',
@@ -105,6 +106,7 @@ export const enigme3Data = () => ({
     },
     {
       type: 'housing',
+      slug: 'appartement',
       name: 'appartement',
       normalImg: 'image normale appartement',
       botImg: 'image stock appartement',
@@ -112,6 +114,7 @@ export const enigme3Data = () => ({
     },
     {
       type: 'vehicle',
+      slug: 'voiture',
       name: 'belle voiture',
       normalImg: 'image normale véhicule',
       botImg: 'image stock véhicule',
