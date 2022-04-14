@@ -37,10 +37,10 @@ const MARKERS_PLAYER = {
 }
 
 const OPTIONS = {
-  // responsive: true,
+  responsive: true,
   fluid: true,
-  autoplay: true,
-  controls: true,
+  autoplay: false,
+  controls: false,
 
   plugins: {
     abLoopPlugin: {
@@ -56,6 +56,26 @@ export default {
     return {
       player: null,
       eventsTime: []
+    }
+  },
+  sockets: {
+    'intro-startVideo': function () {
+      this.startVideo()
+    },
+    setStepGame: function ({ stepGame }) {
+      switch (stepGame) {
+        case 'Enigme1':
+          this.playEnigme1()
+          break
+        case 'Enigme2':
+          this.playEnigme2()
+          break
+        case 'Enigme3':
+          this.playEnigme3()
+          break
+        default:
+          console.error('ERROR')
+      }
     }
   },
   mounted() {
@@ -81,7 +101,7 @@ export default {
       })
     })
 
-    this.setLoop(MARKERS_PLAYER.loopEnigme1)
+    this.playEnigme1()
 
     // this.player.abLoopPlugin.onLoopCallBack = function () {
     //   console.log('NEW LOOP')
@@ -128,6 +148,9 @@ export default {
       this.player.abLoopPlugin.disable()
     },
 
+    playEnigme1() {
+      this.setLoop(MARKERS_PLAYER.loopEnigme1)
+    },
     playEnigme2() {
       this.setLoop(MARKERS_PLAYER.loopEnigme2)
     },
