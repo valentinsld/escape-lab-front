@@ -51,34 +51,28 @@ export const questionsData = (product) => [
     botAnswer: `${product.name} coûte ${getPriceAnswer(product.type, true)}€`
   },
   {
-    slug: '6',
-    question: 'La question 6',
-    normalAnswer: 'La bonne réponse',
-    botAnswer: 'La réponse qui montre le bot'
+    slug: 'payment',
+    question: 'La question payment',
+    normalAnswer: 'La bonne réponse payment',
+    botAnswer: 'La réponse qui montre le bot payment'
   },
   {
-    slug: '7',
-    question: 'La question 7',
-    normalAnswer: 'La bonne réponse',
-    botAnswer: 'La réponse qui montre le bot'
+    slug: 'criteria',
+    question: 'La question criteria',
+    normalAnswer: 'La bonne réponse criteria',
+    botAnswer: 'La réponse qui montre le bot criteria'
   },
   {
-    slug: '8',
-    question: 'La question 8',
-    normalAnswer: 'La bonne réponse',
-    botAnswer: 'La réponse qui montre le bot'
+    slug: 'availability',
+    question: 'La question availability',
+    normalAnswer: 'La bonne réponse availability',
+    botAnswer: 'La réponse qui montre le bot availability'
   },
   {
-    slug: '9',
-    question: 'La question 9',
-    normalAnswer: 'La bonne réponse',
-    botAnswer: 'La réponse qui montre le bot'
-  },
-  {
-    slug: '10',
-    question: 'La question 10',
-    normalAnswer: 'La bonne réponse',
-    botAnswer: 'La réponse qui montre le bot'
+    slug: 'sending',
+    question: 'La question sending',
+    normalAnswer: 'La bonne réponse sending',
+    botAnswer: 'La réponse qui montre le bot sending'
   }
 ]
 
