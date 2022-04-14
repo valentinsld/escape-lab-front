@@ -3,18 +3,36 @@
   <div class="main">
     <h1>Enigme 2 MainScreen</h1>
     <button @click="createPopup">Start</button>
-    <div v-if="showPopup" class="popup">
-      <span>Popup</span>
-    </div>
+    <Enigme2PopupStack v-if="showPopup" class="popup" :cards="cards"></Enigme2PopupStack>
   </div>
 </template>
 
 <script>
+import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
+import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 export default {
   name: 'Enigme2MainScreen',
+  components: {
+    Enigme2Popup,
+    Enigme2PopupStack
+  },
   data: function () {
     return {
-      showPopup: false
+      showPopup: false,
+      cards: [
+        {
+          keyword: 'Test 1'
+        },
+        {
+          keyword: 'Test 2'
+        },
+        {
+          keyword: 'Test 3'
+        },
+        {
+          keyword: 'Test 4'
+        }
+      ]
     }
   },
   mounted() {
@@ -35,34 +53,19 @@ export default {
     createPopup() {
       this.showPopup = true
       console.log(this.showPopup)
-      setTimeout(() => {
-        this.destroyPopup()
-        this.$socket.emit('popupIsReady')
-      }, 1500)
+      // setTimeout(() => {
+      //   this.destroyPopup()
+      //   this.$socket.emit('popupIsReady')
+      // }, 1500)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  border: black solid 1px;
-}
-
-.popup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 400px;
-  height: 280px;
-  color: blue;
-  border: blue solid 3px;
-  border-radius: 30px;
-  // display: none;
-}
+<style scoped>
+/* .popup {
+  border: black dotted 5px;
+  height: 200px;
+  width: 200px;
+} */
 </style>

@@ -23,14 +23,12 @@ export default {
   mounted() {
     this.defineIdentity()
     this.sockets.subscribe('sendPopupToPlayer', () => {
-      // alert('sendPopupToPlayer')
       if (this.$store.state[S.typeScreen] === 'Player1') {
         this.showPopup = true
       }
     })
 
     this.sockets.subscribe('popupTransfer', () => {
-      // alert('sendPopupToPlayer')
       if (this.$store.state[S.typeScreen] === 'Player2') {
         this.createPopup()
       }
