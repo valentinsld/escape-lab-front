@@ -47,8 +47,8 @@ export const questionsData = (product) => [
   {
     slug: 'price',
     question: 'Quel est le prix du produit ?',
-    normalAnswer: `${product.name} coûte ${getPriceAnswer(product.type, false)}€`,
-    botAnswer: `${product.name} coûte ${getPriceAnswer(product.type, true)}€`
+    normalAnswer: `${product.name} coûte ${getPriceAnswer(product.type, product.mainCriteria, false)}€`,
+    botAnswer: `${product.name} coûte ${getPriceAnswer(product.type, product.mainCriteria, true)}€`
   },
   {
     slug: 'payment',
@@ -83,15 +83,37 @@ export const finalAnswer = {
 
 export const pricesData = {
   clothing: {
-    min: 10,
-    max: 500
+    'h&n': {
+      min: 10,
+      max: 100
+    },
+    adidos: {
+      min: 20,
+      max: 300
+    },
+    ralphLaurus: {
+      min: 80,
+      max: 700
+    }
   },
   vehicle: {
-    min: 1000,
-    max: 200000
+    more: {
+      min: 800,
+      max: 50000
+    },
+    less: {
+      min: 1000,
+      max: 70000
+    }
   },
   housing: {
-    min: 4000,
-    max: 500000
+    more: {
+      min: 50000,
+      max: 300000
+    },
+    less: {
+      min: 20000,
+      max: 200000
+    }
   }
 }
