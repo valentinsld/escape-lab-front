@@ -6,6 +6,16 @@
 
 <script>
 export default {
-  name: 'Enigme3MainScreen'
+  name: 'Enigme3MainScreen',
+  sockets: {
+    startEnigme: function () {
+      this.start()
+    }
+  },
+  methods: {
+    start() {
+      console.log('START ENIGME')
+    }
+  }
 }
 </script>

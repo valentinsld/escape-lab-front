@@ -15,6 +15,11 @@ import Anime from 'animejs'
 import Messages from '@/components/block/Messages'
 export default {
   name: 'Enigme3player1',
+  sockets: {
+    startEnigme: function () {
+      this.start()
+    }
+  },
   components: { Messages },
   props: {
     questions: {
@@ -40,6 +45,10 @@ export default {
     })
   },
   methods: {
+    start() {
+      console.log('START ENIGME')
+    },
+
     chooseQuestion(pos) {
       this.hideButtons()
       this.choicePos = pos

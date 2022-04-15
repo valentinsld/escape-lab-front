@@ -27,6 +27,8 @@ export default {
     typeScreen: (state) => state[S.typeScreen]
   }),
   mounted() {
+    this.$socket.emit('readyEnigme')
+
     this.generateAnnonce()
   },
   methods: {
