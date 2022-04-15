@@ -60,7 +60,11 @@ export default {
     this.initPane()
   },
   sockets: {
+    // TODO : remove setStepGame
     setStepGame: function ({ stepGame }) {
+      this.$store.commit(M.stepGame, stepGame)
+    },
+    buildEnigme: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
     }
   },
