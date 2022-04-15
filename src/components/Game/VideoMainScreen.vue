@@ -1,8 +1,8 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
     <video ref="videoPlayer" class="video-js" disablePictureInPicture="true" controlslist="nodownload">
-      <source src="http://localhost:8080/video/testRenduVideo.mp4" type="video/mp4" />
-      <track kind="captions" src="http://localhost:8080/video/Intro.vtt" srclang="en" label="English" default />
+      <source src="/video/testRenduVideo.mp4" type="video/mp4" />
+      <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
     </video>
   </div>
 </template>
@@ -89,6 +89,10 @@ export default {
           }
         }
       })
+
+      this.on('ended', function () {
+        THAT.endVideo()
+      })
     })
 
     this.playEnigme1()
@@ -150,6 +154,9 @@ export default {
     },
     playEndEnigme3() {
       this.stopLoop()
+    },
+    endVideo() {
+      console.log('END VIDEO')
     },
 
     // events on playing video
