@@ -17,7 +17,10 @@ export default {
   components: { Enigme1MainScreen, Enigme1Player1, Enigme1Player2 },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen]
-  })
+  }),
+  mounted() {
+    this.$socket.emit('readyEnigme')
+  }
 }
 </script>
 
