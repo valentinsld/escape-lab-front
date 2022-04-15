@@ -6,6 +6,16 @@
 
 <script>
 export default {
-  name: 'Enigme1Player1'
+  name: 'Enigme1Player1',
+  sockets: {
+    startEnigme: function () {
+      this.start()
+    }
+  },
+  methods: {
+    start() {
+      console.log('START ENIGME')
+    }
+  }
 }
 </script>
