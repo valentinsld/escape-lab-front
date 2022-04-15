@@ -8,9 +8,8 @@
 
       <div v-if="!idRoom">Pas de connexion</div>
       <p>{{ idRoom }}</p>
-      <p v-if="listUsers.player1">Player 1 :{{ listUsers.player1 }}</p>
-      <p v-if="listUsers.player2">Player 2 :{{ listUsers.player2 }}</p>
-
+      <p>Player 1 : {{ statusPlayer1 }}</p>
+      <p>Player 2 : {{ statusPlayer2 }}</p>
       <button v-if="!seeJoinRoom" @click="seeJoinRoomClick">Rejoindre une room en cours</button>
       <div v-if="seeJoinRoom">
         <p>Rejoindre une room</p>
@@ -44,21 +43,32 @@ export default {
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
+    playerIsReady: (state) => state[S.playerIsReady],
 
-    urlQrCode: () => window.location.origin + '?room='
+    urlQrCode: () => window.location.origin + '?room=',
+    statusPlayer1: function () {
+      return this.listUsers.player1 ? (this.playerIsReady.includes(this.listUsers.player1) ? 'PRET' : 'connected') : ''
+    },
+    statusPlayer2: function () {
+      return this.listUsers.player2 ? (this.playerIsReady.includes(this.listUsers.player2) ? 'PRET' : 'connected') : ''
+    }
   }),
-  mounted() {
-    this.$socket.emit('connection')
-
-    this.sockets.subscribe('startGame', () => {
+  sockets: {
+    startGame: function () {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
-    })
+    },
+    playerIsReady: function (data) {
+      this.$store.commit(M.playerIsReady, data)
+    }
+  },
+  mounted() {
+    this.$socket.emit('connection')
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
-      this.connectToRoom('DEV001')
+      this.connectToRoom(null, 'DEV001')
       return
     }
 
@@ -74,7 +84,8 @@ export default {
     seeJoinRoomClick() {
       this.$data.seeJoinRoom = true
     },
-    connectToRoom(id = null) {
+    connectToRoom(ev, id = null) {
+      console.log('connectToRoom', ev, id)
       const idRoom = id || this.$refs.inputIdRoom.value
       this.$data.seeJoinRoom = false
 

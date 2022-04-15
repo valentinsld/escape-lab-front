@@ -1,7 +1,5 @@
 <template>
   <div id="app" class="app">
-    <h1>Le lab de l'arnaque</h1>
-
     <!-- Views -->
     <transition name="fade-page" mode="out-in">
       <router-view />
@@ -44,34 +42,33 @@ export default {
   mounted() {
     this.initSubscribeConnexion()
   },
+  sockets: {
+    connect: function () {
+      console.log(this.$socket.id)
+      this.$store.commit(M.socketID, this.$socket.id)
+    },
+    userConnected: function ({ idRoom, listUsers, isStart, newUser, stepGame }) {
+      this.$store.commit(M.idRoom, idRoom)
+      this.$store.commit(M.listUsers, listUsers)
+      this.$store.commit(M.stepGame, stepGame)
+
+      // if is you
+      console.log(this.$store.state[S.typeScreen])
+      if (!this.$store.state[S.typeScreen]) {
+        this.$store.commit(M.typeScreen, newUser.type)
+      }
+
+      console.log('isStart', isStart)
+      if (isStart) {
+        this.$router.push('/game')
+      }
+    },
+    userDisconnected: function ({ listUsers }) {
+      this.$store.commit(M.listUsers, listUsers)
+    }
+  },
   methods: {
     initSubscribeConnexion() {
-      this.sockets.subscribe('connect', () => {
-        console.log(this.$socket.id)
-        this.$store.commit(M.socketID, this.$socket.id)
-      })
-
-      this.sockets.subscribe('userConnected', ({ idRoom, listUsers, isStart, newUser, stepGame }) => {
-        this.$store.commit(M.idRoom, idRoom)
-        this.$store.commit(M.listUsers, listUsers)
-        this.$store.commit(M.stepGame, stepGame)
-
-        // if is you
-        console.log(this.$store.state[S.typeScreen])
-        if (!this.$store.state[S.typeScreen]) {
-          this.$store.commit(M.typeScreen, newUser.type)
-        }
-
-        console.log('isStart', isStart)
-        if (isStart) {
-          this.$router.push('/game')
-        }
-      })
-
-      this.sockets.subscribe('userDisconnected', ({ listUsers }) => {
-        this.$store.commit(M.listUsers, listUsers)
-      })
-
       this.$socket.on('disconnect', () => {
         console.error('YOU ARE DISCONNECTED')
         if (process.env.NODE_ENV !== 'development') return
