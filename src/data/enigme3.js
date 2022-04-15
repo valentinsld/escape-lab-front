@@ -47,13 +47,12 @@ export const questionsData = (product) => [
   {
     slug: 'price',
     question: 'Quel est le prix du produit ?',
-    // getPriceAnswer(interval, isBot)
     normalAnswer: `${product.name} coûte ${getPriceAnswer(product.subtype.interval, false)}€`,
     botAnswer: `${product.name} coûte ${getPriceAnswer(product.subtype.interval, true)}€`
   },
   {
     slug: 'payment',
-    question: 'La question payment',
+    question: 'Comment se déroule le paiement ?',
     normalAnswer: 'La bonne réponse payment',
     botAnswer: 'La réponse qui montre le bot payment'
   },
@@ -65,9 +64,9 @@ export const questionsData = (product) => [
   },
   {
     slug: 'availability',
-    question: 'La question availability',
-    normalAnswer: 'La bonne réponse availability',
-    botAnswer: 'La réponse qui montre le bot availability'
+    question: 'Le produit est-il encore disponible ?',
+    normalAnswer: 'Oui bien sûr',
+    botAnswer: 'Oui mais j’ai beaucoup de gens sur l’annonce il me faut une réponse tout de suite !'
   },
   {
     slug: 'sending',
