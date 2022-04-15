@@ -64,6 +64,9 @@ export default {
     setStepGame: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
     },
+    endEnigme: function ({ stepGame }) {
+      this.$store.commit(M.stepGame, stepGame)
+    },
     buildEnigme: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
     }
@@ -80,35 +83,43 @@ export default {
 
       pane
         .addButton({
-          title: 'enigme 1'
+          title: 'Enigme suivant'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 1 })
+          this.$socket.emit('endEnigme')
         })
 
-      pane
-        .addButton({
-          title: 'enigme 2'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 2 })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 1'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 1 })
+      //   })
 
-      pane
-        .addButton({
-          title: 'enigme 3'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 3 })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 2'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 2 })
+      //   })
 
-      pane
-        .addButton({
-          title: 'outro'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Outro' })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 3'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 3 })
+      //   })
+
+      // pane
+      //   .addButton({
+      //     title: 'outro'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 'Outro' })
+      //   })
     }
   }
 }

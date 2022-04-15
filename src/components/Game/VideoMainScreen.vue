@@ -4,13 +4,6 @@
       <source src="http://localhost:8080/video/testRenduVideo.mp4" type="video/mp4" />
       <track kind="captions" src="http://localhost:8080/video/Intro.vtt" srclang="en" label="English" default />
     </video>
-
-    <!--
-      <button @click="startVideo">Start Video</button>
-      <button @click="playEnigme2">Start Enigme2</button>
-      <button @click="playEnigme3">Start Enigme3</button>
-      <button @click="playOutro">Start Outro</button>
-    -->
   </div>
 </template>
 
@@ -32,7 +25,7 @@ const MARKERS_PLAYER = {
   loopEnigme1: { start: '0:09:18', end: '0:11:18' },
   loopEnigme2: { start: '0:21:18', end: '0:23:20' },
   loopEnigme3: { start: '0:33:20', end: '0:35:21' },
-  endEnigme3: '0:46:21',
+  startOutro: '0:46:21',
   outroStartMessages: '0:51:12'
 }
 
@@ -71,20 +64,9 @@ export default {
       this.startVideo()
       this.$data.seePlayer = true
     },
-    setStepGame: function ({ stepGame }) {
-      switch (stepGame) {
-        case 'Enigme1':
-          this.playEnigme1()
-          break
-        case 'Enigme2':
-          this.playEnigme2()
-          break
-        case 'Enigme3':
-          this.playEnigme3()
-          break
-        default:
-          console.error('ERROR')
-      }
+    endEnigme: function ({ stepGame }) {
+      console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
+      this[`playEnd${stepGame}`]?.call()
     }
   },
   mounted() {
@@ -149,7 +131,7 @@ export default {
     setLoop: function ({ start, end }) {
       const startSeconds = convertTimeToSeconds(start)
       const endSeconds = convertTimeToSeconds(end)
-      console.log('setLoop', { start, end }, { startSeconds, endSeconds })
+
       this.player.abLoopPlugin.setStart(startSeconds).setEnd(endSeconds).enable()
     },
     stopLoop: function () {
@@ -159,13 +141,14 @@ export default {
     playEnigme1() {
       this.setLoop(MARKERS_PLAYER.loopEnigme1)
     },
-    playEnigme2() {
+    playEndEnigme1() {
+      // TODO : add forced from PANE
       this.setLoop(MARKERS_PLAYER.loopEnigme2)
     },
-    playEnigme3() {
+    playEndEnigme2() {
       this.setLoop(MARKERS_PLAYER.loopEnigme3)
     },
-    playOutro() {
+    playEndEnigme3() {
       this.stopLoop()
     },
 
@@ -175,7 +158,16 @@ export default {
     },
     playloopEnigme1() {
       // START ENIGME 1
-      this.$socket.emit('intro-endVideo')
+      this.$socket.emit('nextEnigme')
+    },
+    playloopEnigme2() {
+      this.$socket.emit('nextEnigme')
+    },
+    playloopEnigme3() {
+      this.$socket.emit('nextEnigme')
+    },
+    playstartOutro() {
+      this.$socket.emit('nextEnigme')
     }
   }
 }
