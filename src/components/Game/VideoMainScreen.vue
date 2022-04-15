@@ -1,6 +1,6 @@
 <template>
   <div class="containerVideoMainScreen">
-    <video ref="videoPlayer" class="video-js">
+    <video ref="videoPlayer" class="video-js" disablePictureInPicture="true" controlslist="nodownload">
       <source src="http://localhost:8080/video/testRenduVideo.mp4" type="video/mp4" />
       <track kind="captions" src="http://localhost:8080/video/Intro.vtt" srclang="en" label="English" default />
     </video>
@@ -43,6 +43,12 @@ const OPTIONS = {
   controls: false,
   muted: true,
 
+  preload: true,
+  controlBar: {
+    liveDisplay: true,
+    pictureInPictureToggle: false
+  },
+
   plugins: {
     abLoopPlugin: {
       loopIfBeforeStart: false,
@@ -80,23 +86,22 @@ export default {
     }
   },
   mounted() {
+    const THAT = this
     const VideoJS = videojs
     abLoopPlugin(window, VideoJS)
 
     const eventsTime = this.initEventsTime()
 
     this.player = VideoJS(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
-      console.log('onPlayerReady', this)
+      // console.log('onPlayerReady', this)
 
       this.on('timeupdate', function () {
         const currentTime = this.currentTime()
 
-        // console.log(eventsTime, currentTime)
-
         for (const time of eventsTime) {
-          if (currentTime > time.time && time.isPlayed) {
+          if (currentTime > time.time && !time.isPlayed) {
             time.isPlayed = true
-            console.log(time.key)
+            THAT[time.key]?.call()
           }
         }
       })
@@ -160,6 +165,15 @@ export default {
     },
     playOutro() {
       this.stopLoop()
+    },
+
+    // events on playing video
+    playintroDarkness() {
+      this.$socket.emit('intro-darkScene')
+    },
+    playloopEnigme1() {
+      // START ENIGME 1
+      this.$socket.emit('intro-endVideo')
     }
   }
 }
