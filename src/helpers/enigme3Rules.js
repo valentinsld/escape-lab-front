@@ -1,10 +1,11 @@
-import { pricesData } from '@/data/enigme3'
+import { randomNum } from '@/helpers/randomNum'
 
-export const getPriceAnswer = (type, subType, isBot) => {
-  console.log(type, 'type')
-  const priceInterval = pricesData[type][subType]
-  const normalAnswer = Math.floor(Math.random() * (priceInterval.max - priceInterval.min) + priceInterval.min)
-  const botAnswer = Math.random() < 0.5 ? priceInterval.max * 1.25 : priceInterval.min * 0.75
+export const getPriceAnswer = (interval, isBot) => {
+  const normalAnswer = randomNum(interval.min, interval.max)
+  const botAnswer =
+    Math.random() < 0.5
+      ? interval.max + randomNum(1, interval.min * 0.2)
+      : interval.min - randomNum(1, interval.min * 0.2)
 
   return isBot ? botAnswer : normalAnswer
 }

@@ -47,8 +47,9 @@ export const questionsData = (product) => [
   {
     slug: 'price',
     question: 'Quel est le prix du produit ?',
-    normalAnswer: `${product.name} coûte ${getPriceAnswer(product.type, product.mainCriteria, false)}€`,
-    botAnswer: `${product.name} coûte ${getPriceAnswer(product.type, product.mainCriteria, true)}€`
+    // getPriceAnswer(interval, isBot)
+    normalAnswer: `${product.name} coûte ${getPriceAnswer(product.subtype.interval, false)}€`,
+    botAnswer: `${product.name} coûte ${getPriceAnswer(product.subtype.interval, true)}€`
   },
   {
     slug: 'payment',
@@ -81,39 +82,4 @@ export const finalAnswer = {
   normal: 'Oui, je vous fais confiance, on y va !'
 }
 
-export const pricesData = {
-  clothing: {
-    'h&n': {
-      min: 10,
-      max: 100
-    },
-    adidos: {
-      min: 20,
-      max: 300
-    },
-    ralphLaurus: {
-      min: 80,
-      max: 700
-    }
-  },
-  vehicle: {
-    more: {
-      min: 800,
-      max: 50000
-    },
-    less: {
-      min: 1000,
-      max: 70000
-    }
-  },
-  housing: {
-    more: {
-      min: 50000,
-      max: 300000
-    },
-    less: {
-      min: 20000,
-      max: 200000
-    }
-  }
-}
+export const text = () => {}
