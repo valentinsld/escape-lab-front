@@ -5,7 +5,8 @@
     <div v-if="startVideo">
       <h2>Video is started</h2>
 
-      <button @click="sendEndVideo">End Video</button>
+      <!-- <button @click="sendDarkScene">Il va faire tout noir</button>
+      <button @click="sendEndVideo">Fin Video</button> -->
     </div>
   </div>
 </template>
@@ -18,16 +19,15 @@ export default {
       startVideo: false
     }
   },
-  mounted() {
-    this.initSocketsMessage()
+  sockets: {
+    'intro-startVideo': function () {
+      console.log('intro-startVideo !!!!!!')
+      this.$data.startVideo = true
+    }
   },
   methods: {
-    initSocketsMessage() {
-      // startVideo
-      this.sockets.subscribe('intro-startVideo', () => {
-        console.log('intro-startVideo !!!!!!')
-        this.$data.startVideo = true
-      })
+    sendDarkScene() {
+      this.$socket.emit('intro-darkScene')
     },
     sendEndVideo() {
       this.$socket.emit('intro-endVideo')

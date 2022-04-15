@@ -2,6 +2,7 @@
   <ViewContainer name="game">
     <p>View Game</p>
     <Components :is="stepGame" />
+    <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
 </template>
 
@@ -17,6 +18,7 @@ import Enigme3 from '@/components/Game/Enigme3/Enigme3'
 import Intro from '@/components/Game/Intro/Intro'
 // outro
 import Outro from '@/components/Game/Outro/Outro'
+import VideoMainScreen from '@/components/Game/VideoMainScreen.vue'
 // Stores
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE as S } from '@/store/helpers'
@@ -33,7 +35,8 @@ export default {
     Enigme2,
     Enigme1,
     Outro,
-    ViewContainer
+    ViewContainer,
+    VideoMainScreen
   },
   data() {
     return {
@@ -42,7 +45,8 @@ export default {
   },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen],
-    stepGame: (state) => state[S.stepGame]
+    stepGame: (state) => state[S.stepGame],
+    mainScreen: () => STATE_SCREEN.mainScreen
   }),
   beforeMount() {
     console.log(this.$store.state[S.idRoom])
@@ -54,13 +58,21 @@ export default {
   },
   mounted() {
     this.initPane()
-
-    this.sockets.subscribe('setStepGame', ({ stepGame }) => {
+  },
+  sockets: {
+    // TODO : remove setStepGame
+    setStepGame: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
-    })
+    },
+    endEnigme: function ({ stepGame }) {
+      this.$store.commit(M.stepGame, stepGame)
+    },
+    buildEnigme: function ({ stepGame }) {
+      this.$store.commit(M.stepGame, stepGame)
+    }
   },
   beforeDestroy() {
-    this.$data.pane.remove()
+    this.$data.pane?.remove()
   },
   methods: {
     initPane() {
@@ -71,35 +83,43 @@ export default {
 
       pane
         .addButton({
-          title: 'enigme 1'
+          title: 'Enigme suivant'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme1' })
+          this.$socket.emit('endEnigme')
         })
 
-      pane
-        .addButton({
-          title: 'enigme 2'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme2' })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 1'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 1 })
+      //   })
 
-      pane
-        .addButton({
-          title: 'enigme 3'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme3' })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 2'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 2 })
+      //   })
 
-      pane
-        .addButton({
-          title: 'outro'
-        })
-        .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Outro' })
-        })
+      // pane
+      //   .addButton({
+      //     title: 'enigme 3'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 3 })
+      //   })
+
+      // pane
+      //   .addButton({
+      //     title: 'outro'
+      //   })
+      //   .on('click', () => {
+      //     this.$socket.emit('setStepGame', { stepGame: 'Outro' })
+      //   })
     }
   }
 }

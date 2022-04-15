@@ -7,14 +7,15 @@
       <button @click="connectToRoom">Connect to room</button>
     </div>
 
-    <div v-else>
-      <p>idRoom : {{ idRoom }}</p>
-      <p v-if="listUsers.mainScreen">mainScreen :{{ listUsers.mainScreen }}</p>
-      <p v-if="listUsers.player1">Player 1 :{{ listUsers.player1 }}</p>
-      <p v-if="listUsers.player2">Player 2 :{{ listUsers.player2 }}</p>
+    <div v-else-if="!(listUsers.player1 && listUsers.player2)">
+      <p>Vous etes connecté à la room {{ idRoom }}</p>
+      <p>En attente du second joueur</p>
     </div>
 
-    <button v-if="listUsers.player1 && listUsers.player2" @click="isReady">isReady</button>
+    <div v-else>
+      <p>Etes vous prêt ?</p>
+      <button :disabled="playerIsReady.includes(socketID)" @click="isReady">Je suis prêt !!</button>
+    </div>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development'
+const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
 
 export default {
   name: 'ConnectionPlayer',
@@ -45,16 +46,22 @@ export default {
   },
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
-    listUsers: (state) => state[S.listUsers]
+    listUsers: (state) => state[S.listUsers],
+    socketID: (state) => state[S.socketID],
+    playerIsReady: (state) => state[S.playerIsReady]
   }),
-  mounted() {
-    this.$socket.emit('connection')
-
-    this.sockets.subscribe('startGame', () => {
+  sockets: {
+    startGame: function () {
       console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
-    })
+    },
+    playerIsReady: function (data) {
+      this.$store.commit(M.playerIsReady, data)
+    }
+  },
+  mounted() {
+    this.$socket.emit('connection')
 
     if (this.$data.idRoomFromUrl) {
       this.connectToRoom()
@@ -78,6 +85,7 @@ export default {
       this.$socket.emit('connectToRoom', loginData)
     },
     isReady() {
+      console.log('isReady !!!')
       this.$socket.emit('isReady')
     }
   }
