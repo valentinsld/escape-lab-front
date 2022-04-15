@@ -83,7 +83,7 @@ export default {
           title: 'enigme 1'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme1' })
+          this.$socket.emit('setStepGame', { stepGame: 1 })
         })
 
       pane
@@ -91,7 +91,7 @@ export default {
           title: 'enigme 2'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme2' })
+          this.$socket.emit('setStepGame', { stepGame: 2 })
         })
 
       pane
@@ -99,7 +99,7 @@ export default {
           title: 'enigme 3'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Enigme3' })
+          this.$socket.emit('setStepGame', { stepGame: 3 })
         })
 
       pane
