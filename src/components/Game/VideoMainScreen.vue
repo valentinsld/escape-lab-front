@@ -1,5 +1,5 @@
 <template>
-  <div class="containerVideoMainScreen">
+  <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
     <video ref="videoPlayer" class="video-js" disablePictureInPicture="true" controlslist="nodownload">
       <source src="http://localhost:8080/video/testRenduVideo.mp4" type="video/mp4" />
       <track kind="captions" src="http://localhost:8080/video/Intro.vtt" srclang="en" label="English" default />
@@ -62,12 +62,14 @@ export default {
   data() {
     return {
       player: null,
+      seePlayer: false,
       eventsTime: []
     }
   },
   sockets: {
     'intro-startVideo': function () {
       this.startVideo()
+      this.$data.seePlayer = true
     },
     setStepGame: function ({ stepGame }) {
       switch (stepGame) {
@@ -189,6 +191,11 @@ export default {
   z-index: -1;
   width: 100%;
   height: 100%;
+  transition: opacity 0.3s ease-in-out;
+
+  &.-hide {
+    opacity: 0;
+  }
 
   > video,
   .video-js {
