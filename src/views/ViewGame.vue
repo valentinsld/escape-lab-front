@@ -69,7 +69,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.$data.pane.remove()
+    this.$data.pane?.remove()
   },
   methods: {
     initPane() {
