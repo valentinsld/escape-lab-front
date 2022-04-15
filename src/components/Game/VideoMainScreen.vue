@@ -41,6 +41,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
+  muted: true,
 
   plugins: {
     abLoopPlugin: {
