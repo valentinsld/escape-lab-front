@@ -58,7 +58,7 @@ export default {
       questions: [],
       finalAnswers: [],
       choices: [],
-      messages: [{ isReveal: true, isReceived: false, content: 'Le premier message' }]
+      messages: [{ isReveal: true, isReceived: false, content: 'Bonjour !' }]
     }
   },
   mounted() {
