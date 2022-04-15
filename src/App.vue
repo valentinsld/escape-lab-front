@@ -1,12 +1,12 @@
 <template>
-  <div id="app" class="app">
+  <main id="app" class="app">
     <!-- Views -->
     <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
 
     <UserDisconnected v-if="listUsers.length < 3 && isStart" />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -93,11 +93,17 @@ export default {
 @import 'scss/app';
 
 #app {
-  margin-top: 60px;
+  display: flex;
+  height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: #2c3e50;
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  & > * {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

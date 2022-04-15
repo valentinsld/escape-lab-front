@@ -17,6 +17,16 @@ export default {
     return {
       rules: noticeData()
     }
+  },
+  sockets: {
+    startEnigme: function () {
+      this.start()
+    }
+  },
+  methods: {
+    start() {
+      console.log('START ENIGME')
+    }
   }
 }
 </script>

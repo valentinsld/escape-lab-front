@@ -45,6 +45,8 @@ export default {
     }
   },
   mounted() {
+    this.$socket.emit('readyEnigme')
+
     //if main screen get config rules from back
     if (this.typeScreen === 'MainScreen') {
       this.$socket.emit('sendEnigme3Config')

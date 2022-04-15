@@ -18,6 +18,16 @@ export default {
   },
   mounted() {
     console.log(this.product, 'product annonce')
+  },
+  sockets: {
+    startEnigme: function () {
+      this.start()
+    }
+  },
+  methods: {
+    start() {
+      console.log('START ENIGME')
+    }
   }
 }
 </script>

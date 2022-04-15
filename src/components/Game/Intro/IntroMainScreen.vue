@@ -5,8 +5,8 @@
     <div v-if="startVideo">
       <h2>Video is started</h2>
 
-      <button @click="sendDarkScene">Il va faire tout noir</button>
-      <button @click="sendEndVideo">Fin Video</button>
+      <!-- <button @click="sendDarkScene">Il va faire tout noir</button>
+      <button @click="sendEndVideo">Fin Video</button> -->
     </div>
   </div>
 </template>
