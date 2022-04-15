@@ -89,6 +89,10 @@ export default {
           }
         }
       })
+
+      this.on('ended', function () {
+        THAT.endVideo()
+      })
     })
 
     this.playEnigme1()
@@ -150,6 +154,9 @@ export default {
     },
     playEndEnigme3() {
       this.stopLoop()
+    },
+    endVideo() {
+      console.log('END VIDEO')
     },
 
     // events on playing video
