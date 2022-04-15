@@ -1,7 +1,22 @@
 <template>
-  <div class="enigme-3">
-    <p>Enigme 3</p>
-    <Enigme3Player1 v-if="typeScreen === 'Player1'" :questions="questions" :true-rules="trueRules" />
+  <div v-if="config" class="enigme-3">
+    <div class="enigme-3__helper">
+      <h4>Config generated :</h4>
+      <p v-html="` type du vendeur : ${config.sellerType}`" />
+      <p>Règles pour démasquer le bot :</p>
+      <div class="enigme-3__helper__rules">
+        <p v-for="(rule, i) in config.trueRules" :key="i" v-html="`${rule.slug}`" />
+      </div>
+    </div>
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="config.product" />
+    <Enigme3Player1
+      v-if="typeScreen === 'Player1'"
+      :true-rules="config.trueRules"
+      :seller-type="config.sellerType"
+      :product="config.product"
+      :questions-to-display="config.settings.questionsToDisplay"
+    />
+    <Enigme3Player2 v-if="typeScreen === 'Player2'" />
   </div>
 </template>
 
@@ -11,48 +26,51 @@ import { mapState } from 'vuex'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
-import { enigme3Data } from '@/data/enigme3'
-import { STATE as S } from '@/store/helpers'
+import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3',
   components: { Enigme3MainScreen, Enigme3Player1, Enigme3Player2 },
   data() {
     return {
-      isBot: false,
-      trueRules: [],
-      questions: []
+      trueRules: null
     }
   },
   computed: mapState({
-    typeScreen: (state) => state[S.typeScreen]
+    typeScreen: (state) => state[S.typeScreen],
+    config: (state) => state[S.enigme3Config]
   }),
-  mounted() {
-    this.generateAnnonce()
-  },
-  methods: {
-    generateAnnonce() {
-      // choose if will be fake annonce or not
-      this.isBot = Math.random() < 0.5
-      this.pickValidRules()
-      this.generateQuestions()
-      console.log('CONFIG bot:', this.isBot, 'trueRules:', this.trueRules, 'questions:', this.questions)
-    },
-    pickValidRules() {
-      const trueRulesNumber = this.isBot ? enigme3Data().config.rulesToDetectBot : 2
-      this.trueRules = enigme3Data()
-        .rules.sort(() => Math.random() - Math.random())
-        .slice(0, trueRulesNumber)
-    },
-    generateQuestions() {
-      this.questions = enigme3Data()
-        .rules.filter(function (obj) {
-          return obj.chat
-        })
-        .sort(() => Math.random() - Math.random())
-        .slice(0, enigme3Data().config.questionsToDisplay)
+  watch: {
+    config: function (newVal) {
+      console.log('true rules enigme 3 : ', newVal)
     }
+  },
+  mounted() {
+    //if main screen get config rules from back
+    if (this.typeScreen === 'MainScreen') {
+      this.$socket.emit('sendEnigme3Config')
+    }
+    this.sockets.subscribe('sendEnigme3Config', (config) => {
+      this.$store.commit(M.enigme3Config, config)
+    })
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.enigme-3__helper {
+  position: fixed;
+  top: 20px;
+  display: block;
+  padding: 1em;
+  background: var(--color-grey-light);
+}
+
+.enigme-3__helper__rules {
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin: 10px;
+  }
+}
+</style>

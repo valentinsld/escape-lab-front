@@ -87,11 +87,13 @@ export default {
 
 .message {
   margin-left: auto;
+  text-align: right;
   opacity: 0;
 
   &[is-received='true'] {
     margin-right: auto;
     margin-left: 0;
+    text-align: left;
   }
 
   &[is-reveal='true'] {

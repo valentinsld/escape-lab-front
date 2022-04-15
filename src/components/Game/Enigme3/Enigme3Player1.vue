@@ -3,8 +3,24 @@
     <p class="chat__title">Chat interface</p>
     <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
     <div ref="choice-buttons" class="chat__choices">
-      <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].chat.question"></button>
-      <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].chat.question"></button>
+      <h4 v-html="'Répondez au vendeur'" />
+      <div class="chat__choices__buttons">
+        <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
+        <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
+        <!-- if last question to choose bot -->
+        <button
+          v-if="finalAnswers[0]"
+          class="chat__choices__btn--strong"
+          @click="chooseBotAnswer('bot')"
+          v-html="finalAnswers[0]"
+        />
+        <button
+          v-if="finalAnswers[1]"
+          class="chat__choices__btn--strong"
+          @click="chooseBotAnswer('normal')"
+          v-html="finalAnswers[1]"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -13,55 +29,73 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
+import { finalAnswer, questionsData } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   components: { Messages },
   props: {
-    questions: {
-      type: Array,
-      default: null
-    },
     trueRules: {
       type: Array,
       default: () => []
+    },
+    sellerType: {
+      type: String,
+      default: null
+    },
+    product: {
+      type: Object,
+      default: () => {}
+    },
+    questionsToDisplay: {
+      type: Number,
+      default: 6
     }
   },
   data() {
     return {
       choicePos: null,
       buttons: null,
+      questions: [],
+      finalAnswers: [],
       choices: [],
-      messages: [{ isReveal: true, isReceived: false, content: 'Le premier message' }]
+      messages: [{ isReveal: true, isReceived: false, content: 'Bonjour !' }]
     }
   },
   mounted() {
+    console.log(this.product, 'data')
+    this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
     })
   },
   methods: {
+    generateQuestions() {
+      this.questions = questionsData(this.product)
+        .sort(() => Math.random() - Math.random())
+        .slice(0, this.questionsToDisplay)
+    },
     chooseQuestion(pos) {
       this.hideButtons()
       this.choicePos = pos
-      this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].chat.question })
+      this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].question })
       this.getResponse()
     },
     nextChoice() {
       // remove choice btn and place non selected question btn at the end of questions
-      this.$props.questions.splice(this.choicePos, 1)
-      this.$props.questions.splice(this.$props.questions.length, 0, this.$props.questions.splice(0, 1)[0])
+      this.questions.splice(this.choicePos, 1)
+      this.questions.length > 0
+        ? this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
+        : this.finalChoice()
     },
     getResponse() {
       const answer =
-        this.trueRules.filter((e) => e.id === this.questions[this.choicePos].id).length > 0
+        this.trueRules.filter((e) => e.slug === this.questions[this.choicePos].slug).length > 0
           ? 'botAnswer'
           : 'normalAnswer'
-      console.log('answer :', answer, 'rules :', this.trueRules, 'response :', this.questions[this.choicePos].id)
-      //const answer =
       this.messages.push({
         isReveal: false,
         isReceived: true,
-        content: this.questions[this.choicePos].chat[answer]
+        content: this.questions[this.choicePos][answer]
       })
     },
     handleMessagesComplete() {
@@ -85,6 +119,13 @@ export default {
         opacity: [1, 0],
         duration: 150
       })
+    },
+    finalChoice() {
+      // push final choices
+      this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
+    },
+    chooseBotAnswer(sellerType) {
+      sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
     }
   }
 }
@@ -96,5 +137,11 @@ export default {
   bottom: 5vh;
   left: 50%;
   transform: translate(-50%);
+}
+
+.chat__choices__btn {
+  &--strong {
+    font-weight: bold;
+  }
 }
 </style>

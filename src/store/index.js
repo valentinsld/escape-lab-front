@@ -17,7 +17,9 @@ export const state = {
   [STATE.idRoom]: null,
   [STATE.listUsers]: {},
   [STATE.isStart]: false,
-  [STATE.stepGame]: null
+  [STATE.stepGame]: null,
+  // enigme 3
+  [STATE.enigme3Config]: null
 }
 
 export const mutations = {
@@ -53,6 +55,17 @@ export const mutations = {
 
   [MUTATIONS.stepGame](state, newVal) {
     state[STATE.stepGame] = newVal
+  },
+  // reset room
+  [MUTATIONS.resetRoom](state) {
+    state[STATE.idRoom] = null
+    state[STATE.listUsers] = {}
+    state[STATE.stepGame] = null
+    state[STATE.typeScreen] = null
+  },
+  // enigme 3
+  [MUTATIONS.enigme3Config](state, newVal) {
+    state[STATE.enigme3Config] = newVal
   }
 }
 export const getters = {}
