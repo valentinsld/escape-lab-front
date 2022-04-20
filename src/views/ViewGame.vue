@@ -1,8 +1,8 @@
 <template>
   <ViewContainer name="game">
-    <p>View Game</p>
-    <Components :is="stepGame" />
-    <VideoMainScreen v-if="typeScreen === mainScreen" />
+    <Canvas />
+    <!--    <Components :is="stepGame" />-->
+    <!--    <VideoMainScreen v-if="typeScreen === mainScreen" />-->
   </ViewContainer>
 </template>
 
@@ -10,6 +10,7 @@
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
+import Canvas from '@/components/Game/Canvas'
 // enigmes
 import Enigme1 from '@/components/Game/Enigme1/Enigme1'
 import Enigme2 from '@/components/Game/Enigme2/Enigme2'
@@ -30,6 +31,7 @@ const DEBUG = process.env.NODE_ENV === 'development'
 export default {
   name: 'ViewGame',
   components: {
+    Canvas,
     Intro,
     Enigme3,
     Enigme2,
