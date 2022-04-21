@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <Enigme2Popup v-for="(card, index) in cards" :key="card" :card="card" :is-current="index === 0" />
+    <Enigme2Popup v-for="(card, index) in cards" :key="`enigme2${index}`" :card="card" :is-current="index === 0" />
   </div>
 </template>
 

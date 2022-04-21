@@ -1,7 +1,7 @@
 /** ALL CARD LOGIC IN POPUP COMPONENT */
 
 <template>
-  <div class="card" :class="{ isCurrent: isCurrent }" :style="{ transform: transformString }">
+  <div ref="interactElement" class="card" :class="{ isCurrent: isCurrent }" :style="{ transform: transformString }">
     <h3 class="cardTitle">{{ card.keyword }}</h3>
   </div>
 </template>

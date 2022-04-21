@@ -42,7 +42,7 @@ export default {
       this.$socket.emit('p2pPopup')
     },
     defineIdentity() {
-      alert(this.$store.state[S.typeScreen])
+      // alert(this.$store.state[S.typeScreen])
     },
     destroyPopup() {
       this.showPopup = false
