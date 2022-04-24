@@ -51,6 +51,7 @@ export default {
       this.$store.commit(M.idRoom, idRoom)
       this.$store.commit(M.listUsers, listUsers)
       this.$store.commit(M.stepGame, stepGame)
+      this.$store.commit(M.isStart, isStart)
 
       // if is you
       console.log(this.$store.state[S.typeScreen])
@@ -58,7 +59,6 @@ export default {
         this.$store.commit(M.typeScreen, newUser.type)
       }
 
-      console.log('isStart', isStart)
       if (isStart) {
         this.$router.push('/game')
       }
