@@ -1,8 +1,8 @@
 <template>
   <ViewContainer name="game">
-    <Canvas />
-    <!--    <Components :is="stepGame" />-->
-    <!--    <VideoMainScreen v-if="typeScreen === mainScreen" />-->
+    <Canvas v-if="typeScreen === mainScreen" />
+    <Components :is="stepGame" />
+    <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
 </template>
 

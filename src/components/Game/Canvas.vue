@@ -21,8 +21,6 @@ export default {
   },
   methods: {
     init() {
-      let container = document.getElementById('container')
-
       this.camera = new Three.PerspectiveCamera(
         70,
         this.$refs.scene.clientWidth / this.$refs.scene.clientHeight,
@@ -39,14 +37,15 @@ export default {
       this.mesh = new Three.Mesh(geometry, material)
       this.scene.add(this.mesh)
 
-      this.renderer = new Three.WebGLRenderer({ antialias: true })
+      this.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
       this.renderer.setSize(this.$refs.scene.clientWidth, this.$refs.scene.clientHeight)
-      container.appendChild(this.renderer.domElement)
+
+      this.$refs.scene.appendChild(this.renderer.domElement)
     },
     animate() {
       requestAnimationFrame(this.animate)
-      this.mesh.rotation.x += 0.01
-      this.mesh.rotation.y += 0.02
+      // this.mesh.rotation.x += 0.01
+      // this.mesh.rotation.y += 0.02
       this.renderer.render(this.scene, this.camera)
     }
   }
