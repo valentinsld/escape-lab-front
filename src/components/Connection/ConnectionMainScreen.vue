@@ -55,7 +55,6 @@ export default {
   }),
   sockets: {
     startGame: function () {
-      console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
     },
@@ -76,16 +75,13 @@ export default {
       isMainScreen: this.$store.state[S.stateScreen] === STATE_SCREEN.mainScreen,
       isPlayer: this.$store.state[S.stateScreen] === STATE_SCREEN.player
     }
-    this.$socket.emit('connectToRoom', loginData, () => {
-      console.log('connectToRoom', this.$socket.id)
-    })
+    this.$socket.emit('connectToRoom', loginData)
   },
   methods: {
     seeJoinRoomClick() {
       this.$data.seeJoinRoom = true
     },
     connectToRoom(ev, id = null) {
-      console.log('connectToRoom', ev, id)
       const idRoom = id || this.$refs.inputIdRoom.value
       this.$data.seeJoinRoom = false
 

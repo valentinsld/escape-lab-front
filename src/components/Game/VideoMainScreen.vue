@@ -81,7 +81,7 @@ export default {
       }, 500)
     },
     endEnigme: function ({ stepGame }) {
-      console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
+      // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
     }
   },
@@ -101,7 +101,6 @@ export default {
         for (const time of eventsTime) {
           if (currentTime > time.time && !time.isPlayed) {
             time.isPlayed = true
-            console.log('timeupdate call ', time.key)
             THAT[time.key]?.call()
           }
         }

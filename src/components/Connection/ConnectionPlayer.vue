@@ -52,7 +52,6 @@ export default {
   }),
   sockets: {
     startGame: function () {
-      console.log('startGame !!!')
       this.$store.commit(M.stepGame, 'Intro')
       this.$router.push('/game')
     },
