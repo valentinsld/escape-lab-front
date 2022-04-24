@@ -1,3 +1,4 @@
+import * as Three from 'three'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -20,7 +21,12 @@ export const state = {
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
   // enigme 3
-  [STATE.enigme3Config]: null
+  [STATE.enigme3Config]: null,
+  // THREE
+  [STATE.camera]: null,
+  [STATE.scene]: null,
+  [STATE.renderer]: null,
+  [STATE.mesh]: null
 }
 
 export const mutations = {
@@ -33,7 +39,6 @@ export const mutations = {
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
   },
-
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal
   },
@@ -70,12 +75,43 @@ export const mutations = {
   // enigme 3
   [MUTATIONS.enigme3Config](state, newVal) {
     state[STATE.enigme3Config] = newVal
+  },
+  // THREE
+  [MUTATIONS.initCam](state) {
+    state[STATE.camera] = new Three.PerspectiveCamera(70, state[STATE.windowW] / state[STATE.windowH], 0.01, 10)
+    state[STATE.camera].position.z = 1
   }
 }
 export const getters = {}
 
+export const actions = {
+  INIT_SCENE({ state, commit }, { width, height, el }) {
+    return new Promise((resolve) => {
+      commit(MUTATIONS.initCam)
+
+      state.scene = new Three.Scene()
+
+      let geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
+      let material = new Three.MeshNormalMaterial()
+
+      state.mesh = new Three.Mesh(geometry, material)
+      state.scene.add(state.mesh)
+
+      state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
+      state.renderer.setSize(width, height)
+
+      el.appendChild(state.renderer.domElement)
+
+      state.renderer.render(state.scene, state.camera)
+
+      resolve()
+    })
+  }
+}
+
 export default new Vuex.Store({
   state: state,
   mutations: mutations,
-  getters: getters
+  getters: getters,
+  actions: actions
 })

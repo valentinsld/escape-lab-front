@@ -11,7 +11,12 @@ export const STATE = {
   stepGame: 'stepGame',
   playerIsReady: 'playerIsReady',
   // enigme 3
-  enigme3Config: 'enigme3Config'
+  enigme3Config: 'enigme3Config',
+  // THREE
+  camera: 'camera',
+  scene: 'scene',
+  renderer: 'renderer',
+  mesh: 'mesh'
 }
 
 export const MUTATIONS = {
@@ -28,7 +33,9 @@ export const MUTATIONS = {
   stepGame: 'M_STEP_GAME',
   resetRoom: 'M_RESET_ROOM',
   // enigme 3
-  enigme3Config: 'M_ENIGME_3_CONFIG'
+  enigme3Config: 'M_ENIGME_3_CONFIG',
+  // THREE
+  initCam: 'M_INIT_CAM'
 }
 
 export const STATE_SCREEN = {
@@ -37,3 +44,7 @@ export const STATE_SCREEN = {
 }
 
 export const GETTERS = {}
+
+export const ACTIONS = {
+  initScene: 'A_INIT_SCENE'
+}

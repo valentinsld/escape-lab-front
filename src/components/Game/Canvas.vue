@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import * as Three from 'three'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Canvas',
@@ -16,36 +16,20 @@ export default {
     }
   },
   mounted() {
-    this.init()
-    this.animate()
+    this.INIT_SCENE({
+      width: this.$refs.scene.clientWidth,
+      height: this.$refs.scene.clientHeight,
+      el: this.$refs.scene
+    })
+    //this.init()
+    //this.animate()
   },
   methods: {
-    init() {
-      this.camera = new Three.PerspectiveCamera(
-        70,
-        this.$refs.scene.clientWidth / this.$refs.scene.clientHeight,
-        0.01,
-        10
-      )
-      this.camera.position.z = 1
-
-      this.scene = new Three.Scene()
-
-      let geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
-      let material = new Three.MeshNormalMaterial()
-
-      this.mesh = new Three.Mesh(geometry, material)
-      this.scene.add(this.mesh)
-
-      this.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
-      this.renderer.setSize(this.$refs.scene.clientWidth, this.$refs.scene.clientHeight)
-
-      this.$refs.scene.appendChild(this.renderer.domElement)
-    },
+    ...mapActions(['INIT_SCENE']),
     animate() {
       requestAnimationFrame(this.animate)
-      // this.mesh.rotation.x += 0.01
-      // this.mesh.rotation.y += 0.02
+      this.mesh.rotation.x += 0.01
+      this.mesh.rotation.y += 0.02
       this.renderer.render(this.scene, this.camera)
     }
   }
