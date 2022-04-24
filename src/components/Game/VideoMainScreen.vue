@@ -56,13 +56,29 @@ export default {
     return {
       player: null,
       seePlayer: false,
-      eventsTime: []
+      eventsTime: [],
+      isStepGame: false
     }
   },
   sockets: {
     'intro-startVideo': function () {
       this.startVideo()
       this.$data.seePlayer = true
+    },
+    setStepGame: function ({ stepGame, stepGameNumber }) {
+      this.$data.isStepGame = true
+      this.$data.seePlayer = true
+      this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
+      this.player.abLoopPlugin.playLoop()
+
+      // reset time for nextEnigme
+      for (let i = stepGameNumber; i < this.$data.eventsTime.length; i++) {
+        this.$data.eventsTime[i].isPlayed = false
+      }
+
+      setTimeout(() => {
+        this.$data.isStepGame = false
+      }, 500)
     },
     endEnigme: function ({ stepGame }) {
       console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
@@ -85,6 +101,7 @@ export default {
         for (const time of eventsTime) {
           if (currentTime > time.time && !time.isPlayed) {
             time.isPlayed = true
+            console.log('timeupdate call ', time.key)
             THAT[time.key]?.call()
           }
         }
@@ -111,19 +128,12 @@ export default {
       const array = []
 
       for (const [key, value] of Object.entries(MARKERS_PLAYER)) {
-        if (typeof value === 'object') {
-          array.push({
-            time: convertTimeToSeconds(value.start),
-            isPlayed: false,
-            key: 'play' + key
-          })
-        } else {
-          array.push({
-            time: convertTimeToSeconds(value),
-            isPlayed: false,
-            key: 'play' + key
-          })
-        }
+        const time = typeof value === 'object' ? value.start : value
+        array.push({
+          time: convertTimeToSeconds(time),
+          isPlayed: false,
+          key: 'play' + key
+        })
       }
 
       this.$data.eventsTime = array
@@ -161,19 +171,23 @@ export default {
 
     // events on playing video
     playintroDarkness() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('intro-darkScene')
     },
     playloopEnigme1() {
-      // START ENIGME 1
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playloopEnigme2() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playloopEnigme3() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playstartOutro() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     }
   }
