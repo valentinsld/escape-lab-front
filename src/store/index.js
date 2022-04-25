@@ -106,6 +106,16 @@ export const actions = {
 
       resolve()
     })
+  },
+  ANIMATE({ dispatch, state }) {
+    window.requestAnimationFrame(() => {
+      dispatch('ANIMATE')
+    })
+    // rotate cubes
+    state.mesh.rotation.x += 0.01
+    state.mesh.rotation.y += 0.02
+
+    state.renderer.render(state.scene, state.camera)
   }
 }
 

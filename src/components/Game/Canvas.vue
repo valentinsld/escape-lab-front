@@ -20,18 +20,12 @@ export default {
       width: this.$refs.scene.clientWidth,
       height: this.$refs.scene.clientHeight,
       el: this.$refs.scene
+    }).then(() => {
+      this.ANIMATE()
     })
-    //this.init()
-    //this.animate()
   },
   methods: {
-    ...mapActions(['INIT_SCENE']),
-    animate() {
-      requestAnimationFrame(this.animate)
-      this.mesh.rotation.x += 0.01
-      this.mesh.rotation.y += 0.02
-      this.renderer.render(this.scene, this.camera)
-    }
+    ...mapActions(['INIT_SCENE', 'ANIMATE'])
   }
 }
 </script>
