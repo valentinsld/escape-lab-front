@@ -1,8 +1,8 @@
-import * as Three from 'three'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { ACTIONS, MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
+import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
+import threeStore from '@/store/modules/three'
 
 Vue.use(Vuex)
 
@@ -21,14 +21,7 @@ export const state = {
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
   // enigme 3
-  [STATE.enigme3Config]: null,
-  // THREE
-  [STATE.camera]: null,
-  [STATE.scene]: null,
-  [STATE.renderer]: null,
-  [STATE.meshGame1]: null,
-  [STATE.meshGame2]: null,
-  [STATE.meshGame3]: null
+  [STATE.enigme3Config]: null
 }
 
 export const mutations = {
@@ -77,51 +70,15 @@ export const mutations = {
   // enigme 3
   [MUTATIONS.enigme3Config](state, newVal) {
     state[STATE.enigme3Config] = newVal
-  },
-  // THREE
-  [MUTATIONS.initCam](state) {
-    state[STATE.camera] = new Three.PerspectiveCamera(70, state[STATE.windowW] / state[STATE.windowH], 0.01, 10)
-    state[STATE.camera].position.z = 1
   }
 }
 export const getters = {}
 
-export const actions = {
-  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
-    return new Promise((resolve) => {
-      commit(MUTATIONS.initCam)
-
-      state.scene = new Three.Scene()
-
-      let geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
-      let material = new Three.MeshNormalMaterial()
-
-      state.meshGame1 = new Three.Mesh(geometry, material)
-      state.scene.add(state.meshGame1)
-
-      state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
-      state.renderer.setSize(width, height)
-
-      el.appendChild(state.renderer.domElement)
-
-      state.renderer.render(state.scene, state.camera)
-
-      resolve()
-    })
-  },
-  [ACTIONS.animate]({ dispatch, state }) {
-    window.requestAnimationFrame(() => {
-      dispatch(ACTIONS.animate)
-    })
-
-    state.meshGame1.rotation.y += 0.001
-    state.renderer.render(state.scene, state.camera)
-  }
-}
-
 export default new Vuex.Store({
+  modules: {
+    three: threeStore
+  },
   state: state,
   mutations: mutations,
-  getters: getters,
-  actions: actions
+  getters: getters
 })
