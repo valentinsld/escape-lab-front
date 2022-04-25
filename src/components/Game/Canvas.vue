@@ -5,6 +5,8 @@
 <script>
 import { mapActions } from 'vuex'
 
+import { ACTIONS as A } from '@/store/helpers'
+
 export default {
   name: 'Canvas',
   data() {
@@ -16,13 +18,21 @@ export default {
     }
   },
   mounted() {
-    this.INIT_SCENE({
-      width: this.$refs.scene.clientWidth,
-      height: this.$refs.scene.clientHeight,
-      el: this.$refs.scene
-    }).then(() => {
-      this.ANIMATE()
-    })
+    this.$store
+      .dispatch({
+        type: A.initScene,
+        width: this.$refs.scene.clientWidth,
+        height: this.$refs.scene.clientHeight,
+        el: this.$refs.scene
+      })
+      // .INIT_SCENE({
+      //   width: this.$refs.scene.clientWidth,
+      //   height: this.$refs.scene.clientHeight,
+      //   el: this.$refs.scene
+      // })
+      .then(() => {
+        this.$store.dispatch(A.animate)
+      })
   },
   methods: {
     ...mapActions(['INIT_SCENE', 'ANIMATE'])

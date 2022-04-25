@@ -2,7 +2,7 @@ import * as Three from 'three'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
+import { ACTIONS, MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
 
 Vue.use(Vuex)
 
@@ -26,7 +26,9 @@ export const state = {
   [STATE.camera]: null,
   [STATE.scene]: null,
   [STATE.renderer]: null,
-  [STATE.mesh]: null
+  [STATE.meshGame1]: null,
+  [STATE.meshGame2]: null,
+  [STATE.meshGame3]: null
 }
 
 export const mutations = {
@@ -85,7 +87,7 @@ export const mutations = {
 export const getters = {}
 
 export const actions = {
-  INIT_SCENE({ state, commit }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
@@ -94,8 +96,8 @@ export const actions = {
       let geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
       let material = new Three.MeshNormalMaterial()
 
-      state.mesh = new Three.Mesh(geometry, material)
-      state.scene.add(state.mesh)
+      state.meshGame1 = new Three.Mesh(geometry, material)
+      state.scene.add(state.meshGame1)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
       state.renderer.setSize(width, height)
@@ -107,14 +109,12 @@ export const actions = {
       resolve()
     })
   },
-  ANIMATE({ dispatch, state }) {
+  [ACTIONS.animate]({ dispatch, state }) {
     window.requestAnimationFrame(() => {
-      dispatch('ANIMATE')
+      dispatch(ACTIONS.animate)
     })
-    // rotate cubes
-    state.mesh.rotation.x += 0.01
-    state.mesh.rotation.y += 0.02
 
+    state.meshGame1.rotation.y += 0.001
     state.renderer.render(state.scene, state.camera)
   }
 }

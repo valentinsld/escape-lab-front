@@ -16,7 +16,9 @@ export const STATE = {
   camera: 'camera',
   scene: 'scene',
   renderer: 'renderer',
-  mesh: 'mesh'
+  meshGame1: 'meshGame1',
+  meshGame2: 'meshGame2',
+  meshGame3: 'meshGame3'
 }
 
 export const MUTATIONS = {
@@ -46,5 +48,6 @@ export const STATE_SCREEN = {
 export const GETTERS = {}
 
 export const ACTIONS = {
-  initScene: 'A_INIT_SCENE'
+  initScene: 'A_INIT_SCENE',
+  animate: 'A_ANIMATE'
 }
