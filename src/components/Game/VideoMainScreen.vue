@@ -14,6 +14,8 @@ import 'video.js/dist/video-js.css'
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
 
+import { STATE as S } from '@/store/helpers'
+
 function convertTimeToSeconds(time) {
   const timeArray = time.split(':').map((t) => parseInt(t), 10)
   const seconds = timeArray[0] * 60 + timeArray[1] + timeArray[2] / 24
@@ -21,7 +23,7 @@ function convertTimeToSeconds(time) {
 }
 
 const MARKERS_PLAYER = {
-  introDarkness: '0:03:23',
+  introDarkness: '0:06:02',
   loopEnigme1: { start: '0:09:18', end: '0:11:18' },
   loopEnigme2: { start: '0:21:18', end: '0:23:20' },
   loopEnigme3: { start: '0:33:20', end: '0:35:21' },
@@ -49,6 +51,8 @@ const OPTIONS = {
     }
   }
 }
+
+const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
 
 export default {
   name: 'VideoMainScreen',
@@ -78,7 +82,7 @@ export default {
 
       setTimeout(() => {
         this.$data.isStepGame = false
-      }, 500)
+      }, 1000)
     },
     endEnigme: function ({ stepGame }) {
       // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
@@ -111,11 +115,25 @@ export default {
       })
     })
 
-    this.playEnigme1()
+    console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
+    if (this.$store.state[S.stepGame] === 'Intro') {
+      this.playEnigme1()
+    } else if (IS_DEV) {
+      let stepGame
 
-    // this.player.abLoopPlugin.onLoopCallBack = function () {
-    //   console.log('NEW LOOP')
-    // }
+      switch (this.$store.state[S.stepGame]) {
+        case 'Enigme1':
+          stepGame = 1
+          break
+        case 'Enigme2':
+          stepGame = 2
+          break
+        case 'Enigme3':
+          stepGame = 3
+          break
+      }
+      if (stepGame) this.$socket.emit('setStepGame', { stepGame })
+    }
   },
   beforeDestroy() {
     if (this.player) {
