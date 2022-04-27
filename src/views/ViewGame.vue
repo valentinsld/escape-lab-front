@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     initPane() {
-      // if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
+      if (/*!DEBUG || */ this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane
