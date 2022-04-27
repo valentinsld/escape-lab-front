@@ -25,6 +25,7 @@ import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 import ViewContainer from '@/views/ViewContainer'
 
+// eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
 const DEBUG = process.env.NODE_ENV === 'development'
 
 export default {
@@ -75,7 +76,7 @@ export default {
   },
   methods: {
     initPane() {
-      if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
+      // if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane
