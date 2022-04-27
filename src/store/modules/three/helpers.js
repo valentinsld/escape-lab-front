@@ -8,7 +8,8 @@ export const STATE = {
 }
 
 export const MUTATIONS = {
-  initCam: 'M_INIT_CAM'
+  initCam: 'M_INIT_CAM',
+  setCamPosition: 'M_SET_CAM_POSITION'
 }
 
 export const ACTIONS = {

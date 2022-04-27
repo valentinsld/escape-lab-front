@@ -19,6 +19,12 @@ export const mutations = {
   [MUTATIONS.initCam](state) {
     state[STATE.camera] = new Three.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10)
     state[STATE.camera].position.z = 1
+  },
+  [MUTATIONS.setCamPosition](state, { x, y, z }) {
+    if (state.camera) {
+      console.log('chaud')
+      state.camera.position.set(x, y, z)
+    }
   }
 }
 

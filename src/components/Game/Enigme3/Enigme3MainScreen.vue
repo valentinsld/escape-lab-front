@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { MUTATIONS as M } from '@/store/modules/three/helpers'
+
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -17,7 +19,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.product, 'product annonce')
+    console.log(this.$store.state.three.camera, 'cam pos')
+    this.$store.commit(M.setCamPosition, { x: 0.5, y: 0, z: 1 })
   },
   sockets: {
     startEnigme: function () {
