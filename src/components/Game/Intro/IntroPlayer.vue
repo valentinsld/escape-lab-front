@@ -54,7 +54,6 @@ export default {
     },
     // startVideo
     'intro-startVideo': function () {
-      console.log('intro-startVideo !!!!!!')
       this.$data.startVideo = true
     }
   },

@@ -14,6 +14,8 @@ import 'video.js/dist/video-js.css'
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
 
+import { STATE as S } from '@/store/helpers'
+
 function convertTimeToSeconds(time) {
   const timeArray = time.split(':').map((t) => parseInt(t), 10)
   const seconds = timeArray[0] * 60 + timeArray[1] + timeArray[2] / 24
@@ -21,12 +23,12 @@ function convertTimeToSeconds(time) {
 }
 
 const MARKERS_PLAYER = {
-  introDarkness: '0:03:23',
-  loopEnigme1: { start: '0:09:18', end: '0:11:18' },
-  loopEnigme2: { start: '0:21:18', end: '0:23:20' },
-  loopEnigme3: { start: '0:33:20', end: '0:35:21' },
-  startOutro: '0:46:21',
-  outroStartMessages: '0:51:12'
+  introDarkness: '0:14:02',
+  loopEnigme1: { start: '0:17:18', end: '0:19:18' },
+  loopEnigme2: { start: '0:29:18', end: '0:31:20' },
+  loopEnigme3: { start: '0:41:20', end: '0:43:21' },
+  startOutro: '0:54:21',
+  outroStartMessages: '0:59:12'
 }
 
 const OPTIONS = {
@@ -50,13 +52,16 @@ const OPTIONS = {
   }
 }
 
+const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
+
 export default {
   name: 'VideoMainScreen',
   data() {
     return {
       player: null,
       seePlayer: false,
-      eventsTime: []
+      eventsTime: [],
+      isStepGame: false
     }
   },
   sockets: {
@@ -64,8 +69,23 @@ export default {
       this.startVideo()
       this.$data.seePlayer = true
     },
+    setStepGame: function ({ stepGame, stepGameNumber }) {
+      this.$data.isStepGame = true
+      this.$data.seePlayer = true
+      this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
+      this.player.abLoopPlugin.playLoop()
+
+      // reset time for nextEnigme
+      for (let i = stepGameNumber; i < this.$data.eventsTime.length; i++) {
+        this.$data.eventsTime[i].isPlayed = false
+      }
+
+      setTimeout(() => {
+        this.$data.isStepGame = false
+      }, 1000)
+    },
     endEnigme: function ({ stepGame }) {
-      console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
+      // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
     }
   },
@@ -95,11 +115,25 @@ export default {
       })
     })
 
-    this.playEnigme1()
+    console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
+    if (this.$store.state[S.stepGame] === 'Intro') {
+      this.playEnigme1()
+    } else if (IS_DEV) {
+      let stepGame
 
-    // this.player.abLoopPlugin.onLoopCallBack = function () {
-    //   console.log('NEW LOOP')
-    // }
+      switch (this.$store.state[S.stepGame]) {
+        case 'Enigme1':
+          stepGame = 1
+          break
+        case 'Enigme2':
+          stepGame = 2
+          break
+        case 'Enigme3':
+          stepGame = 3
+          break
+      }
+      if (stepGame) this.$socket.emit('setStepGame', { stepGame })
+    }
   },
   beforeDestroy() {
     if (this.player) {
@@ -111,19 +145,12 @@ export default {
       const array = []
 
       for (const [key, value] of Object.entries(MARKERS_PLAYER)) {
-        if (typeof value === 'object') {
-          array.push({
-            time: convertTimeToSeconds(value.start),
-            isPlayed: false,
-            key: 'play' + key
-          })
-        } else {
-          array.push({
-            time: convertTimeToSeconds(value),
-            isPlayed: false,
-            key: 'play' + key
-          })
-        }
+        const time = typeof value === 'object' ? value.start : value
+        array.push({
+          time: convertTimeToSeconds(time),
+          isPlayed: false,
+          key: 'play' + key
+        })
       }
 
       this.$data.eventsTime = array
@@ -161,19 +188,23 @@ export default {
 
     // events on playing video
     playintroDarkness() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('intro-darkScene')
     },
     playloopEnigme1() {
-      // START ENIGME 1
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playloopEnigme2() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playloopEnigme3() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
     playstartOutro() {
+      if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     }
   }
