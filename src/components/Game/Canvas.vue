@@ -32,6 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 .scene-container {
+  position: absolute;
+  width: 100vw;
   height: 100vh;
 }
 </style>

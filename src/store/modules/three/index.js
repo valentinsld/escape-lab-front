@@ -33,7 +33,16 @@ export const actions = {
       let material = new Three.MeshNormalMaterial()
 
       state.meshGame1 = new Three.Mesh(geometry, material)
+      state.meshGame1.position.set(-0.5, 0, 0)
       state.scene.add(state.meshGame1)
+
+      state.meshGame2 = new Three.Mesh(geometry, material)
+      state.meshGame2.position.set(0, 0, 0)
+      state.scene.add(state.meshGame2)
+
+      state.meshGame3 = new Three.Mesh(geometry, material)
+      state.meshGame3.position.set(0.5, 0, 0)
+      state.scene.add(state.meshGame3)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
       state.renderer.setSize(width, height)
