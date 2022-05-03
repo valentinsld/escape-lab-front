@@ -25,6 +25,9 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme1-recall': function () {
+      this.$data.recalled = true
     }
   },
   methods: {

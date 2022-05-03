@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     recall() {
-      console.log('recall !!')
+      this.$emit('onRecall', true)
     }
   }
 }
