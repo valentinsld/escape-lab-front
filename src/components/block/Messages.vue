@@ -14,6 +14,7 @@
 
 <script>
 import Anime from 'animejs'
+
 export default {
   name: 'Messages',
   props: {
@@ -83,6 +84,8 @@ export default {
 .messages {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .message {
