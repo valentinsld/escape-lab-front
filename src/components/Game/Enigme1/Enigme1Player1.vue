@@ -2,7 +2,7 @@
   <div>
     <h1>Enigme 1 Player1</h1>
     <Timer v-if="!recalled" :is-start="isStart" @onTimeChange:step="updateTime" @onTimeChange:end="endTime" />
-    <PhoneMessage v-else />
+    <PhoneMessage v-else :data="dataMessages" />
   </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       isStart: false,
-      recalled: false
+      recalled: false,
+      dataMessages: []
     }
   },
   sockets: {
