@@ -113,11 +113,11 @@ const messages = [
         content: 'Hello ! Comment s\'est passé ton week-end ?'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Hello ! J’ai passé un superbe week-end, j\'étais à la plage 😊'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'et toi ?'
       },
       {
@@ -125,7 +125,7 @@ const messages = [
         content: 'J’étais chez mes parents, un peu chiant. Il y a pas grand chose à faire au Havre… et ma maman a encore oublié de venir me chercher'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Oh mince, c’est pas la première fois…'
       },
       {
@@ -133,7 +133,7 @@ const messages = [
         content: 'Est ce que tu veux qu’on aille boire un verre tous les deux dans la semaine ?'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Oui, pourquoi pas. Tu es dispo jeudi ?'
       },
       {
