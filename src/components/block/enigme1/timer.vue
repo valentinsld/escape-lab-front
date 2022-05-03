@@ -9,15 +9,24 @@ export default {
     initTime: {
       type: Number,
       default: 20
+    },
+    isStart: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      timer: this.$props.initTime
+      timer: this.$props.initTime,
+      timerStarted: false
     }
   },
-  mounted() {
-    this.updateTime()
+  watch: {
+    isStart: function () {
+      if (this.$data.timerStarted) return
+      this.updateTime()
+      this.$data.timerStarted = true
+    }
   },
   methods: {
     updateTime() {

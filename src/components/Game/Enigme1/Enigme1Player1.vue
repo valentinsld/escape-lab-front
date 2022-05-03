@@ -1,17 +1,26 @@
 <template>
   <div>
     <h1>Enigme 1 Player1</h1>
-    <Timer @onTimeChange:step="updateTime" @onTimeChange:end="endTime" />
+    <Timer v-if="!recalled" :is-start="isStart" @onTimeChange:step="updateTime" @onTimeChange:end="endTime" />
+    <PhoneMessage v-else />
   </div>
 </template>
 
 <script>
+import PhoneMessage from '@/components/block/enigme1/phoneMessages.vue'
 import Timer from '@/components/block/enigme1/timer.vue'
 
 export default {
   name: 'Enigme1Player1',
   components: {
-    Timer
+    Timer,
+    PhoneMessage
+  },
+  data() {
+    return {
+      isStart: false,
+      recalled: false
+    }
   },
   sockets: {
     startEnigme: function () {
@@ -21,6 +30,7 @@ export default {
   methods: {
     start() {
       console.log('START ENIGME')
+      this.$data.isStart = true
     },
 
     updateTime(time) {
