@@ -1,7 +1,7 @@
 <template>
   <div v-if="product" class="annonce-product">
     <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
-    <p v-if="product.img" class="annonce-product__img" v-html="product.img" />
+    <img v-if="product.img" class="annonce-product__img" :src="getSource" />
     <p v-if="product.description" class="annonce-product__description" v-html="product.description" />
     <p v-if="product.subtype.text" v-html="product.subtype.text" />
   </div>
@@ -14,6 +14,11 @@ export default {
     product: {
       type: Object,
       default: () => {}
+    }
+  },
+  computed: {
+    getSource() {
+      return require(`@/assets/images/enigme3/annonce-product/${this.product.img}.png`)
     }
   },
   mounted() {
