@@ -17,9 +17,10 @@
       :is-reveal="item.isReveal"
       :is-received="item.isReceived"
     >
-      <div v-if="typeof item.content === 'object'">
-        <p v-html="item.content.url" />
+      <div v-if="typeof item.content === 'object'" class="message__payment">
+        <p>Voici le lien du paiement :</p>
         <img v-if="item.content.image" :src="getSource(item.content.image)" />
+        <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
       </div>
       <p v-else v-html="item.content" />
     </div>
@@ -104,18 +105,35 @@ export default {
 }
 
 .message {
-  margin-left: auto;
+  padding: 0 1em;
+  margin: 20px 0 auto 20px;
+  color: white;
   text-align: right;
+  background: #81adff;
+  border-radius: 10px;
   opacity: 0;
 
   &[is-received='true'] {
     margin-right: auto;
     margin-left: 0;
+    color: #707070;
     text-align: left;
+    background: #f2f2f2;
   }
 
   &[is-reveal='true'] {
     opacity: 1;
   }
+}
+
+.message__payment {
+  img {
+    width: 60px;
+  }
+}
+
+.message__payment__link {
+  margin-top: 0;
+  text-decoration: underline;
 }
 </style>
