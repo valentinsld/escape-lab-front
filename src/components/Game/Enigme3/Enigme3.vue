@@ -1,13 +1,13 @@
 <template>
   <div v-if="config" class="enigme-3">
-    <div class="enigme-3__helper">
+    <!--    <div class="enigme-3__helper">
       <h4>Config generated :</h4>
       <p v-html="` type du vendeur : ${config.sellerType}`" />
       <p>Règles pour démasquer le bot :</p>
       <div class="enigme-3__helper__rules">
         <p v-for="(rule, i) in config.trueRules" :key="i" v-html="`${rule.slug}`" />
       </div>
-    </div>
+    </div>-->
     <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="config.product" />
     <Enigme3Player1
       v-if="typeScreen === 'Player1'"
@@ -59,6 +59,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.enigme-3 {
+  padding: 5em 1em;
+}
+
 .enigme-3__helper {
   position: fixed;
   top: 20px;
