@@ -1,4 +1,4 @@
-import { getCountryAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
+import { getCountryAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
 export const noticeData = () => [
   {
@@ -53,8 +53,8 @@ export const questionsData = (product) => [
   {
     slug: 'payment',
     question: 'Comment se déroule le paiement ?',
-    normalAnswer: { url: 'url', desc: 'desc', image: 'image' },
-    botAnswer: { url: 'url', desc: 'desc', image: 'image' }
+    normalAnswer: getPaymentAnswer(false),
+    botAnswer: getPaymentAnswer(true)
   },
   {
     slug: 'criteria',
@@ -84,6 +84,23 @@ export const finalAnswer = {
 export const countries = {
   bot: ['Chashington', 'Pabai', 'Saint Seille', 'Le Mavre'],
   normal: ['Taideaux', 'Borwan', 'Duris', 'Watellerault']
+}
+
+export const payments = {
+  bot: [
+    { url: 'www.extrasafe-paypal.com', image: 'paypal' },
+    { url: 'www.levrai-leboncoin.com', image: 'lbc' },
+    { url: 'www.real-lydia.com', image: 'lydia' },
+    { url: 'www.super-secured-paylib.com', image: 'paylib' },
+    { url: 'www.no-arnaque-lpb.com', image: 'lpb' }
+  ],
+  normal: [
+    { url: 'www.paypal.com', image: 'paypal' },
+    { url: 'www.leboncoin.com', image: 'lbc' },
+    { url: 'www.lydia.com', image: 'lydia' },
+    { url: 'www.paylib.com', image: 'paylib' },
+    { url: 'www.lpb.com', image: 'lpb' }
+  ]
 }
 
 export const text = () => {}

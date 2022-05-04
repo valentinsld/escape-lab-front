@@ -1,4 +1,4 @@
-import { countries } from '@/data/enigme3'
+import { countries, payments } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
 
 export const getPriceAnswer = (interval, isBot) => {
@@ -15,4 +15,8 @@ export const getCountryAnswer = (isBot) => {
   return isBot
     ? countries.bot[randomNum(0, countries.bot.length)]
     : countries.normal[randomNum(0, countries.normal.length)]
+}
+
+export const getPaymentAnswer = (isBot) => {
+  return isBot ? payments.bot[randomNum(0, payments.bot.length)] : payments.normal[randomNum(0, payments.normal.length)]
 }

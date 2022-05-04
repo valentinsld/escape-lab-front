@@ -19,6 +19,7 @@
     >
       <div v-if="typeof item.content === 'object'">
         <p v-html="item.content.url" />
+        <img v-if="item.content.image" :src="getSource(item.content.image)" />
       </div>
       <p v-else v-html="item.content" />
     </div>
@@ -51,6 +52,7 @@ export default {
   watch: {
     messages: function () {
       this.$nextTick(() => {
+        console.log(this.messages, 'messages')
         this.msgAnimation()
       })
     }
@@ -87,6 +89,9 @@ export default {
           }
         }
       })
+    },
+    getSource(name) {
+      return require(`@/assets/images/enigme3/payments/${name}.png`)
     }
   }
 }
