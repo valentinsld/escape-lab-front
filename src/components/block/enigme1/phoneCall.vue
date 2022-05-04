@@ -69,7 +69,6 @@ export default {
         autoplay: true,
         volume: 0.5,
         onend: () => {
-          console.log('Finished!')
           setTimeout(() => this.$data.sound.play(), PARAMS.timeBeforeLoop)
         }
       })
