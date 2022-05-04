@@ -1,6 +1,6 @@
 <template>
   <div class="messages">
-    <p
+    <!--    <p
       v-for="(item, index) in messages"
       ref="messages"
       :key="index"
@@ -8,7 +8,20 @@
       :is-reveal="item.isReveal"
       :is-received="item.isReceived"
       v-html="item.content"
-    />
+    />-->
+    <div
+      v-for="(item, index) in messages"
+      ref="messages"
+      :key="index"
+      class="message"
+      :is-reveal="item.isReveal"
+      :is-received="item.isReceived"
+    >
+      <div v-if="typeof item.content === 'object'">
+        <p v-html="item.content.url" />
+      </div>
+      <p v-else v-html="item.content" />
+    </div>
   </div>
 </template>
 

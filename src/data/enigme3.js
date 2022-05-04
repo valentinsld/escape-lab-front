@@ -53,8 +53,8 @@ export const questionsData = (product) => [
   {
     slug: 'payment',
     question: 'Comment se déroule le paiement ?',
-    normalAnswer: 'Bon lien de paiement',
-    botAnswer: 'Mauvais lien de paiement'
+    normalAnswer: { url: 'url', desc: 'desc', image: 'image' },
+    botAnswer: { url: 'url', desc: 'desc', image: 'image' }
   },
   {
     slug: 'criteria',

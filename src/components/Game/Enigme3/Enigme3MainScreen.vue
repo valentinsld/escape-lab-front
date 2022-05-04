@@ -6,17 +6,20 @@
       </div>
       <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
       <h4 v-if="product.subtype.text" v-html="product.subtype.text" />
-      <p v-if="product.description" class="annonce-product__description" v-html="product.description" />
+      <div v-if="product.description" class="annonce-product__description" v-html="product.description" />
     </div>
     <div class="annonce-product__right-column">
       <div class="annonce-product__sailer-name">
         <img src="@/assets/images/enigme3/sailer-profil.png" />
-        <p>Vendue par eric.mb19</p>
+        <h3>Vendue par eric.mb19</h3>
       </div>
       <p>180 ventes</p>
       <p>0 avis</p>
       <p>Membre depuis moins d'un mois</p>
       <p>Répond en moyenne dans l'heure</p>
+      <div class="annonce-product__criteria-container">
+        <h3>Caractéristiques techniques</h3>
+      </div>
     </div>
   </div>
 </template>
