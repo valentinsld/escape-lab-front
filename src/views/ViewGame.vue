@@ -105,13 +105,13 @@ export default {
       //     this.$socket.emit('setStepGame', { stepGame: 2 })
       //   })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 3'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 3 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 3'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 3 })
+        })
 
       // pane
       //   .addButton({
