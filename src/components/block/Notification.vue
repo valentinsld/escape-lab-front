@@ -62,12 +62,13 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 2;
   width: 100%;
   height: 80px;
   background-color: red;
   transition: transform 250ms ease-in-out;
-  will-change: transform;
   transform: translate3d(0, -100%, 0);
+  will-change: transform;
 
   &.-see {
     transform: translate3d(0, 0, 0);
