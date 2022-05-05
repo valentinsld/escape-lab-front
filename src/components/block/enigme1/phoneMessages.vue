@@ -51,7 +51,6 @@ export default {
   },
   computed: {
     messages() {
-      console.log(this.data, INIT_MESSAGE)
       return [...this.data, ...INIT_MESSAGE]
     }
   },
