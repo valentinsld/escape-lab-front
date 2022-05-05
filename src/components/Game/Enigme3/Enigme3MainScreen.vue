@@ -17,8 +17,9 @@
       <p>0 avis</p>
       <p>Membre depuis moins d'un mois</p>
       <p>Répond en moyenne dans l'heure</p>
-      <div class="annonce-product__criteria-container">
+      <div v-if="product.criteria.good" class="annonce-product__criteria-container">
         <h3>Caractéristiques techniques</h3>
+        <p v-for="(criteria, i) in product.criteria.good" :key="i" v-html="criteria" />
       </div>
     </div>
   </div>
