@@ -102,23 +102,24 @@ export default {
 .messages {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 .message {
+  max-width: 65%;
   padding: 0 1em;
   margin: 20px 0 20px 20px;
-  color: white;
+  color: #2b2b2b;
   text-align: right;
-  background: #81adff;
+  background: #f5f5f5;
+  border: 3px solid var(--color-black);
   border-radius: 10px;
   opacity: 0;
 
   &[is-received='true'] {
     margin-right: auto;
     margin-left: 0;
-    color: #707070;
     text-align: left;
-    background: #f2f2f2;
   }
 
   &[is-reveal='true'] {
