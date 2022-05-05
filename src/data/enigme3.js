@@ -1,4 +1,4 @@
-import { getCountryAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
+import { getCountryAnswer, getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
 export const noticeData = () => [
   {
@@ -58,9 +58,9 @@ export const questionsData = (product) => [
   },
   {
     slug: 'criteria',
-    question: 'La question criteria',
-    normalAnswer: 'La bonne réponse criteria',
-    botAnswer: 'La réponse qui montre le bot criteria'
+    question: 'Quelles sont les caractéristiques du produit ?',
+    normalAnswer: getCriteriaAnswer(product.type, product.criteria.good),
+    botAnswer: getCriteriaAnswer(product.type, product.criteria.wrong)
   },
   {
     slug: 'availability',
