@@ -1,9 +1,8 @@
 <template>
   <div class="notice">
-    <div v-for="(rule, i) in rules" :key="i" class="notice__rules-container">
-      <div class="notice__rule">
-        <h2 class="notice__rule__title" v-html="rule.name" />
-        <p class="notice__rule__description" v-html="rule.description" />
+    <div class="notice__rules-container">
+      <div v-for="i in 2" :key="i" class="notice__rule">
+        <img :src="getSource(i)" />
       </div>
     </div>
   </div>
@@ -26,7 +25,15 @@ export default {
   methods: {
     start() {
       console.log('START ENIGME')
+    },
+    getSource(i) {
+      return require(`@/assets/images/enigme3/notice/page-${i}.png`)
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.notice__rule {
+  position: absolute;
+}
+</style>

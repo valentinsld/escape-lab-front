@@ -195,7 +195,7 @@ p {
   align-items: center;
   justify-content: center;
   height: 30vh;
-  padding: 1em;
+  padding: 1em 2em;
   text-align: center;
   border-top: 4px solid var(--color-black);
 
@@ -206,8 +206,9 @@ p {
 }
 
 .chat__choices__btn {
+  width: 100%;
   padding: 1em;
-  margin: 1em 0.5em;
+  margin: 1em 0;
   font-weight: bold;
   color: #f8f8f8;
   background: #f59535;
