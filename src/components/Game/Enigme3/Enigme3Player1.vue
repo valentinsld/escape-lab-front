@@ -1,7 +1,11 @@
 <template>
   <div class="chat">
-    <p class="chat__title">Chat interface</p>
-    <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
+    <div class="chat__header">
+      <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
+    </div>
+    <div class="chat__messages">
+      <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
+    </div>
     <div ref="choice-buttons" class="chat__choices">
       <h4 v-html="'Répondez au vendeur'" />
       <div class="chat__choices__buttons">
@@ -29,7 +33,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData } from '@/data/enigme3'
+import { finalAnswer, questionsData, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
@@ -63,6 +67,7 @@ export default {
       questions: [],
       finalAnswers: [],
       choices: [],
+      text: textContent,
       messages: [{ isReveal: true, isReceived: false, content: 'Bonjour !' }]
     }
   },
@@ -142,10 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 .chat__choices {
-  position: fixed;
-  bottom: 5vh;
-  left: 50%;
-  transform: translate(-50%);
+  height: 30vh;
 }
 
 .chat__choices__btn {

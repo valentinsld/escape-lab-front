@@ -1,6 +1,6 @@
 <template>
   <div v-if="config" class="enigme-3">
-    <div class="enigme-3__helper">
+    <div class="enigme-3__helper" style="display: none">
       <h4>Config generated :</h4>
       <p v-html="` type du vendeur : ${config.sellerType}`" />
       <p>Règles pour démasquer le bot :</p>
@@ -59,10 +59,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.enigme-3 {
-  padding: 5em 1em;
-}
-
 .enigme-3__helper {
   position: fixed;
   top: 20px;

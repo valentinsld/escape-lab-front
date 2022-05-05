@@ -118,4 +118,6 @@ export const payments = {
   ]
 }
 
-export const text = () => {}
+export const textContent = {
+  sailerName: 'EricDu59'
+}
