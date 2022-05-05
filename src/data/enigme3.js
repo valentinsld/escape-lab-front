@@ -81,6 +81,21 @@ export const finalAnswer = {
   normal: 'Oui, je vous fais confiance, on y va !'
 }
 
+export const criteriaName = {
+  furnished: 'Type :',
+  energyClass: 'Classe énergétique',
+  piecesNumber: 'Nombre de pièces :',
+  location: 'Localisation :',
+  size: 'Taille :',
+  condition: 'État :',
+  material: 'Matière :',
+  color: 'Couleur :',
+  seatsNumber: 'Nombre de sièges :',
+  power: 'Puissance :',
+  modelYear: 'Année du modèle :',
+  model: 'Modèle :'
+}
+
 export const countries = {
   bot: ['Chashington', 'Pabai', 'Saint Seille', 'Le Mavre'],
   normal: ['Taideaux', 'Borwan', 'Duris', 'Watellerault']

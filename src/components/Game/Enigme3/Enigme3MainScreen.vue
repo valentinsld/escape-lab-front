@@ -19,19 +19,28 @@
       <p>Répond en moyenne dans l'heure</p>
       <div v-if="product.criteria.good" class="annonce-product__criteria-container">
         <h3>Caractéristiques techniques</h3>
-        <p v-for="(criteria, i) in product.criteria.good" :key="i" v-html="criteria" />
+        <div v-for="(criteria, name) in product.criteria.good" :key="name" class="annonce-product__criteria-item">
+          <p v-if="criteriaName[name]" class="annonce-product__criteria-name" v-html="criteriaName[name]" />
+          <p class="annonce-product__criteria-value" v-html="criteria" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { criteriaName } from '@/data/enigme3'
 export default {
   name: 'Enigme3MainScreen',
   props: {
     product: {
       type: Object,
       default: () => {}
+    }
+  },
+  data() {
+    return {
+      criteriaName: criteriaName
     }
   },
   computed: {
@@ -64,5 +73,20 @@ export default {
 
 .annonce-product__sailer-name {
   display: flex;
+}
+
+.annonce-product__criteria-item {
+  display: flex;
+  margin: 10px 0;
+}
+
+.annonce-product__criteria-name {
+  padding-right: 6px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.annonce-product__criteria-value {
+  margin: 0;
 }
 </style>
