@@ -29,6 +29,9 @@ export default {
     },
     'enigme1-recall': function () {
       this.$data.recalled = true
+    },
+    'enigme1-action': function (data) {
+      if (data.messages.messages.length > 0) this.$data.dataMessages = [data.messages]
     }
   },
   methods: {
