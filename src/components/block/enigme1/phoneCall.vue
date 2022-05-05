@@ -4,6 +4,8 @@
     <p>{{ numbeEntered.join('') }}</p>
     <p>Time: {{ timeString }}</p>
 
+    <p>STEP : {{ soundStep }}</p>
+
     <div class="pad">
       <button v-for="num in 9" :key="`button_${num}`" @click="() => clickPad(num)">{{ num }}</button>
       <button @click="() => clickPad(0)">0</button>
@@ -16,7 +18,7 @@
 <script>
 /* eslint-disable unused-imports/no-unused-vars, no-unused-vars */
 const SOUNDS_ORIGIN = 'soundsEnigme1/'
-const SOUNDS_STEPS = ['0-intro', '0-wrong', '1-0', '1-1', '1-2', '1-3', '1-wrongCode', '2-1', '2-2-end']
+const SOUNDS_STEPS = ['0-intro', '0-wrong', '1-0', '1-1', '1-wrongCode', '1-2', '1-3-wrong', '2-0', '2-1', '2-2-end']
 const PARAMS = {
   timeBeforeLoop: 500
 }
@@ -42,6 +44,13 @@ export default {
       return [audio + '.webm', audio + '.mp3']
     }
   },
+  sockets: {
+    'enigme1-action': function (data) {
+      this.numbeEntered.push(' ')
+      this.soundStep = data.step
+      this.setSound()
+    }
+  },
   mounted() {
     this.updateTime()
     this.setSound()
@@ -63,12 +72,14 @@ export default {
     // SOUNDS
     //
     setSound() {
+      console.log('set sound', this.soundStep, this.soundSrc)
       this.$data.sound?.pause()
       this.$data.sound = new Howl({
         src: this.soundSrc,
         autoplay: true,
         volume: 0.5,
         onend: () => {
+          if (this.soundStep === 9) return
           setTimeout(() => this.$data.sound.play(), PARAMS.timeBeforeLoop)
         }
       })
