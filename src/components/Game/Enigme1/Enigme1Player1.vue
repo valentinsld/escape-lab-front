@@ -32,6 +32,10 @@ export default {
     },
     'enigme1-action': function (data) {
       if (data.messages.messages.length > 0) this.$data.dataMessages = [data.messages]
+    },
+    'enigme1-end': function ({ messages }) {
+      console.log('enigme1-end', messages)
+      this.$data.dataMessages = messages
     }
   },
   methods: {

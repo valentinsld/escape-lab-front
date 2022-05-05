@@ -2,7 +2,12 @@
   <div>
     <h1>Enigme 1 Player2</h1>
     <PhoneCallIncoming v-if="isFakeCalling" @onEndCall="endFakeCall" />
-    <PhoneLocked v-else-if="!recalled" :called="!recalled && isStart" :message="messageEnd" @onRecall="recall" />
+    <PhoneLocked
+      v-else-if="!recalled || callEnd"
+      :called="!recalled && isStart && !callEnd"
+      :message="messageEnd"
+      @onRecall="recall"
+    />
     <PhoneCall v-else />
   </div>
 </template>
@@ -24,13 +29,24 @@ export default {
       isFakeCalling: true,
       isStart: false,
       recalled: false,
-      messageEnd: ''
+      messageEnd: {
+        contact: '',
+        message: ''
+      },
+      callEnd: false
     }
   },
   sockets: {
     startEnigme: function () {
       this.start()
       this.$data.isStart = true
+    },
+    'enigme1-end': function ({ messages }) {
+      console.log('enigme1-end', messages)
+      this.$data.callEnd = true
+
+      this.$data.messageEnd.contact = messages[0].contact
+      this.$data.messageEnd.message = messages[0].messages[0].content
     }
   },
   methods: {

@@ -9,8 +9,9 @@
       <button @click="recall">Rappeler</button>
     </div>
 
-    <div v-if="message">
-      <p>{{ message }}</p>
+    <div v-if="message.message">
+      <p>{{ message.contact }}</p>
+      <p>{{ message.message }}</p>
     </div>
   </div>
 </template>
@@ -24,8 +25,13 @@ export default {
       default: false
     },
     message: {
-      type: String,
-      default: ''
+      type: Object,
+      default() {
+        return {
+          contact: '',
+          message: ''
+        }
+      }
     }
   },
   methods: {

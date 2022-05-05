@@ -72,14 +72,16 @@ export default {
     // SOUNDS
     //
     setSound() {
-      console.log('set sound', this.soundStep, this.soundSrc)
       this.$data.sound?.pause()
       this.$data.sound = new Howl({
         src: this.soundSrc,
         autoplay: true,
         volume: 0.5,
         onend: () => {
-          if (this.soundStep === 9) return
+          if (this.soundStep === 9) {
+            this.$socket.emit('enigme1-end')
+            return
+          }
           setTimeout(() => this.$data.sound.play(), PARAMS.timeBeforeLoop)
         }
       })
