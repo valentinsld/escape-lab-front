@@ -23,17 +23,22 @@
         <Messages :messages="messages[currentMessage].messages" />
       </div>
     </div>
+
+    <Notification :contact="notification.contact" :message="notification.message" :on-click="onClickNotification" />
   </div>
 </template>
 
 <script>
 import Messages from '@/components/block/Messages.vue'
+import Notification from '@/components/block/Notification.vue'
+// data
 import INIT_MESSAGE from '@/data/enigme1Messages.js'
 
 export default {
   name: 'PhoneMessage',
   components: {
-    Messages
+    Messages,
+    Notification
   },
   props: {
     data: {
@@ -46,12 +51,27 @@ export default {
   data() {
     return {
       currentMessage: 0,
-      chatIsOpen: false
+      chatIsOpen: false,
+      notification: {
+        contact: '',
+        message: ''
+      }
     }
   },
   computed: {
     messages() {
       return [...this.data, ...INIT_MESSAGE]
+    }
+  },
+  watch: {
+    data: function () {
+      if (this.data[0]?.messages?.length === 0) return
+      if (this.data[0].messages.slice(-1)[0].content === this.$data.notification.message) return
+
+      this.$data.notification = {
+        contact: this.data[0].contact,
+        message: this.data[0].messages.slice(-1)[0].content
+      }
     }
   },
   methods: {
@@ -61,6 +81,10 @@ export default {
     },
     closeChat() {
       this.$data.chatIsOpen = false
+    },
+
+    onClickNotification() {
+      this.setCurrentMessage(0)
     }
   }
 }
