@@ -25,6 +25,6 @@ export const getCriteriaAnswer = (productType, criteria) => {
   return productType === 'clothing'
     ? `C'est un vêtement de couleur ${criteria.color} fait en ${criteria.material}. Il est en taille ${criteria.size} et est en ${criteria.condition}`
     : productType === 'housing'
-    ? `C'est un logement de couleur ${criteria.color} fait en ${criteria.material}. Il est en taille ${criteria.size} et est en ${criteria.condition}`
-    : `C'est un véhicule de couleur ${criteria.color} fait en ${criteria.material}. Il est en taille ${criteria.size} et est en ${criteria.condition}`
+    ? `C'est un logement ${criteria.furnished} de classe énergétique ${criteria.energyClass}. Il a ${criteria.piecesNumber} pièces et est situé à ${criteria.location}`
+    : `Ce modèle ${criteria.model} est sorti en ${criteria.modelYear}. La voiture à ${criteria.seatsNumber} sièges et une puissance de ${criteria.power}`
 }
