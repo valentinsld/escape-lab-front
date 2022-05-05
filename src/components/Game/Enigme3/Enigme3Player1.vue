@@ -3,27 +3,29 @@
     <div class="chat__header">
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
-    <div class="chat__messages">
+    <div ref="messages" class="chat__messages">
       <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
     </div>
-    <div ref="choice-buttons" class="chat__choices">
-      <h4 v-html="'Répondez au vendeur'" />
-      <div class="chat__choices__buttons">
-        <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
-        <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
-        <!-- if last question to choose bot -->
-        <button
-          v-if="finalAnswers[0]"
-          class="chat__choices__btn--strong"
-          @click="chooseBotAnswer('bot')"
-          v-html="finalAnswers[0]"
-        />
-        <button
-          v-if="finalAnswers[1]"
-          class="chat__choices__btn--strong"
-          @click="chooseBotAnswer('normal')"
-          v-html="finalAnswers[1]"
-        />
+    <div class="chat__choices-container">
+      <div ref="choice-buttons" class="chat__choices">
+        <h4 v-html="'Répondez au vendeur'" />
+        <div class="chat__choices__buttons">
+          <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
+          <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
+          <!-- if last question to choose bot -->
+          <button
+            v-if="finalAnswers[0]"
+            class="chat__choices__btn--strong"
+            @click="chooseBotAnswer('bot')"
+            v-html="finalAnswers[0]"
+          />
+          <button
+            v-if="finalAnswers[1]"
+            class="chat__choices__btn--strong"
+            @click="chooseBotAnswer('normal')"
+            v-html="finalAnswers[1]"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -92,6 +94,12 @@ export default {
       this.hideButtons()
       this.choicePos = pos
       this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].question })
+      Anime({
+        targets: this.$refs.messages,
+        scrollTop: this.$refs.messages.scrollHeight,
+        duration: 750,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
       this.getResponse()
     },
     nextChoice() {
@@ -115,23 +123,19 @@ export default {
     handleMessagesComplete() {
       this.nextChoice()
       // Show back choices buttons
-      const tl = Anime.timeline({
-        easing: 'easeInExpo'
-      })
-      tl.add({
+      Anime({
         targets: this.buttons,
         opacity: [0, 1],
-        duration: 250
+        duration: 250,
+        easing: 'easeInExpo'
       })
     },
     hideButtons() {
-      const tl = Anime.timeline({
-        easing: 'easeInExpo'
-      })
-      tl.add({
+      Anime({
         targets: this.buttons,
         opacity: [1, 0],
-        duration: 150
+        duration: 150,
+        easing: 'easeInExpo'
       })
     },
     finalChoice() {
@@ -174,7 +178,8 @@ p {
   overflow: scroll;
 }
 
-.chat__choices {
+.chat__choices-container {
+  height: 20vh;
   padding: 2em;
   border-top: 4px solid var(--color-black);
 }
