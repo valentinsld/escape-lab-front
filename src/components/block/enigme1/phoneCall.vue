@@ -10,8 +10,6 @@
       <button v-for="num in 9" :key="`button_${num}`" @click="() => clickPad(num)">{{ num }}</button>
       <button @click="() => clickPad(0)">0</button>
     </div>
-
-    <button @click="nextSound">next</button>
   </div>
 </template>
 
@@ -34,6 +32,7 @@ export default {
       time: 0,
       timeString: '0:00',
       numbeEntered: [],
+      soundLastStep: 0,
       soundStep: 0,
       sound: null
     }
@@ -47,7 +46,8 @@ export default {
   sockets: {
     'enigme1-action': function (data) {
       this.numbeEntered.push(' ')
-      this.soundStep = data.step
+      this.$data.soundLastStep = this.$data.soundStep
+      this.$data.soundStep = data.step
       this.setSound()
     }
   },
@@ -78,23 +78,23 @@ export default {
         autoplay: true,
         volume: 0.5,
         onend: () => {
-          if (this.soundStep === 9) {
+          if (this.$data.soundStep === 9) {
             this.$socket.emit('enigme1-end')
             return
           }
+          // console.log(this.$data.soundStep, [2, 3, 4, 7].includes(this.$data.soundStep))
+          // if ([2, 3, 4, 7].includes(this.$data.soundStep)) {
+          //   console.log('includes !!')
+          //   this.$data.soundStep = this.$data.soundLastStep
+
+          //   return setTimeout(() => this.setSound(), PARAMS.timeBeforeLoop)
+          // }
+
           setTimeout(() => this.$data.sound.play(), PARAMS.timeBeforeLoop)
         }
       })
 
       this.$data.sound.play()
-    },
-    nextSound(ev, setIndex = null) {
-      console.log(this.$data.soundStep, setIndex, SOUNDS_STEPS.length)
-      this.$data.soundStep = setIndex || this.$data.soundStep + 1
-
-      if (this.$data.soundStep >= SOUNDS_STEPS.length) return
-
-      this.setSound()
     }
   }
 }
