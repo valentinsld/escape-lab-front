@@ -8,20 +8,32 @@
     </div>
     <div class="chat__choices-container">
       <div ref="choice-buttons" class="chat__choices">
-        <h4 v-html="'Répondez au vendeur'" />
+        <!--        <h4 v-html="'Répondez au vendeur'" />-->
         <div class="chat__choices__buttons">
-          <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
-          <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
+          <button
+            v-if="questions[0]"
+            class="chat__choices__btn"
+            @click="chooseQuestion(0)"
+            v-html="questions[0].question"
+          ></button>
+          <p v-if="questions[1]">ou</p>
+          <button
+            v-if="questions[1]"
+            class="chat__choices__btn"
+            @click="chooseQuestion(1)"
+            v-html="questions[1].question"
+          ></button>
           <!-- if last question to choose bot -->
           <button
             v-if="finalAnswers[0]"
-            class="chat__choices__btn--strong"
+            class="chat__choices__btn chat__choices__btn--strong"
             @click="chooseBotAnswer('bot')"
             v-html="finalAnswers[0]"
           />
+          <p v-if="finalAnswers[1]">ou</p>
           <button
             v-if="finalAnswers[1]"
-            class="chat__choices__btn--strong"
+            class="chat__choices__btn chat__choices__btn--strong"
             @click="chooseBotAnswer('normal')"
             v-html="finalAnswers[1]"
           />
@@ -179,14 +191,31 @@ p {
 }
 
 .chat__choices-container {
-  height: 20vh;
-  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  padding: 1em;
+  text-align: center;
   border-top: 4px solid var(--color-black);
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 .chat__choices__btn {
+  padding: 1em;
+  margin: 1em 0.5em;
+  font-weight: bold;
+  color: #f8f8f8;
+  background: #f59535;
+  border: 4px solid var(--color-black);
+  border-radius: 27px;
+
   &--strong {
-    font-weight: bold;
+    background: #3577f5;
   }
 }
 </style>
