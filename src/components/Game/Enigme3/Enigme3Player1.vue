@@ -146,8 +146,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p {
+  margin: 0;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 8px);
+  border: 4px solid var(--color-black);
+}
+
+.chat__header {
+  padding: 2em;
+  text-align: center;
+  border-bottom: 4px solid var(--color-black);
+}
+
+.chat__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.chat__messages {
+  flex: 1;
+  padding: 2em 1em;
+  overflow: scroll;
+}
+
 .chat__choices {
-  height: 30vh;
+  padding: 2em;
+  border-top: 4px solid var(--color-black);
 }
 
 .chat__choices__btn {

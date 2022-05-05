@@ -106,7 +106,7 @@ export default {
 
 .message {
   padding: 0 1em;
-  margin: 20px 0 auto 20px;
+  margin: 20px 0 20px 20px;
   color: white;
   text-align: right;
   background: #81adff;
