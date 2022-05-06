@@ -1,5 +1,6 @@
 <template>
   <div class="annonce-product">
+    <p class="annonce-product__site-title">leboncon</p>
     <div v-if="product" class="annonce-product__wrapper">
       <div class="annonce-product__left-column">
         <div class="annonce-product__img-container">
@@ -66,15 +67,25 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.annonce-product__site-title {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+
 .annonce-product {
-  padding: 5em 1em;
+  height: 100vh;
+  padding: 2em 1em;
+  background: #4a6cff;
 }
 
 .annonce-product__wrapper {
   display: flex;
   justify-content: space-around;
   padding: 2em;
+  background: #fff;
   border: 5px solid var(--color-black);
+  border-radius: 30px;
 }
 
 .annonce-product__sailer-name {
