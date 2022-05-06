@@ -29,6 +29,9 @@ export default {
       numberOfPages: 8
     }
   },
+  mounted() {
+    this.currentPage = 1
+  },
   sockets: {
     startEnigme: function () {
       this.start()
@@ -47,26 +50,30 @@ export default {
       }
     },
     nextQuestion() {
-      Anime({
-        targets: this.$refs?.rule[this.currentPage - 1],
-        translateX: ['-50%', -140],
-        rotate: -15,
-        translateY: ['-50%', '-50%'],
-        duration: 900,
-        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
-      })
-      if (this.currentPage < this.numberOfPages) this.currentPage += 1
+      if (this.currentPage < this.numberOfPages) {
+        Anime({
+          targets: this.$refs?.rule[this.currentPage - 1],
+          translateX: ['-50%', -140],
+          rotate: -15,
+          translateY: ['-50%', '-50%'],
+          duration: 900,
+          easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+        })
+        this.currentPage += 1
+      }
     },
     prevQuestion() {
-      Anime({
-        targets: this.$refs?.rule[this.currentPage - 1],
-        rotate: 0,
-        translateX: [-140, '-50%'],
-        translateY: ['-50%', '-50%'],
-        duration: 900,
-        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
-      })
-      if (this.currentPage > 1) this.currentPage -= 1
+      if (this.currentPage > 1) {
+        Anime({
+          targets: this.$refs?.rule[this.currentPage - 2],
+          rotate: 0,
+          translateX: [-140, '-50%'],
+          translateY: ['-50%', '-50%'],
+          duration: 900,
+          easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+        })
+        this.currentPage -= 1
+      }
     }
   }
 }
