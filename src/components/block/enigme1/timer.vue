@@ -39,7 +39,7 @@ export default {
         } else {
           this.$emit('onTimeChange:end', this.$data.timer)
         }
-      }, 1000)
+      }, 23 * (this.$props.initTime - this.$data.timer) + 700) // calcule d'une droite entre A=(0,700) & B=(26,1300)
     }
   }
 }

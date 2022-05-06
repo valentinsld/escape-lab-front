@@ -42,14 +42,14 @@ export default {
     start() {
       console.log('START ENIGME')
       this.$data.isStart = true
-    },
-
-    updateTime(time) {
-      console.log('updateTime', time)
-    },
-    endTime(time) {
-      console.log('endTime', time)
     }
+
+    // updateTime(time) {
+    //   console.log('updateTime', time)
+    // },
+    // endTime(time) {
+    //   console.log('endTime', time)
+    // }
   }
 }
 </script>
