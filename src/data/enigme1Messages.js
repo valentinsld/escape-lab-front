@@ -14,6 +14,7 @@ EXAMPLE MESSAGE
 const messages = [
   {
     contact: 'Papa',
+    id: 11,
     messages: [
       {
         isReceived: true,
@@ -27,6 +28,7 @@ const messages = [
   },
   {
     contact: 'Cpf',
+    id: 12,
     messages: [
       {
         isReceived: true,
@@ -36,6 +38,7 @@ const messages = [
   },
   {
     contact: 'Mamie',
+    id: 13,
     messages: [
       {
         isReceived: true,
@@ -57,6 +60,7 @@ const messages = [
   },
   {
     contact: 'Amozone',
+    id: 14,
     messages: [
       {
         isReceived: true,
@@ -74,6 +78,7 @@ const messages = [
   },
   {
     contact: 'Maman',
+    id: 15,
     messages: [
       {
         isReceived: true,
@@ -107,6 +112,7 @@ const messages = [
   },
   {
     contact: 'Crush 💔',
+    id: 16,
     messages: [
       {
         isReceived: true,
@@ -160,6 +166,7 @@ const messages = [
   },
   {
     contact: 'FlashScore Marseille',
+    id: 17,
     messages: [
       {
         isReceived: true,

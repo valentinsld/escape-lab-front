@@ -10,6 +10,7 @@
         @click="() => setCurrentMessage(index)"
       >
         <p>{{ message.contact }}</p>
+        <p v-if="!readedMessages.includes(message.id)">NOT OPEN</p>
         <p v-if="message.messages.length">{{ message.messages[message.messages.length - 1].content }}</p>
       </div>
     </div>
@@ -55,7 +56,8 @@ export default {
       notification: {
         contact: '',
         message: ''
-      }
+      },
+      readedMessages: [11, 12, 13, 14, 15, 16, 17, 18]
     }
   },
   computed: {
@@ -72,12 +74,18 @@ export default {
         contact: this.data[0].contact,
         message: this.data[0].messages.slice(-1)[0].content
       }
+
+      if (this.$data.chatIsOpen && this.$data.currentMessage === 1) return
+      this.$data.readedMessages = this.$data.readedMessages.filter((v) => v !== 1)
     }
   },
   methods: {
     setCurrentMessage(index) {
       this.$data.currentMessage = index
       this.$data.chatIsOpen = true
+
+      // add
+      this.$data.readedMessages.push(this.messages[index].id)
     },
     closeChat() {
       this.$data.chatIsOpen = false

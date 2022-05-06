@@ -4,8 +4,6 @@
     <p>{{ numbeEntered.join('') }}</p>
     <p>Time: {{ timeString }}</p>
 
-    <p>STEP : {{ soundStep }}</p>
-
     <div class="pad">
       <button v-for="num in 9" :key="`button_${num}`" @click="() => clickPad(num)">{{ num }}</button>
       <button @click="() => clickPad(0)">0</button>
