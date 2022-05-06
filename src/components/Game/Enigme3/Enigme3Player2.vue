@@ -1,7 +1,13 @@
 <template>
   <div class="notice">
     <div class="notice__rules-container">
-      <div v-for="i in 2" :key="i" :class="`notice__rule notice__rule--${i}`" :style="ruleStyle(i)">
+      <div
+        v-for="i in numberOfPages"
+        ref="rule"
+        :key="i"
+        :class="`notice__rule notice__rule--${i}`"
+        :style="ruleStyle(i)"
+      >
         <img class="notice__rule__img" :src="getSource(i)" />
       </div>
       <button @click="prevQuestion">Prev</button>
@@ -11,13 +17,16 @@
 </template>
 
 <script>
+import Anime from 'animejs'
+
 import { noticeData } from '@/data/enigme3'
 export default {
   name: 'Enigme3Player2',
   data() {
     return {
       rules: noticeData(),
-      currentPage: 1
+      currentPage: 1,
+      numberOfPages: 8
     }
   },
   sockets: {
@@ -38,9 +47,25 @@ export default {
       }
     },
     nextQuestion() {
-      if (this.currentPage < 2) this.currentPage += 1
+      Anime({
+        targets: this.$refs?.rule[this.currentPage - 1],
+        translateX: ['-50%', -140],
+        rotate: -15,
+        translateY: ['-50%', '-50%'],
+        duration: 900,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
+      if (this.currentPage < this.numberOfPages) this.currentPage += 1
     },
     prevQuestion() {
+      Anime({
+        targets: this.$refs?.rule[this.currentPage - 1],
+        rotate: 0,
+        translateX: [-140, '-50%'],
+        translateY: ['-50%', '-50%'],
+        duration: 900,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
       if (this.currentPage > 1) this.currentPage -= 1
     }
   }
