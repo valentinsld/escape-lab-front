@@ -84,6 +84,13 @@ export const payments = {
   ]
 }
 
+export const glyphConverter = {
+  a: 'å',
+  e: 'ė',
+  i: 'į',
+  n: 'ń'
+}
+
 export const textContent = {
   sailerName: 'EricDu59'
 }

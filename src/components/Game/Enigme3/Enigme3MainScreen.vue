@@ -8,7 +8,7 @@
         </div>
         <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
         <h4 v-if="product.subtype.text" v-html="product.subtype.text" />
-        <div v-if="product.description" class="annonce-product__description" v-html="product.description" />
+        <div v-if="product.description" class="annonce-product__description" v-html="getGlyphDescription" />
       </div>
       <div class="annonce-product__right-column">
         <div class="annonce-product__sailer-name">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { criteriaName } from '@/data/enigme3'
+import { criteriaName, glyphConverter } from '@/data/enigme3'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -49,6 +49,13 @@ export default {
   computed: {
     getSource() {
       return require(`@/assets/images/enigme3/annonce-product/${this.product.img}.png`)
+    },
+    getGlyphDescription() {
+      let str = this.product.description
+      for (const letter in glyphConverter) {
+        str = str.replace(new RegExp(letter, 'g'), glyphConverter[letter])
+      }
+      return str
     }
   },
   mounted() {
