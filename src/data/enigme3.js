@@ -84,11 +84,17 @@ export const payments = {
   ]
 }
 
-export const glyphConverter = {
+export const botGlyphConverter = {
   a: 'å',
   e: 'ė',
   i: 'į',
   n: 'ń'
+}
+
+export const normalGlyphConverter = {
+  a: 'å',
+  e: 'ę',
+  n: 'ñ'
 }
 
 export const textContent = {

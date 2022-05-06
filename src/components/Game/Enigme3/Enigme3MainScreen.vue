@@ -32,13 +32,17 @@
 </template>
 
 <script>
-import { criteriaName, glyphConverter } from '@/data/enigme3'
+import { botGlyphConverter, criteriaName, normalGlyphConverter } from '@/data/enigme3'
 export default {
   name: 'Enigme3MainScreen',
   props: {
     product: {
       type: Object,
       default: () => {}
+    },
+    trueRules: {
+      type: Array,
+      default: null
     }
   },
   data() {
@@ -51,9 +55,16 @@ export default {
       return require(`@/assets/images/enigme3/annonce-product/${this.product.img}.png`)
     },
     getGlyphDescription() {
+      const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
       let str = this.product.description
-      for (const letter in glyphConverter) {
-        str = str.replace(new RegExp(letter, 'g'), glyphConverter[letter])
+      if (isTrueRule) {
+        for (const letter in botGlyphConverter) {
+          str = str.replace(new RegExp(letter, 'g'), botGlyphConverter[letter])
+        }
+      } else {
+        for (const letter in normalGlyphConverter) {
+          str = str.replace(new RegExp(letter, 'g'), normalGlyphConverter[letter])
+        }
       }
       return str
     }

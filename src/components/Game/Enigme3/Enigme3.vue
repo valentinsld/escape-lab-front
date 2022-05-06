@@ -1,6 +1,6 @@
 <template>
   <div v-if="config" class="enigme-3">
-    <div class="enigme-3__helper" style="display: none">
+    <div class="enigme-3__helper">
       <h4>Config generated :</h4>
       <p v-html="` type du vendeur : ${config.sellerType}`" />
       <p>Règles pour démasquer le bot :</p>
@@ -8,7 +8,7 @@
         <p v-for="(rule, i) in config.trueRules" :key="i" v-html="`${rule.slug}`" />
       </div>
     </div>
-    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="config.product" />
+    <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="config.product" :true-rules="config.trueRules" />
     <Enigme3Player1
       v-if="typeScreen === 'Player1'"
       :true-rules="config.trueRules"
