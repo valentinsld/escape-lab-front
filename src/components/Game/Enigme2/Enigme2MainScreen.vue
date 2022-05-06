@@ -2,8 +2,8 @@
 <template>
   <div class="main">
     <h1>Enigme 2 MainScreen</h1>
-    <button @click="createPopup">Start</button>
-    <Enigme2PopupStack v-if="showPopup" class="popup" :cards="cards"></Enigme2PopupStack>
+    <button @click="enigme2GameLoop">Start Enigme 2</button>
+    <Enigme2PopupStack :cards="cards"></Enigme2PopupStack>
   </div>
 </template>
 
@@ -19,26 +19,13 @@ export default {
   data: function () {
     return {
       showPopup: false,
-      cards: [
-        {
-          keyword: 'Test 1'
-        },
-        {
-          keyword: 'Test 2'
-        },
-        {
-          keyword: 'Test 3'
-        },
-        {
-          keyword: 'Test 4'
-        }
-      ]
+      cards: []
     }
   },
   mounted() {
     this.$socket.emit('sendPopups')
     this.sockets.subscribe('sendPopups', (props) => {
-      console.log(`props vaut :: ${props}`)
+      this.getPopupsData(props)
     })
 
     this.sockets.subscribe('popupIsReady', () => {
@@ -46,17 +33,33 @@ export default {
     })
   },
   methods: {
+    getPopupsData(data) {
+      this.cards = data
+      // console.log(JSON.stringify(this.cards))
+    },
     destroyPopup() {
       this.showPopup = false
       this.$socket.emit('sendPopupToPlayer')
     },
+    // nextPopup(arr, index) {
+    //   if (index != arr.length) {
+    //     let currentPopup = arr[index]
+    //   }
+
+    //   if (index === arr.length) {
+    //     alert('GAME IS OVER')
+    //   }
+    // },
+    enigme2GameLoop() {
+      this.createPopup()
+      setTimeout(() => {
+        this.destroyPopup()
+        this.$socket.emit('popupIsReady')
+      }, 1500)
+    },
     createPopup() {
       this.showPopup = true
-      console.log(this.showPopup)
-      // setTimeout(() => {
-      //   this.destroyPopup()
-      //   this.$socket.emit('popupIsReady')
-      // }, 1500)
+      // console.log(this.showPopup)
     }
   }
 }
