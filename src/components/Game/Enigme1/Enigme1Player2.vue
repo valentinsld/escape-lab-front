@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Enigme 1 Player2</h1>
-    <PhoneCallIncoming v-if="isFakeCalling" @onEndCall="endFakeCall" />
+    <PhoneCallIncoming v-if="isFakeCalling" :duration="isFakeCallingDuration" @onEndCall="endFakeCall" />
     <PhoneLocked
       v-else-if="!recalled || callEnd"
       :called="!recalled && isStart && !callEnd"
@@ -17,6 +17,8 @@ import PhoneCall from '@/components/block/enigme1/phoneCall.vue'
 import PhoneCallIncoming from '@/components/block/enigme1/phoneCallIncoming.vue'
 import PhoneLocked from '@/components/block/enigme1/phoneLocked.vue'
 
+const SECOND_CALL = 15000
+
 export default {
   name: 'Enigme1Player2',
   components: {
@@ -27,6 +29,7 @@ export default {
   data() {
     return {
       isFakeCalling: true,
+      isFakeCallingDuration: 3500,
       isStart: false,
       recalled: false,
       messageEnd: {
@@ -49,6 +52,9 @@ export default {
       this.$data.messageEnd.message = messages[0].messages[0].content
     }
   },
+  mounted() {
+    this.secondCall()
+  },
   methods: {
     start() {
       console.log('START ENIGME')
@@ -59,6 +65,14 @@ export default {
     recall() {
       this.$data.recalled = true
       this.$socket.emit('enigme1-recall')
+    },
+    secondCall() {
+      setTimeout(() => {
+        if (this.$data.recall) return
+
+        this.$data.isFakeCallingDuration = 1000
+        this.$data.isFakeCalling = true
+      }, SECOND_CALL)
     }
   }
 }

@@ -5,18 +5,23 @@
 </template>
 
 <script>
-const TIME_BEFORE_AUTO_HANG_UP = 3500
-
 export default {
   name: 'PhoneCallIncoming',
+  props: {
+    duration: {
+      type: Number,
+      default() {
+        return 3500
+      }
+    }
+  },
   mounted() {
     setTimeout(() => {
       this.$emit('onEndCall', true)
-    }, TIME_BEFORE_AUTO_HANG_UP)
+    }, this.duration)
   },
   methods: {
     click() {
-      console.log('click')
       this.$emit('onEndCall', true)
     }
   }
