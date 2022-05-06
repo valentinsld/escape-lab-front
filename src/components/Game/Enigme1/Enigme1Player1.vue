@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Enigme 1 Player1</h1>
-    <Timer v-if="!recalled" :is-start="isStart" @onTimeChange:step="updateTime" @onTimeChange:end="endTime" />
+    <Timer v-if="!recalled" :is-start="isStart" @onTimeChange:end="endTime" />
     <PhoneMessage v-else :data="dataMessages" />
   </div>
 </template>
@@ -42,14 +42,14 @@ export default {
     start() {
       console.log('START ENIGME')
       this.$data.isStart = true
-    }
+    },
 
     // updateTime(time) {
     //   console.log('updateTime', time)
     // },
-    // endTime(time) {
-    //   console.log('endTime', time)
-    // }
+    endTime() {
+      this.$socket.emit('enigme1-endNotRecall')
+    }
   }
 }
 </script>

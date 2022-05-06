@@ -50,6 +50,9 @@ export default {
 
       this.$data.messageEnd.contact = messages[0].contact
       this.$data.messageEnd.message = messages[0].messages[0].content
+    },
+    'enigme1-endNotRecall': function ({ contact, message }) {
+      this.$data.messageEnd = { contact, message }
     }
   },
   mounted() {

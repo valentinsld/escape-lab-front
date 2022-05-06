@@ -1,10 +1,19 @@
 <template>
-  <div>Timer: {{ timer }}</div>
+  <div>
+    <p>Timer: {{ timer }}</p>
+
+    <Notification :contact="notification.contact" :message="notification.message" :duration="4500" />
+  </div>
 </template>
 
 <script>
+import Notification from '@/components/block/Notification.vue'
+
 export default {
   name: 'Timer',
+  components: {
+    Notification
+  },
   props: {
     initTime: {
       type: Number,
@@ -18,7 +27,11 @@ export default {
   data() {
     return {
       timer: this.$props.initTime,
-      timerStarted: false
+      timerStarted: false,
+      notification: {
+        contact: '',
+        message: ''
+      }
     }
   },
   watch: {
@@ -26,6 +39,11 @@ export default {
       if (this.$data.timerStarted) return
       this.updateTime()
       this.$data.timerStarted = true
+    }
+  },
+  sockets: {
+    'enigme1-endNotRecall': function ({ contact, message }) {
+      this.$data.notification = { contact, message }
     }
   },
   methods: {

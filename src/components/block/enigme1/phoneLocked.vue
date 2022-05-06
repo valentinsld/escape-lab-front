@@ -2,7 +2,7 @@
   <div>
     <h3>Phone locked</h3>
 
-    <div v-if="called">
+    <div v-if="called && !message.message">
       <p><strong>Un appel manqué</strong></p>
       <p>+251 8 34 87 18 31 Peut-être : LaPorte Service</p>
 
