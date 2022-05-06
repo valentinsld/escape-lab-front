@@ -2,7 +2,7 @@
 <template>
   <div class="main">
     <h1>Enigme 2 MainScreen</h1>
-    <button @click="enigme2GameLoop">Start Enigme 2</button>
+    <!-- <button @click="enigme2GameLoop">Start Enigme 2</button> -->
     <Enigme2PopupStack :cards="cards"></Enigme2PopupStack>
   </div>
 </template>

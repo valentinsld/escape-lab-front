@@ -5,14 +5,17 @@
       ref="stack"
       :key="`enigme2${index}`"
       :card="card"
-      :is-current="index === 0"
+      :is-current="card.owner === typeScreen"
     />
   </div>
 </template>
 
 <script>
 // import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
+import { mapState } from 'vuex'
+
 import Enigme2Card from '@/components/Game/Enigme2/Enigme2Card.vue'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme2PopupStack',
@@ -24,6 +27,13 @@ export default {
       type: Array,
       required: true
     }
+  },
+  computed: mapState({
+    typeScreen: (state) => state[S.typeScreen] // Player1 ; Player2 ; MainScreen
+  }),
+  mounted() {
+    console.log(this.cards)
+    console.log(this.typeScreen)
   }
 }
 </script>

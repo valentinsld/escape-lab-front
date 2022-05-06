@@ -15,6 +15,10 @@
 
 <script>
 import interact from 'interact.js'
+import { mapState } from 'vuex'
+
+import { STATE as S } from '@/store/helpers'
+
 const RIGHT = 'right'
 const LEFT = 'left'
 const BOTTOM = 'bottom'
@@ -52,8 +56,8 @@ export default {
       }
     }
   },
-
-  computed: {
+  computed: mapState({
+    typeScreen: (state) => state[S.typeScreen], // Player1 ; Player2 ; MainScreen
     transformString() {
       if (!this.isInteractAnimating || this.isInteractDragged) {
         const { x, y, rotation } = this.interactPosition
@@ -61,6 +65,14 @@ export default {
       }
 
       return null
+    }
+  }),
+  watch: {
+    card() {
+      console.log(this.card)
+      if (this.card.owner === this.typeScreen) {
+        this.resetCardPosition()
+      }
     }
   },
 
@@ -103,13 +115,6 @@ export default {
   },
 
   methods: {
-    hideCard() {
-      setTimeout(() => {
-        this.isShowing = false
-        this.$emit('hideCard', this.card)
-      }, 300)
-    },
-
     playCard(interaction) {
       const { interactOutOfSightXCoordinate, interactOutOfSightYCoordinate, interactMaxRotation } = this.$options.static
 
@@ -121,6 +126,7 @@ export default {
             x: interactOutOfSightXCoordinate,
             rotation: interactMaxRotation
           })
+
           this.$emit(RIGHT)
           break
         case LEFT:
@@ -131,7 +137,6 @@ export default {
           this.$emit(LEFT)
           break
         case BOTTOM:
-          console.log('HERE')
           this.interactSetPosition({
             y: interactOutOfSightYCoordinate
           })
@@ -139,7 +144,10 @@ export default {
           break
       }
 
-      this.hideCard()
+      this.$socket.emit('enigme2-popupOwnerChanged', {
+        id: this.card.id,
+        direction: interaction
+      })
     },
 
     interactSetPosition(coordinates) {

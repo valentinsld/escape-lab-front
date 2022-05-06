@@ -2,7 +2,7 @@
   <div class="main">
     <h1>Enigme 2 Player</h1>
     <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button>
-    <Enigme2PopupStack v-if="showPopup" class="popup" :cards="cards"></Enigme2PopupStack>
+    <Enigme2PopupStack class="popup" :cards="cards"></Enigme2PopupStack>
   </div>
 </template>
 
@@ -26,6 +26,10 @@ export default {
   },
   mounted() {
     this.defineIdentity()
+    this.sockets.subscribe('sendPopups', (props) => {
+      this.getPopupsData(props)
+      console.log('props vaut :: ', props)
+    })
     this.sockets.subscribe('sendPopupToPlayer', () => {
       if (this.$store.state[S.typeScreen] === 'Player1') {
         this.showPopup = true
@@ -39,6 +43,10 @@ export default {
     })
   },
   methods: {
+    getPopupsData(data) {
+      this.cards = data
+      // console.log(JSON.stringify(this.cards))
+    },
     sendPopup() {
       if (this.$store.state[S.typeScreen] === 'Player1') {
         this.showPopup = false
