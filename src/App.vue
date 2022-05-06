@@ -41,6 +41,7 @@ export default {
   }),
   mounted() {
     this.initSubscribeConnexion()
+    this.initAutoVh()
   },
   sockets: {
     connect: function () {
@@ -84,6 +85,10 @@ export default {
           console.error('Socket : ', err)
         })
       })
+    },
+    initAutoVh() {
+      this.$el.style.setProperty('--vh', window.innerHeight / 100 + 'px')
+      window.addEventListener('resize', () => this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px'))
     }
   }
 }

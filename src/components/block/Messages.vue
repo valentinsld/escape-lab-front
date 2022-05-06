@@ -5,7 +5,7 @@
       ref="messages"
       :key="index"
       class="message"
-      :is-reveal="item.isReveal"
+      :is-reveal="item.isReveal || true"
       :is-received="item.isReceived"
       v-html="item.content"
     />
@@ -14,6 +14,7 @@
 
 <script>
 import Anime from 'animejs'
+
 export default {
   name: 'Messages',
   props: {
@@ -83,6 +84,8 @@ export default {
 .messages {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .message {
