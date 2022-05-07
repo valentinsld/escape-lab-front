@@ -14,14 +14,14 @@
             v-if="questions[0]"
             class="chat__choices__btn"
             @click="chooseQuestion(0)"
-            v-html="questions[0].question"
+            v-html="questions[0].btnLabel"
           ></button>
           <p v-if="questions[1]">ou</p>
           <button
             v-if="questions[1]"
             class="chat__choices__btn"
             @click="chooseQuestion(1)"
-            v-html="questions[1].question"
+            v-html="questions[1].btnLabel"
           ></button>
           <!-- if last question to choose bot -->
           <button
