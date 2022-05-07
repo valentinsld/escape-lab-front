@@ -26,7 +26,7 @@ export default {
     return {
       rules: noticeData(),
       currentPage: 1,
-      numberOfPages: 8
+      numberOfPages: 9
     }
   },
   mounted() {
