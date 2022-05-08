@@ -1,5 +1,5 @@
 <template>
-  <div class="notice">
+  <div ref="interactElement" class="notice">
     <div class="notice__rules-container">
       <div
         v-for="i in numberOfPages"
@@ -8,7 +8,7 @@
         :class="`notice__rule notice__rule--${i}`"
         :style="ruleStyle(i)"
       >
-        <img class="notice__rule__img" :src="getSource(i)" />
+        <img class="notice__rule__img" :src="getSource(i)" :style="{ transform: transformString }" />
       </div>
       <button @click="prevQuestion">Prev</button>
       <button @click="nextQuestion">Next</button>
@@ -18,6 +18,7 @@
 
 <script>
 import Anime from 'animejs'
+import interact from 'interactjs'
 
 import { noticeData } from '@/data/enigme3'
 export default {
@@ -26,11 +27,36 @@ export default {
     return {
       rules: noticeData(),
       currentPage: 1,
-      numberOfPages: 9
+      numberOfPages: 9,
+      interactPosition: {
+        x: 0,
+        y: 0
+      }
+    }
+  },
+  computed: {
+    transformString() {
+      const { x, y } = this.interactPosition
+      return `translate3D(${x}px, ${y}px, 0)`
     }
   },
   mounted() {
     this.currentPage = 1
+
+    const element = this.$refs.interactElement
+    interact(element).draggable({
+      onmove: (event) => {
+        const x = this.interactPosition.x + event.dx
+        const y = this.interactPosition.y + event.dy
+        this.interactSetPosition({ x, y })
+      },
+      onend: () => {
+        this.resetCardPosition()
+      }
+    })
+  },
+  beforeDestroy() {
+    interact(this.$refs.interactElement).unset()
   },
   sockets: {
     startEnigme: function () {
@@ -74,6 +100,13 @@ export default {
         })
         this.currentPage -= 1
       }
+    },
+    interactSetPosition(coordinates) {
+      const { x = 0, y = 0 } = coordinates
+      this.interactPosition = { x, y }
+    },
+    resetCardPosition() {
+      this.interactSetPosition({ x: 0, y: 0 })
     }
   }
 }
