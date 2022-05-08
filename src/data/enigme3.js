@@ -13,7 +13,7 @@ export const questionsData = (product) => [
   {
     slug: 'price',
     btnLabel: 'Demander le prix',
-    question: 'Quel est le prix du produit ?',
+    question: `Combien coûte ${productName[product.type]} ?`,
     normalAnswer: `Prix de départ ${getPriceAnswer(product.subtype.interval, false)}€`,
     botAnswer: `Prix de départ ${getPriceAnswer(product.subtype.interval, true)}€`
   },
@@ -34,7 +34,7 @@ export const questionsData = (product) => [
   {
     slug: 'availability',
     btnLabel: 'Demander la disponibilité',
-    question: 'Le produit est-il encore disponible ?',
+    question: `Est-ce que ${productName[product.type]} est encore disponible ?`,
     normalAnswer: 'Oui bien sûr, je n’ai pas encore d’autres demandes. Prenez votre temps :)',
     botAnswer: 'Oui mais j’ai beaucoup de gens sur l’annonce il me faut une réponse tout de suite !'
   },
@@ -100,6 +100,12 @@ export const normalGlyphConverter = {
   a: 'å',
   e: 'ę',
   n: 'ñ'
+}
+
+export const productName = {
+  clothing: 'le vêtement',
+  housing: 'le logement',
+  vehicle: 'la voiture'
 }
 
 export const textContent = {

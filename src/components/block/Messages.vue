@@ -18,7 +18,7 @@
       :is-received="item.isReceived"
     >
       <div v-if="typeof item.content === 'object'" class="message__payment">
-        <p>Voici le lien du paiement :</p>
+        <p v-if="item.content.text" v-html="item.content.text" />
         <img v-if="item.content.image" :src="getSource(item.content.image)" />
         <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
       </div>
