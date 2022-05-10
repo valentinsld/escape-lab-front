@@ -8,7 +8,7 @@
         :class="`notice__rule notice__rule--${i}`"
         :style="ruleStyle(i)"
       >
-        <img class="notice__rule__img" :src="getSource(i)" :style="{ transform: transformString }" />
+        <img class="notice__rule__img" :src="getSource(i)" />
       </div>
       <button @click="prevQuestion">Prev</button>
       <button @click="nextQuestion">Next</button>
@@ -34,24 +34,19 @@ export default {
       }
     }
   },
-  computed: {
-    transformString() {
-      const { x, y } = this.interactPosition
-      return `translate3D(${x}px, ${y}px, 0)`
-    }
-  },
   mounted() {
     this.currentPage = 1
 
     const element = this.$refs.interactElement
     interact(element).draggable({
-      onmove: (event) => {
-        const x = this.interactPosition.x + event.dx
-        const y = this.interactPosition.y + event.dy
-        this.interactSetPosition({ x, y })
-      },
-      onend: () => {
-        this.resetCardPosition()
+      onend: (event) => {
+        //console.log(event.swipe, 'event')
+        if (event.swipe?.left) {
+          this.nextQuestion()
+        }
+        if (event.swipe?.right) {
+          this.prevQuestion()
+        }
       }
     })
   },
@@ -100,13 +95,6 @@ export default {
         })
         this.currentPage -= 1
       }
-    },
-    interactSetPosition(coordinates) {
-      const { x = 0, y = 0 } = coordinates
-      this.interactPosition = { x, y }
-    },
-    resetCardPosition() {
-      this.interactSetPosition({ x: 0, y: 0 })
     }
   }
 }
