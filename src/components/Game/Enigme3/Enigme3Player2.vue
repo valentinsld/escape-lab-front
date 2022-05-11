@@ -28,10 +28,7 @@ export default {
       rules: noticeData(),
       currentPage: 1,
       numberOfPages: 9,
-      interactPosition: {
-        x: 0,
-        y: 0
-      }
+      listeningSwipe: true
     }
   },
   mounted() {
@@ -39,14 +36,18 @@ export default {
 
     const element = this.$refs.interactElement
     interact(element).draggable({
-      onend: (event) => {
-        //console.log(event.swipe, 'event')
-        if (event.swipe?.left) {
-          this.nextQuestion()
-        }
-        if (event.swipe?.right) {
+      onmove: (event) => {
+        if (event.dx > 3 && this.listeningSwipe) {
+          this.listeningSwipe = false
           this.prevQuestion()
         }
+        if (event.dx < -3 && this.listeningSwipe) {
+          this.listeningSwipe = false
+          this.nextQuestion()
+        }
+      },
+      onend: () => {
+        this.listeningSwipe = true
       }
     })
   },
