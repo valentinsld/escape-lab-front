@@ -1,7 +1,6 @@
 <template>
   <div>
     <!--    <h1>Connexion Player</h1>-->
-    <Enigme3Player2 />
     <div v-if="!idRoom">
       <input ref="inputIdRoom" :value="idRoomFromUrl" />
       <button @click="connectToRoom">Connect to room</button>
@@ -22,7 +21,6 @@
 <script>
 import { mapState } from 'vuex'
 
-import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -40,7 +38,6 @@ const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LO
 
 export default {
   name: 'ConnectionPlayer',
-  components: { Enigme3Player2 },
   data() {
     return {
       idRoomFromUrl: getIdRoomFromUrl()
