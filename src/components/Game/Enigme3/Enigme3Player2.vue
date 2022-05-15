@@ -10,8 +10,6 @@
       >
         <img class="notice__rule__img" :src="getSource(i)" />
       </div>
-      <button @click="prevQuestion">Prev</button>
-      <button @click="nextQuestion">Next</button>
     </div>
   </div>
 </template>
@@ -37,11 +35,11 @@ export default {
     const element = this.$refs.interactElement
     interact(element).draggable({
       onmove: (event) => {
-        if (event.dx > 3 && this.listeningSwipe) {
+        if (event.dx > 2 && this.listeningSwipe) {
           this.listeningSwipe = false
           this.prevQuestion()
         }
-        if (event.dx < -3 && this.listeningSwipe) {
+        if (event.dx < -2 && this.listeningSwipe) {
           this.listeningSwipe = false
           this.nextQuestion()
         }
