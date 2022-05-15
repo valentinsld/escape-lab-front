@@ -11,14 +11,18 @@
         <div v-if="product.description" class="annonce-product__description" v-html="getGlyphDescription" />
       </div>
       <div class="annonce-product__right-column">
-        <div class="annonce-product__sailer-name">
-          <img src="@/assets/images/enigme3/sailer-profil.png" />
-          <h3>Vendue par eric.mb19</h3>
+        <div class="annonce-product__sailer">
+          <div class="annonce-product__sailer-name">
+            <img src="@/assets/images/enigme3/sailer-profil.png" />
+            <h3>Vendue par eric.mb19</h3>
+          </div>
+          <div v-if="sailer" class="annonce-product__sailer-data">
+            <p v-if="sailer.sales" v-html="`${sailer.sales} ventes`" />
+            <p v-if="sailer.reviews" v-html="`${sailer.reviews} avis`" />
+            <p v-if="sailer.date" v-html="`Membre depuis ${sailer.date}`" />
+          </div>
+          <p>Répond en moyenne dans l'heure</p>
         </div>
-        <p>180 ventes</p>
-        <p>0 avis</p>
-        <p>Membre depuis moins d'un mois</p>
-        <p>Répond en moyenne dans l'heure</p>
         <div v-if="product.criteria.good" class="annonce-product__criteria-container">
           <h3>Caractéristiques techniques</h3>
           <div v-for="(criteria, name) in product.criteria.good" :key="name" class="annonce-product__criteria-item">
@@ -32,7 +36,8 @@
 </template>
 
 <script>
-import { botGlyphConverter, criteriaName, normalGlyphConverter } from '@/data/enigme3'
+import { botGlyphConverter, botSailers, criteriaName, normalGlyphConverter, normalSailers } from '@/data/enigme3'
+import { randomNum } from '@/helpers/randomNum'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -47,7 +52,8 @@ export default {
   },
   data() {
     return {
-      criteriaName: criteriaName
+      criteriaName: criteriaName,
+      sailer: null
     }
   },
   computed: {
@@ -71,6 +77,7 @@ export default {
   },
   mounted() {
     console.log(this.product, 'product annonce')
+    this.sailer = this.getSailer()
   },
   sockets: {
     startEnigme: function () {
@@ -80,6 +87,12 @@ export default {
   methods: {
     start() {
       console.log('START ENIGME')
+    },
+    getSailer() {
+      const isTrueRule = this.trueRules.filter((e) => e.slug === 'profile').length > 0
+      return isTrueRule
+        ? botSailers[randomNum(0, botSailers.length)]
+        : normalSailers[randomNum(0, normalSailers.length)]
     }
   }
 }

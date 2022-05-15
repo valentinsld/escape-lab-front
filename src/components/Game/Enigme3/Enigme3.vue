@@ -1,6 +1,6 @@
 <template>
   <div v-if="config" class="enigme-3">
-    <div class="enigme-3__helper" style="display: none">
+    <div class="enigme-3__helper">
       <h4>Config generated :</h4>
       <p v-html="` type du vendeur : ${config.sellerType}`" />
       <p>Règles pour démasquer le bot :</p>

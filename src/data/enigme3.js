@@ -102,6 +102,62 @@ export const normalGlyphConverter = {
   n: 'ñ'
 }
 
+export const botSailers = [
+  {
+    reviews: 8,
+    sales: 35,
+    date: '1 mois'
+  },
+  {
+    reviews: 11,
+    sales: 55,
+    date: '3 mois'
+  },
+  {
+    reviews: 48,
+    sales: 85,
+    date: '7 mois'
+  },
+  {
+    reviews: 50,
+    sales: 110,
+    date: '10 mois'
+  },
+  {
+    reviews: 74,
+    sales: 205,
+    date: '1 an et 1 mois'
+  }
+]
+
+export const normalSailers = [
+  {
+    reviews: 11,
+    sales: 35,
+    date: '1 mois'
+  },
+  {
+    reviews: 11,
+    sales: 45,
+    date: '3 mois'
+  },
+  {
+    reviews: 52,
+    sales: 85,
+    date: '7 mois'
+  },
+  {
+    reviews: 67,
+    sales: 110,
+    date: '10 mois'
+  },
+  {
+    reviews: 82,
+    sales: 205,
+    date: '1 an et 1 mois'
+  }
+]
+
 export const productName = {
   clothing: 'le vêtement',
   housing: 'le logement',
