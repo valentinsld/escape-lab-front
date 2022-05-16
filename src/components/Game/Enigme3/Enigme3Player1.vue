@@ -4,6 +4,9 @@
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
     <div ref="messages" class="chat__messages">
+      <p v-if="!isMessageSend" class="chat__messages__helper-question">
+        Envoyez une première question pour lancer la discussion avec le vendeur.
+      </p>
       <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
     </div>
     <div class="chat__choices-container">
@@ -79,10 +82,11 @@ export default {
       choicePos: null,
       buttons: null,
       questions: [],
+      isMessageSend: false,
       finalAnswers: [],
       choices: [],
       text: textContent,
-      messages: [{ isReveal: true, isReceived: false, content: 'Bonjour !' }]
+      messages: []
     }
   },
   mounted() {
@@ -103,6 +107,7 @@ export default {
         .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
+      this.isMessageSend = true
       this.hideButtons()
       this.choicePos = pos
       this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].question })
@@ -188,6 +193,11 @@ p {
   flex: 1;
   padding: 2em 1em;
   overflow: scroll;
+}
+
+.chat__messages__helper-question {
+  margin-top: 50%;
+  text-align: center;
 }
 
 .chat__choices-container {
