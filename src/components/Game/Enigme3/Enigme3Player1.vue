@@ -4,7 +4,7 @@
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
     <div ref="messages" class="chat__messages">
-      <p v-if="!isMessageSend" class="chat__messages__helper-question">
+      <p v-if="!isMessageSend" class="chat__messages__helper-message">
         Envoyez une première question pour lancer la discussion avec le vendeur.
       </p>
       <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
@@ -195,7 +195,7 @@ p {
   overflow: scroll;
 }
 
-.chat__messages__helper-question {
+.chat__messages__helper-message {
   margin-top: 50%;
   text-align: center;
 }
