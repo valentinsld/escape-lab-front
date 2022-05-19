@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex">
+  <div class="screenContainer" style="display: flex">
     <div style="width: 50%">
       <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="200" level="H" />
     </div>
