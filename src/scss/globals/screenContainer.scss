@@ -1,15 +1,18 @@
-$margeX: 32px;
-$margeY: 32px;
-$paddingX: 32px;
-$paddingY: 32px;
+
 
 .screenContainer {
-  width: calc(100% - $margeX*2);
+  --margeX: 32px;
+  --margeY: 32px;
+  --paddingX: 32px;
+  --paddingY: 32px;
+
+  box-sizing: border-box;
+  width: calc(100% - (var(--margeX) * 2));
   max-width: 1100px;
-  height: calc(100% - $margeY*2);
+  height: calc(100% - (var(--margeY) * 2));
   min-height: 40vh;
-  max-height: 700px;
-  padding: $paddingY $paddingX;
+  max-height: min(700px, 60vh);
+  padding: var(--paddingY) var(--paddingX);
   margin: auto;
   background-color: var(--color-white);
   border: 5px solid var(--color-black);
