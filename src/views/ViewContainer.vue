@@ -19,6 +19,7 @@ export default {
 <style lang="scss" scoped>
 .view {
   position: relative;
+  display: flex;
   height: calc(100 * var(--vh, 1vh)) !important;
   max-height: calc(100 * var(--vh, 1vh));
 }
