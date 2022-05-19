@@ -10,11 +10,11 @@
       <p>{{ idRoom }}</p>
       <p>Player 1 : {{ statusPlayer1 }}</p>
       <p>Player 2 : {{ statusPlayer2 }}</p>
-      <button v-if="!seeJoinRoom" @click="seeJoinRoomClick">Rejoindre une room en cours</button>
+      <Button v-if="!seeJoinRoom" :on-click="seeJoinRoomClick" text="Rejoindre une room en cours" />
       <div v-if="seeJoinRoom">
         <p>Rejoindre une room</p>
         <input ref="inputIdRoom" />
-        <button @click="connectToRoom">Connect to room</button>
+        <Button :on-click="connectToRoom" text="Connect to room" />
       </div>
     </div>
   </div>
@@ -24,6 +24,7 @@
 import QrcodeVue from 'qrcode.vue'
 import { mapState } from 'vuex'
 
+import Button from '@/components/block/button.vue'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -33,7 +34,8 @@ const IS_DEV = process.env.NODE_ENV === 'development'
 export default {
   name: 'ConnectionMainScreen',
   components: {
-    QrcodeVue
+    QrcodeVue,
+    Button
   },
   data() {
     return {
