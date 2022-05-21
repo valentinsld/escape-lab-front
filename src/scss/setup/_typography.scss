@@ -1,26 +1,31 @@
+@import url("https://use.typekit.net/skn1apu.css");
+
 $serif-font: serif;
 $sans-serif-font: arial, sans-serif;
 
-$avenir: 'Avenir', #{$sans-serif-font};
-$arial: 'Arial', #{$sans-serif-font};
+$font: 'grenadine-mvb', #{$sans-serif-font};
 
 @mixin f-h1() {
-  font-family: $avenir;
+  font-family: $font;
+  font-weight: 500;
 }
 
 @mixin f-h2() {
-  font-family: $avenir;
+  font-family: $font;
+  font-weight: 500;
 }
 
 @mixin f-h3() {
-  font-family: $avenir;
+  font-family: $font;
+  font-weight: 500;
 }
 
 @mixin f-body() {
-  font-family: $avenir;
+  font-family: $font;
+  font-weight: 300;
 }
 
 @mixin f-link() {
-  font-family: $arial;
+  font-family: $font;
   font-size: 0.9rem;
 }

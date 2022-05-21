@@ -1,0 +1,36 @@
+.button {
+  padding: 18px 36px 16px;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  background-color: var(--color-primary);
+  border: 3px solid var(--color-black);
+  border-radius: 50px;
+
+  &.-enigme1 {
+    background-color: var(--color-enigme1);
+  }
+
+  &.-enigme2 {
+    background-color: var(--color-enigme2);
+  }
+
+  &.-enigme3 {
+    background-color: var(--color-enigme3);
+  }
+
+  &.-green {
+    background-color: var(--color-green);
+  }
+
+  &.-red {
+    background-color: var(--color-red);
+  }
+
+  &.-blue {
+    background-color: var(--color-blue);
+  }
+
+  &.-yellow {
+    background-color: var(--color-yellow);
+  }
+}
