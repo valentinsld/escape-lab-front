@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  width: 100%;
+}
+
+//
+// HOME
+//
+.homeContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms var(--custom-bezier);
+
+  &.-see {
+    pointer-events: initial;
+    opacity: 1;
+  }
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__img {
+    width: 560px;
+    max-width: 50%;
+  }
+
+  &__baseline {
+    margin-bottom: 1.5em;
+    font-size: 1.825em;
+    font-weight: var(--weight-bold);
+
+    // color: var(--color-black);
+  }
+}
+
+//
+// connection
+//
+.connection {
+  display: flex;
+  align-items: center;
+
+  &__qrcode {
+    width: 40%;
+  }
+
+  &__content {
+    flex: 1;
+
+    .content {
+      &__title {
+        margin-bottom: 0.2em;
+      }
+
+      &__idRoom {
+        margin-top: 0;
+        margin-bottom: 1em;
+        color: var(--color-primary);
+      }
+    }
+  }
+}
