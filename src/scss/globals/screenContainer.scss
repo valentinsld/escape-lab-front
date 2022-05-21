@@ -21,6 +21,11 @@
 
   .-isPlayer & {
     max-height: inherit;
+
+    --margeX: 16px;
+    --margeY: 16px;
+    --paddingX: 24px;
+    --paddingY: 24px;
   }
 
   &::after {
