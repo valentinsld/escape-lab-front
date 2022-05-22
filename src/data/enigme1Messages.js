@@ -15,6 +15,7 @@ const messages = [
   {
     contact: 'Papa',
     id: 11,
+    color: 'green',
     messages: [
       {
         isReceived: true,
@@ -29,6 +30,7 @@ const messages = [
   {
     contact: 'Cpf',
     id: 12,
+    color: 'blue',
     messages: [
       {
         isReceived: true,
@@ -39,6 +41,7 @@ const messages = [
   {
     contact: 'Mamie',
     id: 13,
+    color: 'yellow',
     messages: [
       {
         isReceived: true,
@@ -61,6 +64,7 @@ const messages = [
   {
     contact: 'Amozone',
     id: 14,
+    color: 'red',
     messages: [
       {
         isReceived: true,
@@ -79,6 +83,7 @@ const messages = [
   {
     contact: 'Maman',
     id: 15,
+    color: 'blue',
     messages: [
       {
         isReceived: true,
@@ -113,6 +118,7 @@ const messages = [
   {
     contact: 'Crush 💔',
     id: 16,
+    color: 'yellow',
     messages: [
       {
         isReceived: true,
@@ -167,6 +173,7 @@ const messages = [
   {
     contact: 'FlashScore Marseille',
     id: 17,
+    color: 'green',
     messages: [
       {
         isReceived: true,

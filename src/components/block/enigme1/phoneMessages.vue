@@ -1,17 +1,22 @@
 <template>
   <div class="container">
-    <p>Phone messageeee</p>
+    <p class="container__top">Messages</p>
 
-    <div class="list">
+    <div class="container__list">
       <div
         v-for="(message, index) in messages"
         :key="`message_${message.contact}`"
         class="list__item"
         @click="() => setCurrentMessage(index)"
       >
-        <p>{{ message.contact }}</p>
-        <p v-if="!readedMessages.includes(message.id)">NOT OPEN</p>
-        <p v-if="message.messages.length">{{ message.messages[message.messages.length - 1].content }}</p>
+        <div class="item__color" :class="'-' + message.color" />
+        <div class="item__content">
+          <p class="content__author">{{ message.contact }}</p>
+          <p v-if="message.messages.length" class="content__message">
+            {{ message.messages[message.messages.length - 1].content }}
+          </p>
+        </div>
+        <div v-if="!readedMessages.includes(message.id)" class="item__notification" />
       </div>
     </div>
 
