@@ -20,7 +20,7 @@
   box-shadow: 6px 6px 0 var(--color-black);
 
   .-isPlayer & {
-    max-height: inherit;
+    max-height: 700px;
 
     --screenContainer-margeX: 16px;
     --screenContainer-margeY: 16px;
