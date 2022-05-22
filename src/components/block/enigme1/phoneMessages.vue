@@ -22,8 +22,8 @@
 
     <div class="chat" :class="{ '-open': chatIsOpen }">
       <div class="chat__header">
-        <p @click="closeChat">Back</p>
-        <p>{{ messages[currentMessage].contact }}</p>
+        <p class="header__retour" @click="closeChat">Retour</p>
+        <p class="header__contact">{{ messages[currentMessage].contact }}</p>
       </div>
       <div class="chat__content">
         <Messages :messages="messages[currentMessage].messages" />
