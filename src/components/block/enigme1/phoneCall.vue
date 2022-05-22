@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <p>Phone call to + 00 8 34 87 18 31</p>
-    <p>{{ numbeEntered.join('') }}</p>
-    <p>Time: {{ timeString }}</p>
+  <div class="phoneCall">
+    <img class="phoneCall__sound" :src="SoundIcon" />
+    <p class="phoneCall__phoneNumber">+0834871831</p>
+    <p class="phoneCall__phoneNumberInfos">Peut-être : LaPorte Services</p>
 
-    <p>{{ soundStep }}</p>
+    <p class="phoneCall__time">{{ timeString }}</p>
+    <p class="phoneCall__numbeEntered">{{ numbeEntered.join('') }}</p>
 
-    <div class="pad">
+    <div class="phoneCall__pad">
       <button v-for="num in 9" :key="`button_${num}`" @click="() => clickPad(num)">{{ num }}</button>
-      <button @click="() => clickPad(0)">0</button>
+      <div class="-close">
+        <button>
+          <img :src="PhoneIcon" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -36,12 +41,16 @@ const PARAMS = {
 
 import { Howl } from 'howler'
 
+import PhoneIcon from '@/assets/icon-phone.svg'
+import SoundIcon from '@/assets/icon-sound.svg'
 import convertSecondToTime from '@/helpers/convertSecondToTIme.js'
 
 export default {
   name: 'PhoneCall',
   data() {
     return {
+      PhoneIcon,
+      SoundIcon,
       time: 0,
       timeString: '0:00',
       numbeEntered: [],
@@ -72,7 +81,7 @@ export default {
     updateTime() {
       setTimeout(() => {
         this.$data.time += 1
-        this.$data.timeString = convertSecondToTime(this.$data.time)
+        this.$data.timeString = convertSecondToTime(this.$data.time, true)
         this.updateTime()
       }, 1000)
     },
@@ -112,3 +121,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import './phoneCall';
+</style>
