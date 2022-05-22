@@ -70,7 +70,7 @@ export default {
     },
     secondCall() {
       setTimeout(() => {
-        if (this.$data.recall) return
+        if (this.$data.recalled) return
 
         this.$data.isFakeCallingDuration = 1000
         this.$data.isFakeCalling = true
