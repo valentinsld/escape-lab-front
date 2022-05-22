@@ -72,7 +72,7 @@ export default {
   border: 3px solid var(--color-black);
   border-radius: 20px;
   transition: transform 250ms ease-in-out;
-  // transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, calc(-100% - 16px), 0);
   will-change: transform;
 
   &.-see {
