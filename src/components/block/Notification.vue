@@ -60,18 +60,33 @@ export default {
 <style lang="scss" scoped>
 .notification {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 8px;
+  left: 8px;
   z-index: 2;
-  width: 100%;
-  height: 80px;
-  background-color: red;
+  box-sizing: border-box;
+  width: calc(100% - 16px);
+  height: auto;
+  padding: 16px 24px;
+  text-align: left;
+  background-color: var(--color-white);
+  border: 3px solid var(--color-black);
+  border-radius: 20px;
   transition: transform 250ms ease-in-out;
-  transform: translate3d(0, -100%, 0);
+  // transform: translate3d(0, -100%, 0);
   will-change: transform;
 
   &.-see {
     transform: translate3d(0, 0, 0);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__contact {
+    padding-bottom: 0.5em;
+    font-size: 1.125em;
+    font-weight: var(--weight-semi-bold);
   }
 }
 </style>
