@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>Timer: {{ timer }}</p>
+  <div class="timer">
+    <p class="timer__text">{{ time }}</p>
 
     <Notification :contact="notification.contact" :message="notification.message" :duration="4500" />
   </div>
@@ -8,6 +8,7 @@
 
 <script>
 import Notification from '@/components/block/Notification.vue'
+import convertSecondsToTime from '@/helpers/convertSecondToTIme.js'
 
 export default {
   name: 'Timer',
@@ -32,6 +33,11 @@ export default {
         contact: '',
         message: ''
       }
+    }
+  },
+  computed: {
+    time() {
+      return convertSecondsToTime(this.timer, true)
     }
   },
   watch: {
@@ -62,3 +68,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import 'timer.scss';
+</style>
