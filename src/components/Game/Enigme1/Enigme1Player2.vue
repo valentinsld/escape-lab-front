@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Enigme 1 Player2</h1>
+  <div class="screenContainer -blue">
     <PhoneCallIncoming v-if="isFakeCalling" :duration="isFakeCallingDuration" @onEndCall="endFakeCall" />
     <PhoneLocked
       v-else-if="!recalled || callEnd"
