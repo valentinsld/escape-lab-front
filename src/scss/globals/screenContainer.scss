@@ -1,18 +1,18 @@
 
 
 .screenContainer {
-  --margeX: 32px;
-  --margeY: 32px;
-  --paddingX: 32px;
-  --paddingY: 32px;
+  --screenContainer-margeX: 32px;
+  --screenContainer-margeY: 32px;
+  --screenContainer-paddingX: 32px;
+  --screenContainer-paddingY: 32px;
 
   box-sizing: border-box;
-  width: calc(100% - (var(--margeX) * 2));
+  width: calc(100% - (var(--screenContainer-margeX) * 2));
   max-width: 1100px;
-  height: calc(100% - (var(--margeY) * 2));
+  height: calc(100% - (var(--screenContainer-margeY) * 2));
   min-height: 40vh;
   max-height: min(700px, 60vh);
-  padding: var(--paddingY) var(--paddingX);
+  padding: var(--screenContainer-paddingY) var(--screenContainer-paddingX);
   margin: auto;
   background-color: var(--color-white);
   border: 5px solid var(--color-black);
@@ -22,10 +22,10 @@
   .-isPlayer & {
     max-height: inherit;
 
-    --margeX: 16px;
-    --margeY: 16px;
-    --paddingX: 24px;
-    --paddingY: 24px;
+    --screenContainer-margeX: 16px;
+    --screenContainer-margeY: 16px;
+    --screenContainer-paddingX: 24px;
+    --screenContainer-paddingY: 24px;
   }
 
   &::after {
