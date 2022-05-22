@@ -6,10 +6,15 @@
  */
 function convertSecondsToTime(time, twoNumberForMintes = false) {
   if (Number.isNaN(time)) return '0:00'
+  const pad = twoNumberForMintes ? 2 : 1
 
   const minutes = Math.floor(time / 60)
+    .toString()
+    .padStart(pad, '0')
   const seconds = Math.floor(time % 60)
-  return `${minutes > 9 && twoNumberForMintes ? `0${minutes}` : minutes}:${seconds > 9 ? seconds : `0${seconds}`}`
+    .toString()
+    .padStart(pad, '0')
+  return `${minutes}:${seconds}`
 }
 
 export default convertSecondsToTime

@@ -1,6 +1,5 @@
 <template>
   <ViewContainer name="game">
-    <p>View Game</p>
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>

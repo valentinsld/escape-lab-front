@@ -1,10 +1,14 @@
 <template>
-  <div class="view" :class="`view--${name}`">
+  <div class="view" :class="`view--${name} -is${stateScreen}`">
     <slot />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+import { STATE as S } from '@/store/helpers'
+
 export default {
   name: 'ViewContainer',
   props: {
@@ -12,7 +16,10 @@ export default {
       type: String,
       required: true
     }
-  }
+  },
+  computed: mapState({
+    stateScreen: (state) => state[S.stateScreen]
+  })
 }
 </script>
 

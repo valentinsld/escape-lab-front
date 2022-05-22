@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Enigme 1 Player1</h1>
+  <div class="screenContainer -blue">
     <Timer v-if="!recalled" :is-start="isStart" @onTimeChange:end="endTime" />
     <PhoneMessage v-else :data="dataMessages" />
   </div>

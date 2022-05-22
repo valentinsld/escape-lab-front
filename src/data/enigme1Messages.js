@@ -15,6 +15,7 @@ const messages = [
   {
     contact: 'Papa',
     id: 11,
+    color: 'green',
     messages: [
       {
         isReceived: true,
@@ -29,6 +30,7 @@ const messages = [
   {
     contact: 'Cpf',
     id: 12,
+    color: 'blue',
     messages: [
       {
         isReceived: true,
@@ -39,6 +41,7 @@ const messages = [
   {
     contact: 'Mamie',
     id: 13,
+    color: 'yellow',
     messages: [
       {
         isReceived: true,
@@ -61,6 +64,7 @@ const messages = [
   {
     contact: 'Amozone',
     id: 14,
+    color: 'red',
     messages: [
       {
         isReceived: true,
@@ -79,6 +83,7 @@ const messages = [
   {
     contact: 'Maman',
     id: 15,
+    color: 'blue',
     messages: [
       {
         isReceived: true,
@@ -113,53 +118,54 @@ const messages = [
   {
     contact: 'Crush 💔',
     id: 16,
+    color: 'yellow',
     messages: [
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Hello ! Comment s\'est passé ton week-end ?'
       },
       {
-        isReceived: false,
+        isReceived: true,
         content: 'Hello ! J’ai passé un superbe week-end, j\'étais à la plage 😊'
       },
       {
-        isReceived: false,
+        isReceived: true,
         content: 'et toi ?'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'J’étais chez mes parents, un peu chiant. Il y a pas grand chose à faire au Havre… et ma maman a encore oublié de venir me chercher'
       },
       {
-        isReceived: false,
+        isReceived: true,
         content: 'Oh mince, c’est pas la première fois…'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Est ce que tu veux qu’on aille boire un verre tous les deux dans la semaine ?'
       },
       {
-        isReceived: false,
+        isReceived: true,
         content: 'Oui, pourquoi pas. Tu es dispo jeudi ?'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Parfait ! A jeudi !!'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'J’ai beaucoup apprécié cette soirée avec toi !'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Hâte de reprendre un verre ensemble'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'Hello ! Comment s\'est passé ton week-end ?'
       },
       {
-        isReceived: true,
+        isReceived: false,
         content: 'J’ai pas de nouvelle de toi depuis plus d’une semaine…'
       }
     ]
@@ -167,6 +173,7 @@ const messages = [
   {
     contact: 'FlashScore Marseille',
     id: 17,
+    color: 'green',
     messages: [
       {
         isReceived: true,

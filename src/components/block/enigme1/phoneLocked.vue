@@ -1,22 +1,25 @@
 <template>
-  <div>
-    <h3>Phone locked</h3>
+  <div class="phoneLocked">
+    <p class="phoneLocked__hour">15:01</p>
 
-    <div v-if="called && !message.message">
-      <p><strong>Un appel manqué</strong></p>
-      <p>+251 8 34 87 18 31 Peut-être : LaPorte Service</p>
-
-      <button @click="recall">Rappeler</button>
+    <div v-if="called && !message.message" class="phoneLocked__recall" @click="recall">
+      <img class="recall__img" :src="PhoneIcon" />
+      <div class="recall__content">
+        <p class="recall__number">+0834871831</p>
+        <p class="recall__infos">Peut-être : LaPorte Service</p>
+      </div>
     </div>
 
-    <div v-if="message.message">
-      <p>{{ message.contact }}</p>
-      <p>{{ message.message }}</p>
+    <div v-if="message.message" class="phoneLocked__message">
+      <p class="message__contact">{{ message.contact }}</p>
+      <p class="message__message">{{ message.message }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import PhoneIcon from '@/assets/icon-phone.svg'
+
 export default {
   name: 'PhoneLocked',
   props: {
@@ -34,6 +37,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      PhoneIcon
+    }
+  },
   methods: {
     recall() {
       this.$emit('onRecall', true)
@@ -41,3 +49,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import './phoneLocked';
+</style>

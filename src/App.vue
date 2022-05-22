@@ -100,8 +100,8 @@ export default {
 #app {
   display: flex;
   height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
+  font-family: 'grenadine-mvb', arial, sans-serif;
+  color: var(--color-black);
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

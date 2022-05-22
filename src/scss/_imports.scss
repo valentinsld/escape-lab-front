@@ -5,6 +5,7 @@ Setup
 @import 'setup/typography';
 @import 'setup/css-variables';
 @import 'setup/variables';
+@import 'setup/mixins-responsive';
 
 /*
 Globals
@@ -12,4 +13,5 @@ Globals
 @import 'globals/general-styles';
 @import 'globals/button';
 @import 'globals/screenContainer';
+@import 'globals/video-subtitles';
 

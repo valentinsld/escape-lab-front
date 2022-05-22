@@ -1,20 +1,35 @@
 <template>
-  <div class="screenContainer" style="display: flex">
-    <div style="width: 50%">
-      <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="200" level="H" />
+  <div class="container">
+    <div
+      :class="{
+        homeContainer: true,
+        '-see': seeHome
+      }"
+    >
+      <div class="home screenContainer">
+        <img class="home__img" :src="Logo" />
+        <p class="home__baseline">TODO : Ici une superbe baseline !!</p>
+        <Button text="Commencer l’expérience" :on-click="goToConnection" />
+      </div>
     </div>
-    <div>
-      <h1>Connexion Main Screen</h1>
 
-      <div v-if="!idRoom">Pas de connexion</div>
-      <p>{{ idRoom }}</p>
-      <p>Player 1 : {{ statusPlayer1 }}</p>
-      <p>Player 2 : {{ statusPlayer2 }}</p>
-      <Button v-if="!seeJoinRoom" :on-click="seeJoinRoomClick" text="Rejoindre une room en cours" />
-      <div v-if="seeJoinRoom">
-        <p>Rejoindre une room</p>
-        <input ref="inputIdRoom" />
-        <Button :on-click="connectToRoom" text="Connect to room" />
+    <div class="connection screenContainer">
+      <div class="connection__qrcode">
+        <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="200" level="H" />
+      </div>
+      <div class="connection__content">
+        <h1 class="content__title">Rejoindre la room</h1>
+        <h2 class="content__idRoom">{{ idRoom }}</h2>
+
+        <div v-if="!idRoom">Pas de connexion</div>
+        <p>Player 1 : {{ statusPlayer1 }}</p>
+        <p>Player 2 : {{ statusPlayer2 }}</p>
+        <!-- <Button v-if="!seeJoinRoom" :on-click="seeJoinRoomClick" text="Rejoindre une room en cours" /> -->
+        <div v-if="seeJoinRoom">
+          <p>Rejoindre une room</p>
+          <input ref="inputIdRoom" />
+          <Button :on-click="connectToRoom" text="Connect to room" />
+        </div>
       </div>
     </div>
   </div>
@@ -24,6 +39,7 @@
 import QrcodeVue from 'qrcode.vue'
 import { mapState } from 'vuex'
 
+import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
@@ -39,7 +55,9 @@ export default {
   },
   data() {
     return {
-      seeJoinRoom: false
+      Logo,
+      seeJoinRoom: false,
+      seeHome: true
     }
   },
   computed: mapState({
@@ -80,6 +98,10 @@ export default {
     this.$socket.emit('connectToRoom', loginData)
   },
   methods: {
+    goToConnection() {
+      this.$data.seeHome = false
+    },
+
     seeJoinRoomClick() {
       this.$data.seeJoinRoom = true
     },
@@ -98,4 +120,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import './ConnectionMainScreen';
+</style>
