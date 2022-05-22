@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51.026" height="54.003" viewBox="0 0 51.026 54.003">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_348" data-name="Rectangle 348" width="51.026" height="54.003" transform="translate(-4 -4)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_238" data-name="Groupe 238" transform="translate(4 4)">
+    <g id="Groupe_237" data-name="Groupe 237" clip-path="url(#clip-path)">
+      <path id="Tracé_749" data-name="Tracé 749" d="M28.4.4a3.029,3.029,0,0,0-3.09.044.929.929,0,0,0-.13.093L11.633,12H1a1,1,0,0,0-1,1V32a1,1,0,0,0,1,1l10.61,0,13.543,12.44a.976.976,0,0,0,.161.12,3.029,3.029,0,0,0,3.09.044A3.124,3.124,0,0,0,30,42.845V3.158A3.125,3.125,0,0,0,28.4.4M28,42.845a1.147,1.147,0,0,1-.579,1.015,1.049,1.049,0,0,1-1,.026L13,31.557V27a1,1,0,0,0-2,0v4L2,31V14h9v4a1,1,0,0,0,2,0V13.465L26.405,2.125a1.045,1.045,0,0,1,1.016.018A1.147,1.147,0,0,1,28,3.158V42.845" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Tracé_750" data-name="Tracé 750" d="M33.277,9.54a1,1,0,0,0-.554,1.922,11.491,11.491,0,0,1,0,22.08A1,1,0,0,0,33,35.5a1.018,1.018,0,0,0,.277-.039,13.491,13.491,0,0,0,0-25.924" transform="translate(3)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
