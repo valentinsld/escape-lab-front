@@ -44,6 +44,8 @@ export default {
     this.initAutoVh()
 
     setTimeout(this.initAutoVh.bind(this), 1000)
+
+    this.removePinchOnMobile()
   },
   sockets: {
     connect: function () {
@@ -92,6 +94,14 @@ export default {
       this.$el.style.setProperty('--vh', window.innerHeight / 100 + 'px')
       this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px')
       window.addEventListener('resize', () => this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px'))
+    },
+    removePinchOnMobile() {
+      // remove pintch zoom
+      this.$nextTick(() => {
+        document.addEventListener('gesturestart', function (e) {
+          e.preventDefault()
+        })
+      })
     }
   }
 }
@@ -99,6 +109,13 @@ export default {
 
 <style lang="scss">
 @import 'scss/app';
+
+// Remove scroll to reload page for ios
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 
 #app {
   display: flex;
