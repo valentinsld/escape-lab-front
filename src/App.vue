@@ -118,7 +118,7 @@ body {
 }
 
 // remove double tap (zoom)
-button {
+* {
   touch-action: manipulation;
 }
 
