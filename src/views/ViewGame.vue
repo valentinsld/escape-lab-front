@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-multiple-template-root */
 <template>
   <ViewContainer name="game">
     <Components :is="stepGame" />
