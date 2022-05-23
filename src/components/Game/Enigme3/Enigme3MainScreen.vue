@@ -14,7 +14,7 @@
         <div class="annonce-product__sailer">
           <div class="annonce-product__sailer-name">
             <img src="@/assets/images/enigme3/sailer-profil.png" />
-            <h3>Vendue par eric.mb19</h3>
+            <h3 v-html="` Vendu par ${textContent.sailerName} `" />
           </div>
           <div v-if="sailer" class="annonce-product__sailer-data">
             <p v-if="sailer.sales" v-html="`${sailer.sales} ventes`" />
@@ -36,7 +36,14 @@
 </template>
 
 <script>
-import { botGlyphConverter, botSailers, criteriaName, normalGlyphConverter, normalSailers } from '@/data/enigme3'
+import {
+  botGlyphConverter,
+  botSailers,
+  criteriaName,
+  normalGlyphConverter,
+  normalSailers,
+  textContent
+} from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
 export default {
   name: 'Enigme3MainScreen',
@@ -53,7 +60,8 @@ export default {
   data() {
     return {
       criteriaName: criteriaName,
-      sailer: null
+      sailer: null,
+      textContent: textContent
     }
   },
   computed: {

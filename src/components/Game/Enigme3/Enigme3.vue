@@ -1,6 +1,6 @@
 <template>
   <div v-if="config" class="enigme-3">
-    <div v-if="isStart">
+    <div v-if="isStart" class="enigme-3__game">
       <Enigme3MainScreen v-if="typeScreen === 'MainScreen'" :product="config.product" :true-rules="config.trueRules" />
       <Enigme3Player1
         v-if="typeScreen === 'Player1'"
@@ -11,7 +11,7 @@
       />
       <Enigme3Player2 v-if="typeScreen === 'Player2'" />
     </div>
-    <div v-else>
+    <div v-else class="enigme-3__tuto">
       <Enigme3MainScreenTuto v-if="typeScreen === 'MainScreen'" />
       <Enigme3Player2Tuto v-if="typeScreen === 'Player2'" />
       <Enigme3player1Tuto v-if="typeScreen === 'Player1'" />
@@ -71,4 +71,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.enigme-3 {
+  height: 100%;
+}
+
+.enigme-3__tuto {
+  height: 100%;
+}
+
+.enigme-3__game {
+  height: 100%;
+}
+</style>

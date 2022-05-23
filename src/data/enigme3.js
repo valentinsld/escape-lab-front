@@ -1,14 +1,5 @@
 import { getCountryAnswer, getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
-export const noticeData = () => [
-  {
-    src: 'La règle 1'
-  },
-  {
-    name: 'La règle 2'
-  }
-]
-
 export const questionsData = (product) => [
   {
     slug: 'price',
@@ -165,5 +156,11 @@ export const productName = {
 }
 
 export const textContent = {
-  sailerName: 'EricDu59'
+  sailerName: 'EricDu59',
+  consigne: {
+    mainScreen:
+      'À la fin du timer, déterminez si le vendeur est fiable ou s’il s’agit du bot arnaqueur du professeur, à l’aide du carnet de notes.',
+    notice: 'Vous devez étudier le carnet de notes',
+    chat: 'Vous devez chatter avec le vendeur'
+  }
 }

@@ -1,14 +1,18 @@
 <template>
   <div class="tuto">
-    <p>Player 2 tuto</p>
+    <p v-html="textContent.consigne.notice" />
+    <button>Start</button>
   </div>
 </template>
 
 <script>
+import { textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3Player2Tuto',
   data() {
-    return {}
+    return {
+      textContent: textContent
+    }
   }
 }
 </script>

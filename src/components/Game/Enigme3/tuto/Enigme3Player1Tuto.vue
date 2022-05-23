@@ -1,17 +1,19 @@
 <template>
   <div class="tuto">
-    <p>Player 1 tuto</p>
+    <p v-html="textContent.consigne.chat" />
+    <button>Start</button>
   </div>
 </template>
 
 <script>
+import { textContent } from '@/data/enigme3'
 export default {
-  name: 'Enigme3player1Tuto',
-  props: {},
+  name: 'Enigme3Player1Tuto',
   data() {
-    return {}
+    return {
+      textContent: textContent
+    }
   }
 }
 </script>
-
 <style lang="scss" scoped></style>

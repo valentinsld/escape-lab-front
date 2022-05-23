@@ -1,15 +1,27 @@
 <template>
   <div class="tuto">
-    <p>Tuto écran principal</p>
+    <h3 v-html="textContent.consigne.mainScreen" />
   </div>
 </template>
 
 <script>
+import { textContent } from '@/data/enigme3'
+
 export default {
   name: 'Enigme3MainScreenTuto',
   data() {
-    return {}
+    return {
+      textContent: textContent
+    }
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tuto {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 2em;
+  text-align: center;
+}
+</style>
