@@ -117,6 +117,11 @@ body {
   overscroll-behavior: none;
 }
 
+// remove double tap (zoom)
+button {
+  touch-action: manipulation;
+}
+
 #app {
   display: flex;
   height: calc(100 * var(--vhRes, 1vh));
