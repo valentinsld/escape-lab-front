@@ -120,6 +120,8 @@ export default {
     },
 
     connectToRoom(ev, id = null) {
+      this.goToConnection()
+
       const idRoom = id || this.$refs.inputIdRoom.value
 
       const loginData = {

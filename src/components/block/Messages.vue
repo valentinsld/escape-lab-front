@@ -1,19 +1,23 @@
 <template>
   <div class="messages">
-    <p
+    <div
       v-for="(item, index) in messages"
       ref="messages"
       :key="index"
       class="message"
       :is-reveal="item.isReveal || true"
       :is-received="item.isReceived"
-      v-html="item.content"
-    />
+    >
+      <img v-if="item.content.includes('[lien]')" :src="CanapDeLuxe" />
+      <p v-else>{{ item.content }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import Anime from 'animejs'
+
+import CanapDeLuxe from '@/assets/CANAPDELUXE.png'
 
 export default {
   name: 'Messages',
@@ -33,6 +37,7 @@ export default {
   },
   data() {
     return {
+      CanapDeLuxe,
       animLogComplete: 0
     }
   },
@@ -95,7 +100,7 @@ export default {
   z-index: 2;
   max-width: 80%;
   padding: 8px;
-  margin-top: -2.2em;
+  // margin-top: -2.2em;
   margin-bottom: 2em;
   margin-left: auto;
   font-size: 0.9em;
@@ -110,10 +115,12 @@ export default {
     opacity: 1;
   }
 
-  &[is-received='true'] + &,
-  & + &[is-received='true'] {
-    z-index: 1;
-    margin-top: 0 !important;
+  p {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
   }
 
   //
