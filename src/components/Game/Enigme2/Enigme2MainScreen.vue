@@ -62,14 +62,14 @@ export default {
       // console.log(this.showPopup)
     },
     start() {
-        console.log('START ENIGME')
-    },
+      console.log('START ENIGME')
+    }
   },
   sockets: {
     startEnigme: function () {
       this.start()
     }
-  },
+  }
 }
 </script>
 
