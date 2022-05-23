@@ -21,7 +21,6 @@ export default {
   },
   sockets: {
     'intro-startVideo': function () {
-      console.log('intro-startVideo !!!!!!')
       this.$data.startVideo = true
     }
   },

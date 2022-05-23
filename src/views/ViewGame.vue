@@ -1,6 +1,5 @@
 <template>
   <ViewContainer name="game">
-    <p>View Game</p>
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
@@ -25,6 +24,7 @@ import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 import ViewContainer from '@/views/ViewContainer'
 
+// eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
 const DEBUG = process.env.NODE_ENV === 'development'
 
 export default {
@@ -60,7 +60,6 @@ export default {
     this.initPane()
   },
   sockets: {
-    // TODO : remove setStepGame
     setStepGame: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
     },
@@ -76,7 +75,7 @@ export default {
   },
   methods: {
     initPane() {
-      if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
+      if (/*!DEBUG || */ this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane
@@ -89,37 +88,37 @@ export default {
           this.$socket.emit('endEnigme')
         })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 1'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 1 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 1'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 1 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 2'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 2 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 2'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 2 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 3'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 3 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 3'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 3 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'outro'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 'Outro' })
-      //   })
+      pane
+        .addButton({
+          title: 'outro'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 'Outro' })
+        })
     }
   }
 }

@@ -1,17 +1,9 @@
 <template>
-  <div
-    :class="{
-      introPlayer: true,
-      '-isDark': isDark
-    }"
-  >
-    <h1>Intro Player</h1>
+  <div class="screenContainer introPlayer">
+    <div></div>
+    <Messages v-if="!startVideo" :messages="messages" :delay="{ default: 0, firstMsg: 0 }" />
 
-    <div v-if="!startVideo">
-      <Messages :messages="messages" :delay="{ default: 0, firstMsg: 0 }" />
-    </div>
-
-    <p v-else>{{ textIntro }}</p>
+    <p v-else class="dark">{{ textIntro }}</p>
   </div>
 </template>
 
@@ -54,7 +46,6 @@ export default {
     },
     // startVideo
     'intro-startVideo': function () {
-      console.log('intro-startVideo !!!!!!')
       this.$data.startVideo = true
     }
   },
@@ -69,19 +60,24 @@ export default {
 
 <style lang="scss" scoped>
 .introPlayer {
-  &.-isDark {
-    &::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      content: '';
-      background-color: black;
-    }
-  }
+  padding: 0;
+}
+
+.dark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  margin: 0;
+  color: #fff;
+  background-color: #000;
 }
 </style>

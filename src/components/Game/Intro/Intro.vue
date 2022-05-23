@@ -19,4 +19,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.intro {
+  display: flex;
+  width: 100%;
+}
+</style>

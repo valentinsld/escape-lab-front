@@ -41,6 +41,7 @@ export default {
   }),
   mounted() {
     this.initSubscribeConnexion()
+    this.initAutoVh()
   },
   sockets: {
     connect: function () {
@@ -51,6 +52,7 @@ export default {
       this.$store.commit(M.idRoom, idRoom)
       this.$store.commit(M.listUsers, listUsers)
       this.$store.commit(M.stepGame, stepGame)
+      this.$store.commit(M.isStart, isStart)
 
       // if is you
       console.log(this.$store.state[S.typeScreen])
@@ -58,7 +60,6 @@ export default {
         this.$store.commit(M.typeScreen, newUser.type)
       }
 
-      console.log('isStart', isStart)
       if (isStart) {
         this.$router.push('/game')
       }
@@ -84,6 +85,10 @@ export default {
           console.error('Socket : ', err)
         })
       })
+    },
+    initAutoVh() {
+      this.$el.style.setProperty('--vh', window.innerHeight / 100 + 'px')
+      window.addEventListener('resize', () => this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px'))
     }
   }
 }
@@ -95,8 +100,8 @@ export default {
 #app {
   display: flex;
   height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
+  font-family: 'grenadine-mvb', arial, sans-serif;
+  color: var(--color-black);
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
