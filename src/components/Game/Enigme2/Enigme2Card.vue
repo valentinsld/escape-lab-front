@@ -110,15 +110,15 @@ export default {
     })
   },
 
-  beforeDestroy() {
-    interact(this.$refs.interactElement).unset()
-  },
+  //   beforeDestroy() {
+  //     interact(this.$refs.interactElement).unset()
+  //   },
 
   methods: {
     playCard(interaction) {
       const { interactOutOfSightXCoordinate, interactOutOfSightYCoordinate, interactMaxRotation } = this.$options.static
 
-      this.interactUnsetElement()
+      // this.interactUnsetElement()
 
       switch (interaction) {
         case RIGHT:
@@ -155,10 +155,10 @@ export default {
       this.interactPosition = { x, y, rotation }
     },
 
-    interactUnsetElement() {
-      interact(this.$refs.interactElement).unset()
-      this.isInteractDragged = true
-    },
+    // interactUnsetElement() {
+    //   interact(this.$refs.interactElement).unset()
+    //   this.isInteractDragged = true
+    // },
 
     resetCardPosition() {
       this.interactSetPosition({ x: 0, y: 0, rotation: 0 })
