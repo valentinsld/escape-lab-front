@@ -8,7 +8,10 @@ export const STATE = {
   idRoom: 'idRoom',
   listUsers: 'listUsers',
   isStart: 'isStart',
-  stepGame: 'stepGame'
+  stepGame: 'stepGame',
+  playerIsReady: 'playerIsReady',
+  // enigme 3
+  enigme3Config: 'enigme3Config'
 }
 
 export const MUTATIONS = {
@@ -20,8 +23,12 @@ export const MUTATIONS = {
   socketID: 'M_SOCKET_ID',
   idRoom: 'M_ID_ROOM',
   listUsers: 'M_LIST_USERS',
-  isStart: 'M_IS_START',
-  stepGame: 'M_STEP_GAME'
+  isStart: 'isStart',
+  playerIsReady: 'M_PLAYER_IS_READY',
+  stepGame: 'M_STEP_GAME',
+  resetRoom: 'M_RESET_ROOM',
+  // enigme 3
+  enigme3Config: 'M_ENIGME_3_CONFIG'
 }
 
 export const STATE_SCREEN = {

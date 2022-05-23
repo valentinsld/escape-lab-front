@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>View Connection</p>
-
-    <Components :is="'Connection' + $data.stateScreen" />
+    <ViewContainer name="connection">
+      <Components :is="'Connection' + $data.stateScreen" />
+    </ViewContainer>
   </div>
 </template>
 
@@ -10,12 +10,14 @@
 import ConnectionMainScreen from '@/components/Connection/ConnectionMainScreen.vue'
 import ConnectionPlayer from '@/components/Connection/ConnectionPlayer.vue'
 import { STATE as S } from '@/store/helpers'
+import ViewContainer from '@/views/ViewContainer'
 
 export default {
   name: 'ViewConnection',
   components: {
     ConnectionMainScreen,
-    ConnectionPlayer
+    ConnectionPlayer,
+    ViewContainer
   },
   data() {
     return {

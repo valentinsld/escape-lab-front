@@ -16,8 +16,11 @@ export const state = {
   [STATE.socketID]: null,
   [STATE.idRoom]: null,
   [STATE.listUsers]: {},
+  [STATE.playerIsReady]: [],
   [STATE.isStart]: false,
-  [STATE.stepGame]: null
+  [STATE.stepGame]: null,
+  // enigme 3
+  [STATE.enigme3Config]: null
 }
 
 export const mutations = {
@@ -47,12 +50,26 @@ export const mutations = {
   [MUTATIONS.listUsers](state, newVal) {
     state[STATE.listUsers] = newVal
   },
+  [MUTATIONS.playerIsReady](state, newVal) {
+    state[STATE.playerIsReady] = newVal
+  },
   [MUTATIONS.isStart](state, newVal) {
     state[STATE.isStart] = newVal
   },
 
   [MUTATIONS.stepGame](state, newVal) {
     state[STATE.stepGame] = newVal
+  },
+  // reset room
+  [MUTATIONS.resetRoom](state) {
+    state[STATE.idRoom] = null
+    state[STATE.listUsers] = {}
+    state[STATE.stepGame] = null
+    state[STATE.typeScreen] = null
+  },
+  // enigme 3
+  [MUTATIONS.enigme3Config](state, newVal) {
+    state[STATE.enigme3Config] = newVal
   }
 }
 export const getters = {}
