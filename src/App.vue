@@ -42,6 +42,8 @@ export default {
   mounted() {
     this.initSubscribeConnexion()
     this.initAutoVh()
+
+    setTimeout(this.initAutoVh.bind(this), 1000)
   },
   sockets: {
     connect: function () {
@@ -88,6 +90,7 @@ export default {
     },
     initAutoVh() {
       this.$el.style.setProperty('--vh', window.innerHeight / 100 + 'px')
+      this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px')
       window.addEventListener('resize', () => this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px'))
     }
   }
@@ -99,7 +102,7 @@ export default {
 
 #app {
   display: flex;
-  height: 100vh;
+  height: calc(100 * var(--vhRes, 1vh));
   font-family: 'grenadine-mvb', arial, sans-serif;
   color: var(--color-black);
   text-align: center;
