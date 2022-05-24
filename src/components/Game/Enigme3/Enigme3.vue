@@ -13,8 +13,8 @@
     </div>
     <div v-else class="enigme-3__tuto">
       <Enigme3MainScreenTuto v-if="typeScreen === 'MainScreen'" />
-      <Enigme3Player2Tuto v-if="typeScreen === 'Player2'" />
-      <Enigme3player1Tuto v-if="typeScreen === 'Player1'" />
+      <PlayerTuto v-if="typeScreen === 'Player1'" :text="textContent.consigne.chat" />
+      <PlayerTuto v-if="typeScreen === 'Player2'" :text="textContent.consigne.notice" />
     </div>
   </div>
 </template>
@@ -22,18 +22,17 @@
 <script>
 import { mapState } from 'vuex'
 
+import PlayerTuto from '@/components/Game/Enigme1/PlayerTuto'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
 import Enigme3MainScreenTuto from '@/components/Game/Enigme3/tuto/Enigme3MainScreenTuto'
-import Enigme3player1Tuto from '@/components/Game/Enigme3/tuto/Enigme3Player1Tuto'
-import Enigme3Player2Tuto from '@/components/Game/Enigme3/tuto/Enigme3Player2Tuto'
+import { textContent } from '@/data/enigme3'
 import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3',
   components: {
-    Enigme3player1Tuto,
-    Enigme3Player2Tuto,
+    PlayerTuto,
     Enigme3MainScreenTuto,
     Enigme3MainScreen,
     Enigme3Player1,
@@ -42,7 +41,8 @@ export default {
   data() {
     return {
       trueRules: null,
-      isStart: true
+      isStart: false,
+      textContent: textContent
     }
   },
   computed: mapState({
@@ -57,9 +57,12 @@ export default {
       console.groupEnd()
     }
   },
+  sockets: {
+    startEnigme: function () {
+      this.isStart = true
+    }
+  },
   mounted() {
-    this.$socket.emit('readyEnigme')
-
     //if main screen get config rules from back
     if (this.typeScreen === 'MainScreen') {
       this.$socket.emit('sendEnigme3Config')
