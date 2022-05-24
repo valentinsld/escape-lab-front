@@ -115,7 +115,7 @@ export default {
       })
     })
 
-    console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
+    // console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
     if (this.$store.state[S.stepGame] === 'Intro') {
       this.playEnigme1()
     } else if (IS_DEV) {
