@@ -1,5 +1,15 @@
 <template>
   <div class="chat">
+    <div v-if="solutionAnswer" class="chat__solution">
+      <div class="chat__solution__overlay" />
+      <div class="chat__solution_popup-end">
+        <p class="chat__solution__answer" v-html="solutionAnswer" />
+        <div class="chat__solution__rules">
+          <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
+        </div>
+        <button class="chat__solution__button" @click="nextStep">suivant</button>
+      </div>
+    </div>
     <div class="chat__header">
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
@@ -50,7 +60,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData, textContent } from '@/data/enigme3'
+import { finalAnswer, questionsData, solution, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
@@ -86,11 +96,11 @@ export default {
       finalAnswers: [],
       choices: [],
       text: textContent,
-      messages: []
+      messages: [],
+      solutionAnswer: null
     }
   },
   mounted() {
-    console.log(this.product, 'data')
     this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
@@ -160,7 +170,11 @@ export default {
       this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
     },
     chooseBotAnswer(sellerType) {
-      sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
+      this.solutionAnswer =
+        sellerType === this.sellerType ? solution[this.sellerType]['success'] : solution[this.sellerType]['fail']
+    },
+    nextStep() {
+      this.$socket.emit('nextEnigme')
     }
   }
 }
@@ -171,10 +185,15 @@ p {
   margin: 0;
 }
 
+.chat__popup-end {
+  width: 70vw;
+  background: white;
+}
+
 .chat {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 8px);
+  height: calc(100 * var(--vhRes, 1vh));
   border: 4px solid var(--color-black);
 }
 
@@ -227,6 +246,58 @@ p {
 
   &--strong {
     background: #3577f5;
+  }
+}
+
+.chat__solution {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.chat__solution_popup-end {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  padding: 2em 1em;
+  background: white;
+  border: 5px solid var(--color-black);
+  border-radius: 30px;
+  transform: translate(-50%, -50%);
+}
+
+.chat__solution__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 300ms var(--custom-bezier);
+}
+
+.chat__solution__answer {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.chat__solution__button {
+  display: block;
+  padding: 1em;
+  margin: auto;
+  font-weight: bold;
+  color: #f8f8f8;
+  background: #3577f5;
+  border: 4px solid var(--color-black);
+  border-radius: 27px;
+}
+
+.chat__solution__rules {
+  margin-bottom: 30px;
+
+  p {
+    margin: 10px 0;
+    font-weight: bold;
   }
 }
 </style>

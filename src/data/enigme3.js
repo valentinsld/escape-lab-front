@@ -43,6 +43,18 @@ export const finalAnswer = {
   normal: 'Oui, je vous fais confiance, on y va !'
 }
 
+export const solution = {
+  bot: {
+    success: 'Bien joué ! Il s’agissait bien du bot du professeur, voici les règles qui permettaient de le démasquer :',
+    fail: 'Aie ! Tu t’es fait avoir par le bot... voici les règles qui permettaient de le démasquer :'
+  },
+  normal: {
+    success:
+      'Bien joué ! Il s’agissait d’un vendeur fiable ! Seul les points suivants auraient pu laisser penser que c’était le bot :',
+    fail: 'Aie... Il s’agissait d’un véritable vendeur, il n’a pas dû apprécier ce moment ! Seul les points suivants auraient pu laisser penser que c’était le bot : '
+  }
+}
+
 export const criteriaName = {
   furnished: 'Type :',
   energyClass: 'Classe énergétique',

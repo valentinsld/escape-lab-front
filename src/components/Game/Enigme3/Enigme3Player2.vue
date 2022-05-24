@@ -98,7 +98,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .notice {
-  height: 100vh;
+  height: calc(100 * var(--vhRes, 1vh));
   background: #3577f5;
 }
 
