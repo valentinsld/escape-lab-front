@@ -1,53 +1,18 @@
 <template>
-  <div class="tuto">
-    <div class="screenContainer">
-      <p v-html="textContent.consigne.player1" />
-      <button class="tuto__start-btn" :class="btnClass" @click="toggleStart">Start</button>
-      <p v-if="isReady">En attente du joueur 2</p>
-    </div>
-  </div>
+  <PlayerTuto :text="textContent.consigne.player1" />
 </template>
 
 <script>
+import PlayerTuto from '@/components/Game/Enigme1/PlayerTuto'
 import { textContent } from '@/data/enigme2'
 export default {
   name: 'Enigme2Player1Tuto',
+  components: { PlayerTuto },
   data() {
     return {
-      textContent: textContent,
-      isReady: false
-    }
-  },
-  computed: {
-    btnClass() {
-      return {
-        'tuto__start-btn--ready': this.isReady
-      }
-    }
-  },
-  methods: {
-    toggleStart() {
-      this.$socket.emit('readyTutoEnigme')
+      textContent: textContent
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-.tuto {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.tuto__start-btn {
-  display: block;
-  min-width: 100px;
-  padding: 1em;
-  margin: auto;
-  font-weight: bold;
-  color: #f8f8f8;
-  background: #3577f5;
-  border: 4px solid var(--color-black);
-  border-radius: 27px;
-}
-</style>
+<style lang="scss" scoped></style>

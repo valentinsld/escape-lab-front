@@ -2,7 +2,7 @@
   <div class="tuto">
     <div class="screenContainer tuto__container">
       <img class="tuto__logo" :src="Logo" />
-      <p class="tuto__consigne" v-html="textContent.consigne.chat" />
+      <p v-if="text" class="tuto__consigne" v-html="text" />
       <div class="tuto__btn-container">
         <button :disabled="isReady" class="tuto__start-btn" @click="toggleStart">Start</button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
@@ -15,7 +15,13 @@
 import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
 export default {
-  name: 'Enigme3Player1Tuto',
+  name: 'PlayerTuto',
+  props: {
+    text: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       Logo,
