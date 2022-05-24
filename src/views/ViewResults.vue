@@ -48,6 +48,7 @@ main {
 
 .header {
   width: auto;
+  max-width: calc(100% - 24px);
   max-height: 150px;
 }
 
@@ -67,5 +68,12 @@ main {
   max-height: 100%;
   margin: 0 24px;
   scroll-snap-align: left;
+}
+
+@media screen and (max-width: 756px) {
+  .card {
+    scroll-snap-align: center;
+    margin: 0 12px;
+  }
 }
 </style>
