@@ -9,9 +9,9 @@
       :is-received="item.isReceived"
     >
       <div v-if="typeof item.content === 'object'" class="message__payment">
-        <p v-if="item.content.text" v-html="item.content.text" />
         <img v-if="item.content.image" :src="getSource(item.content.image)" />
         <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
+        <p v-if="item.content.text" v-html="item.content.text" />
       </div>
       <p v-else v-html="item.content" />
     </div>
@@ -91,7 +91,7 @@ export default {
       })
     },
     getSource(name) {
-      return require(`@/assets/images/enigme3/payments/${name}.png`)
+      return require(`@/assets/images/enigme3/messages/${name}.png`)
     }
   }
 }
@@ -189,12 +189,13 @@ export default {
 
 .message__payment {
   img {
-    width: 60px;
+    width: 90px;
   }
 }
 
 .message__payment__link {
   margin-top: 0;
+  font-size: 12px;
   text-decoration: underline;
 }
 </style>
