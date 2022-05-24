@@ -10,13 +10,12 @@
 
 <script>
 import { textContent } from '@/data/enigme2'
-import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme2Player1Tuto',
   data() {
     return {
       textContent: textContent,
-      isReady: this.$store.state[S.enigme3PlayerIsReady]
+      isReady: false
     }
   },
   computed: {

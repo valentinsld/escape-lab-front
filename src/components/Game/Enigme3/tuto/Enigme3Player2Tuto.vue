@@ -10,13 +10,12 @@
 
 <script>
 import { textContent } from '@/data/enigme3'
-import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3Player2Tuto',
   data() {
     return {
       textContent: textContent,
-      isReady: this.$store.state[S.enigme3PlayerIsReady]
+      isReady: false
     }
   },
   computed: {
@@ -50,5 +49,9 @@ export default {
   background: #3577f5;
   border: 4px solid var(--color-black);
   border-radius: 27px;
+
+  &:disabled {
+    background: gray;
+  }
 }
 </style>

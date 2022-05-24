@@ -1,33 +1,31 @@
 <template>
   <div class="tuto">
-    <div class="screenContainer">
-      <p v-html="textContent.consigne.chat" />
-      <button class="tuto__start-btn" :class="btnClass" @click="toggleStart">Start</button>
-      <p v-if="isReady">En attente du joueur 2</p>
+    <div class="screenContainer tuto__container">
+      <img class="tuto__logo" :src="Logo" />
+      <p class="tuto__consigne" v-html="textContent.consigne.chat" />
+      <div class="tuto__btn-container">
+        <button :disabled="isReady" class="tuto__start-btn" @click="toggleStart">Start</button>
+        <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
-import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3Player1Tuto',
   data() {
     return {
+      Logo,
       textContent: textContent,
-      isReady: this.$store.state[S.enigme3PlayerIsReady]
-    }
-  },
-  computed: {
-    btnClass() {
-      return {
-        'tuto__start-btn--ready': this.isReady
-      }
+      isReady: false
     }
   },
   methods: {
     toggleStart() {
+      this.isReady = true
       this.$socket.emit('readyTutoEnigme')
     }
   }
@@ -40,6 +38,26 @@ export default {
   height: 100%;
 }
 
+.tuto__logo {
+  max-width: 80px;
+}
+
+.tuto__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tuto__consigne {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.tuto__player-info {
+  text-align: center;
+  transition: 200ms var(--custom-bezier);
+}
+
 .tuto__start-btn {
   display: block;
   min-width: 100px;
@@ -50,5 +68,10 @@ export default {
   background: #3577f5;
   border: 4px solid var(--color-black);
   border-radius: 27px;
+  transition: 200ms var(--custom-bezier);
+
+  &:disabled {
+    background: gray;
+  }
 }
 </style>
