@@ -59,7 +59,7 @@ export default {
       this.$store.commit(M.isStart, isStart)
 
       // if is you
-      console.log(this.$store.state[S.typeScreen])
+      // console.log(this.$store.state[S.typeScreen])
       if (!this.$store.state[S.typeScreen]) {
         this.$store.commit(M.typeScreen, newUser.type)
       }
