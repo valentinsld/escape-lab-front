@@ -77,7 +77,7 @@ export default {
   }),
   watch: {
     card() {
-      console.log(this.card)
+      // console.log(this.card)
       if (this.card.owner === this.typeScreen) {
         this.resetCardPosition()
       }
