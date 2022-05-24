@@ -48,11 +48,11 @@ export default {
     },
     // dark screen
     'intro-darkScene': function () {
-      //this.$data.isDark = true
+      this.$data.isDark = true
     },
     // startVideo
     'intro-startVideo': function () {
-      //this.$data.startVideo = true
+      this.$data.startVideo = true
     }
   },
   methods: {

@@ -66,8 +66,8 @@ export default {
   },
   sockets: {
     'intro-startVideo': function () {
-      /*this.startVideo()
-      this.$data.seePlayer = true*/
+      this.startVideo()
+      this.$data.seePlayer = true
     },
     setStepGame: function ({ stepGame, stepGameNumber }) {
       this.$data.isStepGame = true
