@@ -1,11 +1,9 @@
 <template>
   <div class="chat">
-    <div v-if="solutionAnswer[0]" class="chat__solution">
+    <div v-if="solutionAnswer" class="chat__solution">
       <div class="chat__solution__overlay" />
       <div class="chat__solution_popup-end">
-        <p class="chat__solution__answer">
-          Bien joué ! Il s'agissait bien du bot du professeur, voici les règles qui permettaient de le démasquer :
-        </p>
+        <p class="chat__solution__answer" v-html="solutionAnswer" />
         <div class="chat__solution__rules">
           <p v-for="(rule, item) in trueRules" :key="item" v-html="rule.name" />
         </div>
@@ -62,7 +60,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData, textContent } from '@/data/enigme3'
+import { finalAnswer, questionsData, solution, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
@@ -87,10 +85,6 @@ export default {
     questionsToDisplay: {
       type: Number,
       default: 6
-    },
-    solutionAnswer: {
-      type: Array,
-      default: () => ['alors']
     }
   },
   data() {
@@ -102,7 +96,8 @@ export default {
       finalAnswers: [],
       choices: [],
       text: textContent,
-      messages: []
+      messages: [],
+      solutionAnswer: null
     }
   },
   mounted() {
@@ -175,7 +170,8 @@ export default {
       this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
     },
     chooseBotAnswer(sellerType) {
-      sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
+      this.solutionAnswer =
+        sellerType === this.sellerType ? solution[this.sellerType]['success'] : solution[this.sellerType]['fail']
     },
     nextStep() {
       this.$socket.emit('nextEnigme')
@@ -255,6 +251,7 @@ p {
 
 .chat__solution {
   position: absolute;
+  z-index: 100;
   width: 100%;
   height: 100%;
 }
