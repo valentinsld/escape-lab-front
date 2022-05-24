@@ -193,7 +193,7 @@ p {
 .chat {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 8px);
+  height: calc(100 * var(--vhRes, 1vh));
   border: 4px solid var(--color-black);
 }
 
