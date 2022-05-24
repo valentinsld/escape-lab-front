@@ -5,7 +5,7 @@
       ref="messages"
       :key="index"
       class="message"
-      :is-reveal="item.isReveal"
+      :is-reveal="isAnim ? item.isReveal : true"
       :is-received="item.isReceived"
     >
       <div v-if="typeof item.content === 'object'" class="message__payment">
@@ -29,6 +29,10 @@ export default {
     messages: {
       type: Array,
       default: null
+    },
+    isAnim: {
+      type: Boolean,
+      default: true
     },
     delay: {
       type: Object,
