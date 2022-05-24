@@ -1,6 +1,5 @@
 <template>
   <div class="annonce-product">
-    <p class="annonce-product__site-title">leboncon</p>
     <div v-if="product" class="annonce-product__wrapper">
       <div class="annonce-product__left-column">
         <div class="annonce-product__img-container">
@@ -108,9 +107,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .annonce-product {
-  height: 100vh;
-  padding: 2em 1em;
-  background: #4a6cff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  transform: translate(-50%, -50%);
 
   p {
     margin: 7px 0;
