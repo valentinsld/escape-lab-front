@@ -5,9 +5,9 @@
       <div class="chat__solution_popup-end">
         <p class="chat__solution__answer" v-html="solutionAnswer" />
         <div class="chat__solution__rules">
-          <p v-for="(rule, item) in trueRules" :key="item" v-html="rule.name" />
+          <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
         </div>
-        <button @click="nextStep">suivant</button>
+        <button class="chat__solution__button" @click="nextStep">suivant</button>
       </div>
     </div>
     <div class="chat__header">
@@ -260,7 +260,8 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 1em;
+  width: 75%;
+  padding: 2em 1em;
   background: white;
   border: 5px solid var(--color-black);
   border-radius: 30px;
@@ -273,5 +274,30 @@ p {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   transition: 300ms var(--custom-bezier);
+}
+
+.chat__solution__answer {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.chat__solution__button {
+  display: block;
+  padding: 1em;
+  margin: auto;
+  font-weight: bold;
+  color: #f8f8f8;
+  background: #3577f5;
+  border: 4px solid var(--color-black);
+  border-radius: 27px;
+}
+
+.chat__solution__rules {
+  margin-bottom: 30px;
+
+  p {
+    margin: 10px 0;
+    font-weight: bold;
+  }
 }
 </style>
