@@ -70,10 +70,16 @@ export default {
       this.$data.seePlayer = true
     },
     setStepGame: function ({ stepGame, stepGameNumber }) {
+      console.log('setStepGame', { stepGame, stepGameNumber })
+
       this.$data.isStepGame = true
       this.$data.seePlayer = true
-      this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
-      this.player.abLoopPlugin.playLoop()
+      if (stepGame === 'Outro') {
+        this.playEndOutro()
+      } else {
+        this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
+        this.player.abLoopPlugin.playLoop()
+      }
 
       // reset time for nextEnigme
       for (let i = stepGameNumber; i < this.$data.eventsTime.length; i++) {
@@ -182,8 +188,14 @@ export default {
     playEndEnigme3() {
       this.stopLoop()
     },
+    playEndOutro() {
+      this.stopLoop()
+      console.log(MARKERS_PLAYER.startOutro)
+      this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.startOutro)).play()
+    },
     endVideo() {
       console.log('END VIDEO')
+      this.$socket.emit('endVideo')
     },
 
     // events on playing video
