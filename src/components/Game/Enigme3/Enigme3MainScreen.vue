@@ -123,6 +123,10 @@ export default {
   text-align: center;
 }
 
+.annonce-product__img {
+  width: 100%;
+}
+
 .annonce-product__wrapper {
   display: flex;
   justify-content: space-around;
@@ -134,6 +138,14 @@ export default {
 
 .annonce-product__description {
   margin-top: 45px;
+}
+
+.annonce-product__left-column {
+  width: 50%;
+}
+
+.annonce-product__right-column {
+  width: 35%;
 }
 
 .annonce-product__sailer-name {
