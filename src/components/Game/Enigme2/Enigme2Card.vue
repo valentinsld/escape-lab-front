@@ -88,8 +88,6 @@ export default {
       const player1 = this.isFirstPlayer && this.card.isSpam
       const player2 = !this.isFirstPlayer && !this.card.isSpam
 
-      console.log(this.card.id, this.isFirstPlayer, this.isFirstPlayer ? player1 : player2)
-
       return this.isEndSort && (this.isFirstPlayer ? player1 : player2)
     },
     isWrong() {
