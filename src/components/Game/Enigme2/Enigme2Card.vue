@@ -7,7 +7,7 @@
       isCurrent: isCurrent
     }"
     class="card"
-    :style="{ transform: transformString }"
+    :style="{ transform: transformString, order: card.order }"
   >
     <div class="enigme2-bar">
       <div class="enigme2-controls"></div>
