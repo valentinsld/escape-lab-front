@@ -11,8 +11,6 @@
 import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 
-const TIME_BEFORE_POPUP_SEND = 3500
-
 export default {
   name: 'Enigme2MainScreen',
   components: {
@@ -38,16 +36,6 @@ export default {
   methods: {
     getPopupsData(data) {
       this.cards = data
-
-      const lastPopupsIndex = data.reverse().findIndex((d) => d.owner === 'MainScreen')
-      console.log(data, lastPopupsIndex)
-
-      setTimeout(() => {
-        this.$socket.emit('enigme2-popupOwnerChanged', {
-          id: this.cards[lastPopupsIndex].id,
-          direction: 'bottom'
-        })
-      }, TIME_BEFORE_POPUP_SEND)
       // console.log(JSON.stringify(this.cards))
     },
     destroyPopup() {

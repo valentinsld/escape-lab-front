@@ -1,7 +1,6 @@
 <template>
   <div class="main">
-    <h1>Enigme 2 Player</h1>
-    <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button>
+    <!-- <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button> -->
     <Enigme2PopupStack class="popup" :cards="cards"></Enigme2PopupStack>
   </div>
 </template>
