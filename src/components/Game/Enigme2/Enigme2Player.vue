@@ -62,7 +62,7 @@ export default {
     },
     createPopup() {
       this.showPopup = true
-      // console.log(this.showPopup)
+      console.log(this.showPopup)
     },
     start() {
       console.log('START ENIGME')

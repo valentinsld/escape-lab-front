@@ -45,7 +45,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 350px;
+  height: 100%;
   border: red dotted 3px;
 }
 </style>

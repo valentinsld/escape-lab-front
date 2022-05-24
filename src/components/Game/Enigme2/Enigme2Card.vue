@@ -9,7 +9,15 @@
     class="card"
     :style="{ transform: transformString }"
   >
-    <h3>{{ card.text }}</h3>
+    <div class="enigme2-bar">
+      <div class="enigme2-controls"></div>
+      <div class="enigme2-controls"></div>
+    </div>
+    <ul>
+      <li>{{ card.from }}</li>
+      <li>{{ card.subject }}</li>
+      <li>{{ card.text }}</li>
+    </ul>
   </div>
 </template>
 
@@ -174,10 +182,23 @@ export default {
   justify-content: center;
   width: 400px;
   height: 280px;
-  color: blue;
+  color: black;
   background-color: azure;
-  border: blue solid 5px;
+  border: black solid 5px;
   border-radius: 30px;
+}
+
+.card .enigme2-bar {
+  display: flex;
+  background-color: magenta;
+  border-bottom: black solid 4px;
+}
+
+.enigme2-bar .enigme2-controls {
+  width: 10px;
+  height: 10px;
+  border: black solid 3px;
+  border-radius: 50%;
 }
 
 .card:not(.isCurrent) {
