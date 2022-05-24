@@ -1,5 +1,17 @@
 <template>
   <div class="chat">
+    <div v-if="solutionAnswer[0]" class="chat__solution">
+      <div class="chat__solution__overlay" />
+      <div class="chat__solution_popup-end">
+        <p class="chat__solution__answer">
+          Bien joué ! Il s'agissait bien du bot du professeur, voici les règles qui permettaient de le démasquer :
+        </p>
+        <div class="chat__solution__rules">
+          <p v-for="(rule, item) in trueRules" :key="item" v-html="rule.name" />
+        </div>
+        <button @click="nextStep">suivant</button>
+      </div>
+    </div>
     <div class="chat__header">
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
@@ -75,6 +87,10 @@ export default {
     questionsToDisplay: {
       type: Number,
       default: 6
+    },
+    solutionAnswer: {
+      type: Array,
+      default: () => ['alors']
     }
   },
   data() {
@@ -160,6 +176,9 @@ export default {
     },
     chooseBotAnswer(sellerType) {
       sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
+    },
+    nextStep() {
+      this.$socket.emit('nextEnigme')
     }
   }
 }
@@ -168,6 +187,11 @@ export default {
 <style lang="scss" scoped>
 p {
   margin: 0;
+}
+
+.chat__popup-end {
+  width: 70vw;
+  background: white;
 }
 
 .chat {
@@ -227,5 +251,30 @@ p {
   &--strong {
     background: #3577f5;
   }
+}
+
+.chat__solution {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.chat__solution_popup-end {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1em;
+  background: white;
+  border: 5px solid var(--color-black);
+  border-radius: 30px;
+  transform: translate(-50%, -50%);
+}
+
+.chat__solution__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 300ms var(--custom-bezier);
 }
 </style>
