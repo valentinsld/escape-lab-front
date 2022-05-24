@@ -1,32 +1,17 @@
 <template>
   <div class="messages">
-    <!--    <p
->>>>>>> feat/enigme3
-      v-for="(item, index) in messages"
-      ref="messages"
-      :key="index"
-      class="message"
-      :is-reveal="item.isReveal || true"
-      :is-received="item.isReceived"
-<<<<<<< HEAD
-    >
-      <img v-if="item.content.includes('[lien]')" :src="CanapDeLuxe" />
-      <p v-else>{{ item.content }}</p>
-=======
-      v-html="item.content"
-    />-->
     <div
       v-for="(item, index) in messages"
       ref="messages"
       :key="index"
       class="message"
-      :is-reveal="item.isReveal"
+      :is-reveal="isAnim ? item.isReveal : true"
       :is-received="item.isReceived"
     >
       <div v-if="typeof item.content === 'object'" class="message__payment">
-        <p v-if="item.content.text" v-html="item.content.text" />
         <img v-if="item.content.image" :src="getSource(item.content.image)" />
         <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
+        <p v-if="item.content.text" v-html="item.content.text" />
       </div>
       <p v-else v-html="item.content" />
     </div>
@@ -44,6 +29,10 @@ export default {
     messages: {
       type: Array,
       default: null
+    },
+    isAnim: {
+      type: Boolean,
+      default: true
     },
     delay: {
       type: Object,
@@ -102,7 +91,7 @@ export default {
       })
     },
     getSource(name) {
-      return require(`@/assets/images/enigme3/payments/${name}.png`)
+      return require(`@/assets/images/enigme3/messages/${name}.png`)
     }
   }
 }
@@ -113,28 +102,15 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
-  /* <<<<<<< HEAD
-  align-items: flex-end;
-}
-
-.message {
-  max-width: 65%;
-  padding: 0 1em;
-  margin: 20px 0 20px 20px;
-  color: #2b2b2b;
-  text-align: right;
-  background: #f5f5f5;
-======= */
   //height: 100%;
-  padding: 64px 8px 24px;
+  padding: 45px 8px 24px;
   overflow-y: auto;
 }
 
 .message {
   position: relative;
   z-index: 2;
-  max-width: 80%;
+  max-width: 75%;
   padding: 8px;
   // margin-top: -2.2em;
   margin-bottom: 2em;
@@ -143,8 +119,6 @@ export default {
   line-height: 1.6;
   text-align: right;
   background-color: var(--color-whiteDimmed);
-
-  /* >>>>>>> 5d4bbbdb8ab21fcc03605aef0ff7b99527a5ef0e */
   border: 3px solid var(--color-black);
   border-radius: 10px;
   opacity: 0;
@@ -215,12 +189,13 @@ export default {
 
 .message__payment {
   img {
-    width: 60px;
+    width: 90px;
   }
 }
 
 .message__payment__link {
   margin-top: 0;
+  font-size: 12px;
   text-decoration: underline;
 }
 </style>

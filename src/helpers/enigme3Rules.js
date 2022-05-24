@@ -21,7 +21,7 @@ export const getPaymentAnswer = (isBot) => {
   const service = isBot
     ? payments.bot[randomNum(0, payments.bot.length)]
     : payments.normal[randomNum(0, payments.normal.length)]
-  return { text: 'Nous pouvons passer par ce service de paiement :', ...service }
+  return { text: 'Nous pouvons passer par ce service de paiement', ...service }
 }
 
 export const getCriteriaAnswer = (productType, criteria) => {
