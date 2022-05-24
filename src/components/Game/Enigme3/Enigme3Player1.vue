@@ -90,7 +90,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.product, 'data')
     this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']

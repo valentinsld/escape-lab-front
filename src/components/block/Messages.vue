@@ -52,7 +52,6 @@ export default {
   watch: {
     messages: function () {
       this.$nextTick(() => {
-        console.log(this.messages, 'messages')
         this.msgAnimation()
       })
     }
