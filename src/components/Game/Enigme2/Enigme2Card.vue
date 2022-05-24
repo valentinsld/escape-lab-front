@@ -205,6 +205,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 400px;
@@ -223,17 +224,37 @@ export default {
   }
 }
 
-.card .enigme2-bar {
+/* .card ul {
+  padding-left: 0;
+  list-style: none;
   display: flex;
-  background-color: magenta;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+} */
+
+.card .enigme2-bar {
+  position: absolute;
+  top: 5px;
+  display: flex;
+  width: 95%;
+  padding: 4px;
+  background-color: transparent;
   border-bottom: black solid 4px;
 }
 
 .enigme2-bar .enigme2-controls {
   width: 10px;
   height: 10px;
+  margin-left: 5px;
   border: black solid 3px;
   border-radius: 50%;
+  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.enigme2-bar .enigme2-controls:first-of-type {
+  margin-left: 15px;
+  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:not(.isCurrent) {

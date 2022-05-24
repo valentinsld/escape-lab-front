@@ -118,7 +118,7 @@ export default {
           title: 'outro'
         })
         .on('click', () => {
-          this.$socket.emit('setStepGame', { stepGame: 'Outro' })
+          this.$socket.emit('setStepGame', { stepGame: 4 })
         })
     }
   }
