@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <p class="indicationSPam">{{ isFirstPlayer ? 'SPAM' : 'NON SPAM' }}</p>
     <!-- <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button> -->
     <Enigme2PopupStack class="popup" :cards="cards"></Enigme2PopupStack>
   </div>
@@ -83,6 +84,12 @@ export default {
   justify-content: center;
   height: 100%;
   border: black solid 1px;
+}
+
+.indicationSPam {
+  margin: 0.25em 0;
+  font-size: 2em;
+  font-weight: var(--weight-bold);
 }
 
 // .popup {

@@ -22,4 +22,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.enigme-2 {
+  width: 100%;
+}
+</style>
