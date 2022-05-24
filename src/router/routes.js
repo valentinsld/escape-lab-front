@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 const ViewConnection = () => import(/* webpackChunkName: "view-connection" */ '@/views/ViewConnection')
 const ViewGame = () => import(/* webpackChunkName: "view-game" */ '@/views/ViewGame')
+const ViewResults = () => import(/* webpackChunkName: "view-game" */ '@/views/ViewResults')
 
 Vue.use(VueRouter)
 let routes = [
@@ -13,6 +14,10 @@ let routes = [
   {
     path: '/game',
     component: ViewGame
+  },
+  {
+    path: '/results',
+    component: ViewResults
   }
 ]
 
