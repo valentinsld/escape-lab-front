@@ -1,6 +1,5 @@
 <template>
   <div class="enigme-2">
-    <p>Enigme 2</p>
     <Components :is="'Enigme2' + typeScreen" />
   </div>
 </template>
@@ -23,4 +22,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.enigme-2 {
+  width: 100%;
+}
+</style>

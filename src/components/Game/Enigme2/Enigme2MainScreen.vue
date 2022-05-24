@@ -10,6 +10,7 @@
 <script>
 import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
+
 export default {
   name: 'Enigme2MainScreen',
   components: {
@@ -41,15 +42,6 @@ export default {
       this.showPopup = false
       this.$socket.emit('sendPopupToPlayer')
     },
-    // nextPopup(arr, index) {
-    //   if (index != arr.length) {
-    //     let currentPopup = arr[index]
-    //   }
-
-    //   if (index === arr.length) {
-    //     alert('GAME IS OVER')
-    //   }
-    // },
     enigme2GameLoop() {
       this.createPopup()
       setTimeout(() => {
