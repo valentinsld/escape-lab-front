@@ -1,19 +1,27 @@
 <template>
   <div class="messages">
-    <p
+    <div
       v-for="(item, index) in messages"
       ref="messages"
       :key="index"
       class="message"
-      :is-reveal="item.isReveal || true"
+      :is-reveal="isAnim ? item.isReveal : true"
       :is-received="item.isReceived"
-      v-html="item.content"
-    />
+    >
+      <div v-if="typeof item.content === 'object'" class="message__payment">
+        <img v-if="item.content.image" :src="getSource(item.content.image)" />
+        <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
+        <p v-if="item.content.text" v-html="item.content.text" />
+      </div>
+      <p v-else v-html="item.content" />
+    </div>
   </div>
 </template>
 
 <script>
 import Anime from 'animejs'
+
+import CanapDeLuxe from '@/assets/CANAPDELUXE.png'
 
 export default {
   name: 'Messages',
@@ -21,6 +29,10 @@ export default {
     messages: {
       type: Array,
       default: null
+    },
+    isAnim: {
+      type: Boolean,
+      default: true
     },
     delay: {
       type: Object,
@@ -33,6 +45,7 @@ export default {
   },
   data() {
     return {
+      CanapDeLuxe,
       animLogComplete: 0
     }
   },
@@ -75,6 +88,9 @@ export default {
           }
         }
       })
+    },
+    getSource(name) {
+      return require(`@/assets/images/enigme3/messages/${name}.png`)
     }
   }
 }
@@ -85,17 +101,17 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 64px 8px 24px;
+  //height: 100%;
+  padding: 45px 8px 24px;
   overflow-y: auto;
 }
 
 .message {
   position: relative;
   z-index: 2;
-  max-width: 80%;
+  max-width: 75%;
   padding: 8px;
-  margin-top: -2.2em;
+  // margin-top: -2.2em;
   margin-bottom: 2em;
   margin-left: auto;
   font-size: 0.9em;
@@ -110,10 +126,12 @@ export default {
     opacity: 1;
   }
 
-  &[is-received='true'] + &,
-  & + &[is-received='true'] {
-    z-index: 1;
-    margin-top: 0 !important;
+  p {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
   }
 
   //
@@ -166,5 +184,17 @@ export default {
       border-left: 18px solid var(--color-black);
     }
   }
+}
+
+.message__payment {
+  img {
+    width: 90px;
+  }
+}
+
+.message__payment__link {
+  margin-top: 0;
+  font-size: 12px;
+  text-decoration: underline;
 }
 </style>

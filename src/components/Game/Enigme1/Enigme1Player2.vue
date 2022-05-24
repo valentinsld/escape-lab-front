@@ -44,7 +44,7 @@ export default {
       this.$data.isStart = true
     },
     'enigme1-end': function ({ messages }) {
-      console.log('enigme1-end', messages)
+      // console.log('enigme1-end', messages)
       this.$data.callEnd = true
 
       this.$data.messageEnd.contact = messages[0].contact

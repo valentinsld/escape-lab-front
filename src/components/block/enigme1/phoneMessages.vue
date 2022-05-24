@@ -26,7 +26,7 @@
         <p class="header__contact">{{ messages[currentMessage].contact }}</p>
       </div>
       <div class="chat__content">
-        <Messages :messages="messages[currentMessage].messages" />
+        <Messages :is-anim="false" :messages="messages[currentMessage].messages" />
       </div>
     </div>
 
