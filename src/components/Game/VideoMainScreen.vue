@@ -93,6 +93,10 @@ export default {
     endEnigme: function ({ stepGame }) {
       // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
+    },
+    playEndIntro: function () {
+      this.player.abLoopPlugin.disable()
+      this.player.play()
     }
   },
   mounted() {
