@@ -11,7 +11,8 @@ export const STATE = {
   stepGame: 'stepGame',
   playerIsReady: 'playerIsReady',
   // enigme 3
-  enigme3Config: 'enigme3Config'
+  enigme3Config: 'enigme3Config',
+  enigme3PlayerIsReady: 'enigme3PlayerIsReady'
 }
 
 export const MUTATIONS = {
@@ -28,7 +29,8 @@ export const MUTATIONS = {
   stepGame: 'M_STEP_GAME',
   resetRoom: 'M_RESET_ROOM',
   // enigme 3
-  enigme3Config: 'M_ENIGME_3_CONFIG'
+  enigme3Config: 'M_ENIGME_3_CONFIG',
+  enigme3PlayerIsReady: 'M_ENIGME_3_PLAYER_IS_READY'
 }
 
 export const STATE_SCREEN = {

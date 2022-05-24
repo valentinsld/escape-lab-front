@@ -20,7 +20,8 @@ export const state = {
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
   // enigme 3
-  [STATE.enigme3Config]: null
+  [STATE.enigme3Config]: null,
+  [STATE.enigme3PlayerIsReady]: []
 }
 
 export const mutations = {
@@ -70,6 +71,9 @@ export const mutations = {
   // enigme 3
   [MUTATIONS.enigme3Config](state, newVal) {
     state[STATE.enigme3Config] = newVal
+  },
+  [MUTATIONS.enigme3PlayerIsReady](state, newVal) {
+    state[STATE.playerIsReady] = newVal
   }
 }
 export const getters = {}
