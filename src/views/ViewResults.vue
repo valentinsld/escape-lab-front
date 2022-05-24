@@ -28,6 +28,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
   background-color: #4a6cff;
 }
 
@@ -50,5 +51,19 @@ main {
 .card {
   flex: 0 0 auto;
   margin: 10px;
+}
+
+@media screen and (max-width: 640px) {
+  main {
+    display: block;
+  }
+
+  main img {
+    width: 400px;
+  }
+
+  .card img {
+    width: 300px;
+  }
 }
 </style>
