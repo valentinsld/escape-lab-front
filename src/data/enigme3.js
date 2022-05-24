@@ -71,8 +71,8 @@ export const criteriaName = {
 }
 
 export const countries = {
-  bot: ['Chashington', 'Pabai', 'Saint Seille', 'Le Mavre'],
-  normal: ['Taideaux', 'Borwan', 'Duris', 'Watellerault']
+  bot: ['Chashington', 'Pabai', 'Le Mavre', 'Duris'],
+  normal: ['Taideaux', 'Borwan', 'Wateller', 'Saint Seille']
 }
 
 export const payments = {
