@@ -1,13 +1,19 @@
 <template>
   <div class="screenContainer introPlayer">
-    <div></div>
-    <Messages v-if="!startVideo" :messages="messages" :delay="{ default: 0, firstMsg: 0 }" />
-
+    <div v-if="!startVideo" ref="messages" class="introPlayer__messages-container">
+      <Messages
+        :messages="messages"
+        :delay="{ default: 0, firstMsg: 0 }"
+        @onanimation:iscomplete="handleMessageComplete"
+      />
+    </div>
     <p v-else class="dark">{{ textIntro }}</p>
   </div>
 </template>
 
 <script>
+import Anime from 'animejs'
+
 import Messages from '@/components/block/Messages'
 import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -53,6 +59,14 @@ export default {
     initSocketsMessage() {
       // launch start
       this.$socket.emit('intro-recevedMessage')
+    },
+    handleMessageComplete() {
+      Anime({
+        targets: this.$refs.messages,
+        scrollTop: this.$refs.messages.scrollHeight,
+        duration: 750,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
     }
   }
 }
@@ -60,7 +74,14 @@ export default {
 
 <style lang="scss" scoped>
 .introPlayer {
+  display: flex;
   padding: 0;
+}
+
+.introPlayer__messages-container {
+  flex: 1;
+  padding: 5px;
+  overflow: scroll;
 }
 
 .dark {
