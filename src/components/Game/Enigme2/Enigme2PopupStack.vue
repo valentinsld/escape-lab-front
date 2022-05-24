@@ -6,6 +6,8 @@
       :key="`enigme2${index}`"
       :card="card"
       :is-current="card.owner === typeScreen"
+      :is-end-sort="isEndSort"
+      :is-first-player="isFirstPlayer"
     />
   </div>
 </template>
@@ -28,9 +30,21 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      isFirstPlayer: this.$store.state[S.typeScreen] === 'Player1',
+      isEndSort: false
+    }
+  },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen] // Player1 ; Player2 ; MainScreen
   }),
+  sockets: {
+    'enigme2-endSort': function () {
+      this.$data.isEndSort = true
+      console.log('EN SORT CARDS')
+    }
+  },
   mounted() {
     console.log(this.cards)
     console.log(this.typeScreen)

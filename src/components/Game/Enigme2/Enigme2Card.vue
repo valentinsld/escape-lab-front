@@ -3,10 +3,12 @@
     v-if="isShowing"
     ref="interactElement"
     :class="{
+      card: true,
       isAnimating: isInteractAnimating,
-      isCurrent: isCurrent
+      isCurrent: isCurrent,
+      '-isWrong': isWrong,
+      '-isRight': isRight
     }"
-    class="card"
     :style="{ transform: transformString, order: card.order }"
   >
     <div class="enigme2-bar">
@@ -49,6 +51,14 @@ export default {
     isCurrent: {
       type: Boolean,
       required: true
+    },
+    isEndSort: {
+      type: Boolean,
+      required: true
+    },
+    isFirstPlayer: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -73,6 +83,20 @@ export default {
       }
 
       return null
+    },
+    isRight() {
+      const player1 = this.isFirstPlayer && this.card.isSpam
+      const player2 = !this.isFirstPlayer && !this.card.isSpam
+
+      console.log(this.card.id, this.isFirstPlayer, this.isFirstPlayer ? player1 : player2)
+
+      return this.isEndSort && (this.isFirstPlayer ? player1 : player2)
+    },
+    isWrong() {
+      const player1 = this.isFirstPlayer && this.card.isSpam
+      const player2 = !this.isFirstPlayer && !this.card.isSpam
+
+      return this.isEndSort && !(this.isFirstPlayer ? player1 : player2)
     }
   }),
   watch: {
@@ -80,6 +104,11 @@ export default {
       // console.log(this.card)
       if (this.card.owner === this.typeScreen) {
         this.resetCardPosition()
+      }
+    },
+    isEndSort() {
+      if (this.isEndSort) {
+        this.interactUnsetElement()
       }
     }
   },
@@ -163,10 +192,10 @@ export default {
       this.interactPosition = { x, y, rotation }
     },
 
-    // interactUnsetElement() {
-    //   interact(this.$refs.interactElement).unset()
-    //   this.isInteractDragged = true
-    // },
+    interactUnsetElement() {
+      interact(this.$refs.interactElement).unset()
+      this.isInteractDragged = true
+    },
 
     resetCardPosition() {
       this.interactSetPosition({ x: 0, y: 0, rotation: 0 })
@@ -175,7 +204,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
   display: flex;
   align-items: center;
@@ -186,6 +215,14 @@ export default {
   background-color: azure;
   border: black solid 5px;
   border-radius: 30px;
+
+  &.-isWrong {
+    background-color: red;
+  }
+
+  &.-isRight {
+    background-color: green;
+  }
 }
 
 .card .enigme2-bar {
