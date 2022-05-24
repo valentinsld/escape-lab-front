@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       trueRules: null,
-      isStart: true
+      isStart: false
     }
   },
   computed: mapState({
@@ -57,8 +57,14 @@ export default {
       console.groupEnd()
     }
   },
+  sockets: {
+    startEnigme: function () {
+      console.log('a')
+      this.isStart = true
+    }
+  },
   mounted() {
-    this.$socket.emit('readyEnigme')
+    //this.$socket.emit('readyEnigme')
 
     //if main screen get config rules from back
     if (this.typeScreen === 'MainScreen') {

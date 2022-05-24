@@ -1,7 +1,7 @@
 <template>
   <div class="tuto">
     <div class="screenContainer">
-      <p v-html="textContent.consigne.chat" />
+      <p v-html="textContent.consigne.player2" />
       <button class="tuto__start-btn" :class="btnClass" @click="toggleStart">Start</button>
       <p v-if="isReady">En attente du joueur 2</p>
     </div>
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { textContent } from '@/data/enigme3'
+import { textContent } from '@/data/enigme2'
 import { STATE as S } from '@/store/helpers'
 export default {
-  name: 'Enigme3Player1Tuto',
+  name: 'Enigme2Player2Tuto',
   data() {
     return {
       textContent: textContent,

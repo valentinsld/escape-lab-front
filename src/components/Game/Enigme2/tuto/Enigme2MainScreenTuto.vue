@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { textContent } from '@/data/enigme3'
+import { textContent } from '@/data/enigme2'
 
 export default {
-  name: 'Enigme3MainScreenTuto',
+  name: 'Enigme2MainScreenTuto',
   data() {
     return {
       textContent: textContent
