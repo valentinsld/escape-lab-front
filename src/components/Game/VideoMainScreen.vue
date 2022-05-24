@@ -190,8 +190,8 @@ export default {
     },
     playEndOutro() {
       this.stopLoop()
-      console.log(MARKERS_PLAYER.startOutro)
-      this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.startOutro)).play()
+      this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.startOutro))
+      this.player.play()
     },
     endVideo() {
       console.log('END VIDEO')
