@@ -1,0 +1,21 @@
+.vjs-text-track-display {
+  & > div {
+    margin: 3%!important;
+  }
+
+  .vjs-text-track-cue {
+    font-size: 26px!important;
+
+    & > div {
+      padding: 12px 36px!important;
+      font-family: 'grenadine-mvb', arial, sans-serif!important;
+      color: var(--color-black)!important;
+      background-color: var(--color-white)!important;
+      border: 2px solid var(--color-black);
+      border-radius: 8px;
+
+      // style bu video-js
+      // direction: ltr; writing-mode: horizontal-tb; unicode-bidi: plaintext; text-align: center; font: 43.66px sans-serif; white-space: pre-line; position: absolute; width: 929.267px; inset: 783.267px 0px 0px; height: 90px; background-color: rgba(0, 0, 0, 0);
+    }
+  }
+}

@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       trueRules: null,
-      isStart: false
+      isStart: true
     }
   },
   computed: mapState({
@@ -73,6 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .enigme-3 {
+  width: 100%;
   height: 100%;
 }
 

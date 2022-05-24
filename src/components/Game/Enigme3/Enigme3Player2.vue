@@ -18,12 +18,10 @@
 import Anime from 'animejs'
 import interact from 'interactjs'
 
-import { noticeData } from '@/data/enigme3'
 export default {
   name: 'Enigme3Player2',
   data() {
     return {
-      rules: noticeData(),
       currentPage: 1,
       numberOfPages: 9,
       listeningSwipe: true

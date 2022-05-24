@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1>Enigme 1 MainScreen</h1>
-  </div>
+  <div></div>
 </template>
 
 <script>

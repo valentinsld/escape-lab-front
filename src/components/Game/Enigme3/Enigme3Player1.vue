@@ -191,7 +191,7 @@ p {
 
 .chat__messages {
   flex: 1;
-  padding: 2em 1em;
+  padding: 0 1em;
   overflow: scroll;
 }
 
