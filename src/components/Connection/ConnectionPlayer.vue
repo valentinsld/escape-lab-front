@@ -26,8 +26,9 @@
             Veuillez entrer le code de partie qui s’affiche sur l’écran principal pour rejoindre la room :
           </p>
           <div class="content__inputs">
-            <input ref="inputIdRoom" type="phone" :value="idRoomFromUrl" />
+            <input v-for="i in 4" :key="i" ref="inputIdRoom" maxlength="1" />
           </div>
+          <p v-if="errorId" class="content__inputsError">{{ errorId }}</p>
           <p class="content__text">Ou scannez le QR code affiché sur l’écran principal</p>
           <Button text="Connect to room" :on-click="connectToRoom" />
         </div>
@@ -71,7 +72,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
+const IS_DEV = false
 
 export default {
   name: 'ConnectionPlayer',
@@ -84,6 +85,7 @@ export default {
       FakeVideo,
       ConnectionCHeck,
       idRoomFromUrl: getIdRoomFromUrl(),
+      errorId: '',
       seeHome: true
     }
   },
@@ -100,6 +102,10 @@ export default {
     },
     playerIsReady: function (data) {
       this.$store.commit(M.playerIsReady, data)
+    },
+    errorInputs: function ({ error }) {
+      console.log('errorInputs', error)
+      this.errorId = error
     }
   },
   mounted() {
@@ -113,16 +119,56 @@ export default {
     if (IS_DEV) {
       this.connectToRoom(null, 'DEV001')
     }
+
+    this.initInputs()
   },
   methods: {
     goToConnection() {
       this.$data.seeHome = false
     },
 
+    initInputs() {
+      const inputs = [...this.$refs.inputIdRoom]
+
+      inputs.forEach((input, index) => {
+        input.lastValue = ''
+
+        input.addEventListener('keyup', (e) => {
+          if (/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(input.value)) {
+            return (input.value = '')
+          }
+
+          // valeur rentrer -> next
+          if (input.value.length === input.maxLength && index < 3) {
+            inputs[index + 1].focus()
+          }
+
+          // si vide est retour -> previous
+          var x = e.charCode || e.keyCode
+          if ((x == 8 || x == 46) && input.lastValue.length === 0 && index !== 0) {
+            inputs[index - 1].focus()
+          }
+
+          input.lastValue = input.value
+
+          // last auto connect
+          if (index === 3 && !(x == 8 || x == 46)) {
+            this.connectToRoom()
+          }
+        })
+      })
+    },
+
     connectToRoom(ev, id = null) {
       this.goToConnection()
 
-      const idRoom = id || this.$refs.inputIdRoom.value
+      const idFromInputs = this.$refs.inputIdRoom.map((e) => e.value).join('')
+      const idRoom = id || idFromInputs
+
+      if (idRoom.length < 4) {
+        this.errorId = 'Le code de la room est trop court'
+        return
+      }
 
       const loginData = {
         isMainScreen: this.$store.state[S.stateScreen] === STATE_SCREEN.mainScreen,
