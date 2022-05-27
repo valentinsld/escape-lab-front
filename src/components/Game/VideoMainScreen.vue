@@ -36,7 +36,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
-  muted: true,
+  muted: false,
 
   preload: true,
   controlBar: {
