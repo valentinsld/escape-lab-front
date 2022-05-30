@@ -36,7 +36,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
-  muted: true,
+  muted: false,
 
   preload: true,
   controlBar: {
@@ -70,10 +70,16 @@ export default {
       this.$data.seePlayer = true
     },
     setStepGame: function ({ stepGame, stepGameNumber }) {
+      console.log('setStepGame', { stepGame, stepGameNumber })
+
       this.$data.isStepGame = true
       this.$data.seePlayer = true
-      this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
-      this.player.abLoopPlugin.playLoop()
+      if (stepGame === 'Outro') {
+        this.playEndOutro()
+      } else {
+        this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
+        this.player.abLoopPlugin.playLoop()
+      }
 
       // reset time for nextEnigme
       for (let i = stepGameNumber; i < this.$data.eventsTime.length; i++) {
@@ -87,6 +93,10 @@ export default {
     endEnigme: function ({ stepGame }) {
       // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
+    },
+    playEndIntro: function () {
+      this.player.abLoopPlugin.disable()
+      this.player.play()
     }
   },
   mounted() {
@@ -182,8 +192,14 @@ export default {
     playEndEnigme3() {
       this.stopLoop()
     },
+    playEndOutro() {
+      this.stopLoop()
+      this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.startOutro))
+      this.player.play()
+    },
     endVideo() {
       console.log('END VIDEO')
+      this.$socket.emit('endVideo')
     },
 
     // events on playing video

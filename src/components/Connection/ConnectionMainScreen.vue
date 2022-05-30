@@ -87,7 +87,7 @@ export default {
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
-      this.connectToRoom(null, 'DEV001')
+      this.connectToRoom(null, 'dev1')
       return
     }
 
