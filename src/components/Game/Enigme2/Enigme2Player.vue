@@ -26,21 +26,6 @@ export default {
   },
   mounted() {
     this.defineIdentity()
-    this.sockets.subscribe('sendPopups', (props) => {
-      this.getPopupsData(props)
-      console.log('props vaut :: ', props)
-    })
-    this.sockets.subscribe('sendPopupToPlayer', () => {
-      if (this.$store.state[S.typeScreen] === 'Player1') {
-        this.showPopup = true
-      }
-    })
-
-    this.sockets.subscribe('popupTransfer', () => {
-      if (this.$store.state[S.typeScreen] === 'Player2') {
-        this.createPopup()
-      }
-    })
   },
   methods: {
     getPopupsData(data) {
@@ -71,6 +56,20 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme2-sendPopups': function (props) {
+      this.getPopupsData(props)
+      console.log('props vaut :: ', props)
+    },
+    sendPopupToPlayer: function () {
+      if (this.$store.state[S.typeScreen] === 'Player1') {
+        this.showPopup = true
+      }
+    },
+    popupTransfer: function () {
+      if (this.$store.state[S.typeScreen] === 'Player2') {
+        this.createPopup()
+      }
     }
   }
 }
