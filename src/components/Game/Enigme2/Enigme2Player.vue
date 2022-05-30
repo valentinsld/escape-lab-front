@@ -1,5 +1,7 @@
 <template>
   <div class="main">
+    <Enigme2Restart v-if="showFailure" />
+
     <p class="indicationSPam">{{ isFirstPlayer ? 'SPAM' : 'NON SPAM' }}</p>
     <!-- <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button> -->
     <Enigme2PopupStack class="popup" :cards="cards"></Enigme2PopupStack>
@@ -9,19 +11,22 @@
 <script>
 import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
+import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2PlayerRestart.vue'
 import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme2Player',
   components: {
     Enigme2Popup,
-    Enigme2PopupStack
+    Enigme2PopupStack,
+    Enigme2Restart
   },
   data: function () {
     return {
       showPopup: false,
       isFirstPlayer: this.$store.state[S.typeScreen] === 'Player1',
-      cards: []
+      cards: [],
+      showFailure: false
     }
   },
   mounted() {
@@ -70,6 +75,11 @@ export default {
       if (this.$store.state[S.typeScreen] === 'Player2') {
         this.createPopup()
       }
+    },
+    'enigme2-endSort': function ({ success }) {
+      setTimeout(() => {
+        this.showFailure = !success
+      }, 800)
     }
   }
 }
