@@ -63,6 +63,10 @@ export default {
     },
     'enigme3-config': function (config) {
       this.$store.commit(M.enigme3Config, config)
+    },
+    'enigme3-restart': function (config) {
+      this.$forceUpdate()
+      this.$store.commit(M.enigme3Config, config)
     }
   },
   mounted() {

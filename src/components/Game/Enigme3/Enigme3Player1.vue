@@ -7,7 +7,9 @@
         <div class="chat__solution__rules">
           <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
         </div>
-        <button class="chat__solution__button" @click="nextStep">suivant</button>
+        <button class="chat__solution__button" @click="nextStep">
+          {{ rightResponse ? 'suivant' : 'recommencer' }}
+        </button>
       </div>
     </div>
     <div class="chat__header">
@@ -66,6 +68,9 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme3-restart': function () {
+      this.reInitData()
     }
   },
   components: { Messages },
@@ -97,7 +102,8 @@ export default {
       choices: [],
       text: textContent,
       messages: [],
-      solutionAnswer: null
+      solutionAnswer: null,
+      rightResponse: null
     }
   },
   mounted() {
@@ -170,11 +176,31 @@ export default {
       this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
     },
     chooseBotAnswer(sellerType) {
+      this.rightResponse = sellerType === this.sellerType
       this.solutionAnswer =
         sellerType === this.sellerType ? solution[this.sellerType]['success'] : solution[this.sellerType]['fail']
     },
     nextStep() {
-      this.$socket.emit('nextEnigme')
+      if (this.rightResponse) {
+        this.$socket.emit('nextEnigme')
+      } else {
+        this.$socket.emit('enigme3-restart')
+      }
+    },
+
+    reInitData() {
+      this.choicePos = null
+      this.buttons = null
+      this.questions = []
+      this.isMessageSend = false
+      this.finalAnswers = []
+      this.choices = []
+      this.text = textContent
+      this.messages = []
+      this.solutionAnswer = null
+      this.rightResponse = null
+
+      this.generateQuestions()
     }
   }
 }
