@@ -1,6 +1,6 @@
 <template>
   <div class="phoneLocked">
-    <p class="phoneLocked__hour">15:01</p>
+    <p class="phoneLocked__hour">15:31</p>
 
     <div v-if="called && !message.message" class="phoneLocked__recall" @click="recall">
       <img class="recall__img" :src="PhoneIcon" />

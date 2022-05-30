@@ -72,7 +72,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = false
+const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
 
 export default {
   name: 'ConnectionPlayer',
@@ -117,7 +117,7 @@ export default {
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
-      this.connectToRoom(null, 'DEV001')
+      this.connectToRoom(null, 'dev1')
     }
 
     this.initInputs()
