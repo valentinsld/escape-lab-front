@@ -10,6 +10,7 @@
       >
         <div class="notice__rule__wrapper">
           <img class="notice__rule__img" :src="getSource(i)" />
+          <button class="notice__rule__btn" @click="toggleButton(i)" v-html="buttonText(i)" />
         </div>
       </div>
     </div>
@@ -26,7 +27,8 @@ export default {
     return {
       currentPage: 1,
       numberOfPages: 7,
-      listeningSwipe: true
+      listeningSwipe: true,
+      activeButtons: []
     }
   },
   mounted() {
@@ -94,6 +96,13 @@ export default {
         })
         this.currentPage -= 1
       }
+    },
+    buttonText(i) {
+      console.log(i)
+      return 'Signaler'
+    },
+    toggleButton(i) {
+      console.log(i)
     }
   }
 }
@@ -129,5 +138,12 @@ export default {
   .notice__rule--6 & {
     transform: rotate(2deg);
   }
+}
+
+.notice__rule__btn {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
