@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      numberOfPages: 9,
+      numberOfPages: 7,
       listeningSwipe: true
     }
   },
@@ -106,6 +106,12 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 305px;
   transform: translate(-50%, -50%);
+}
+
+.notice__rule__img {
+  width: 100%;
+  height: 100%;
 }
 </style>
