@@ -94,7 +94,7 @@ export default {
       // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
     },
-    playEndIntro: function () {
+    playEndOutro: function () {
       this.player.abLoopPlugin.disable()
       this.player.play()
     }
@@ -222,6 +222,10 @@ export default {
     playstartOutro() {
       if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
+    },
+    playoutroStartMessages() {
+      console.log('outro-startMessages')
+      this.$socket.emit('outro-startMessages')
     }
   }
 }

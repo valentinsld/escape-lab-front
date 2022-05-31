@@ -17,16 +17,24 @@ export default {
   },
   sockets: {
     endEnigme: function ({ stepGame }) {
-      console.log('END ENIGME', stepGame)
-      setTimeout(
-        () => {
-          this.show = true
-        },
-        stepGame === 'Enigme2' ? 1000 : 0
-      )
+      let time = 0
+      switch (stepGame) {
+        case 'Enigme2':
+          time = 1000
+          break
+        case 'Enigme3':
+          time = 2000
+          break
+      }
+      setTimeout(() => {
+        this.show = true
+      }, time)
     },
     buildEnigme: function ({ stepGame }) {
-      console.log('BUILD ENIGME', stepGame)
+      if (!stepGame) return
+      this.show = false
+    },
+    'outro-startMessages': function () {
       this.show = false
     }
   }
