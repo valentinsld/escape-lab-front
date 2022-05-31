@@ -8,7 +8,9 @@
         :class="`notice__rule notice__rule--${i}`"
         :style="ruleStyle(i)"
       >
-        <img class="notice__rule__img" :src="getSource(i)" />
+        <div class="notice__rule__wrapper">
+          <img class="notice__rule__img" :src="getSource(i)" />
+        </div>
       </div>
     </div>
   </div>
@@ -35,11 +37,11 @@ export default {
       onmove: (event) => {
         if (event.dx > 2 && this.listeningSwipe) {
           this.listeningSwipe = false
-          this.prevQuestion()
+          this.prevRule()
         }
         if (event.dx < -2 && this.listeningSwipe) {
           this.listeningSwipe = false
-          this.nextQuestion()
+          this.nextRule()
         }
       },
       onend: () => {
@@ -67,27 +69,27 @@ export default {
         zIndex: 100 - i
       }
     },
-    nextQuestion() {
+    nextRule() {
       if (this.currentPage < this.numberOfPages) {
         Anime({
           targets: this.$refs?.rule[this.currentPage - 1],
           translateX: ['-50%', -140],
           rotate: -15,
           translateY: ['-50%', '-50%'],
-          duration: 900,
+          duration: 500,
           easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
         })
         this.currentPage += 1
       }
     },
-    prevQuestion() {
+    prevRule() {
       if (this.currentPage > 1) {
         Anime({
           targets: this.$refs?.rule[this.currentPage - 2],
           rotate: 0,
           translateX: [-140, '-50%'],
           translateY: ['-50%', '-50%'],
-          duration: 900,
+          duration: 500,
           easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
         })
         this.currentPage -= 1
@@ -113,5 +115,19 @@ export default {
 .notice__rule__img {
   width: 100%;
   height: 100%;
+}
+
+.notice__rule__wrapper {
+  .notice__rule--2 & {
+    transform: rotate(3deg);
+  }
+
+  .notice__rule--4 & {
+    transform: rotate(-2deg);
+  }
+
+  .notice__rule--6 & {
+    transform: rotate(2deg);
+  }
 }
 </style>
