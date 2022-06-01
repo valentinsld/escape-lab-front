@@ -1,8 +1,8 @@
 <template>
   <div ref="interactElement" class="notice">
     <div class="notice__rules-choices">
-      <div v-for="(slug, i) in notice" :key="i" class="notice__rule-choice">
-        <img v-if="slug !== 'first'" class="notice__rule-choice__img" :src="getIcon(slug)" />
+      <div v-for="(slug, i) in activeButtons" :key="i" class="notice__rule-choice" :class="`notice__rule-choice--${i}`">
+        <img class="notice__rule-choice__img" :src="getIcon(slug)" />
       </div>
     </div>
     <div class="notice__rules-container">
@@ -132,6 +132,41 @@ export default {
 .notice {
   height: calc(100 * var(--vhRes, 1vh));
   background: #3577f5;
+}
+
+.notice__rules-choices {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  width: 135px;
+  height: 35px;
+  padding: 5px 0;
+  margin: auto;
+  border: 2px solid white;
+  transform: translateX(-50%);
+}
+
+.notice__rule-choice {
+  position: absolute;
+  top: 50%;
+  display: none;
+  transform: translateY(-50%);
+
+  &.notice__rule-choice--0 {
+    left: 10px;
+    display: flex;
+  }
+
+  &.notice__rule-choice--1 {
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+  }
+
+  &.notice__rule-choice--2 {
+    right: 10px;
+    display: flex;
+  }
 }
 
 .notice__rule {
