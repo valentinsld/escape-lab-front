@@ -8,18 +8,6 @@
       </div>
     </div>-->
     <notice-choices :active-buttons="activeButtons" :on-click="removeChoice" />
-    <!--    <div class="notice__rules-choices">
-      <div v-for="i in 3" :key="i" class="notice__rule-choice__dot" :class="`notice__rule-choice__dot&#45;&#45;${i}`" />
-      <div
-        v-for="(slug, i) in activeButtons"
-        :key="slug"
-        class="notice__rule-choice"
-        :class="`notice__rule-choice&#45;&#45;${i}`"
-        @click="removeChoice(slug)"
-      >
-        <img class="notice__rule-choice__img" :src="getIcon(slug)" />
-      </div>
-    </div>-->
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -50,7 +38,6 @@ export default {
   data() {
     return {
       currentPage: 1,
-      numberOfPages: 7,
       listeningSwipe: true,
       activeButtons: [],
       notice: notice
@@ -93,16 +80,13 @@ export default {
     getSource(slug) {
       return require(`@/assets/images/enigme3/notice/${slug}.png`)
     },
-    getIcon(slug) {
-      return require(`@/assets/images/enigme3/notice/icons/${slug}.svg`)
-    },
     ruleStyle(i) {
       return {
         zIndex: 100 - i
       }
     },
     nextRule() {
-      if (this.currentPage < this.numberOfPages) {
+      if (this.currentPage < this.notice.length) {
         Anime({
           targets: this.$refs?.rule[this.currentPage - 1],
           translateX: ['-50%', -140],
@@ -150,69 +134,6 @@ export default {
 <style lang="scss" scoped>
 .notice {
   height: calc(100 * var(--vhRes, 1vh));
-  background: #3577f5;
-}
-
-.notice__rules-choices {
-  position: absolute;
-  top: 3%;
-  left: 50%;
-  width: 135px;
-  height: 35px;
-  padding: 5px 0;
-  margin: auto;
-  border: 2px solid white;
-  transform: translateX(-50%);
-}
-
-.notice__rule-choice {
-  position: absolute;
-  top: 50%;
-  display: flex;
-  width: 32px;
-  height: 32px;
-  transform: translateY(-50%);
-
-  &.notice__rule-choice--0 {
-    left: 10px;
-  }
-
-  &.notice__rule-choice--1 {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &.notice__rule-choice--2 {
-    right: 10px;
-  }
-}
-
-.notice__rule-choice__dot {
-  position: absolute;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  background: white;
-  border-radius: 50%;
-  transform: translateY(-50%);
-
-  &.notice__rule-choice__dot--1 {
-    left: 26px;
-  }
-
-  &.notice__rule-choice__dot--2 {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &.notice__rule-choice__dot--3 {
-    right: 26px;
-  }
-}
-
-.notice__rule-choice__img {
-  width: 100%;
-  height: 100%;
   background: #3577f5;
 }
 
