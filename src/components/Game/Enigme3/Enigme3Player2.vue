@@ -121,7 +121,7 @@ export default {
         const i = this.activeButtons.indexOf(slug)
         this.activeButtons.splice(i, 1)
       } else {
-        this.activeButtons.push(slug)
+        if (this.activeButtons.length < 3) this.activeButtons.push(slug)
       }
       console.log(this.activeButtons, 'active buttons')
     }
@@ -149,24 +149,25 @@ export default {
 .notice__rule-choice {
   position: absolute;
   top: 50%;
-  display: none;
+  display: flex;
   transform: translateY(-50%);
 
   &.notice__rule-choice--0 {
     left: 10px;
-    display: flex;
   }
 
   &.notice__rule-choice--1 {
     left: 50%;
-    display: flex;
     transform: translate(-50%, -50%);
   }
 
   &.notice__rule-choice--2 {
     right: 10px;
-    display: flex;
   }
+}
+
+.notice__rule-choice__img {
+  transition: 300ms var(--custom-bezier);
 }
 
 .notice__rule {
