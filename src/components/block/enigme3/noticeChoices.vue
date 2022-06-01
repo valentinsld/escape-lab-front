@@ -92,6 +92,5 @@ export default {
 .notice-choices__icon {
   width: 100%;
   height: 100%;
-  background: #3577f5;
 }
 </style>

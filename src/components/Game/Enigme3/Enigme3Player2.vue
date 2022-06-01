@@ -1,14 +1,19 @@
 <template>
   <div ref="interactElement" class="notice">
-    <div class="notice__validation">
+    <div v-if="showValidation" class="notice__validation">
       <div class="notice__validation__overlay" />
       <div class="notice__validation__wrapper">
         <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
-        <button class="notice__validation__button" @click="nextStep">Valider mes choix</button>
-        <p class="notice__validation__modify">ou <u>modifier</u></p>
+        <button class="notice__validation__button">Valider mes choix</button>
+        <p class="notice__validation__modify" @click="modifyChoices">ou <u>modifier</u></p>
       </div>
     </div>
-    <notice-choices class="notice__choices" :active-buttons="activeButtons" :on-click="removeChoice" />
+    <notice-choices
+      v-if="!showValidation"
+      class="notice__choices"
+      :active-buttons="activeButtons"
+      :on-click="removeChoice"
+    />
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -41,7 +46,8 @@ export default {
       currentPage: 1,
       listeningSwipe: true,
       activeButtons: [],
-      notice: notice
+      notice: notice,
+      showValidation: false
     }
   },
   computed: {},
@@ -123,11 +129,16 @@ export default {
         this.removeChoice(slug)
       } else {
         if (this.activeButtons.length < 3) this.activeButtons.push(slug)
+        this.showValidation = this.activeButtons.length === 3
       }
     },
     removeChoice(slug) {
       const i = this.activeButtons.indexOf(slug)
       this.activeButtons.splice(i, 1)
+    },
+    modifyChoices() {
+      console.log('aloors')
+      this.showValidation = false
     }
   }
 }
@@ -181,7 +192,7 @@ export default {
 
 .notice__validation {
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   height: 100%;
 }
