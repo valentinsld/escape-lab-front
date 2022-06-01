@@ -15,10 +15,20 @@
       <div class="enigme2-controls"></div>
       <div class="enigme2-controls"></div>
     </div>
-    <ul>
-      <li>{{ card.from }}</li>
-      <li>{{ card.subject }}</li>
-      <li>{{ card.text }}</li>
+    <ul class="card-content">
+      <li>
+        <span
+          ><strong>{{ card.senderPrefix }}</strong></span
+        >
+        <span>{{ card.from }}</span>
+      </li>
+      <li>
+        <span
+          ><strong>{{ card.subjetPrefix }}</strong></span
+        >
+        <span>{{ card.subject }}</span>
+      </li>
+      <li class="text">{{ card.text }}</li>
     </ul>
   </div>
 </template>
@@ -210,11 +220,12 @@ export default {
   align-items: center;
   justify-content: center;
   width: 400px;
-  height: 280px;
+  height: 260px;
   color: black;
   background-color: azure;
   border: black solid 5px;
   border-radius: 30px;
+  box-shadow: 6px 6px 0 var(--color-black);
 
   &.-isWrong {
     background-color: red;
@@ -225,14 +236,34 @@ export default {
   }
 }
 
-/* .card ul {
-  padding-left: 0;
-  list-style: none;
+.card ul {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
-} */
+  max-height: 80%;
+  padding-left: 0;
+  list-style: none;
+}
+
+.card-content {
+  width: auto;
+  height: auto;
+  // border: magenta solid 2px;
+  margin: 0 10px;
+}
+
+.card-content span,
+.card-content li.text {
+  font-weight: 200;
+}
+
+.card-content li {
+  justify-content: flex-start;
+  // margin-left: 0;
+  padding-left: 0;
+  margin: 10px 0;
+  text-align: left;
+}
 
 .card .enigme2-bar {
   position: absolute;
