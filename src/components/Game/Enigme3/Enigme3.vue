@@ -9,7 +9,7 @@
         :product="config.product"
         :questions-to-display="config.settings.questionsToDisplay"
       />
-      <Enigme3Player2 v-if="typeScreen === 'Player2'" />
+      <Enigme3Player2 v-if="typeScreen === 'Player2'" :true-rules="config.trueRules" />
     </div>
     <div v-else class="enigme-3__tuto">
       <Enigme3MainScreenTuto v-if="typeScreen === 'MainScreen'" />

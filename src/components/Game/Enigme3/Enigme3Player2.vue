@@ -1,11 +1,11 @@
 <template>
   <div ref="interactElement" class="notice">
     <transition name="fade">
-      <div v-if="showValidation" class="notice__validation">
+      <div v-if="showValidation && isSuccess === null" class="notice__validation">
         <div class="notice__validation__overlay" />
         <div class="notice__validation__wrapper">
           <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
-          <button class="notice__validation__button">Valider mes choix</button>
+          <button class="notice__validation__button" @click="validateChoices">Valider mes choix</button>
           <p class="notice__validation__modify" @click="modifyChoices">ou <u>modifier</u></p>
         </div>
       </div>
@@ -16,6 +16,9 @@
       :active-buttons="activeButtons"
       :on-click="removeChoice"
     />
+    <transition name="fade">
+      <solution-popup v-if="isSuccess !== null" :true-rules="trueRules" :is-success="isSuccess" />
+    </transition>
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -38,18 +41,26 @@ import Anime from 'animejs'
 import interact from 'interact.js'
 
 import NoticeChoices from '@/components/block/enigme3/noticeChoices'
+import SolutionPopup from '@/components/block/enigme3/solutionPopup'
 import { notice } from '@/data/enigme3'
 
 export default {
   name: 'Enigme3Player2',
-  components: { NoticeChoices },
+  components: { SolutionPopup, NoticeChoices },
+  props: {
+    trueRules: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       currentPage: 1,
       listeningSwipe: true,
       activeButtons: [],
       notice: notice,
-      showValidation: false
+      showValidation: false,
+      isSuccess: null
     }
   },
   computed: {},
@@ -141,8 +152,18 @@ export default {
       this.activeButtons.splice(i, 1)
     },
     modifyChoices() {
-      console.log('aloors')
       this.showValidation = false
+    },
+    isGoodChoices() {
+      for (const rule in this.trueRules) {
+        if (!this.activeButtons.includes(this.trueRules[rule].slug)) return false
+      }
+      return true
+    },
+    validateChoices() {
+      console.log(this.activeButtons, this.trueRules)
+      this.isSuccess = this.isGoodChoices()
+      console.log(this.isSuccess, 'success')
     }
   }
 }
@@ -246,7 +267,8 @@ export default {
   transition: opacity 0.3s;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

@@ -45,7 +45,7 @@ export const finalAnswer = {
 }
 
 export const solution = {
-  bot: {
+  /*bot: {
     success: 'Bien joué ! Il s’agissait bien du bot du professeur, voici les règles qui permettaient de le démasquer :',
     fail: 'Aie ! Tu t’es fait avoir par le bot... voici les règles qui permettaient de le démasquer :'
   },
@@ -53,7 +53,9 @@ export const solution = {
     success:
       'Bien joué ! Il s’agissait d’un vendeur fiable ! Seul les points suivants auraient pu laisser penser que c’était le bot :',
     fail: 'Aie... Il s’agissait d’un véritable vendeur, il n’a pas dû apprécier ce moment ! Seul les points suivants auraient pu laisser penser que c’était le bot : '
-  }
+  }*/
+  success: 'Bien joué !',
+  fail: 'Aie ! Ce ne sont pas les bonnes règles, voici celles qui permettaient de le démasquer :'
 }
 
 export const criteriaName = {
