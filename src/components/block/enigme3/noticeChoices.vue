@@ -37,15 +37,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .notice-choices {
-  position: absolute;
-  top: 3%;
-  left: 50%;
   width: 135px;
   height: 35px;
   padding: 5px 0;
   margin: auto;
   border: 2px solid white;
-  transform: translateX(-50%);
 }
 
 .notice-choices__choice {

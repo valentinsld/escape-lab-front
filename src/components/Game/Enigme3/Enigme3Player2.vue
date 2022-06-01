@@ -1,13 +1,14 @@
 <template>
   <div ref="interactElement" class="notice">
-    <!--    <div class="notice__validation">
+    <div class="notice__validation">
       <div class="notice__validation__overlay" />
       <div class="notice__validation__wrapper">
+        <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
         <button class="notice__validation__button" @click="nextStep">Valider mes choix</button>
         <p class="notice__validation__modify">ou <u>modifier</u></p>
       </div>
-    </div>-->
-    <notice-choices :active-buttons="activeButtons" :on-click="removeChoice" />
+    </div>
+    <notice-choices class="notice__choices" :active-buttons="activeButtons" :on-click="removeChoice" />
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -137,6 +138,13 @@ export default {
   background: #3577f5;
 }
 
+.notice__choices {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .notice__rule {
   position: absolute;
   top: 50%;
@@ -191,8 +199,13 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   transition: 300ms var(--custom-bezier);
+}
+
+.notice__validation__choices {
+  position: relative;
+  margin: 0 auto 35px;
 }
 
 .notice__validation__modify {
