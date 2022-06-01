@@ -101,12 +101,23 @@ export default {
         this.currentPage -= 1
       }
     },
+    isButtonActive(slug) {
+      return this.activeButtons.includes(slug)
+    },
     buttonText(slug) {
       console.log(slug)
+      if (this.activeButtons.includes(slug)) {
+        return 'Annuler'
+      }
       return 'Signaler'
     },
-    toggleButton(i) {
-      this.activeButtons.push(i)
+    toggleButton(slug) {
+      if (this.isButtonActive(slug)) {
+        const i = this.activeButtons.indexOf(slug)
+        this.activeButtons.splice(i, 1)
+      } else {
+        this.activeButtons.push(slug)
+      }
       console.log(this.activeButtons, 'active buttons')
     }
   }
