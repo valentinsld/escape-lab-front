@@ -18,8 +18,8 @@ export default {
     }
   },
   sockets: {
-    endVideo: function () {
-      console.log('endVideo')
+    'outro-end': function () {
+      // console.log('endVideo')
       this.endVideo = true
     }
   },
