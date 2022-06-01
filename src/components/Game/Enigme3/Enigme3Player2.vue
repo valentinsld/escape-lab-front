@@ -2,7 +2,13 @@
   <div ref="interactElement" class="notice">
     <div class="notice__rules-choices">
       <div v-for="i in 3" :key="i" class="notice__rule-choice__dot" :class="`notice__rule-choice__dot--${i}`" />
-      <div v-for="(slug, i) in activeButtons" :key="i" class="notice__rule-choice" :class="`notice__rule-choice--${i}`">
+      <div
+        v-for="(slug, i) in activeButtons"
+        :key="slug"
+        class="notice__rule-choice"
+        :class="`notice__rule-choice--${i}`"
+        @click="removeChoice(slug)"
+      >
         <img class="notice__rule-choice__img" :src="getIcon(slug)" />
       </div>
     </div>
@@ -119,12 +125,14 @@ export default {
     },
     toggleButton(slug) {
       if (this.isButtonActive(slug)) {
-        const i = this.activeButtons.indexOf(slug)
-        this.activeButtons.splice(i, 1)
+        this.removeChoice(slug)
       } else {
         if (this.activeButtons.length < 3) this.activeButtons.push(slug)
       }
-      console.log(this.activeButtons, 'active buttons')
+    },
+    removeChoice(slug) {
+      const i = this.activeButtons.indexOf(slug)
+      this.activeButtons.splice(i, 1)
     }
   }
 }
