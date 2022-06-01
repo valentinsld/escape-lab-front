@@ -40,6 +40,9 @@ export default {
     'enigme2-restart': function () {
       this.show = false
     },
+    'enigme3-restart': function () {
+      this.show = false
+    },
     'outro-startMessages': function () {
       this.show = false
     }
@@ -54,7 +57,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 99;
+  z-index: 199;
   width: 100%;
   height: 100%;
   pointer-events: none;
