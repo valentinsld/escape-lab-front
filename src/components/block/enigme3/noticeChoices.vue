@@ -1,18 +1,20 @@
 <template>
-  <div v-if="activeButtons" class="notice-choices">
-    <div v-for="i in 3" :key="i" class="notice-choices__dot-wrapper">
-      <div v-if="!activeButtons[i - 1]" class="notice-choices__dot" :class="`notice-choices__dot--${i}`" />
+  <transition name="fade">
+    <div v-if="activeButtons" class="notice-choices">
+      <div v-for="i in 3" :key="i" class="notice-choices__dot-wrapper">
+        <div v-if="!activeButtons[i - 1]" class="notice-choices__dot" :class="`notice-choices__dot--${i}`" />
+      </div>
+      <div
+        v-for="(slug, i) in activeButtons"
+        :key="slug"
+        class="notice-choices__choice"
+        :class="`notice-choices__choice--${i}`"
+        @click="onClick(slug)"
+      >
+        <img class="notice-choices__icon" :src="getSource(slug)" />
+      </div>
     </div>
-    <div
-      v-for="(slug, i) in activeButtons"
-      :key="slug"
-      class="notice-choices__choice"
-      :class="`notice-choices__choice--${i}`"
-      @click="onClick(slug)"
-    >
-      <img class="notice-choices__icon" :src="getSource(slug)" />
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -94,5 +96,15 @@ export default {
 .notice-choices__icon {
   width: 100%;
   height: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

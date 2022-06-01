@@ -1,13 +1,15 @@
 <template>
   <div ref="interactElement" class="notice">
-    <div v-if="showValidation" class="notice__validation">
-      <div class="notice__validation__overlay" />
-      <div class="notice__validation__wrapper">
-        <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
-        <button class="notice__validation__button">Valider mes choix</button>
-        <p class="notice__validation__modify" @click="modifyChoices">ou <u>modifier</u></p>
+    <transition name="fade">
+      <div v-if="showValidation" class="notice__validation">
+        <div class="notice__validation__overlay" />
+        <div class="notice__validation__wrapper">
+          <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
+          <button class="notice__validation__button">Valider mes choix</button>
+          <p class="notice__validation__modify" @click="modifyChoices">ou <u>modifier</u></p>
+        </div>
       </div>
-    </div>
+    </transition>
     <notice-choices
       v-if="!showValidation"
       class="notice__choices"
@@ -129,7 +131,9 @@ export default {
         this.removeChoice(slug)
       } else {
         if (this.activeButtons.length < 3) this.activeButtons.push(slug)
-        this.showValidation = this.activeButtons.length === 3
+        setTimeout(() => {
+          this.showValidation = this.activeButtons.length === 3
+        }, 150)
       }
     },
     removeChoice(slug) {
@@ -235,5 +239,14 @@ export default {
   background: #f59535;
   border: 4px solid var(--color-black);
   border-radius: 27px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
