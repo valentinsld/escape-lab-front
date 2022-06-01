@@ -1,6 +1,7 @@
 <template>
   <div ref="interactElement" class="notice">
     <div class="notice__rules-choices">
+      <div v-for="i in 3" :key="i" class="notice__rule-choice__dot" :class="`notice__rule-choice__dot--${i}`" />
       <div v-for="(slug, i) in activeButtons" :key="i" class="notice__rule-choice" :class="`notice__rule-choice--${i}`">
         <img class="notice__rule-choice__img" :src="getIcon(slug)" />
       </div>
@@ -150,6 +151,8 @@ export default {
   position: absolute;
   top: 50%;
   display: flex;
+  width: 32px;
+  height: 32px;
   transform: translateY(-50%);
 
   &.notice__rule-choice--0 {
@@ -166,8 +169,33 @@ export default {
   }
 }
 
+.notice__rule-choice__dot {
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  transform: translateY(-50%);
+
+  &.notice__rule-choice__dot--1 {
+    left: 26px;
+  }
+
+  &.notice__rule-choice__dot--2 {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.notice__rule-choice__dot--3 {
+    right: 26px;
+  }
+}
+
 .notice__rule-choice__img {
-  transition: 300ms var(--custom-bezier);
+  width: 100%;
+  height: 100%;
+  background: #3577f5;
 }
 
 .notice__rule {
