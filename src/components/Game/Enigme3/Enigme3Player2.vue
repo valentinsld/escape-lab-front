@@ -2,15 +2,15 @@
   <div ref="interactElement" class="notice">
     <div class="notice__rules-container">
       <div
-        v-for="i in numberOfPages"
+        v-for="(slug, i) in notice"
         ref="rule"
         :key="i"
         :class="`notice__rule notice__rule--${i}`"
         :style="ruleStyle(i)"
       >
         <div class="notice__rule__wrapper">
-          <img class="notice__rule__img" :src="getSource(i)" />
-          <button class="notice__rule__btn" @click="toggleButton(i)" v-html="buttonText(i)" />
+          <img class="notice__rule__img" :src="getSource(slug)" />
+          <button v-if="i > 0" class="notice__rule__btn" @click="toggleButton(slug)" v-html="buttonText(i)" />
         </div>
       </div>
     </div>
@@ -21,6 +21,8 @@
 import Anime from 'animejs'
 import interact from 'interact.js'
 
+import { notice } from '@/data/enigme3'
+
 export default {
   name: 'Enigme3Player2',
   data() {
@@ -28,10 +30,12 @@ export default {
       currentPage: 1,
       numberOfPages: 7,
       listeningSwipe: true,
-      activeButtons: []
+      activeButtons: [],
+      notice: notice
     }
   },
   mounted() {
+    console.log(this.notice, 'notice')
     this.currentPage = 1
 
     const element = this.$refs.interactElement
@@ -63,8 +67,8 @@ export default {
     start() {
       console.log('START ENIGME')
     },
-    getSource(i) {
-      return require(`@/assets/images/enigme3/notice/page-${i}.png`)
+    getSource(slug) {
+      return require(`@/assets/images/enigme3/notice/${slug}.png`)
     },
     ruleStyle(i) {
       return {
@@ -97,12 +101,13 @@ export default {
         this.currentPage -= 1
       }
     },
-    buttonText(i) {
-      console.log(i)
+    buttonText(slug) {
+      console.log(slug)
       return 'Signaler'
     },
     toggleButton(i) {
-      console.log(i)
+      this.activeButtons.push(i)
+      console.log(this.activeButtons, 'active buttons')
     }
   }
 }

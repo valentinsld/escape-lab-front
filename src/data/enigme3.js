@@ -1,5 +1,6 @@
 import { getCountryAnswer, getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
+export const notice = ['first', 'price', 'stock', 'profile', 'payment', 'criteria', 'availability']
 export const questionsData = (product) => [
   {
     slug: 'price',
