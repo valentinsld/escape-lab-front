@@ -10,7 +10,7 @@
       >
         <div class="notice__rule__wrapper">
           <img class="notice__rule__img" :src="getSource(slug)" />
-          <button v-if="i > 0" class="notice__rule__btn" @click="toggleButton(slug)" v-html="buttonText(i)" />
+          <button v-if="i > 0" class="notice__rule__btn" @click="toggleButton(slug)" v-html="buttonText(slug)" />
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@ export default {
       notice: notice
     }
   },
+  computed: {},
   mounted() {
     console.log(this.notice, 'notice')
     this.currentPage = 1
@@ -105,11 +106,7 @@ export default {
       return this.activeButtons.includes(slug)
     },
     buttonText(slug) {
-      console.log(slug)
-      if (this.activeButtons.includes(slug)) {
-        return 'Annuler'
-      }
-      return 'Signaler'
+      return this.isButtonActive(slug) ? 'Annuler' : 'Signaler'
     },
     toggleButton(slug) {
       if (this.isButtonActive(slug)) {
