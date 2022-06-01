@@ -1,5 +1,10 @@
 <template>
   <div ref="interactElement" class="notice">
+    <div class="notice__rules-choices">
+      <div v-for="(slug, i) in notice" :key="i" class="notice__rule-choice">
+        <img v-if="slug !== 'first'" class="notice__rule-choice__img" :src="getIcon(slug)" />
+      </div>
+    </div>
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -70,6 +75,9 @@ export default {
     },
     getSource(slug) {
       return require(`@/assets/images/enigme3/notice/${slug}.png`)
+    },
+    getIcon(slug) {
+      return require(`@/assets/images/enigme3/notice/icons/${slug}.svg`)
     },
     ruleStyle(i) {
       return {

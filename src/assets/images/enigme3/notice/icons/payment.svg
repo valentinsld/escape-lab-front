@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.535" height="30.535" viewBox="0 0 30.535 30.535">
+  <g id="payment" transform="translate(-17705.57 -16397.102)">
+    <g id="Groupe_436" data-name="Groupe 436" transform="translate(2349.571 993.102)">
+      <g id="Ellipse_118" data-name="Ellipse 118" transform="translate(15356 15404)" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="2">
+        <circle cx="15.268" cy="15.268" r="15.268" stroke="none"/>
+        <circle cx="15.268" cy="15.268" r="14.268" fill="none"/>
+      </g>
+    </g>
+    <g id="Groupe_446" data-name="Groupe 446" transform="translate(1969.596 990.617)">
+      <g id="Rectangle_392" data-name="Rectangle 392" transform="translate(15742 15416)" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="1.5">
+        <rect width="18.808" height="11.822" rx="3" stroke="none"/>
+        <rect x="0.75" y="0.75" width="17.308" height="10.322" rx="2.25" fill="none"/>
+      </g>
+      <g id="Rectangle_393" data-name="Rectangle 393" transform="translate(15744.687 15423.522)" stroke="#fff" stroke-width="1">
+        <rect width="13.972" height="1.612" stroke="none"/>
+        <rect x="0.5" y="0.5" width="12.972" height="0.612" fill="none"/>
+      </g>
+      <g id="Rectangle_394" data-name="Rectangle 394" transform="translate(15753.822 15418.687)" fill="#fff" stroke="#fff" stroke-width="1">
+        <rect width="3.762" height="3.224" stroke="none"/>
+        <rect x="0.5" y="0.5" width="2.762" height="2.224" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>
