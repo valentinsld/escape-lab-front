@@ -34,6 +34,12 @@ export default {
       if (!stepGame) return
       this.show = false
     },
+    'show-fader': function () {
+      this.show = true
+    },
+    'enigme2-restart': function () {
+      this.show = false
+    },
     'outro-startMessages': function () {
       this.show = false
     }
