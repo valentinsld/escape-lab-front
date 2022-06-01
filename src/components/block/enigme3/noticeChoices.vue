@@ -1,6 +1,8 @@
 <template>
   <div v-if="activeButtons" class="notice-choices">
-    <div v-for="i in 3" :key="i" class="notice-choices__dot" :class="`notice-choices__dot--${i}`" />
+    <div v-for="i in 3" :key="i" class="notice-choices__dot-wrapper">
+      <div v-if="!activeButtons[i - 1]" class="notice-choices__dot" :class="`notice-choices__dot--${i}`" />
+    </div>
     <div
       v-for="(slug, i) in activeButtons"
       :key="slug"
