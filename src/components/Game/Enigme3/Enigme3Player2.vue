@@ -1,17 +1,25 @@
 <template>
   <div ref="interactElement" class="notice">
-    <div class="notice__rules-choices">
-      <div v-for="i in 3" :key="i" class="notice__rule-choice__dot" :class="`notice__rule-choice__dot--${i}`" />
+    <!--    <div class="notice__validation">
+      <div class="notice__validation__overlay" />
+      <div class="notice__validation__wrapper">
+        <button class="notice__validation__button" @click="nextStep">Valider mes choix</button>
+        <p class="notice__validation__modify">ou <u>modifier</u></p>
+      </div>
+    </div>-->
+    <notice-choices :active-buttons="activeButtons" :on-click="removeChoice" />
+    <!--    <div class="notice__rules-choices">
+      <div v-for="i in 3" :key="i" class="notice__rule-choice__dot" :class="`notice__rule-choice__dot&#45;&#45;${i}`" />
       <div
         v-for="(slug, i) in activeButtons"
         :key="slug"
         class="notice__rule-choice"
-        :class="`notice__rule-choice--${i}`"
+        :class="`notice__rule-choice&#45;&#45;${i}`"
         @click="removeChoice(slug)"
       >
         <img class="notice__rule-choice__img" :src="getIcon(slug)" />
       </div>
-    </div>
+    </div>-->
     <div class="notice__rules-container">
       <div
         v-for="(slug, i) in notice"
@@ -33,10 +41,12 @@
 import Anime from 'animejs'
 import interact from 'interact.js'
 
+import NoticeChoices from '@/components/block/enigme3/noticeChoices'
 import { notice } from '@/data/enigme3'
 
 export default {
   name: 'Enigme3Player2',
+  components: { NoticeChoices },
   data() {
     return {
       currentPage: 1,
@@ -238,5 +248,47 @@ export default {
   bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.notice__validation {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.notice__validation__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  padding: 2em 1em;
+  transform: translate(-50%, -50%);
+}
+
+.notice__validation__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  transition: 300ms var(--custom-bezier);
+}
+
+.notice__validation__modify {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #f8f8f8;
+  text-align: center;
+}
+
+.notice__validation__button {
+  display: block;
+  padding: 0.8em 1.5em;
+  margin: auto;
+  font-weight: bold;
+  color: #f8f8f8;
+  background: #f59535;
+  border: 4px solid var(--color-black);
+  border-radius: 27px;
 }
 </style>
