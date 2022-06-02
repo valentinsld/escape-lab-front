@@ -61,9 +61,7 @@ export default {
       let timer = 0
       let coundtDown = setInterval(() => {
         timer = timer + interval
-        console.log(timer)
         let progressWidth = (timer / time) * 100
-        console.log(`progress width vaut :: ${progressWidth}`)
         if (timer < time) {
           this.$refs.progress.style.width = `${progressWidth}%`
         } else {
@@ -79,7 +77,6 @@ export default {
       this.getPopupsData(props)
     },
     'enigme2-timer': function ({ timer }) {
-      console.log(timer)
       this.startTimer(timer)
     },
     'enigme2-endSort': function ({ success }) {
