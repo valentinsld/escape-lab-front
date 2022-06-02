@@ -24,11 +24,12 @@
         v-for="(slug, i) in notice"
         ref="rule"
         :key="i"
-        :class="`notice__rule notice__rule--${i}`"
+        :class="[`notice__rule notice__rule--${i}`, isButtonActive(slug) && 'notice__rule--active']"
         :style="ruleStyle(i)"
       >
         <div class="notice__rule__wrapper">
           <img class="notice__rule__img" :src="getSource(slug)" />
+          <img class="notice__rule__check" src="@/assets/images/enigme3/notice/check.png" />
           <button
             v-if="i > 0"
             class="notice__rule__btn"
@@ -200,6 +201,20 @@ export default {
   height: 100%;
 }
 
+.notice__rule__check {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: 150ms var(--custom-bezier);
+  transform: translateY(-50%);
+
+  .notice__rule--active & {
+    opacity: 1;
+  }
+}
+
 .notice__rule__wrapper {
   .notice__rule--2 & {
     transform: rotate(3deg);
@@ -227,7 +242,7 @@ export default {
   transition: 150ms var(--custom-bezier);
   transform: translateX(-50%);
 
-  &--active {
+  .notice__rule--active & {
     color: #f8f8f8;
     background: var(--color-black);
   }
