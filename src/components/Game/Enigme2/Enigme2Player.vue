@@ -32,25 +32,6 @@ export default {
   },
   mounted() {
     this.defineIdentity()
-    this.sockets.subscribe('sendPopups', (props) => {
-      this.getPopupsData(props)
-      console.log('props vaut :: ', props)
-    })
-    this.sockets.subscribe('sendPopupToPlayer', () => {
-      if (this.$store.state[S.typeScreen] === 'Player1') {
-        this.showPopup = true
-      }
-    })
-
-    this.sockets.subscribe('popupTransfer', () => {
-      if (this.$store.state[S.typeScreen] === 'Player2') {
-        this.createPopup()
-      }
-    })
-    this.sockets.subscribe('enigme2-timer', ({ timer }) => {
-      this.startTimer(timer)
-    })
-    // this.start()
   },
   methods: {
     getPopupsData(data) {
@@ -74,9 +55,6 @@ export default {
       this.showPopup = true
       console.log(this.showPopup)
     },
-    start() {
-      console.log('START ENIGME')
-    },
     startTimer(time) {
       //ref to progress inner
       const interval = 100
@@ -94,6 +72,20 @@ export default {
           // alert('enigme terminée')
         }
       }, interval)
+    }
+  },
+  sockets: {
+    'enigme2-sendPopups': function (props) {
+      this.getPopupsData(props)
+    },
+    'enigme2-timer': function ({ timer }) {
+      console.log(timer)
+      this.startTimer(timer)
+    },
+    'enigme2-endSort': function ({ success }) {
+      setTimeout(() => {
+        this.showFailure = !success
+      }, 800)
     }
   }
 }
