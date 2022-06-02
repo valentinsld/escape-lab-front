@@ -21,7 +21,6 @@
     </div>
     <div class="chat__choices-container">
       <div ref="choice-buttons" class="chat__choices">
-        <!--        <h4 v-html="'Répondez au vendeur'" />-->
         <div class="chat__choices__buttons">
           <button
             v-if="questions[0]"
@@ -36,20 +35,7 @@
             @click="chooseQuestion(1)"
             v-html="questions[1].btnLabel"
           ></button>
-          <!-- if last question to choose bot -->
-          <button
-            v-if="finalAnswers[0]"
-            class="chat__choices__btn chat__choices__btn--strong"
-            @click="chooseBotAnswer('bot')"
-            v-html="finalAnswers[0]"
-          />
-          <p v-if="finalAnswers[1]">ou</p>
-          <button
-            v-if="finalAnswers[1]"
-            class="chat__choices__btn chat__choices__btn--strong"
-            @click="chooseBotAnswer('normal')"
-            v-html="finalAnswers[1]"
-          />
+          <p v-if="allQuestionsAsked">Je crois avoir posé toutes les questions</p>
         </div>
       </div>
     </div>
@@ -60,7 +46,7 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData, solution, textContent } from '@/data/enigme3'
+import { questionsData, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
@@ -93,11 +79,11 @@ export default {
       buttons: null,
       questions: [],
       isMessageSend: false,
-      finalAnswers: [],
       choices: [],
       text: textContent,
       messages: [],
-      solutionAnswer: null
+      solutionAnswer: null,
+      allQuestionsAsked: false
     }
   },
   mounted() {
@@ -134,7 +120,7 @@ export default {
       this.questions.splice(this.choicePos, 1)
       this.questions.length > 0
         ? this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
-        : this.finalChoice()
+        : (this.allQuestionsAsked = true)
     },
     getResponse() {
       const answer =
@@ -164,17 +150,6 @@ export default {
         duration: 150,
         easing: 'easeInExpo'
       })
-    },
-    finalChoice() {
-      // push final choices
-      this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
-    },
-    chooseBotAnswer(sellerType) {
-      this.solutionAnswer =
-        sellerType === this.sellerType ? solution[this.sellerType]['success'] : solution[this.sellerType]['fail']
-    },
-    nextStep() {
-      this.$socket.emit('nextEnigme')
     }
   }
 }
