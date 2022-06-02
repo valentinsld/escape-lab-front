@@ -219,10 +219,10 @@ export default {
       if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
-    playstartOutro() {
-      if (this.$data.isStepGame) return
-      this.$socket.emit('nextEnigme')
-    },
+    // playstartOutro() {
+    //   if (this.$data.isStepGame) return
+    //   this.$socket.emit('nextEnigme')
+    // },
     playoutroStartMessages() {
       console.log('outro-startMessages')
       this.$socket.emit('outro-startMessages')
