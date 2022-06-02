@@ -32,6 +32,25 @@ export default {
   },
   mounted() {
     this.defineIdentity()
+    this.sockets.subscribe('sendPopups', (props) => {
+      this.getPopupsData(props)
+      console.log('props vaut :: ', props)
+    })
+    this.sockets.subscribe('sendPopupToPlayer', () => {
+      if (this.$store.state[S.typeScreen] === 'Player1') {
+        this.showPopup = true
+      }
+    })
+
+    this.sockets.subscribe('popupTransfer', () => {
+      if (this.$store.state[S.typeScreen] === 'Player2') {
+        this.createPopup()
+      }
+    })
+    this.sockets.subscribe('enigme2-timer', ({ timer }) => {
+      this.startTimer(timer)
+    })
+    // this.start()
   },
   methods: {
     getPopupsData(data) {
@@ -57,47 +76,24 @@ export default {
     },
     start() {
       console.log('START ENIGME')
-      this.startTimer(1000)
     },
     startTimer(time) {
       //ref to progress inner
-      let interval = time
-      let timer = setInterval(() => {
-        interval--
-        console.log(interval)
-        let progressWidth = (interval / 10) * 100
-        if (interval > 0) {
+      const interval = 100
+      let timer = 0
+      let coundtDown = setInterval(() => {
+        timer = timer + interval
+        console.log(timer)
+        let progressWidth = (timer / time) * 100
+        console.log(`progress width vaut :: ${progressWidth}`)
+        if (timer < time) {
           this.$refs.progress.style.width = `${progressWidth}%`
         } else {
-          clearInterval(timer)
+          clearInterval(coundtDown)
           this.$refs.progress.style.width = '0%'
-          alert('enigme terminée')
+          // alert('enigme terminée')
         }
       }, interval)
-    }
-  },
-  sockets: {
-    startEnigme: function () {
-      this.start()
-    },
-    'enigme2-sendPopups': function (props) {
-      this.getPopupsData(props)
-      console.log('props vaut :: ', props)
-    },
-    sendPopupToPlayer: function () {
-      if (this.$store.state[S.typeScreen] === 'Player1') {
-        this.showPopup = true
-      }
-    },
-    popupTransfer: function () {
-      if (this.$store.state[S.typeScreen] === 'Player2') {
-        this.createPopup()
-      }
-    },
-    'enigme2-endSort': function ({ success }) {
-      setTimeout(() => {
-        this.showFailure = !success
-      }, 800)
     }
   }
 }
@@ -118,9 +114,10 @@ export default {
 //   position: relative;
 // }
 
-.progress-inner {
+.progress {
   position: absolute;
-  left: 0;
+  top: 0;
+  right: 0;
   width: 0%;
   height: 100%;
   background-color: magenta;

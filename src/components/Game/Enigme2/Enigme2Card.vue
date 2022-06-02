@@ -204,6 +204,7 @@ export default {
 
 <style lang="scss" scoped>
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -237,7 +238,7 @@ export default {
   position: absolute;
   top: 5px;
   display: flex;
-  width: 95%;
+  width: 100%;
   padding: 4px;
   background-color: transparent;
   border-bottom: black solid 4px;
