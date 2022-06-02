@@ -29,7 +29,13 @@
       >
         <div class="notice__rule__wrapper">
           <img class="notice__rule__img" :src="getSource(slug)" />
-          <button v-if="i > 0" class="notice__rule__btn" @click="toggleButton(slug)" v-html="buttonText(slug)" />
+          <button
+            v-if="i > 0"
+            class="notice__rule__btn"
+            :class="isButtonActive(slug) ? 'notice__rule__btn--active' : ''"
+            @click="toggleButton(slug)"
+            v-html="buttonText(slug)"
+          />
         </div>
       </div>
     </div>
@@ -218,10 +224,12 @@ export default {
   background: transparent;
   border: 4px solid var(--color-black);
   border-radius: 8px;
+  transition: 150ms var(--custom-bezier);
   transform: translateX(-50%);
 
   &--active {
-    background: #3577f5;
+    color: #f8f8f8;
+    background: var(--color-black);
   }
 }
 
