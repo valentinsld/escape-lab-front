@@ -17,18 +17,16 @@
     </div>
     <ul class="card-content">
       <li>
-        <span
-          ><strong>{{ card.senderPrefix }}</strong></span
-        >
+        <strong>De : </strong>
         <span>{{ card.from }}</span>
       </li>
       <li>
-        <span
-          ><strong>{{ card.subjetPrefix }}</strong></span
-        >
+        <strong>Objet : </strong>
         <span>{{ card.subject }}</span>
       </li>
-      <li class="text">{{ card.text }}</li>
+      <li class="text">
+        {{ card.text }}
+      </li>
     </ul>
   </div>
 </template>
@@ -215,12 +213,16 @@ export default {
 <style lang="scss" scoped>
 .card {
   position: relative;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 260px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  min-height: 200px;
+  margin-bottom: 20px;
   color: black;
   background-color: azure;
   border: black solid 5px;
@@ -228,11 +230,11 @@ export default {
   box-shadow: 6px 6px 0 var(--color-black);
 
   &.-isWrong {
-    background-color: red;
+    background-color: var(--color-red);
   }
 
   &.-isRight {
-    background-color: green;
+    background-color: var(--color-green);
   }
 }
 
@@ -240,8 +242,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-height: 80%;
   padding-left: 0;
+  // max-height: 80%;
+  margin: 40px 20px 20px;
   list-style: none;
 }
 
