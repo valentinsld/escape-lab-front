@@ -2,6 +2,7 @@
   <div class="main">
     <Enigme2Restart v-if="showFailure" />
 
+    <div ref="progress" class="progress"></div>
     <p class="indicationSPam">{{ isFirstPlayer ? 'SPAM' : 'NON SPAM' }}</p>
     <!-- <button v-if="isFirstPlayer" @click="sendPopup">Envoyer au Joueur 2</button> -->
     <Enigme2PopupStack class="popup" :cards="cards"></Enigme2PopupStack>
@@ -56,6 +57,23 @@ export default {
     },
     start() {
       console.log('START ENIGME')
+      this.startTimer(1000)
+    },
+    startTimer(time) {
+      //ref to progress inner
+      let interval = time
+      let timer = setInterval(() => {
+        interval--
+        console.log(interval)
+        let progressWidth = (interval / 10) * 100
+        if (interval > 0) {
+          this.$refs.progress.style.width = `${progressWidth}%`
+        } else {
+          clearInterval(timer)
+          this.$refs.progress.style.width = '0%'
+          alert('enigme terminée')
+        }
+      }, interval)
     }
   },
   sockets: {
@@ -92,7 +110,20 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%;
+  background-color: #5d44c7;
   border: black solid 1px;
+}
+
+// .main.progress {
+//   position: relative;
+// }
+
+.progress-inner {
+  position: absolute;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: magenta;
 }
 
 .indicationSPam {

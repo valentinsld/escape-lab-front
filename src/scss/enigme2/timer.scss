@@ -1,0 +1,79 @@
+/* TIMEBAR COMPONENT */
+.c-timebar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .c-timebar__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: #FFF8C4;
+    opacity: 0.15;
+  }
+  
+  .c-timebar__remaining {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: #FFE626;
+    -webkit-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
+  
+  @-webkit-keyframes timebar_progress_x {
+    from {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+
+    to {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+    }
+  }
+  
+  @keyframes timebar_progress_x {
+    from {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+
+    to {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+    }
+  }
+  @-webkit-keyframes timebar_progress_y {
+    from {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+    }
+
+    to {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+    }
+  }
+  @keyframes timebar_progress_y {
+    from {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+    }
+
+    to {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+    }
+  }
