@@ -54,7 +54,7 @@ export const solution = {
       'Bien joué ! Il s’agissait d’un vendeur fiable ! Seul les points suivants auraient pu laisser penser que c’était le bot :',
     fail: 'Aie... Il s’agissait d’un véritable vendeur, il n’a pas dû apprécier ce moment ! Seul les points suivants auraient pu laisser penser que c’était le bot : '
   }*/
-  success: 'Bien joué !',
+  success: 'Vous avez trouvé les bonnes règles, bien joué !',
   fail: 'Aie ! Ce ne sont pas les bonnes règles, voici celles qui permettaient de le démasquer :'
 }
 
