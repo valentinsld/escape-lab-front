@@ -2,8 +2,8 @@
   <div class="solution-popup">
     <div class="solution-popup__overlay" />
     <div class="solution-popup__container">
-      <p class="solution-popup__answer" v-html="isSuccess ? 'Gagné !' : 'Perdu !'" />
-      <div class="solution-popup__rules">
+      <p class="solution-popup__answer" v-html="getContent" />
+      <div v-if="!isSuccess" class="solution-popup__rules">
         <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
       </div>
       <button class="solution-popup__button" @click="nextStep">suivant</button>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { solution } from '@/data/enigme3'
+
 export default {
   name: 'SolutionPopup',
   props: {
@@ -25,7 +27,14 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      solution: solution
+    }
+  },
+  computed: {
+    getContent() {
+      return this.isSuccess ? this.solution.success : this.solution.fail
+    }
   },
   mounted() {},
   methods: {
