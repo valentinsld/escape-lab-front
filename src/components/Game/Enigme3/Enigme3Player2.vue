@@ -4,7 +4,11 @@
       <div v-if="showValidation && isSuccess === null" class="notice__validation">
         <div class="notice__validation__overlay" />
         <div class="notice__validation__wrapper">
-          <notice-choices class="notice__validation__choices" :active-buttons="activeButtons" />
+          <notice-choices
+            class="notice__validation__choices"
+            :active-buttons="activeButtons"
+            :on-click="removeChoice"
+          />
           <button class="notice__validation__button" @click="validateChoices">Valider mes choix</button>
           <p class="notice__validation__modify" @click="modifyChoices">ou <u>modifier</u></p>
         </div>
@@ -30,13 +34,7 @@
         <div class="notice__rule__wrapper">
           <img class="notice__rule__img" :src="getSource(slug)" />
           <img class="notice__rule__check" src="@/assets/images/enigme3/notice/check.png" />
-          <button
-            v-if="i > 0"
-            class="notice__rule__btn"
-            :class="isButtonActive(slug) ? 'notice__rule__btn--active' : ''"
-            @click="toggleButton(slug)"
-            v-html="buttonText(slug)"
-          />
+          <button v-if="i > 0" class="notice__rule__btn" @click="toggleButton(slug)" v-html="buttonText(slug)" />
         </div>
       </div>
     </div>
@@ -157,6 +155,9 @@ export default {
     removeChoice(slug) {
       const i = this.activeButtons.indexOf(slug)
       this.activeButtons.splice(i, 1)
+      setTimeout(() => {
+        this.modifyChoices()
+      }, 150)
     },
     modifyChoices() {
       this.showValidation = false
