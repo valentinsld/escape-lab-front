@@ -1,5 +1,5 @@
 <template>
-  <div class="outro">
+  <div class="screenContainer outro">
     <div ref="messages" class="outro__messages">
       <Messages
         :messages="messages"
@@ -7,7 +7,11 @@
         @onanimation:iscomplete="handleMessageComplete"
       />
     </div>
-    <Button v-if="endVideo" text="Voir des statistiques" :on-click="goToStats" />
+
+    <div v-if="endVideo" class="outro__end">
+      <Button class="end__stats" text="En savoir plus sur les arnaques" :on-click="goToStats" />
+      <Button class="end__restart" text="Recommencer l'expérience" :on-click="goToHome" />
+    </div>
   </div>
 </template>
 
@@ -17,6 +21,7 @@ import Anime from 'animejs'
 import Button from '@/components/block/button'
 import Messages from '@/components/block/Messages'
 import { STATE as S } from '@/store/helpers'
+import { MUTATIONS as M } from '@/store/helpers'
 
 export default {
   name: 'OutroPlayer',
@@ -55,6 +60,21 @@ export default {
     goToStats() {
       this.$router.push({ path: '/results' })
     },
+    goToHome() {
+      this.$socket.emit('leave')
+
+      this.$store.commit(M.typeScreen, null)
+      this.$store.commit(M.idRoom, null)
+      this.$store.commit(M.listUsers, {})
+      this.$store.commit(M.playerIsReady, [])
+      this.$store.commit(M.isStart, false)
+      this.$store.commit(M.stepGame, null)
+
+      this.$nextTick(() => {
+        this.$router.push({ path: '/' })
+        window.location.reload()
+      })
+    },
 
     handleMessageComplete() {
       Anime({
@@ -71,14 +91,51 @@ export default {
 <style lang="scss" scoped>
 .outro {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  // flex-direction: column;
+  // align-items: align;
+  // justify-content: center;
+
+  padding: 0;
 
   &__messages {
     width: 100%;
+  }
+
+  &__end {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 32px;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: enShow 450ms var(--custom-bezier);
+
+    & > * {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@keyframes enShow {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 </style>
