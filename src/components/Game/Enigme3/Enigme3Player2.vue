@@ -210,9 +210,19 @@ export default {
 
 .notice__rule__btn {
   position: absolute;
-  bottom: 35px;
+  bottom: 30px;
   left: 50%;
+  padding: 0.2em 1em;
+  font-size: 20px;
+  font-weight: bold;
+  background: transparent;
+  border: 4px solid var(--color-black);
+  border-radius: 8px;
   transform: translateX(-50%);
+
+  &--active {
+    background: #3577f5;
+  }
 }
 
 .notice__validation {
