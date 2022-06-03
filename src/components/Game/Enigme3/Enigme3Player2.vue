@@ -43,7 +43,7 @@
 
 <script>
 import Anime from 'animejs'
-import interact from 'interact.js'
+import interact from 'interactjs'
 
 import NoticeChoices from '@/components/block/enigme3/noticeChoices'
 import SolutionPopup from '@/components/block/enigme3/solutionPopup'

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import { mapState } from 'vuex'
 
 import Enigme2Card from '@/components/Game/Enigme2/Enigme2Card.vue'
@@ -55,6 +54,7 @@ export default {
 <style scoped>
 .cards {
   position: relative;
+  box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -63,8 +63,8 @@ export default {
   /* justify-content: center; */
   width: 100%;
   height: 100%;
+  padding: 0 20px 20px;
   overflow-x: hidden;
   overflow-y: scroll;
-  border: red dotted 3px;
 }
 </style>
