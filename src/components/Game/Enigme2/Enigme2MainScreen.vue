@@ -2,21 +2,18 @@
 <template>
   <div class="main enigme2">
     <Enigme2Restart v-if="showFailure" />
-    <h1>Enigme 2 MainScreen</h1>
     <!-- <button @click="enigme2GameLoop">Start Enigme 2</button> -->
-    <Enigme2PopupStack :cards="cards"></Enigme2PopupStack>
+    <Enigme2PopupStack :cards="cards" :is-main-screen="true"></Enigme2PopupStack>
   </div>
 </template>
 
 <script>
-import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2MainScreenRestart.vue'
 
 export default {
   name: 'Enigme2MainScreen',
   components: {
-    Enigme2Popup,
     Enigme2PopupStack,
     Enigme2Restart
   },

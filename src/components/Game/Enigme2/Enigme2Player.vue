@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2PlayerRestart.vue'
 import { STATE as S } from '@/store/helpers'
@@ -18,7 +17,6 @@ import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme2Player',
   components: {
-    Enigme2Popup,
     Enigme2PopupStack,
     Enigme2Restart
   },

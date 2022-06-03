@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Popup.vue'
 import { mapState } from 'vuex'
 
 import Enigme2Card from '@/components/Game/Enigme2/Enigme2Card.vue'
