@@ -130,7 +130,7 @@ export default {
               translateY: [-this.heightCard, 0],
               rotate: 0,
               easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 850,
+              duration: 450,
               complete: () => {
                 this.interactPosition = { x: 0, y: 0, rotation: 0 }
                 this.isAnimating = false
@@ -146,8 +146,7 @@ export default {
               translateY: 0,
               rotate: 0,
               easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 1050,
-              delay: 500,
+              duration: 450,
               complete: () => {
                 this.interactPosition = { x: 0, y: 0, rotation: 0 }
                 this.isAnimating = false
@@ -163,8 +162,7 @@ export default {
               translateY: 0,
               rotate: 0,
               easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 1050,
-              delay: 500,
+              duration: 450,
               complete: () => {
                 this.interactPosition = { x: 0, y: 0, rotation: 0 }
                 this.isAnimating = false
@@ -297,7 +295,7 @@ export default {
 .cardContainer {
   flex-shrink: 0;
   max-height: 0;
-  transition: max-height 1050ms var(--custom-bezier);
+  transition: max-height 450ms var(--custom-bezier);
 
   &.isCurrent {
     max-height: var(--heightCard);
