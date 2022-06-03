@@ -4,7 +4,6 @@
     :style="{ '--heightCard': heightCard + 50 + 'px', order: card.order }"
   >
     <div
-      v-if="isShowing"
       ref="interactElement"
       :class="{
         card: true,
@@ -78,7 +77,6 @@ export default {
 
   data() {
     return {
-      isShowing: true,
       isInteractAnimating: true,
       isInteractDragged: null,
       interactPosition: {
@@ -111,14 +109,70 @@ export default {
       const player2 = !this.isFirstPlayer && !this.card.isSpam
 
       return this.isEndSort && !(this.isFirstPlayer ? player1 : player2)
+    },
+    incomingDirection() {
+      return this.card.incomingDirection
     }
   }),
   watch: {
-    card() {
-      // console.log(this.card)
-      if (this.card.owner === this.typeScreen) {
-        this.resetCardPosition()
-      }
+    incomingDirection() {
+      if (this.isAnimating || this.card.owner !== this.typeScreen) return
+      this.isAnimating = true
+
+      this.$nextTick(() => {
+        switch (this.card.incomingDirection) {
+          case 'top':
+            // this.$refs.interactElement.style.transform = `translate3d(0, ${this.heightCard}, 0)`
+
+            Anime({
+              targets: this.$refs.interactElement,
+              translateX: 0,
+              translateY: [-this.heightCard, 0],
+              rotate: 0,
+              easing: 'cubicBezier(.2,0,.25,1)',
+              duration: 850,
+              complete: () => {
+                this.interactPosition = { x: 0, y: 0, rotation: 0 }
+                this.isAnimating = false
+              }
+            })
+            break
+          case LEFT:
+            // this.$refs.interactElement.style.transform = `translate3d(${-window.innerWidth}, 0, 0)`
+
+            Anime({
+              targets: this.$refs.interactElement,
+              translateX: [-window.innerWidth, 0],
+              translateY: 0,
+              rotate: 0,
+              easing: 'cubicBezier(.2,0,.25,1)',
+              duration: 1050,
+              delay: 500,
+              complete: () => {
+                this.interactPosition = { x: 0, y: 0, rotation: 0 }
+                this.isAnimating = false
+              }
+            })
+            break
+          case RIGHT:
+            // this.$refs.interactElement.style.transform = `translate3d(${window.innerWidth}, 0, 0)`
+
+            Anime({
+              targets: this.$refs.interactElement,
+              translateX: [window.innerWidth, 0],
+              translateY: 0,
+              rotate: 0,
+              easing: 'cubicBezier(.2,0,.25,1)',
+              duration: 1050,
+              delay: 500,
+              complete: () => {
+                this.interactPosition = { x: 0, y: 0, rotation: 0 }
+                this.isAnimating = false
+              }
+            })
+            break
+        }
+      })
     },
     isEndSort() {
       if (this.isEndSort) {
@@ -151,21 +205,16 @@ export default {
       },
 
       onend: () => {
-        const { x, y } = this.interactPosition
-        const { interactXThreshold, interactYThreshold } = this.$options.static
+        const { x } = this.interactPosition
+        const { interactXThreshold } = this.$options.static
         this.isInteractAnimating = true
 
         if (x > interactXThreshold) this.playCard(RIGHT)
         else if (x < -interactXThreshold) this.playCard(LEFT)
-        else if (y > interactYThreshold) this.playCard(BOTTOM)
         else this.resetCardPosition()
       }
     })
   },
-
-  //   beforeDestroy() {
-  //     interact(this.$refs.interactElement).unset()
-  //   },
 
   methods: {
     initHeightCard() {
@@ -248,7 +297,7 @@ export default {
 .cardContainer {
   flex-shrink: 0;
   max-height: 0;
-  transition: all 450ms var(--custom-bezier);
+  transition: max-height 1050ms var(--custom-bezier);
 
   &.isCurrent {
     max-height: var(--heightCard);
@@ -272,6 +321,12 @@ export default {
   border: black solid 5px;
   border-radius: 30px;
   box-shadow: 6px 6px 0 var(--color-black);
+  will-change: transform;
+  opacity: 0;
+
+  &.isCurrent {
+    opacity: 1;
+  }
 
   &.-isWrong {
     background-color: var(--color-red);
@@ -338,9 +393,5 @@ export default {
 
 .card:not(.isCurrent) {
   opacity: 0;
-}
-
-.isAnimating {
-  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 </style>
