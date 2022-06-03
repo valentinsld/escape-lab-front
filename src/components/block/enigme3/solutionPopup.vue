@@ -6,7 +6,7 @@
       <div v-if="!isSuccess" class="solution-popup__rules">
         <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
       </div>
-      <button class="solution-popup__button" @click="nextStep">suivant</button>
+      <button class="solution-popup__button" @click="nextStep">{{ isSuccess ? 'suivant' : 'recommencer' }}</button>
     </div>
   </div>
 </template>
@@ -33,13 +33,18 @@ export default {
   },
   computed: {
     getContent() {
+      console.log(this.isSuccess, 'success')
       return this.isSuccess ? this.solution.success : this.solution.fail
     }
   },
   mounted() {},
   methods: {
     nextStep() {
-      this.$socket.emit('nextEnigme')
+      if (this.isSuccess) {
+        this.$socket.emit('nextEnigme')
+      } else {
+        this.$socket.emit('enigme3-restart')
+      }
     }
   }
 }

@@ -44,6 +44,9 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme3-restart': function () {
+      this.reInitData()
     }
   },
   components: { Messages },
@@ -52,17 +55,13 @@ export default {
       type: Array,
       default: () => []
     },
-    sellerType: {
-      type: String,
-      default: null
-    },
     product: {
       type: Object,
       default: () => {}
     },
     questionsToDisplay: {
       type: Number,
-      default: 6
+      default: 4
     }
   },
   data() {
@@ -87,7 +86,6 @@ export default {
     start() {
       console.log('START ENIGME')
     },
-
     generateQuestions() {
       this.questions = questionsData(this.product)
         .sort(() => Math.random() - Math.random())
@@ -140,6 +138,21 @@ export default {
         opacity: [1, 0],
         duration: 150,
         easing: 'easeInExpo'
+      })
+    },
+    reInitData() {
+      this.messages = []
+      this.choicePos = null
+      this.buttons = null
+      this.questions = []
+      this.isMessageSend = false
+      this.choices = []
+      this.allQuestionsAsked = false
+
+      this.generateQuestions()
+
+      this.$nextTick(() => {
+        this.buttons = this.$refs?.['choice-buttons']
       })
     },
     getSource(slug) {

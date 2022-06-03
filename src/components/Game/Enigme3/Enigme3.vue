@@ -5,7 +5,6 @@
       <Enigme3Player1
         v-if="typeScreen === 'Player1'"
         :true-rules="config.trueRules"
-        :seller-type="config.sellerType"
         :product="config.product"
         :questions-to-display="config.settings.questionsToDisplay"
       />
@@ -60,16 +59,20 @@ export default {
   sockets: {
     startEnigme: function () {
       this.isStart = true
+    },
+    'enigme3-config': function (config) {
+      this.$store.commit(M.enigme3Config, config)
+    },
+    'enigme3-restart': function (config) {
+      this.$forceUpdate()
+      this.$store.commit(M.enigme3Config, config)
     }
   },
   mounted() {
     //if main screen get config rules from back
     if (this.typeScreen === 'MainScreen') {
-      this.$socket.emit('sendEnigme3Config')
+      this.$socket.emit('enigme3-config')
     }
-    this.sockets.subscribe('sendEnigme3Config', (config) => {
-      this.$store.commit(M.enigme3Config, config)
-    })
   }
 }
 </script>

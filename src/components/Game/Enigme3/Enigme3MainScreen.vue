@@ -69,6 +69,12 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'show-fader': function () {
+      this.$el.style.opacity = 0
+    },
+    'enigme3-restart': function () {
+      this.$el.style.opacity = 1
     }
   },
   methods: {
@@ -104,6 +110,7 @@ export default {
   top: 50%;
   left: 50%;
   width: 60vw;
+  transition: opacity 400ms var(--custom-bezier);
   transform: translate(-50%, -50%);
 
   p {

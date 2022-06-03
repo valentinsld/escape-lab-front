@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import PhoneCall from '@/components/block/enigme1/phoneCall.vue'
-import PhoneCallIncoming from '@/components/block/enigme1/phoneCallIncoming.vue'
-import PhoneLocked from '@/components/block/enigme1/phoneLocked.vue'
+import PhoneCall from './phoneBlocks/phoneCall.vue'
+import PhoneCallIncoming from './phoneBlocks/phoneCallIncoming.vue'
+import PhoneLocked from './phoneBlocks/phoneLocked.vue'
 
 const SECOND_CALL = 15000
 

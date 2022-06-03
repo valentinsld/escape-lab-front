@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import PhoneMessage from '@/components/block/enigme1/phoneMessages.vue'
-import Timer from '@/components/block/enigme1/timer.vue'
+import PhoneMessage from './phoneBlocks/phoneMessages.vue'
+import Timer from './phoneBlocks/timer.vue'
 
 export default {
   name: 'Enigme1Player1',

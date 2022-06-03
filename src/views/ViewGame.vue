@@ -1,6 +1,8 @@
 /* eslint-disable vue/no-multiple-template-root */
 <template>
   <ViewContainer name="game">
+    <Fader v-if="typeScreen !== mainScreen" />
+
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
@@ -14,6 +16,7 @@ import { mapState } from 'vuex'
 import Enigme1 from '@/components/Game/Enigme1/Enigme1'
 import Enigme2 from '@/components/Game/Enigme2/Enigme2'
 import Enigme3 from '@/components/Game/Enigme3/Enigme3'
+import Fader from '@/components/Game/Fader.vue'
 // intro
 import Intro from '@/components/Game/Intro/Intro'
 // outro
@@ -37,7 +40,8 @@ export default {
     Enigme1,
     Outro,
     ViewContainer,
-    VideoMainScreen
+    VideoMainScreen,
+    Fader
   },
   data() {
     return {

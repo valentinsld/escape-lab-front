@@ -96,6 +96,21 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme3-restart': function () {
+      this.currentPage = 1
+      this.isSuccess = null
+      this.showValidation = false
+      this.activeButtons = []
+
+      Anime({
+        targets: this.$refs.rule,
+        rotate: 0,
+        translateX: '-50%',
+        translateY: '-50%',
+        duration: 900,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
     }
   },
   methods: {

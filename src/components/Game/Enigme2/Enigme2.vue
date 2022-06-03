@@ -1,7 +1,7 @@
 <template>
   <div class="enigme-2">
-    <Components :is="'Enigme2' + typeScreen" v-if="isStart" />
-    <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" />
+    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" />
+    <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" :key="componentKey" />
   </div>
 </template>
 
@@ -26,7 +26,8 @@ export default {
   },
   data() {
     return {
-      isStart: false
+      isStart: false,
+      componentKey: 0
     }
   },
   computed: mapState({
@@ -35,6 +36,10 @@ export default {
   sockets: {
     startEnigme: function () {
       this.isStart = true
+    },
+    'enigme2-restart': function () {
+      console.log('restart')
+      this.componentKey += 1
     }
   },
   mounted() {
