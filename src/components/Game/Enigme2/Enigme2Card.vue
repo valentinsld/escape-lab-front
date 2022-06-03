@@ -270,8 +270,8 @@ export default {
         easing: 'cubicBezier(.2,0,.25,1)',
         duration: 250,
         complete: () => {
-          this.interactPosition = { x, y, rotation }
           this.isAnimating = false
+          this.resetCardPosition()
         }
       })
     },
