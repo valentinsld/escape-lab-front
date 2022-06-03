@@ -248,7 +248,7 @@ export default {
 .cardContainer {
   flex-shrink: 0;
   max-height: 0;
-  transition: all 250ms var(--custom-bezier);
+  transition: all 450ms var(--custom-bezier);
 
   &.isCurrent {
     max-height: var(--heightCard);
