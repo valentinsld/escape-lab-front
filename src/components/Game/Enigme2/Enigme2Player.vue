@@ -116,6 +116,7 @@ export default {
   margin: 0.25em 0;
   font-size: 2em;
   font-weight: var(--weight-bold);
+  color: var(--color-white);
 }
 
 // .popup {
