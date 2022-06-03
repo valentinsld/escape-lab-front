@@ -91,12 +91,8 @@ export default {
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen], // Player1 ; Player2 ; MainScreen
     transformString() {
-      if (!this.isInteractAnimating || this.isInteractDragged) {
-        const { x, y, rotation } = this.interactPosition
-        return `translate3D(${x}px, ${y}px, 0) rotate(${rotation}deg)`
-      }
-
-      return null
+      const { x, y, rotation } = this.interactPosition
+      return `translate3D(${x}px, ${y}px, 0) rotate(${rotation}deg)`
     },
     isRight() {
       const player1 = this.isFirstPlayer && this.card.isSpam
@@ -236,12 +232,14 @@ export default {
             x: -interactOutOfSightXCoordinate,
             rotation: -interactMaxRotation
           })
+
           this.$emit(LEFT)
           break
         case BOTTOM:
           this.interactPositionAnimation({
             y: interactOutOfSightYCoordinate
           })
+
           this.$emit(BOTTOM)
           break
       }
