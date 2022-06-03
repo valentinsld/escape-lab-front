@@ -1,4 +1,4 @@
-import { getCountryAnswer, getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
+import { getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
 export const notice = ['first', 'price', 'stock', 'profile', 'payment', 'criteria', 'availability']
 export const questionsData = (product) => [
@@ -29,14 +29,14 @@ export const questionsData = (product) => [
     question: `Est-ce que ${productName[product.type]} est encore disponible ?`,
     normalAnswer: 'Oui bien sûr, je n’ai pas encore d’autres demandes. Prenez votre temps :)',
     botAnswer: 'Oui mais j’ai beaucoup de gens sur l’annonce il me faut une réponse tout de suite !'
-  },
+  } /*,
   {
     slug: 'sending',
     btnLabel: 'Demander la livraison',
     question: 'Comment puis-je récupérer le colis ?',
     normalAnswer: `Je vais vous envoyer le colis par UPS depuis ${getCountryAnswer(false)}`,
     botAnswer: `Je vais vous envoyer le colis depuis ${getCountryAnswer(true)}`
-  }
+  }*/
 ]
 
 export const finalAnswer = {
