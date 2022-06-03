@@ -1,37 +1,43 @@
 <template>
   <div
-    v-if="isShowing"
-    ref="interactElement"
-    :class="{
-      card: true,
-      isAnimating: isInteractAnimating,
-      isCurrent: isCurrent,
-      '-isWrong': isWrong,
-      '-isRight': isRight
-    }"
-    :style="{ transform: transformString, order: card.order }"
+    :class="{ cardContainer: true, isCurrent: isCurrent }"
+    :style="{ '--heightCard': heightCard + 50 + 'px', order: card.order }"
   >
-    <div class="enigme2-bar">
-      <div class="enigme2-controls"></div>
-      <div class="enigme2-controls"></div>
+    <div
+      v-if="isShowing"
+      ref="interactElement"
+      :class="{
+        card: true,
+        isAnimating: isInteractAnimating,
+        isCurrent: isCurrent || isAnimating,
+        '-isWrong': isWrong,
+        '-isRight': isRight
+      }"
+      :style="{ transform: transformString }"
+    >
+      <div class="enigme2-bar">
+        <div class="enigme2-controls"></div>
+        <div class="enigme2-controls"></div>
+      </div>
+      <ul class="card-content">
+        <li>
+          <strong>De : </strong>
+          <span>{{ card.from }}</span>
+        </li>
+        <li>
+          <strong>Objet : </strong>
+          <span>{{ card.subject }}</span>
+        </li>
+        <li class="text">
+          {{ card.text }}
+        </li>
+      </ul>
     </div>
-    <ul class="card-content">
-      <li>
-        <strong>De : </strong>
-        <span>{{ card.from }}</span>
-      </li>
-      <li>
-        <strong>Objet : </strong>
-        <span>{{ card.subject }}</span>
-      </li>
-      <li class="text">
-        {{ card.text }}
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
+import Anime from 'animejs'
 import interact from 'interact.js'
 import { mapState } from 'vuex'
 
@@ -79,7 +85,9 @@ export default {
         x: 0,
         y: 0,
         rotation: 0
-      }
+      },
+      isAnimating: false,
+      heightCard: 200
     }
   },
   computed: mapState({
@@ -120,6 +128,8 @@ export default {
   },
 
   mounted() {
+    this.initHeightCard()
+
     const element = this.$refs.interactElement
 
     interact(element).draggable({
@@ -158,6 +168,9 @@ export default {
   //   },
 
   methods: {
+    initHeightCard() {
+      this.heightCard = this.$refs.interactElement.clientHeight
+    },
     playCard(interaction) {
       const { interactOutOfSightXCoordinate, interactOutOfSightYCoordinate, interactMaxRotation } = this.$options.static
 
@@ -165,7 +178,7 @@ export default {
 
       switch (interaction) {
         case RIGHT:
-          this.interactSetPosition({
+          this.interactPositionAnimation({
             x: interactOutOfSightXCoordinate,
             rotation: interactMaxRotation
           })
@@ -173,14 +186,14 @@ export default {
           this.$emit(RIGHT)
           break
         case LEFT:
-          this.interactSetPosition({
+          this.interactPositionAnimation({
             x: -interactOutOfSightXCoordinate,
             rotation: -interactMaxRotation
           })
           this.$emit(LEFT)
           break
         case BOTTOM:
-          this.interactSetPosition({
+          this.interactPositionAnimation({
             y: interactOutOfSightYCoordinate
           })
           this.$emit(BOTTOM)
@@ -197,6 +210,27 @@ export default {
       const { x = 0, y = 0, rotation = 0 } = coordinates
       this.interactPosition = { x, y, rotation }
     },
+    interactPositionAnimation(coordinates) {
+      // const { x = 0, y = 0, rotation = 0 } = coordinates
+      const x = coordinates.x || this.interactPosition.x
+      const y = coordinates.y || this.interactPosition.y
+      const rotation = coordinates.rotation || this.interactPosition.rotation
+
+      this.isAnimating = true
+
+      Anime({
+        targets: this.$refs.interactElement,
+        translateX: x,
+        translateY: y,
+        rotate: rotation,
+        easing: 'cubicBezier(.2,0,.25,1)',
+        duration: 250,
+        complete: () => {
+          this.interactPosition = { x, y, rotation }
+          this.isAnimating = false
+        }
+      })
+    },
 
     interactUnsetElement() {
       interact(this.$refs.interactElement).unset()
@@ -211,6 +245,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cardContainer {
+  flex-shrink: 0;
+  max-height: 0;
+  transition: all 250ms var(--custom-bezier);
+
+  &.isCurrent {
+    max-height: var(--heightCard);
+  }
+}
+
 .card {
   position: relative;
   box-sizing: border-box;
@@ -224,7 +268,7 @@ export default {
   min-height: 200px;
   margin-bottom: 20px;
   color: black;
-  background-color: azure;
+  background-color: var(--color-whiteDimmed);
   border: black solid 5px;
   border-radius: 30px;
   box-shadow: 6px 6px 0 var(--color-black);
@@ -293,7 +337,7 @@ export default {
 }
 
 .card:not(.isCurrent) {
-  display: none;
+  opacity: 0;
 }
 
 .isAnimating {
