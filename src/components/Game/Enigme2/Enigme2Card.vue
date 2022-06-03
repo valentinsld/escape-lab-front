@@ -110,67 +110,64 @@ export default {
 
       return this.isEndSort && !(this.isFirstPlayer ? player1 : player2)
     },
-    incomingDirection() {
-      return this.card.incomingDirection
+    owner() {
+      return this.card.owner
     }
   }),
   watch: {
-    incomingDirection() {
+    owner() {
+      console.log(this.isAnimating, this.card.owner !== this.typeScreen, this.card.owner, this.typeScreen)
       if (this.isAnimating || this.card.owner !== this.typeScreen) return
       this.isAnimating = true
 
-      this.$nextTick(() => {
-        switch (this.card.incomingDirection) {
-          case 'top':
-            // this.$refs.interactElement.style.transform = `translate3d(0, ${this.heightCard}, 0)`
-
-            Anime({
-              targets: this.$refs.interactElement,
-              translateX: 0,
-              translateY: [-this.heightCard, 0],
-              rotate: 0,
-              easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 450,
-              complete: () => {
-                this.interactPosition = { x: 0, y: 0, rotation: 0 }
-                this.isAnimating = false
-              }
-            })
-            break
-          case LEFT:
-            // this.$refs.interactElement.style.transform = `translate3d(${-window.innerWidth}, 0, 0)`
-
-            Anime({
-              targets: this.$refs.interactElement,
-              translateX: [-window.innerWidth, 0],
-              translateY: 0,
-              rotate: 0,
-              easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 450,
-              complete: () => {
-                this.interactPosition = { x: 0, y: 0, rotation: 0 }
-                this.isAnimating = false
-              }
-            })
-            break
-          case RIGHT:
-            // this.$refs.interactElement.style.transform = `translate3d(${window.innerWidth}, 0, 0)`
-
-            Anime({
-              targets: this.$refs.interactElement,
-              translateX: [window.innerWidth, 0],
-              translateY: 0,
-              rotate: 0,
-              easing: 'cubicBezier(.2,0,.25,1)',
-              duration: 450,
-              complete: () => {
-                this.interactPosition = { x: 0, y: 0, rotation: 0 }
-                this.isAnimating = false
-              }
-            })
-            break
-        }
-      })
+      switch (this.card.incomingDirection) {
+        case 'top':
+          Anime({
+            targets: this.$refs.interactElement,
+            translateX: 0,
+            translateY: [-this.heightCard, 0],
+            rotate: 0,
+            easing: 'cubicBezier(.2,0,.25,1)',
+            duration: 450,
+            complete: () => {
+              this.resetCardPosition()
+              this.isAnimating = false
+            }
+          })
+          break
+        case LEFT:
+          Anime({
+            targets: this.$refs.interactElement,
+            translateX: [-window.innerWidth, 0],
+            translateY: 0,
+            rotate: 0,
+            easing: 'cubicBezier(.2,0,.25,1)',
+            duration: 450,
+            complete: () => {
+              console.log('END anim left')
+              this.resetCardPosition()
+              this.isAnimating = false
+            }
+          })
+          break
+        case RIGHT:
+          Anime({
+            targets: this.$refs.interactElement,
+            translateX: [window.innerWidth, 0],
+            translateY: 0,
+            rotate: 0,
+            easing: 'cubicBezier(.2,0,.25,1)',
+            duration: 450,
+            complete: () => {
+              this.resetCardPosition()
+              this.isAnimating = false
+            }
+          })
+          break
+        default:
+          this.resetCardPosition()
+          break
+      }
     },
     isEndSort() {
       if (this.isEndSort) {
@@ -315,14 +312,16 @@ export default {
   min-height: 200px;
   margin-bottom: 20px;
   color: black;
+  pointer-events: none;
   background-color: var(--color-whiteDimmed);
   border: black solid 5px;
   border-radius: 30px;
   box-shadow: 6px 6px 0 var(--color-black);
-  will-change: transform;
   opacity: 0;
+  will-change: transform;
 
   &.isCurrent {
+    pointer-events: initial;
     opacity: 1;
   }
 
@@ -387,9 +386,5 @@ export default {
 .enigme2-bar .enigme2-controls:first-of-type {
   margin-left: 15px;
   transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.card:not(.isCurrent) {
-  opacity: 0;
 }
 </style>
