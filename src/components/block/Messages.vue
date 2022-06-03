@@ -52,7 +52,7 @@ export default {
   watch: {
     messages: function () {
       this.$nextTick(() => {
-        this.msgAnimation()
+        if (this.messages.length > 0) this.msgAnimation()
       })
     }
   },
@@ -77,7 +77,7 @@ export default {
         }
       })
       tl.add({
-        targets: this.$refs?.messages[this.getFirstMsgIndex()],
+        targets: this.$refs?.messages[this.getFirstMsgIndex()] ? this.$refs?.messages[this.getFirstMsgIndex()] : null,
         opacity: [0, 1],
         duration: this.duration.firstMsg && this.animLogComplete === 0 ? this.duration.firstMsg : this.duration.default,
         delay: this.delay.firstMsg && this.animLogComplete === 0 ? this.delay.firstMsg : this.delay.default,
