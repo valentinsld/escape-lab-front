@@ -16,7 +16,7 @@
 
 <script>
 import Anime from 'animejs'
-import interact from 'interact.js'
+import interact from 'interactjs'
 
 export default {
   name: 'Enigme3Player2',
