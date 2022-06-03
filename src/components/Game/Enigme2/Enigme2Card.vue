@@ -37,7 +37,7 @@
 
 <script>
 import Anime from 'animejs'
-import interact from 'interact.js'
+import interact from 'interactjs'
 import { mapState } from 'vuex'
 
 import { STATE as S } from '@/store/helpers'
@@ -116,7 +116,6 @@ export default {
   }),
   watch: {
     owner() {
-      console.log(this.isAnimating, this.card.owner !== this.typeScreen, this.card.owner, this.typeScreen)
       if (this.isAnimating || this.card.owner !== this.typeScreen) return
       this.isAnimating = true
 
@@ -182,6 +181,9 @@ export default {
     const element = this.$refs.interactElement
 
     interact(element).draggable({
+      startAxis: 'x',
+      lockAxis: 'xy',
+
       onstart: () => {
         this.isInteractAnimating = false
       },
@@ -313,6 +315,8 @@ export default {
   margin-bottom: 20px;
   color: black;
   pointer-events: none;
+  touch-action: pan-y;
+  user-select: none;
   background-color: var(--color-whiteDimmed);
   border: black solid 5px;
   border-radius: 30px;
