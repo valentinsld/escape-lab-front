@@ -15,6 +15,7 @@
           <button
             v-if="questions[0]"
             class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[0].slug)}  ')` }"
             @click="chooseQuestion(0)"
             v-html="questions[0].btnLabel"
           ></button>
@@ -22,6 +23,7 @@
           <button
             v-if="questions[1]"
             class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[1].slug)}  ')` }"
             @click="chooseQuestion(1)"
             v-html="questions[1].btnLabel"
           ></button>
@@ -139,6 +141,9 @@ export default {
         duration: 150,
         easing: 'easeInExpo'
       })
+    },
+    getSource(slug) {
+      return require(`@/assets/images/enigme3/notice/icons/${slug}.svg`)
     }
   }
 }
@@ -200,11 +205,12 @@ p {
 
 .chat__choices__btn {
   width: 100%;
-  padding: 1em;
+  padding: 1em 1em 1em 4em;
   margin: 1em 0;
   font-weight: bold;
   color: #f8f8f8;
-  background: #f59535;
+  text-align: left;
+  background: #f59535 no-repeat center left 15px;
   border: 4px solid var(--color-black);
   border-radius: 27px;
 
