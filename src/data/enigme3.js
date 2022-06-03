@@ -80,18 +80,18 @@ export const countries = {
 
 export const payments = {
   bot: [
-    { url: 'www.extrasafe-paypal.com', image: 'paypal' },
-    { url: 'www.levrai-leboncoin.com', image: 'lbc' },
-    { url: 'www.real-lydia.com', image: 'lydia' },
-    { url: 'www.super-secured-paylib.com', image: 'paylib' },
-    { url: 'www.no-arnaque-lpb.com', image: 'lpb' }
+    { url: 'www.extrasafe-banquepopulaire.fr', image: 'banque-populaire' },
+    { url: 'www.levrai-leboncoin.fr', image: 'lbc' },
+    { url: 'www.real-cic.fr', image: 'cic' },
+    { url: 'www.super-secured-caisse-epargne.fr', image: 'caisse-epargne' },
+    { url: 'www.no-arnaque-lbp.com', image: 'lbp' }
   ],
   normal: [
-    { url: 'www.paypal.com', image: 'paypal' },
-    { url: 'www.leboncoin.com', image: 'lbc' },
-    { url: 'www.lydia.com', image: 'lydia' },
-    { url: 'www.paylib.com', image: 'paylib' },
-    { url: 'www.lpb.com', image: 'lpb' }
+    { url: 'www.banquepopulaire.fr', image: 'banque-populaire' },
+    { url: 'www.leboncoin.fr', image: 'lbc' },
+    { url: 'www.cic.fr', image: 'cic' },
+    { url: 'www.caisse-epargne.fr', image: 'caisse-epargne' },
+    { url: 'www.lbp.com', image: 'lbp' }
   ]
 }
 
