@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import NoSleep from 'nosleep.js'
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
@@ -45,7 +46,8 @@ export default {
   },
   data() {
     return {
-      pane: null
+      pane: null,
+      noSleep: null
     }
   },
   computed: mapState({
@@ -63,6 +65,8 @@ export default {
   },
   mounted() {
     this.initPane()
+
+    this.initNoSleep()
   },
   sockets: {
     setStepGame: function ({ stepGame }) {
@@ -77,6 +81,8 @@ export default {
   },
   beforeDestroy() {
     this.$data.pane?.remove()
+
+    this.noSleep?.disable()
   },
   methods: {
     initPane() {
@@ -124,6 +130,11 @@ export default {
         .on('click', () => {
           this.$socket.emit('setStepGame', { stepGame: 4 })
         })
+    },
+    initNoSleep() {
+      this.noSleep = new NoSleep()
+
+      this.noSleep.enable()
     }
   }
 }
