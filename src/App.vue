@@ -5,7 +5,7 @@
       <router-view />
     </transition>
 
-    <UserDisconnected v-if="listUsers.length < 3 && isStart" />
+    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
   </main>
 </template>
 
@@ -37,7 +37,8 @@ export default {
   },
   computed: mapState({
     listUsers: (state) => state[S.listUsers],
-    isStart: (state) => state[S.isStart]
+    isStart: (state) => state[S.isStart],
+    stepGame: (state) => state[S.stepGame]
   }),
   mounted() {
     this.initSubscribeConnexion()

@@ -1,7 +1,9 @@
 <template>
   <div class="userDisconnected">
     <p>Utilisateur déconnecter</p>
-    <p>Pour se reconnecter utilisez le code : {{ idRoom }}</p>
+    <p>
+      Pour se reconnecter utilisez le code : <strong>{{ idRoom }}</strong>
+    </p>
   </div>
 </template>
 
@@ -24,13 +26,19 @@ export default {
   top: 50%;
   left: 50%;
   z-index: 10;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 300px;
+  height: auto !important;
   min-height: 180px;
+  padding: 20px;
+  font-size: 1.1em;
   color: white;
+  border: 3px solid var(--color-black);
+  border-radius: 25px;
   transform: translate3d(-50%, -50%, 0);
 
   * {
@@ -47,7 +55,8 @@ export default {
     width: 100%;
     height: 100%;
     content: '';
-    background: red;
+    background: var(--color-red);
+    border-radius: 25px;
   }
 
   &::after {
@@ -58,7 +67,7 @@ export default {
     width: 100vw;
     height: 100vh;
     content: '';
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.7);
     transform: translate3d(-50%, -50%, 0);
   }
 }

@@ -1,5 +1,6 @@
-import { getCountryAnswer, getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
+import { getCriteriaAnswer, getPaymentAnswer, getPriceAnswer } from '@/helpers/enigme3Rules'
 
+export const notice = ['first', 'price', 'stock', 'profile', 'payment', 'criteria', 'availability']
 export const questionsData = (product) => [
   {
     slug: 'price',
@@ -28,14 +29,14 @@ export const questionsData = (product) => [
     question: `Est-ce que ${productName[product.type]} est encore disponible ?`,
     normalAnswer: 'Oui bien sûr, je n’ai pas encore d’autres demandes. Prenez votre temps :)',
     botAnswer: 'Oui mais j’ai beaucoup de gens sur l’annonce il me faut une réponse tout de suite !'
-  },
+  } /*,
   {
     slug: 'sending',
     btnLabel: 'Demander la livraison',
     question: 'Comment puis-je récupérer le colis ?',
     normalAnswer: `Je vais vous envoyer le colis par UPS depuis ${getCountryAnswer(false)}`,
     botAnswer: `Je vais vous envoyer le colis depuis ${getCountryAnswer(true)}`
-  }
+  }*/
 ]
 
 export const finalAnswer = {
@@ -44,7 +45,7 @@ export const finalAnswer = {
 }
 
 export const solution = {
-  bot: {
+  /*bot: {
     success: 'Bien joué ! Il s’agissait bien du bot du professeur, voici les règles qui permettaient de le démasquer :',
     fail: 'Aie ! Tu t’es fait avoir par le bot... voici les règles qui permettaient de le démasquer :'
   },
@@ -52,7 +53,9 @@ export const solution = {
     success:
       'Bien joué ! Il s’agissait d’un vendeur fiable ! Seul les points suivants auraient pu laisser penser que c’était le bot :',
     fail: 'Aie... Il s’agissait d’un véritable vendeur, il n’a pas dû apprécier ce moment ! Seul les points suivants auraient pu laisser penser que c’était le bot : '
-  }
+  }*/
+  success: 'Vous avez trouvé les bonnes règles, bien joué !',
+  fail: 'Aie ! Ce ne sont pas les bonnes règles, voici celles qui permettaient de le démasquer :'
 }
 
 export const criteriaName = {
@@ -77,18 +80,18 @@ export const countries = {
 
 export const payments = {
   bot: [
-    { url: 'www.extrasafe-paypal.com', image: 'paypal' },
-    { url: 'www.levrai-leboncoin.com', image: 'lbc' },
-    { url: 'www.real-lydia.com', image: 'lydia' },
-    { url: 'www.super-secured-paylib.com', image: 'paylib' },
-    { url: 'www.no-arnaque-lpb.com', image: 'lpb' }
+    { url: 'www.extrasafe-banquepopulaire.fr', image: 'banque-populaire' },
+    { url: 'www.levrai-leboncoin.fr', image: 'lbc' },
+    { url: 'www.real-cic.fr', image: 'cic' },
+    { url: 'www.super-secured-caisse-epargne.fr', image: 'caisse-epargne' },
+    { url: 'www.no-arnaque-lbp.com', image: 'lbp' }
   ],
   normal: [
-    { url: 'www.paypal.com', image: 'paypal' },
-    { url: 'www.leboncoin.com', image: 'lbc' },
-    { url: 'www.lydia.com', image: 'lydia' },
-    { url: 'www.paylib.com', image: 'paylib' },
-    { url: 'www.lpb.com', image: 'lpb' }
+    { url: 'www.banquepopulaire.fr', image: 'banque-populaire' },
+    { url: 'www.leboncoin.fr', image: 'lbc' },
+    { url: 'www.cic.fr', image: 'cic' },
+    { url: 'www.caisse-epargne.fr', image: 'caisse-epargne' },
+    { url: 'www.lbp.com', image: 'lbp' }
   ]
 }
 

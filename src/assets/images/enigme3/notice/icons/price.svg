@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.445" height="30.444" viewBox="0 0 30.445 30.444">
+  <g id="price" transform="translate(-15433 -15400.061)">
+    <g id="Groupe_383" data-name="Groupe 383" transform="translate(15433 15399.061)">
+      <g id="Ellipse_119" data-name="Ellipse 119" transform="translate(0 1)" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="2">
+        <circle cx="15.222" cy="15.222" r="15.222" stroke="none"/>
+        <circle cx="15.222" cy="15.222" r="14.222" fill="none"/>
+      </g>
+      <text id="_" data-name="€" transform="translate(14.303 22)" fill="#fff" font-size="19" font-family="GrenadineMVB-Bold, Grenadine MVB" font-weight="700"><tspan x="-6.166" y="0">€</tspan></text>
+    </g>
+  </g>
+</svg>

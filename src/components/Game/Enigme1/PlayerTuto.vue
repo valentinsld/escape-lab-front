@@ -4,7 +4,7 @@
       <img class="tuto__logo" :src="Logo" />
       <p v-if="text" class="tuto__consigne" v-html="text" />
       <div class="tuto__btn-container">
-        <button :disabled="isReady" class="tuto__start-btn" @click="toggleStart">Start</button>
+        <button :disabled="isReady" class="tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
       </div>
     </div>
@@ -20,6 +20,18 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    socketSend: {
+      type: String,
+      default() {
+        return 'readyTutoEnigme'
+      }
+    },
+    textButton: {
+      type: String,
+      default() {
+        return 'Start'
+      }
     }
   },
   data() {
@@ -32,7 +44,7 @@ export default {
   methods: {
     toggleStart() {
       this.isReady = true
-      this.$socket.emit('readyTutoEnigme')
+      this.$socket.emit(this.socketSend)
     }
   }
 }
@@ -41,6 +53,7 @@ export default {
 .tuto {
   display: flex;
   align-items: center;
+  width: 100%;
   height: 100%;
 }
 

@@ -36,7 +36,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
-  muted: true,
+  muted: false,
 
   preload: true,
   controlBar: {
@@ -94,7 +94,7 @@ export default {
       // console.log('endEnigme', { stepGame }, this[`play${stepGame}`])
       this[`playEnd${stepGame}`]?.call()
     },
-    playEndIntro: function () {
+    playEndOutro: function () {
       this.player.abLoopPlugin.disable()
       this.player.play()
     }
@@ -219,9 +219,13 @@ export default {
       if (this.$data.isStepGame) return
       this.$socket.emit('nextEnigme')
     },
-    playstartOutro() {
-      if (this.$data.isStepGame) return
-      this.$socket.emit('nextEnigme')
+    // playstartOutro() {
+    //   if (this.$data.isStepGame) return
+    //   this.$socket.emit('nextEnigme')
+    // },
+    playoutroStartMessages() {
+      console.log('outro-startMessages')
+      this.$socket.emit('outro-startMessages')
     }
   }
 }

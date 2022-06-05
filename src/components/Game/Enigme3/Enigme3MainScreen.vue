@@ -8,7 +8,7 @@
         <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
         <h4 v-if="product.subtype.text" v-html="product.subtype.text" />
         <div v-if="product.description" class="annonce-product__description">
-          <p v-for="(item, index) in product.description" :key="index" v-html="getGlyphDescription(item)" />
+          <p v-for="(item, index) in product.description" :key="index" v-html="item" />
         </div>
       </div>
       <div class="annonce-product__right-column">
@@ -37,14 +37,7 @@
 </template>
 
 <script>
-import {
-  botGlyphConverter,
-  botSailers,
-  criteriaName,
-  normalGlyphConverter,
-  normalSailers,
-  textContent
-} from '@/data/enigme3'
+import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
 export default {
   name: 'Enigme3MainScreen',
@@ -76,6 +69,12 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'show-fader': function () {
+      this.$el.style.opacity = 0
+    },
+    'enigme3-restart': function () {
+      this.$el.style.opacity = 1
     }
   },
   methods: {
@@ -87,7 +86,7 @@ export default {
       return isTrueRule
         ? botSailers[randomNum(0, botSailers.length)]
         : normalSailers[randomNum(0, normalSailers.length)]
-    },
+    } /*,
     getGlyphDescription(item) {
       const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
       let str = item
@@ -101,7 +100,7 @@ export default {
         }
       }
       return str
-    }
+    }*/
   }
 }
 </script>
@@ -111,6 +110,7 @@ export default {
   top: 50%;
   left: 50%;
   width: 60vw;
+  transition: opacity 400ms var(--custom-bezier);
   transform: translate(-50%, -50%);
 
   p {

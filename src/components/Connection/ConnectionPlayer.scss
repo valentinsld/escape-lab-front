@@ -77,11 +77,23 @@
 
       &__inputs {
         display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
         
-        // TODO : style inputs
-        // input {
-        //   width: 30px;
-        // }
+        input {
+          width: 30px;
+          height: 30px;
+          margin: 0 8px;
+          font-size: 1.5em;
+          text-align: center;
+          text-transform: uppercase;
+        }
+
+        &Error {
+          color: var(--color-red)
+        }
       }
 
       // check

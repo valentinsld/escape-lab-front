@@ -10,7 +10,7 @@
     <div class="phoneCall__pad">
       <button v-for="num in 9" :key="`button_${num}`" @click="() => clickPad(num)">{{ num }}</button>
       <div class="-close">
-        <button>
+        <button @click="hangUp">
           <img :src="PhoneIcon" />
         </button>
       </div>
@@ -88,6 +88,9 @@ export default {
     clickPad(number) {
       this.$data.numbeEntered.push(number)
       this.$socket.emit('enigme1-enteredNumber', number)
+    },
+    hangUp() {
+      this.$socket.emit('enigme1-end')
     },
 
     //

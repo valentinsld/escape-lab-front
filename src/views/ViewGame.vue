@@ -1,12 +1,15 @@
 /* eslint-disable vue/no-multiple-template-root */
 <template>
   <ViewContainer name="game">
+    <Fader v-if="typeScreen !== mainScreen" />
+
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
 </template>
 
 <script>
+import NoSleep from 'nosleep.js'
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
@@ -14,6 +17,7 @@ import { mapState } from 'vuex'
 import Enigme1 from '@/components/Game/Enigme1/Enigme1'
 import Enigme2 from '@/components/Game/Enigme2/Enigme2'
 import Enigme3 from '@/components/Game/Enigme3/Enigme3'
+import Fader from '@/components/Game/Fader.vue'
 // intro
 import Intro from '@/components/Game/Intro/Intro'
 // outro
@@ -37,11 +41,13 @@ export default {
     Enigme1,
     Outro,
     ViewContainer,
-    VideoMainScreen
+    VideoMainScreen,
+    Fader
   },
   data() {
     return {
-      pane: null
+      pane: null,
+      noSleep: null
     }
   },
   computed: mapState({
@@ -59,6 +65,8 @@ export default {
   },
   mounted() {
     this.initPane()
+
+    this.initNoSleep()
   },
   sockets: {
     setStepGame: function ({ stepGame }) {
@@ -73,6 +81,8 @@ export default {
   },
   beforeDestroy() {
     this.$data.pane?.remove()
+
+    this.noSleep?.disable()
   },
   methods: {
     initPane() {
@@ -120,6 +130,11 @@ export default {
         .on('click', () => {
           this.$socket.emit('setStepGame', { stepGame: 4 })
         })
+    },
+    initNoSleep() {
+      this.noSleep = new NoSleep()
+
+      this.noSleep.enable()
     }
   }
 }

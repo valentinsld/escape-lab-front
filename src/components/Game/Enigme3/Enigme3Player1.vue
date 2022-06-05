@@ -1,15 +1,5 @@
 <template>
   <div class="chat">
-    <div v-if="solutionAnswer" class="chat__solution">
-      <div class="chat__solution__overlay" />
-      <div class="chat__solution_popup-end">
-        <p class="chat__solution__answer" v-html="solutionAnswer" />
-        <div class="chat__solution__rules">
-          <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
-        </div>
-        <button class="chat__solution__button" @click="nextStep">suivant</button>
-      </div>
-    </div>
     <div class="chat__header">
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
@@ -21,11 +11,11 @@
     </div>
     <div class="chat__choices-container">
       <div ref="choice-buttons" class="chat__choices">
-        <!--        <h4 v-html="'Répondez au vendeur'" />-->
         <div class="chat__choices__buttons">
           <button
             v-if="questions[0]"
             class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[0].slug)}  ')` }"
             @click="chooseQuestion(0)"
             v-html="questions[0].btnLabel"
           ></button>
@@ -33,23 +23,11 @@
           <button
             v-if="questions[1]"
             class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[1].slug)}  ')` }"
             @click="chooseQuestion(1)"
             v-html="questions[1].btnLabel"
           ></button>
-          <!-- if last question to choose bot -->
-          <button
-            v-if="finalAnswers[0]"
-            class="chat__choices__btn chat__choices__btn--strong"
-            @click="chooseBotAnswer('bot')"
-            v-html="finalAnswers[0]"
-          />
-          <p v-if="finalAnswers[1]">ou</p>
-          <button
-            v-if="finalAnswers[1]"
-            class="chat__choices__btn chat__choices__btn--strong"
-            @click="chooseBotAnswer('normal')"
-            v-html="finalAnswers[1]"
-          />
+          <p v-if="allQuestionsAsked">Je crois avoir posé toutes les questions</p>
         </div>
       </div>
     </div>
@@ -60,12 +38,15 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData, solution, textContent } from '@/data/enigme3'
+import { questionsData, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme3-restart': function () {
+      this.reInitData()
     }
   },
   components: { Messages },
@@ -74,17 +55,13 @@ export default {
       type: Array,
       default: () => []
     },
-    sellerType: {
-      type: String,
-      default: null
-    },
     product: {
       type: Object,
       default: () => {}
     },
     questionsToDisplay: {
       type: Number,
-      default: 6
+      default: 4
     }
   },
   data() {
@@ -93,11 +70,10 @@ export default {
       buttons: null,
       questions: [],
       isMessageSend: false,
-      finalAnswers: [],
       choices: [],
       text: textContent,
       messages: [],
-      solutionAnswer: null
+      allQuestionsAsked: false
     }
   },
   mounted() {
@@ -110,7 +86,6 @@ export default {
     start() {
       console.log('START ENIGME')
     },
-
     generateQuestions() {
       this.questions = questionsData(this.product)
         .sort(() => Math.random() - Math.random())
@@ -134,7 +109,7 @@ export default {
       this.questions.splice(this.choicePos, 1)
       this.questions.length > 0
         ? this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
-        : this.finalChoice()
+        : (this.allQuestionsAsked = true)
     },
     getResponse() {
       const answer =
@@ -165,16 +140,23 @@ export default {
         easing: 'easeInExpo'
       })
     },
-    finalChoice() {
-      // push final choices
-      this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
+    reInitData() {
+      this.messages = []
+      this.choicePos = null
+      this.buttons = null
+      this.questions = []
+      this.isMessageSend = false
+      this.choices = []
+      this.allQuestionsAsked = false
+
+      this.generateQuestions()
+
+      this.$nextTick(() => {
+        this.buttons = this.$refs?.['choice-buttons']
+      })
     },
-    chooseBotAnswer(sellerType) {
-      this.solutionAnswer =
-        sellerType === this.sellerType ? solution[this.sellerType]['success'] : solution[this.sellerType]['fail']
-    },
-    nextStep() {
-      this.$socket.emit('nextEnigme')
+    getSource(slug) {
+      return require(`@/assets/images/enigme3/notice/icons/${slug}.svg`)
     }
   }
 }
@@ -236,68 +218,17 @@ p {
 
 .chat__choices__btn {
   width: 100%;
-  padding: 1em;
+  padding: 1em 1em 1em 4em;
   margin: 1em 0;
   font-weight: bold;
   color: #f8f8f8;
-  background: #f59535;
+  text-align: left;
+  background: #f59535 no-repeat center left 15px;
   border: 4px solid var(--color-black);
   border-radius: 27px;
 
   &--strong {
     background: #3577f5;
-  }
-}
-
-.chat__solution {
-  position: absolute;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-}
-
-.chat__solution_popup-end {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 75%;
-  padding: 2em 1em;
-  background: white;
-  border: 5px solid var(--color-black);
-  border-radius: 30px;
-  transform: translate(-50%, -50%);
-}
-
-.chat__solution__overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  transition: 300ms var(--custom-bezier);
-}
-
-.chat__solution__answer {
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-.chat__solution__button {
-  display: block;
-  padding: 1em;
-  margin: auto;
-  font-weight: bold;
-  color: #f8f8f8;
-  background: #3577f5;
-  border: 4px solid var(--color-black);
-  border-radius: 27px;
-}
-
-.chat__solution__rules {
-  margin-bottom: 30px;
-
-  p {
-    margin: 10px 0;
-    font-weight: bold;
   }
 }
 </style>
