@@ -112,7 +112,7 @@ export default {
     this.$socket.emit('connection')
 
     if (this.$data.idRoomFromUrl) {
-      this.connectToRoom()
+      this.connectToRoom(null, this.$data.idRoomFromUrl)
     }
 
     // Si c'est en developpement se connecter direct à la room
