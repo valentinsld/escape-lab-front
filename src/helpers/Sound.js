@@ -1,5 +1,6 @@
 import { Howl } from 'howler'
 
+// can be use with new Sound('name', { volume: 0.3, isLoop: true })
 class Sound {
   constructor(name, opts) {
     this.name = name
@@ -34,7 +35,14 @@ class Sound {
 
   play() {
     this.sound.play()
-    console.log('sound', this.sound, 'name 2:', this.name, 'opts 2', this.opts)
+  }
+
+  stop() {
+    this.sound.stop()
+  }
+
+  pause() {
+    this.sound.pause()
   }
 }
 
