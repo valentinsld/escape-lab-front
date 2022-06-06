@@ -354,17 +354,11 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  min-height: 200px;
-  margin-bottom: 20px;
-  color: black;
-  pointer-events: none;
-  touch-action: pan-y;
-  user-select: none;
+  width: 400px;
+  height: 280px;
+  color: var(--color-black);
   background-color: var(--color-whiteDimmed);
-  border: black solid 5px;
+  border: var(--color-black) solid 5px;
   border-radius: 30px;
   box-shadow: 6px 6px 0 var(--color-black);
   opacity: 0;
@@ -421,14 +415,14 @@ export default {
   width: 100%;
   padding: 4px;
   background-color: transparent;
-  border-bottom: black solid 4px;
+  border-bottom: var(--color-black) solid 4px;
 }
 
 .enigme2-bar .enigme2-controls {
   width: 10px;
   height: 10px;
   margin-left: 5px;
-  border: black solid 3px;
+  border: var(--color-black) solid 3px;
   border-radius: 50%;
   transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
