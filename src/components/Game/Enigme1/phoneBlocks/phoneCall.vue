@@ -91,6 +91,7 @@ export default {
     },
     hangUp() {
       this.$socket.emit('enigme1-end')
+      this.$data.sound.pause()
     },
 
     //
