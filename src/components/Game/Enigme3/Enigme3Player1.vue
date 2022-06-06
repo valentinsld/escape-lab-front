@@ -39,6 +39,7 @@ import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
 import { questionsData, textContent } from '@/data/enigme3'
+import SoundPlayer from '@/helpers/SoundPlayer'
 export default {
   name: 'Enigme3player1',
   sockets: {
@@ -92,6 +93,9 @@ export default {
         .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
+      new SoundPlayer('boom', {
+        name: 'boom'
+      })
       this.isMessageSend = true
       this.hideButtons()
       this.choicePos = pos
