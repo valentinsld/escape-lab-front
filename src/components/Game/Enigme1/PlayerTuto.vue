@@ -85,14 +85,14 @@ export default {
   padding: 1em;
   margin: auto;
   font-weight: bold;
-  color: #f8f8f8;
-  background: #3577f5;
+  color: var(--color-whiteDimmed);
+  background: var(--color-enigme1);
   border: 4px solid var(--color-black);
   border-radius: 27px;
   transition: 200ms var(--custom-bezier);
 
   &:disabled {
-    background: gray;
+    background: var(--color-disabled);
   }
 }
 </style>
