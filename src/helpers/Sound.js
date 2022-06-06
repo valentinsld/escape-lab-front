@@ -4,8 +4,9 @@ class Sound {
   constructor(name, opts) {
     this.name = name
     this.opts = {
-      autoplay: true,
       volume: opts.volume || 0.5,
+      isLoop: opts.isLoop || false,
+      timeBeforeLoop: opts.timeBeforeLoop || 0,
       ...opts
     }
     this.sound = null
@@ -16,6 +17,10 @@ class Sound {
   init() {
     this.sound = new Howl({
       src: this.soundSrc(),
+      onend: () => {
+        if (!this.opts.isLoop) return
+        setTimeout(() => this.play(), this.opts.timeBeforeLoop)
+      },
       ...this.opts
     })
     this.play()
@@ -24,7 +29,6 @@ class Sound {
   soundSrc() {
     if (!this.name) return
     const audio = 'sounds/' + this.name
-    console.log(audio, 'audio')
     return [audio + '.webm', audio + '.mp3']
   }
 
