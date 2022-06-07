@@ -206,7 +206,7 @@ export default {
       tl.add({
         rotate: -7,
         translateX: ['-50%', '-60%'],
-        translateY: '-50%'
+        translateY: ['-50%', '-50%']
       })
         .add({
           rotate: 0,
