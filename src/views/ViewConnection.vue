@@ -1,7 +1,6 @@
 <template>
   <div>
     <ViewContainer name="connection">
-      <p>View Connection</p>
       <Components :is="'Connection' + $data.stateScreen" />
     </ViewContainer>
   </div>

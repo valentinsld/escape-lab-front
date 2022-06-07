@@ -1,12 +1,15 @@
+/* eslint-disable vue/no-multiple-template-root */
 <template>
   <ViewContainer name="game">
     <Canvas v-if="typeScreen === mainScreen" />
+    <Fader v-if="typeScreen !== mainScreen" />
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
 </template>
 
 <script>
+import NoSleep from 'nosleep.js'
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
@@ -15,6 +18,7 @@ import Canvas from '@/components/Game/Canvas'
 import Enigme1 from '@/components/Game/Enigme1/Enigme1'
 import Enigme2 from '@/components/Game/Enigme2/Enigme2'
 import Enigme3 from '@/components/Game/Enigme3/Enigme3'
+import Fader from '@/components/Game/Fader.vue'
 // intro
 import Intro from '@/components/Game/Intro/Intro'
 // outro
@@ -26,6 +30,7 @@ import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
 import ViewContainer from '@/views/ViewContainer'
 
+// eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
 const DEBUG = process.env.NODE_ENV === 'development'
 
 export default {
@@ -38,11 +43,13 @@ export default {
     Enigme1,
     Outro,
     ViewContainer,
-    VideoMainScreen
+    VideoMainScreen,
+    Fader
   },
   data() {
     return {
-      pane: null
+      pane: null,
+      noSleep: null
     }
   },
   computed: mapState({
@@ -60,9 +67,10 @@ export default {
   },
   mounted() {
     this.initPane()
+
+    this.initNoSleep()
   },
   sockets: {
-    // TODO : remove setStepGame
     setStepGame: function ({ stepGame }) {
       this.$store.commit(M.stepGame, stepGame)
     },
@@ -75,10 +83,12 @@ export default {
   },
   beforeDestroy() {
     this.$data.pane?.remove()
+
+    this.noSleep?.disable()
   },
   methods: {
     initPane() {
-      if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
+      if (/*!DEBUG || */ this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane
@@ -91,37 +101,42 @@ export default {
           this.$socket.emit('endEnigme')
         })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 1'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 1 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 1'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 1 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 2'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 2 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 2'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 2 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'enigme 3'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 3 })
-      //   })
+      pane
+        .addButton({
+          title: 'enigme 3'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 3 })
+        })
 
-      // pane
-      //   .addButton({
-      //     title: 'outro'
-      //   })
-      //   .on('click', () => {
-      //     this.$socket.emit('setStepGame', { stepGame: 'Outro' })
-      //   })
+      pane
+        .addButton({
+          title: 'outro'
+        })
+        .on('click', () => {
+          this.$socket.emit('setStepGame', { stepGame: 4 })
+        })
+    },
+    initNoSleep() {
+      this.noSleep = new NoSleep()
+
+      this.noSleep.enable()
     }
   }
 }

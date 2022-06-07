@@ -1,25 +1,34 @@
 <template>
   <div class="chat">
-    <p class="chat__title">Chat interface</p>
-    <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
-    <div ref="choice-buttons" class="chat__choices">
-      <h4 v-html="'Répondez au vendeur'" />
-      <div class="chat__choices__buttons">
-        <button v-if="questions[0]" @click="chooseQuestion(0)" v-html="questions[0].question"></button>
-        <button v-if="questions[1]" @click="chooseQuestion(1)" v-html="questions[1].question"></button>
-        <!-- if last question to choose bot -->
-        <button
-          v-if="finalAnswers[0]"
-          class="chat__choices__btn--strong"
-          @click="chooseBotAnswer('bot')"
-          v-html="finalAnswers[0]"
-        />
-        <button
-          v-if="finalAnswers[1]"
-          class="chat__choices__btn--strong"
-          @click="chooseBotAnswer('normal')"
-          v-html="finalAnswers[1]"
-        />
+    <div class="chat__header">
+      <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
+    </div>
+    <div ref="messages" class="chat__messages">
+      <p v-if="!isMessageSend" class="chat__messages__helper-message">
+        Envoyez une première question pour lancer la discussion avec le vendeur.
+      </p>
+      <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
+    </div>
+    <div class="chat__choices-container">
+      <div ref="choice-buttons" class="chat__choices">
+        <div class="chat__choices__buttons">
+          <button
+            v-if="questions[0]"
+            class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[0].slug)}  ')` }"
+            @click="chooseQuestion(0)"
+            v-html="questions[0].btnLabel"
+          ></button>
+          <p v-if="questions[1]">ou</p>
+          <button
+            v-if="questions[1]"
+            class="chat__choices__btn"
+            :style="{ 'background-image': `url(' ${getSource(questions[1].slug)}  ')` }"
+            @click="chooseQuestion(1)"
+            v-html="questions[1].btnLabel"
+          ></button>
+          <p v-if="allQuestionsAsked">Je crois avoir posé toutes les questions</p>
+        </div>
       </div>
     </div>
   </div>
@@ -29,12 +38,15 @@
 import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
-import { finalAnswer, questionsData } from '@/data/enigme3'
+import { questionsData, textContent } from '@/data/enigme3'
 export default {
   name: 'Enigme3player1',
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'enigme3-restart': function () {
+      this.reInitData()
     }
   },
   components: { Messages },
@@ -43,17 +55,13 @@ export default {
       type: Array,
       default: () => []
     },
-    sellerType: {
-      type: String,
-      default: null
-    },
     product: {
       type: Object,
       default: () => {}
     },
     questionsToDisplay: {
       type: Number,
-      default: 6
+      default: 4
     }
   },
   data() {
@@ -61,13 +69,14 @@ export default {
       choicePos: null,
       buttons: null,
       questions: [],
-      finalAnswers: [],
+      isMessageSend: false,
       choices: [],
-      messages: [{ isReveal: true, isReceived: false, content: 'Bonjour !' }]
+      text: textContent,
+      messages: [],
+      allQuestionsAsked: false
     }
   },
   mounted() {
-    console.log(this.product, 'data')
     this.generateQuestions()
     this.$nextTick(() => {
       this.buttons = this.$refs?.['choice-buttons']
@@ -77,16 +86,22 @@ export default {
     start() {
       console.log('START ENIGME')
     },
-
     generateQuestions() {
       this.questions = questionsData(this.product)
         .sort(() => Math.random() - Math.random())
         .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
+      this.isMessageSend = true
       this.hideButtons()
       this.choicePos = pos
       this.messages.push({ isReceived: false, isReveal: false, content: this.questions[this.choicePos].question })
+      Anime({
+        targets: this.$refs.messages,
+        scrollTop: this.$refs.messages.scrollHeight,
+        duration: 750,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
       this.getResponse()
     },
     nextChoice() {
@@ -94,7 +109,7 @@ export default {
       this.questions.splice(this.choicePos, 1)
       this.questions.length > 0
         ? this.questions.splice(this.questions.length, 0, this.questions.splice(0, 1)[0])
-        : this.finalChoice()
+        : (this.allQuestionsAsked = true)
     },
     getResponse() {
       const answer =
@@ -110,47 +125,110 @@ export default {
     handleMessagesComplete() {
       this.nextChoice()
       // Show back choices buttons
-      const tl = Anime.timeline({
-        easing: 'easeInExpo'
-      })
-      tl.add({
+      Anime({
         targets: this.buttons,
         opacity: [0, 1],
-        duration: 250
+        duration: 250,
+        easing: 'easeInExpo'
       })
     },
     hideButtons() {
-      const tl = Anime.timeline({
-        easing: 'easeInExpo'
-      })
-      tl.add({
+      Anime({
         targets: this.buttons,
         opacity: [1, 0],
-        duration: 150
+        duration: 150,
+        easing: 'easeInExpo'
       })
     },
-    finalChoice() {
-      // push final choices
-      this.finalAnswers = [finalAnswer.bot, finalAnswer.normal]
+    reInitData() {
+      this.messages = []
+      this.choicePos = null
+      this.buttons = null
+      this.questions = []
+      this.isMessageSend = false
+      this.choices = []
+      this.allQuestionsAsked = false
+
+      this.generateQuestions()
+
+      this.$nextTick(() => {
+        this.buttons = this.$refs?.['choice-buttons']
+      })
     },
-    chooseBotAnswer(sellerType) {
-      sellerType === this.sellerType ? console.log('ouiii réussi !') : console.log('raté')
+    getSource(slug) {
+      return require(`@/assets/images/enigme3/notice/icons/${slug}.svg`)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.chat__choices {
-  position: fixed;
-  bottom: 5vh;
-  left: 50%;
-  transform: translate(-50%);
+p {
+  margin: 0;
+}
+
+.chat__popup-end {
+  width: 70vw;
+  background: white;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100 * var(--vhRes, 1vh));
+  border: 4px solid var(--color-black);
+}
+
+.chat__header {
+  padding: 2em;
+  text-align: center;
+  border-bottom: 4px solid var(--color-black);
+}
+
+.chat__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.chat__messages {
+  flex: 1;
+  padding: 0 1em;
+  overflow: scroll;
+}
+
+.chat__messages__helper-message {
+  margin-top: 50%;
+  text-align: center;
+}
+
+.chat__choices-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  padding: 1em 2em;
+  text-align: center;
+  border-top: 4px solid var(--color-black);
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 .chat__choices__btn {
+  width: 100%;
+  padding: 1em 1em 1em 4em;
+  margin: 1em 0;
+  font-weight: bold;
+  color: #f8f8f8;
+  text-align: left;
+  background: #f59535 no-repeat center left 15px;
+  border: 4px solid var(--color-black);
+  border-radius: 27px;
+
   &--strong {
-    font-weight: bold;
+    background: #3577f5;
   }
 }
 </style>

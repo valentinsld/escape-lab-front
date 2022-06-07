@@ -1,41 +1,185 @@
 <template>
-  <div v-if="product" class="annonce-product">
-    <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
-    <p v-if="product.img" class="annonce-product__img" v-html="product.img" />
-    <p v-if="product.description" class="annonce-product__description" v-html="product.description" />
-    <p v-if="product.subtype.text" v-html="product.subtype.text" />
+  <div class="annonce-product">
+    <div v-if="product" class="annonce-product__wrapper">
+      <div class="annonce-product__left-column">
+        <div class="annonce-product__img-container">
+          <img v-if="product.img" class="annonce-product__img" :src="getSource" />
+        </div>
+        <h2 v-if="product.name" class="annonce-product__title" v-html="product.name" />
+        <h4 v-if="product.subtype.text" v-html="product.subtype.text" />
+        <div v-if="product.description" class="annonce-product__description">
+          <p v-for="(item, index) in product.description" :key="index" v-html="item" />
+        </div>
+      </div>
+      <div class="annonce-product__right-column">
+        <div class="annonce-product__sailer">
+          <div class="annonce-product__sailer-name">
+            <img src="@/assets/images/enigme3/sailer-profil.png" />
+            <h4 v-html="` Vendu par ${textContent.sailerName} `" />
+          </div>
+          <div v-if="sailer" class="annonce-product__sailer-data">
+            <p v-if="sailer.sales" v-html="`${sailer.sales} ventes`" />
+            <p v-if="sailer.reviews" v-html="`${sailer.reviews} avis`" />
+            <p v-if="sailer.date" v-html="`Membre depuis ${sailer.date}`" />
+            <p>Répond en moyenne dans l'heure</p>
+          </div>
+        </div>
+        <div v-if="product.criteria.good" class="annonce-product__criteria-container">
+          <h3>Caractéristiques techniques</h3>
+          <div v-for="(criteria, name) in product.criteria.good" :key="name" class="annonce-product__criteria-item">
+            <p v-if="criteriaName[name]" class="annonce-product__criteria-name" v-html="criteriaName[name]" />
+            <p class="annonce-product__criteria-value" v-html="criteria" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { MUTATIONS as M } from '@/store/modules/three/helpers'
-
+import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
+import { randomNum } from '@/helpers/randomNum'
 export default {
   name: 'Enigme3MainScreen',
   props: {
     product: {
       type: Object,
       default: () => {}
+    },
+    trueRules: {
+      type: Array,
+      default: null
+    }
+  },
+  data() {
+    return {
+      criteriaName: criteriaName,
+      sailer: null,
+      textContent: textContent
+    }
+  },
+  computed: {
+    getSource() {
+      return require(`@/assets/images/enigme3/annonce-product/${this.product.img}.png`)
     }
   },
   mounted() {
-    console.log(this.$store.state.three.camera, 'cam pos')
-    this.$store.commit(M.setCamPosition, { x: 0.5, y: 0, z: 1 })
+    this.sailer = this.getSailer()
   },
   sockets: {
     startEnigme: function () {
       this.start()
+    },
+    'show-fader': function () {
+      this.$el.style.opacity = 0
+    },
+    'enigme3-restart': function () {
+      this.$el.style.opacity = 1
     }
   },
   methods: {
     start() {
       console.log('START ENIGME')
-    }
+    },
+    getSailer() {
+      const isTrueRule = this.trueRules.filter((e) => e.slug === 'profile').length > 0
+      return isTrueRule
+        ? botSailers[randomNum(0, botSailers.length)]
+        : normalSailers[randomNum(0, normalSailers.length)]
+    } /*,
+    getGlyphDescription(item) {
+      const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
+      let str = item
+      if (isTrueRule) {
+        for (const letter in botGlyphConverter) {
+          str = str.replace(new RegExp(letter, 'g'), botGlyphConverter[letter])
+        }
+      } else {
+        for (const letter in normalGlyphConverter) {
+          str = str.replace(new RegExp(letter, 'g'), normalGlyphConverter[letter])
+        }
+      }
+      return str
+    }*/
   }
 }
 </script>
 <style lang="scss" scoped>
 .annonce-product {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  transition: opacity 400ms var(--custom-bezier);
+  transform: translate(-50%, -50%);
+
+  p {
+    margin: 7px 0;
+  }
+}
+
+.annonce-product__site-title {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.annonce-product__img {
+  width: 100%;
+}
+
+.annonce-product__wrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 2em;
+  background: #fff;
   border: 5px solid var(--color-black);
+  border-radius: 30px;
+}
+
+.annonce-product__description {
+  margin-top: 45px;
+}
+
+.annonce-product__left-column {
+  width: 50%;
+}
+
+.annonce-product__right-column {
+  width: 35%;
+}
+
+.annonce-product__sailer-name {
+  display: flex;
+
+  h4 {
+    margin-left: 10px;
+  }
+}
+
+.annonce-product__criteria-container {
+  margin-top: 50px;
+
+  h3 {
+    margin-bottom: 35px;
+  }
+}
+
+.annonce-product__criteria-item {
+  display: flex;
+}
+
+.annonce-product__criteria-name {
+  padding-right: 6px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.annonce-product__criteria-value {
+  margin: 0;
+}
+
+.annonce-product__sailer-data {
+  margin-top: 20px;
 }
 </style>

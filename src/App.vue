@@ -5,7 +5,7 @@
       <router-view />
     </transition>
 
-    <UserDisconnected v-if="listUsers.length < 3 && isStart" />
+    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
   </main>
 </template>
 
@@ -37,10 +37,16 @@ export default {
   },
   computed: mapState({
     listUsers: (state) => state[S.listUsers],
-    isStart: (state) => state[S.isStart]
+    isStart: (state) => state[S.isStart],
+    stepGame: (state) => state[S.stepGame]
   }),
   mounted() {
     this.initSubscribeConnexion()
+    this.initAutoVh()
+
+    setTimeout(this.initAutoVh.bind(this), 1000)
+
+    this.removePinchOnMobile()
   },
   sockets: {
     connect: function () {
@@ -51,14 +57,14 @@ export default {
       this.$store.commit(M.idRoom, idRoom)
       this.$store.commit(M.listUsers, listUsers)
       this.$store.commit(M.stepGame, stepGame)
+      this.$store.commit(M.isStart, isStart)
 
       // if is you
-      console.log(this.$store.state[S.typeScreen])
+      // console.log(this.$store.state[S.typeScreen])
       if (!this.$store.state[S.typeScreen]) {
         this.$store.commit(M.typeScreen, newUser.type)
       }
 
-      console.log('isStart', isStart)
       if (isStart) {
         this.$router.push('/game')
       }
@@ -84,6 +90,19 @@ export default {
           console.error('Socket : ', err)
         })
       })
+    },
+    initAutoVh() {
+      this.$el.style.setProperty('--vh', window.innerHeight / 100 + 'px')
+      this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px')
+      window.addEventListener('resize', () => this.$el.style.setProperty('--vhRes', window.innerHeight / 100 + 'px'))
+    },
+    removePinchOnMobile() {
+      // remove pintch zoom
+      this.$nextTick(() => {
+        document.addEventListener('gesturestart', function (e) {
+          e.preventDefault()
+        })
+      })
     }
   }
 }
@@ -92,11 +111,23 @@ export default {
 <style lang="scss">
 @import 'scss/app';
 
+// Remove scroll to reload page for ios
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+// remove double tap (zoom)
+* {
+  touch-action: manipulation;
+}
+
 #app {
   display: flex;
-  height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
+  height: calc(100 * var(--vhRes, 1vh));
+  font-family: 'grenadine-mvb', arial, sans-serif;
+  color: var(--color-black);
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

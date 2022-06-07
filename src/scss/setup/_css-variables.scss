@@ -1,16 +1,23 @@
 :root {
-    // Base colors
-    --color-white: #fff;
-    --color-black: #000;
-    --color-grey-light: #E7E7E7;
+  // COLORS
+  --color-black: #000;
+  --color-blackDimmed: #2B2B2B;
+  --color-white: #FFF;
+  --color-whiteDimmed: #F5F5F5;
+  --color-primary: #F59535;
+  --color-enigme1: #4A6CFF;
+  --color-enigme2: #5D44C7;
+  --color-enigme3: #F59535;
+  --color-green: #00C90F;
+  --color-red: #FF664A;
+  --color-blue: #4A6CFF;
+  --color-yellow: #FFEA4A;
 
-    // Text colors
-    --color-text: var(--color-black);
-    --color-text-secondary: var(--color-black);
-    --color-text-link: var(--color-black);
-    --color-text-link-hover: var(--color-black);
+  // FONT WEIGHT
+  --weight-regular: 300;
+  --weight-medium: 400;
+  --weight-bold: 600;
 
-    // Background colors
-    --color-background: var(--color-white);
-    --color-background-inverse: var(--color-black);
+  // BEZIER
+  --custom-bezier: cubic-bezier(.2,0,.25,1);
 }

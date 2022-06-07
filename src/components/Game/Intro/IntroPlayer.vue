@@ -1,21 +1,19 @@
 <template>
-  <div
-    :class="{
-      introPlayer: true,
-      '-isDark': isDark
-    }"
-  >
-    <h1>Intro Player</h1>
-
-    <div v-if="!startVideo">
-      <Messages :messages="messages" :delay="{ default: 0, firstMsg: 0 }" />
+  <div class="screenContainer introPlayer">
+    <div v-if="!startVideo" ref="messages" class="introPlayer__messages-container">
+      <Messages
+        :messages="messages"
+        :delay="{ default: 0, firstMsg: 0 }"
+        @onanimation:iscomplete="handleMessageComplete"
+      />
     </div>
-
-    <p v-else>{{ textIntro }}</p>
+    <p v-else class="dark">{{ textIntro }}</p>
   </div>
 </template>
 
 <script>
+import Anime from 'animejs'
+
 import Messages from '@/components/block/Messages'
 import { STATE as S } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -54,7 +52,6 @@ export default {
     },
     // startVideo
     'intro-startVideo': function () {
-      console.log('intro-startVideo !!!!!!')
       this.$data.startVideo = true
     }
   },
@@ -62,6 +59,14 @@ export default {
     initSocketsMessage() {
       // launch start
       this.$socket.emit('intro-recevedMessage')
+    },
+    handleMessageComplete() {
+      Anime({
+        targets: this.$refs.messages,
+        scrollTop: this.$refs.messages.scrollHeight,
+        duration: 750,
+        easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
+      })
     }
   }
 }
@@ -69,19 +74,31 @@ export default {
 
 <style lang="scss" scoped>
 .introPlayer {
-  &.-isDark {
-    &::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      content: '';
-      background-color: black;
-    }
-  }
+  display: flex;
+  padding: 0;
+}
+
+.introPlayer__messages-container {
+  flex: 1;
+  padding: 5px;
+  overflow: scroll;
+}
+
+.dark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  margin: 0;
+  color: #fff;
+  background-color: #000;
 }
 </style>

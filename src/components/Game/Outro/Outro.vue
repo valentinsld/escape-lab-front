@@ -1,6 +1,5 @@
 <template>
-  <div class="outro">
-    <p>outro</p>
+  <div class="outroContainer">
     <Components :is="'Outro' + typeScreen" />
   </div>
 </template>
@@ -20,4 +19,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.outroContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+</style>

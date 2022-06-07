@@ -38,7 +38,7 @@ export const mutations = {
     state[STATE.stateScreen] = newVal
   },
   [MUTATIONS.typeScreen](state, newVal) {
-    state[STATE.typeScreen] = newVal.charAt(0).toUpperCase() + newVal.slice(1)
+    state[STATE.typeScreen] = newVal ? newVal.charAt(0).toUpperCase() + newVal.slice(1) : null
   },
 
   [MUTATIONS.socketID](state, newVal) {

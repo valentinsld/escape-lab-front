@@ -1203,6 +1203,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@interactjs/types@1.10.11":
+  version "1.10.11"
+  resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.10.11.tgz#29be25d503f9c7842df062fa3cda5b044a47cf2a"
+  integrity sha512-YRsVFWjL8Gkkvlx3qnjeaxW4fnibSJ9791g8BA7Pv5ANByI64WmtR1vU7A2rXcrOn8XvyCEfY0ss1s8NhZP+MA==
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -5601,6 +5606,11 @@ hosted-git-info@^4.0.1:
   dependencies:
     lru-cache "^6.0.0"
 
+howler@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.3.tgz#a2eff9b08b586798e7a2ee17a602a90df28715da"
+  integrity sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==
+
 hpack.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/hpack.js/-/hpack.js-2.1.6.tgz#87774c0949e513f42e84575b3c45681fade2a0b2"
@@ -5962,6 +5972,13 @@ inquirer@^7.0.0, inquirer@^7.1.0:
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
     through "^2.3.6"
+
+interactjs@^1.10.11:
+  version "1.10.11"
+  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.10.11.tgz#0b9eabe37f1f82fff68e22faad51269b8f2038ea"
+  integrity sha512-VPUWsGAOPmrZe1YF7Fq/4AIBBZ+3FikZRS8bpzT6VsAfUuhxl/CKJY73IAiZHd3fz9p174CXErn0Qs81XEFICA==
+  dependencies:
+    "@interactjs/types" "1.10.11"
 
 internal-ip@^4.3.0:
   version "4.3.0"
@@ -7449,6 +7466,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+
+nosleep.js@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/nosleep.js/-/nosleep.js-0.12.0.tgz#a01fddab2c13af357d673928b1f40a9013a4dc08"
+  integrity sha512-9d1HbpKLh3sdWlhXMhU6MMH+wQzKkrgfRkYV0EBdvt99YJfj0ilCJrWRDYG2130Tm4GXbEoTCx5b34JSaP+HhA==
 
 npm-run-path@^2.0.0:
   version "2.0.2"
