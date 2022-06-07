@@ -85,7 +85,8 @@ export default {
         rotation: 0
       },
       isAnimating: false,
-      heightCard: 200
+      heightCard: 200,
+      hasDragged: false
     }
   },
   computed: mapState({
@@ -127,6 +128,17 @@ export default {
             complete: () => {
               this.resetCardPosition()
               this.isAnimating = false
+
+              // start animation for help
+              if (this.card.id === 1 && this.typeScreen === 'Player1') {
+                setTimeout(() => {
+                  this.initAnimationTuto()
+                }, 3000)
+              } else if (this.card.id === 2 && this.typeScreen === 'Player2') {
+                setTimeout(() => {
+                  this.initAnimationTuto()
+                }, 3000)
+              }
             }
           })
           break
@@ -182,6 +194,7 @@ export default {
 
       onstart: () => {
         this.isInteractAnimating = false
+        this.hasDragged = true
       },
 
       onmove: (event) => {
@@ -283,6 +296,41 @@ export default {
 
     resetCardPosition() {
       this.interactSetPosition({ x: 0, y: 0, rotation: 0 })
+    },
+
+    // animartion tuto
+    initAnimationTuto() {
+      if (this.hasDragged || this.isEndSort) return
+
+      const tl = Anime.timeline({
+        targets: this.$refs.interactElement,
+        easing: 'easeOutBack',
+        duration: 450,
+        update: () => {
+          if (this.hasDragged) tl.pause()
+        }
+      })
+
+      tl.add({
+        translateX: 35,
+        rotate: 7
+      })
+        .add({
+          translateX: 0,
+          rotate: 0
+        })
+        .add({
+          translateX: 35,
+          rotate: 7
+        })
+        .add({
+          translateX: 0,
+          rotate: 0
+        })
+
+      tl.finished.then(() => {
+        setTimeout(() => this.initAnimationTuto(), 2000)
+      })
     }
   }
 }
