@@ -30,6 +30,7 @@
     "serve-static": "^1.15.0",
     "socket.io-client": "^4.4.1",
     "three": "^0.139.2",
+    "troika-three-text": "^0.46.4",
     "tweakpane": "^3.0.8",
     "video.js": "^7.18.1",
     "videojs-abloop": "^1.2.0",

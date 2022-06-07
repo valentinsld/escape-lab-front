@@ -1,11 +1,12 @@
 <template>
   <main id="app" class="app">
     <!-- Views -->
-    <transition name="fade-page" mode="out-in">
+    <!--    <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
 
-    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
+    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />-->
+    <Canvas />
   </main>
 </template>
 
@@ -13,6 +14,7 @@
 import { mapState } from 'vuex'
 
 import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
+import Canvas from '@/components/Game/Canvas'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 
@@ -33,6 +35,7 @@ const ERROR_SOCKETS = [
 export default {
   name: 'App',
   components: {
+    Canvas,
     UserDisconnected
   },
   computed: mapState({
