@@ -174,8 +174,8 @@ export const textContent = {
   sailerName: 'EricDu59',
   consigne: {
     mainScreen:
-      'À la fin du timer, déterminez si le vendeur est fiable ou s’il s’agit du bot arnaqueur du professeur, à l’aide du carnet de notes.',
+      'À l’aide du carnet de notes, trouvez les bugs qui permettent de reconnaitre le robot générateur de fausses annonces du professeur.',
     notice: 'Vous devez étudier le carnet de notes',
-    chat: 'Vous devez chatter avec le vendeur'
+    chat: 'Vous devez chatter avec le robot'
   }
 }
