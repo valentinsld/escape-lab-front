@@ -32,6 +32,7 @@
     "tweakpane": "^3.0.8",
     "video.js": "^7.18.1",
     "videojs-abloop": "^1.2.0",
+    "videojs-hls-quality-selector": "^1.1.4",
     "vue": "2.6.14",
     "vue-router": "3.5.3",
     "vue-socket.io": "^3.0.10",
