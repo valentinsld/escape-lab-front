@@ -1,4 +1,6 @@
 import * as Three from 'three'
+import { AmbientLight, DirectionalLight } from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -11,8 +13,7 @@ export const state = {
   [STATE.scene]: null,
   [STATE.renderer]: null,
   [STATE.meshGame1]: null,
-  [STATE.meshGame2]: null,
-  [STATE.meshGame3]: null
+  [STATE.popup]: null
 }
 
 export const mutations = {
@@ -42,13 +43,25 @@ export const actions = {
       state.meshGame1.position.set(-0.5, 0, 0)
       state.scene.add(state.meshGame1)
 
-      state.meshGame2 = new Three.Mesh(geometry, material)
-      state.meshGame2.position.set(0, 0, 0)
-      state.scene.add(state.meshGame2)
+      let loader = new GLTFLoader()
+      loader.load('/assets/models/popup.gltf', (data) => {
+        state.popup = data.scene
+        state.popup.scale.set(0.1, 0.1, 0.1)
+        state.popup.rotation.set(0, 1, 0)
+        state.popup.position.set(0, 0, 0)
+        state.scene.add(state.popup)
+      })
 
-      state.meshGame3 = new Three.Mesh(geometry, material)
-      state.meshGame3.position.set(0.5, 0, 0)
-      state.scene.add(state.meshGame3)
+      let lightA = new DirectionalLight(0xffffff)
+      lightA.position.set(1, 1, 1)
+      state.scene.add(lightA)
+
+      let lightB = new DirectionalLight(0x002288)
+      lightB.position.set(-1, -1, -1)
+      state.scene.add(lightB)
+
+      let ambientLight = new AmbientLight(0x222222)
+      state.scene.add(ambientLight)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
       state.renderer.setSize(width, height)
@@ -66,6 +79,7 @@ export const actions = {
     })
 
     state.meshGame1.rotation.y += 0.001
+    if (state.popup) state.popup.rotation.y += 0.01
     state.renderer.render(state.scene, state.camera)
   }
 }
