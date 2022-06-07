@@ -25,11 +25,15 @@ export default {
       showPopup: false,
       isFirstPlayer: this.$store.state[S.typeScreen] === 'Player1',
       cards: [],
-      showFailure: false
+      showFailure: false,
+      coundtDown: null
     }
   },
   mounted() {
     this.defineIdentity()
+  },
+  beforeDestroy() {
+    clearInterval(this.coundtDown)
   },
   methods: {
     getPopupsData(data) {
@@ -57,13 +61,13 @@ export default {
       //ref to progress inner
       const interval = 100
       let timer = 0
-      let coundtDown = setInterval(() => {
+      this.coundtDown = setInterval(() => {
         timer = timer + interval
         let progressWidth = (timer / time) * 100
         if (timer < time) {
           this.$refs.progress.style.width = `${progressWidth}%`
         } else {
-          clearInterval(coundtDown)
+          clearInterval(this.coundtDown)
           this.$refs.progress.style.width = '0%'
           // alert('enigme terminée')
         }
