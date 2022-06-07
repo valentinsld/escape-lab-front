@@ -14,6 +14,7 @@
 <script>
 import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
+import Sound from '@/helpers/Sound'
 export default {
   name: 'PlayerTuto',
   props: {
@@ -43,6 +44,7 @@ export default {
   },
   methods: {
     toggleStart() {
+      new Sound('validation', { volume: 0.3 })
       this.isReady = true
       this.$socket.emit(this.socketSend)
     }

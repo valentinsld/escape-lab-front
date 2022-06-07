@@ -41,6 +41,7 @@ import { mapState } from 'vuex'
 
 import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -99,6 +100,7 @@ export default {
   },
   methods: {
     goToConnection() {
+      new Sound('select-3', { volume: 0.3 })
       this.$data.seeHome = false
     },
 

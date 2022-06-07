@@ -22,6 +22,7 @@
 import Anime from 'animejs'
 
 import CanapDeLuxe from '@/assets/CANAPDELUXE.png'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'Messages',
@@ -82,6 +83,7 @@ export default {
         duration: this.duration.firstMsg && this.animLogComplete === 0 ? this.duration.firstMsg : this.duration.default,
         delay: this.delay.firstMsg && this.animLogComplete === 0 ? this.delay.firstMsg : this.delay.default,
         complete: () => {
+          if (this.isAnim) new Sound('message-1', { volume: 0.3 })
           this.$props.messages[this.getFirstMsgIndex()] = {
             ...this.$props.messages[this.getFirstMsgIndex()],
             isReveal: true
