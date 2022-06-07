@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     toggleStart() {
-      new Sound('select-3', { volume: 0.3 })
+      new Sound('validation', { volume: 0.3 })
       this.isReady = true
       this.$socket.emit(this.socketSend)
     }
