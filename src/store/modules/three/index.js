@@ -12,7 +12,6 @@ export const state = {
   [STATE.camera]: null,
   [STATE.scene]: null,
   [STATE.renderer]: null,
-  [STATE.meshGame1]: null,
   [STATE.popup]: null
 }
 
@@ -36,13 +35,6 @@ export const actions = {
 
       state.scene = new Three.Scene()
 
-      let geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
-      let material = new Three.MeshNormalMaterial()
-
-      state.meshGame1 = new Three.Mesh(geometry, material)
-      state.meshGame1.position.set(-0.5, 0, 0)
-      state.scene.add(state.meshGame1)
-
       let loader = new GLTFLoader()
       loader.load('/assets/models/popup.gltf', (data) => {
         state.popup = data.scene
@@ -52,15 +44,11 @@ export const actions = {
         state.scene.add(state.popup)
       })
 
-      let lightA = new DirectionalLight(0xffffff)
+      let lightA = new DirectionalLight(0xffffff, 1.5)
       lightA.position.set(1, 1, 1)
       state.scene.add(lightA)
 
-      let lightB = new DirectionalLight(0x002288)
-      lightB.position.set(-1, -1, -1)
-      state.scene.add(lightB)
-
-      let ambientLight = new AmbientLight(0x222222)
+      let ambientLight = new AmbientLight(0xffffff, 1.5)
       state.scene.add(ambientLight)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
@@ -78,7 +66,6 @@ export const actions = {
       dispatch(ACTIONS.animate)
     })
 
-    state.meshGame1.rotation.y += 0.001
     if (state.popup) state.popup.rotation.y += 0.01
     state.renderer.render(state.scene, state.camera)
   }

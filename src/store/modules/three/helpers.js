@@ -2,9 +2,7 @@ export const STATE = {
   camera: 'camera',
   scene: 'scene',
   renderer: 'renderer',
-  meshGame1: 'meshGame1',
-  meshGame2: 'meshGame2',
-  meshGame3: 'meshGame3'
+  popup: 'popup'
 }
 
 export const MUTATIONS = {
