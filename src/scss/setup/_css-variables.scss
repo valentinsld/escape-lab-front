@@ -1,22 +1,24 @@
 :root {
   // COLORS
-  --color-black: #000;
-  --color-blackDimmed: #2B2B2B;
-  --color-white: #FFF;
-  --color-whiteDimmed: #F5F5F5;
-  --color-primary: #F59535;
-  --color-enigme1: #4A6CFF;
-  --color-enigme2: #5D44C7;
-  --color-enigme3: #F59535;
-  --color-green: #00C90F;
-  --color-red: #FF664A;
-  --color-blue: #4A6CFF;
-  --color-yellow: #FFEA4A;
-  --color-disabled: gray;
---color-orange-highlighted: #FFB366;
---color-blue-highlighted: #6E8AFF;
---color-purple-highlighted: #9880FF;
+  --color-black: hsl(0, 0, 0, 1);
+  --color-blackDimmed: hsl(0, 0%, 17%);
+  --color-white: hsl(0, 0, 100, 1);
+  --color-whiteDimmed: hsl(0, 0%, 96%);
+  --color-primary: hsl(30, 91, 58, 1);
+  --color-enigme1: hsl(229, 100, 65, 1);
+  --color-enigme2: hsl(251, 54, 49, 1);
+  --color-enigme3: hsl(30, 91, 58, 1);
+  --color-green: hsl(124, 100%, 39%);
+  --color-red: hsl(9, 100%, 65%);
+  --color-blue: hsl(229, 100, 65, 1);
+  --color-yellow: hsl(53, 100%, 65%);
+  --color-disabled: hsl(0, 0%, 85%);
+--color-orange-highlighted: hsl(30, 100%, 70%);
+--color-blue-highlighted: hsl(228, 100%, 72%);
+--color-purple-highlighted: hsl(251, 100%, 75%);
 
+  // BORDER RADIUS
+  --box-rounded-radius: 35px;
   // FONT WEIGHT
   --weight-regular: 300;
   --weight-medium: 400;
@@ -25,3 +27,31 @@
   // BEZIER
   --custom-bezier: cubic-bezier(.2,0,.25,1);
 }
+
+// :root {
+//   // COLORS
+//   --color-black: #000;
+//   --color-blackDimmed: #2B2B2B;
+//   --color-white: #FFF;
+//   --color-whiteDimmed: #F5F5F5;
+//   --color-primary: #F59535;
+//   --color-enigme1: #4A6CFF;
+//   --color-enigme2: #5D44C7;
+//   --color-enigme3: #F59535;
+//   --color-green: #00C90F;
+//   --color-red: #FF664A;
+//   --color-blue: #4A6CFF;
+//   --color-yellow: #FFEA4A;
+//   --color-disabled: gray;
+// --color-orange-highlighted: #FFB366;
+// --color-blue-highlighted: #6E8AFF;
+// --color-purple-highlighted: #9880FF;
+
+//   // FONT WEIGHT
+//   --weight-regular: 300;
+//   --weight-medium: 400;
+//   --weight-bold: 600;
+
+//   // BEZIER
+//   --custom-bezier: cubic-bezier(.2,0,.25,1);
+// }
