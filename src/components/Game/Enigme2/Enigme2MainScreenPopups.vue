@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch({
-      type: A.addPopup
+      type: A.initPopup
     })
   }
 }

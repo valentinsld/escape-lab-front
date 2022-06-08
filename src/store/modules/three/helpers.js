@@ -2,7 +2,8 @@ export const STATE = {
   camera: 'camera',
   scene: 'scene',
   renderer: 'renderer',
-  popup: 'popup'
+  popup: 'popup',
+  popups: 'popups'
 }
 
 export const MUTATIONS = {
@@ -12,6 +13,6 @@ export const MUTATIONS = {
 
 export const ACTIONS = {
   initScene: 'A_INIT_SCENE',
-  addPopup: 'A_ADD_POPUP',
+  initPopup: 'A_INIT_POPUP',
   animate: 'A_ANIMATE'
 }

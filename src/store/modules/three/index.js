@@ -13,7 +13,8 @@ export const state = {
   [STATE.camera]: null,
   [STATE.scene]: null,
   [STATE.renderer]: null,
-  [STATE.popup]: null
+  [STATE.popup]: null,
+  [STATE.popups]: []
 }
 
 export const mutations = {
@@ -29,7 +30,7 @@ export const mutations = {
 }
 
 export const actions = {
-  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit, dispatch }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
@@ -62,6 +63,8 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
+      dispatch(ACTIONS.initPopup)
+
       resolve()
     })
   },
@@ -73,15 +76,44 @@ export const actions = {
     //if (state.popup) state.popup.rotation.y += 0.01
     state.renderer.render(state.scene, state.camera)
   },
-  [ACTIONS.addPopup]({ state }) {
+  [ACTIONS.initPopup]({ state }) {
     let loader = new GLTFLoader()
     loader.load('/assets/models/popup.gltf', (data) => {
-      state.popup = data.scene
-      state.popup.scale.set(1, 1, 1)
-      state.popup.rotation.set(0, Math.PI * 0.5, 0)
-      state.popup.position.set(0, 0, 0)
+      /*let popup = data.scene.children[0]
+      popup.scale.set(0.96, 18.351, 29.543)
+      popup.rotation.set(0, Math.PI * 0.5, 0)
+      popup.position.set(0, 0, 0)
+      state.popups.push(popup)
+      state.scene.add(popup)
+      console.log(popup, state.popups, 'popup')*/
+
+      let itemCount = 1
+      let dummy = new Three.Object3D()
+      let childObject = data.scene.children[0]
+      let material = childObject.material
+      let geometry = childObject.geometry
+
+      let defaultTransform = new Three.Matrix4().multiply(new Three.Matrix4().makeScale(0.96, 18.351, 29.543))
+      geometry.applyMatrix4(defaultTransform)
+
+      state.popup = new Three.InstancedMesh(geometry, material, itemCount)
+      state.popup.instanceMatrix.setUsage(Three.DynamicDrawUsage)
+
+      for (let i = 0; i < itemCount; i++) {
+        dummy.position.copy(new Three.Vector3(i, 0, 0))
+        dummy.rotation.copy(new Three.Vector3(0, -Math.PI * 0.5, 0))
+        // regarder pour faire un instanced d'un group
+        dummy.updateMatrix()
+        state.popup.setMatrixAt(i, dummy.matrix)
+      }
+
+      state.popup.instanceMatrix.needsUpdate = true
+
+      state.popup.castShadow = true
+      state.popup.receiveShadow = true
+
       state.scene.add(state.popup)
-      console.log(state.popup, 'popup')
+      console.log(data.scene, 'mesh')
     })
     state.renderer.render(state.scene, state.camera)
   }
