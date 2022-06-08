@@ -35,7 +35,7 @@ export const mutations = {
 }
 
 export const actions = {
-  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit, dispatch }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
@@ -55,7 +55,7 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
-      //dispatch(ACTIONS.initPopup)
+      dispatch(ACTIONS.initPopup)
 
       resolve()
     })
@@ -67,29 +67,58 @@ export const actions = {
       // HANDLE MODEL
       let obj = data.scene
       obj.rotation.set(0, Math.PI * 0.5, 0)
-      obj.position.set(0, 9, 0)
+      obj.position.set(0, 0, 0)
 
       console.log(props, 'content')
 
-      // HANDLE TEXT
+      // HANDLE TEXTS
+      const from = new Text()
+      const subject = new Text()
       const text = new Text()
+      state.scene.add(from)
+      state.scene.add(subject)
       state.scene.add(text)
 
-      // Set properties to configure:
+      from.text = props.content.from
+      from.fontSize = 0.3
+      from.anchorX = 'left'
+      from.position.x = -4
+      from.position.z = 0.2
+      from.position.y = 2
+      from.color = 0x000000
+
+      subject.text = props.content.subject
+      subject.fontSize = 0.3
+      subject.anchorX = 'left'
+      subject.position.x = -4
+      subject.position.z = 0.2
+      subject.position.y = 1.4
+      subject.color = 0x000000
+
       text.text = props.content.text
-      text.fontSize = 0.4
-      text.position.z = 0.5
-      text.position.y = 9
+      text.fontSize = 0.35
+      text.anchorX = 'left'
+      text.anchorY = 'top'
+      text.lineHeight = 1.5
+      text.position.x = -4
+      text.maxWidth = 8
+      text.position.z = 0.2
+      text.position.y = 0.5
       text.color = 0x000000
 
       // Update the rendering:
+      from.sync()
+      subject.sync()
       text.sync()
 
       popup.add(obj)
+      popup.add(from)
+      popup.add(subject)
       popup.add(text)
 
       popup.isTriggered = false
       popup.triggerId = props.content.id
+      popup.position.set(0, 10, 0)
 
       state.popups.push(popup)
       state.scene.add(popup)
@@ -102,7 +131,7 @@ export const actions = {
       dispatch(ACTIONS.animate)
     })
     state.popups.filter((e) => {
-      if (e.isTriggered) e.position.y -= 0.02
+      if (e.isTriggered) e.position.y -= 0.05
     })
     state.renderer.render(state.scene, state.camera)
   }
