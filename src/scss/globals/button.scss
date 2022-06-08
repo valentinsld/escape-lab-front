@@ -1,11 +1,22 @@
 .button {
   padding: 18px 36px 16px;
   font-weight: var(--weight-bold);
-  color: var(--color-black);
+  color: dynamic-color($primary);
   cursor: pointer;
   background-color: var(--color-primary);
   border: 3px solid var(--color-black);
-  border-radius: 50px;
+  border-radius: 50px; // style propre boutons
+  box-shadow: 6px 6px 0 var(--color-black);
+
+  &:active {
+    box-shadow: 4px 4px 0 var(--color-black);
+    transform: translateY(4px) translateX(4px);
+  }
+
+  &:hover {
+    background-color: var(--color-orange-highlighted);
+  }
+  
 
   .-isPlayer & {
     padding: 16px 24px 14px;
@@ -13,30 +24,46 @@
   }
 
   &.-enigme1 {
-    background-color: var(--color-enigme1);
+    background-color: $enigme1;
+
+    &:hover {
+      background-color: $orange-highlighted;
+    }
   }
 
   &.-enigme2 {
-    background-color: var(--color-enigme2);
+    background-color: $enigme2;
+
+    &:hover {
+      background-color: $purple-highlighted;
+    }
   }
 
   &.-enigme3 {
-    background-color: var(--color-enigme3);
+    background-color: $enigme3;
+
+    &:hover {
+      background-color: $blue-highlighted;
+    }
   }
 
   &.-green {
-    background-color: var(--color-green);
+    background-color: $green;
   }
 
   &.-red {
-    background-color: var(--color-red);
+    background-color: $red;
   }
 
   &.-blue {
-    background-color: var(--color-blue);
+    background-color: $blue;
   }
 
   &.-yellow {
-    background-color: var(--color-yellow);
+    background-color: $yellow;
+  }
+
+  &:disabled {
+    background: var(--color-disabled);
   }
 }

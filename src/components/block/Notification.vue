@@ -70,7 +70,7 @@ export default {
   text-align: left;
   background-color: var(--color-white);
   border: 3px solid var(--color-black);
-  border-radius: 20px;
+  border-radius: var(--box-rounded-radius);
   transition: transform 250ms ease-in-out;
   transform: translate3d(0, calc(-100% - 16px), 0);
   will-change: transform;
