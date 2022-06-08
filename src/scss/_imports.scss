@@ -3,9 +3,10 @@ Setup
 ------------------------------------------------------------ */
 @import 'setup/reset';
 @import 'setup/typography';
-@import 'setup/css-variables';
 @import 'setup/variables';
-@import 'setup/mixins-responsive';
+@import 'setup/css-variables';
+@import 'setup/mixins';
+@import 'setup/functions';
 
 /*
 Globals
