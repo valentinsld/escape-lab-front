@@ -32,8 +32,8 @@ export default {
         exitDirection: null,
         isSpam: false,
         order: 0
-      },
-      {
+      }
+      /*{
         id: 2,
         from: 'mail@e.cudo.com.au',
         subject: 'ʀÉᴄᴜᴘÉʀᴇᴢ ᴠᴏᴛʀᴇ ʀÉᴄᴏᴍᴘᴇɴꜱᴇ ɪᴘʜᴏɴᴇ 13 ᴏꜰꜰᴇʀᴛ',
@@ -98,13 +98,13 @@ export default {
         exitDirection: null,
         isSpam: true,
         order: 0
-      }
+      }*/
     ]
     for (let card in CARDS) {
       console.log('test')
       this.$store.dispatch({
         type: A.initPopup,
-        text: card
+        content: CARDS[card]
       })
     }
   }
