@@ -6,7 +6,6 @@
     </transition>
 
     <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
-    <Canvas />
   </main>
 </template>
 

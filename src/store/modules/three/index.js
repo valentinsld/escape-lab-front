@@ -26,6 +26,11 @@ export const mutations = {
     if (state.camera) {
       state.camera.position.set(x, y, z)
     }
+  },
+  [MUTATIONS.triggerPopup](state, id) {
+    state.popups.filter((e) => {
+      if (e.triggerId === id) e.isTriggered = true
+    })
   }
 }
 
@@ -35,19 +40,6 @@ export const actions = {
       commit(MUTATIONS.initCam)
 
       state.scene = new Three.Scene()
-
-      /*// Create:
-      const myText = new Text()
-      state.scene.add(myText)
-
-      // Set properties to configure:
-      myText.text = 'Hello world!'
-      myText.fontSize = 0.4
-      myText.position.z = 1
-      myText.color = 0x000000
-
-      // Update the rendering:
-      myText.sync()*/
 
       let lightA = new DirectionalLight(0xffffff, 1.5)
       lightA.position.set(1, 1, 1)
@@ -68,14 +60,6 @@ export const actions = {
       resolve()
     })
   },
-  [ACTIONS.animate]({ dispatch, state }) {
-    window.requestAnimationFrame(() => {
-      dispatch(ACTIONS.animate)
-    })
-    if (state.popups[0]?.isTriggered) state.popups[0].position.y -= 0.01
-    //if (state.popup) state.popup.rotation.y += 0.01
-    state.renderer.render(state.scene, state.camera)
-  },
   [ACTIONS.initPopup]({ state }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
@@ -83,7 +67,7 @@ export const actions = {
       // HANDLE MODEL
       let obj = data.scene
       obj.rotation.set(0, Math.PI * 0.5, 0)
-      obj.position.set(0, 0, 0)
+      obj.position.set(0, 9, 0)
 
       console.log(props, 'content')
 
@@ -94,7 +78,8 @@ export const actions = {
       // Set properties to configure:
       text.text = props.content.text
       text.fontSize = 0.4
-      text.position.z = 1
+      text.position.z = 0.5
+      text.position.y = 9
       text.color = 0x000000
 
       // Update the rendering:
@@ -104,16 +89,23 @@ export const actions = {
       popup.add(text)
 
       popup.isTriggered = false
+      popup.triggerId = props.content.id
 
       state.popups.push(popup)
       state.scene.add(popup)
       console.log(popup, state.popups, 'popup')
     })
     state.renderer.render(state.scene, state.camera)
-  }
-  /*[ACTIONS.triggerPopup]({ state }, mesh) {
+  },
+  [ACTIONS.animate]({ dispatch, state }) {
+    window.requestAnimationFrame(() => {
+      dispatch(ACTIONS.animate)
+    })
+    state.popups.filter((e) => {
+      if (e.isTriggered) e.position.y -= 0.02
+    })
     state.renderer.render(state.scene, state.camera)
-  }*/
+  }
 }
 
 export default {
