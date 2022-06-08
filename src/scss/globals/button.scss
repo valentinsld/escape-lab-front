@@ -62,4 +62,8 @@
   &.-yellow {
     background-color: $yellow;
   }
+
+  &:disabled {
+    background: var(--color-disabled);
+  }
 }
