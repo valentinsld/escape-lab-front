@@ -1,5 +1,5 @@
 <template>
-  <div class="introContainer">
+  <div class="introContainer" :class="`${startVideo ? '-disable' : ''}`">
     <div class="introContainer__content">
       <p class="content__notif">1</p>
 
@@ -43,6 +43,11 @@ export default {
   width: 100%;
   height: 100%;
   background-color: var(--color-primary);
+  transition: opacity 250ms ease-in-out;
+
+  &.-disable {
+    opacity: 0;
+  }
 
   &__content {
     position: relative;
