@@ -17,6 +17,7 @@ import abLoopPlugin from 'videojs-abloop'
 
 require('videojs-contrib-quality-levels')
 require('videojs-hls-quality-selector')
+require('@videojs/http-streaming')
 
 import { STATE as S } from '@/store/helpers'
 
@@ -38,22 +39,31 @@ const MARKERS_PLAYER = {
 const OPTIONS = {
   responsive: true,
   fluid: true,
-  // autoplay: false,
-  // controls: false,
-  // muted: false,
+  autoplay: false,
+  controls: false,
+  muted: false,
 
   preload: true,
-  // controlBar: {
-  //   liveDisplay: true,
-  //   pictureInPictureToggle: false
-  // },
+  controlBar: {
+    liveDisplay: true,
+    pictureInPictureToggle: false
+  },
 
   plugins: {
     abLoopPlugin: {
       loopIfBeforeStart: false,
       loopIfAfterEnd: true
     }
-  }
+  },
+
+  loadingSpinner: true,
+  html5: {
+    vhs: {
+      limitRenditionByPlayerDimensions: false,
+      bandwidth: 6194304
+    }
+  },
+  withCredentials: true
 }
 
 const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
