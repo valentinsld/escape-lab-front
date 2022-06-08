@@ -221,65 +221,14 @@ p {
   padding: 1em 1em 1em 4em;
   margin: 1em 0;
   font-weight: bold;
-  color: var(--color-white);
-  background: var(--color-enigme3);
+  color: var(--color-whiteDimmed);
+  text-align: left;
+  background: var(--color-enigme3) no-repeat center left 15px;
   border: 4px solid var(--color-black);
   border-radius: var(--box-rounded-radius);
 
   &--strong {
     background: var(--color-blue);
-  }
-}
-
-.chat__solution {
-  position: absolute;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-}
-
-.chat__solution_popup-end {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 75%;
-  padding: 2em 1em;
-  background: var(--color-white);
-  border: 5px solid var(--color-black);
-  border-radius: var(--box-rounded-radius);
-  transform: translate(-50%, -50%);
-}
-
-.chat__solution__overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  transition: 300ms var(--custom-bezier);
-}
-
-.chat__solution__answer {
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-.chat__solution__button {
-  display: block;
-  padding: 1em;
-  margin: auto;
-  font-weight: bold;
-  color: var(--color-white);
-  background: var(--color-blue);
-  border: 4px solid var(--color-black);
-  border-radius: var(--box-rounded-radius);
-}
-
-.chat__solution__rules {
-  margin-bottom: 30px;
-
-  p {
-    margin: 10px 0;
-    font-weight: bold;
   }
 }
 </style>

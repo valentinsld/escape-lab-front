@@ -354,12 +354,26 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 280px;
-  color: var(--color-black);
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  min-height: 200px;
+  margin-bottom: 20px;
+  color: black;
+  pointer-events: none;
+  touch-action: pan-y;
+  user-select: none;
   background-color: var(--color-whiteDimmed);
-  border: var(--color-black) solid 5px;
-  border-radius: var(--box-rounded-radius);
+  border: black solid 5px;
+  border-radius: 30px;
+  box-shadow: 6px 6px 0 var(--color-black);
+  opacity: 0;
+  will-change: transform;
+
+  &.isCurrent {
+    pointer-events: initial;
+    opacity: 1;
+  }
 
   &.-isWrong {
     background-color: var(--color-red);

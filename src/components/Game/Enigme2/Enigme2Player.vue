@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import Enigme2Popup from '@/components/Game/Enigme2/Enigme2Card.vue'
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2PlayerRestart.vue'
 import { STATE as S } from '@/store/helpers'
@@ -98,6 +97,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%;
+  background-color: var(--color-enigme2);
   border: var(--color-black) solid 1px;
 }
 
