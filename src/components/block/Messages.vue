@@ -119,9 +119,9 @@ export default {
   font-size: 0.9em;
   line-height: 1.6;
   text-align: right;
-  background-color: var(--color-whiteDimmed);
+  background-color: var(--color-enigme3);
   border: 3px solid var(--color-black);
-  border-radius: 10px;
+  border-radius: var(--box-rounded-radius);
   opacity: 0;
 
   &[is-reveal='true'] {
@@ -147,8 +147,8 @@ export default {
     width: 0;
     height: 0;
     content: '';
-    border-top: 6px solid var(--color-whiteDimmed);
-    border-right: 12px solid var(--color-whiteDimmed);
+    border-top: 6px solid var(--color-enigme3);
+    border-right: 12px solid var(--color-enigme3);
     border-bottom: 10px solid transparent;
     border-left: 6px solid transparent;
   }
@@ -171,10 +171,12 @@ export default {
     margin-right: auto;
     margin-left: 0;
     text-align: left;
+    background-color: var(--color-whiteDimmed);
 
     &::after {
       right: inherit;
       left: 16px;
+      border-top: 12px solid var(--color-whiteDimmed);
       border-right: 6px solid transparent;
       border-left: 12px solid var(--color-whiteDimmed);
     }

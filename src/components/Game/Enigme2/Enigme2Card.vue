@@ -421,15 +421,15 @@ export default {
   width: 100%;
   padding: 4px;
   background-color: transparent;
-  border-bottom: black solid 4px;
+  border-bottom: var(--color-black) solid 4px;
 }
 
 .enigme2-bar .enigme2-controls {
   width: 10px;
   height: 10px;
   margin-left: 5px;
-  border: black solid 3px;
-  border-radius: 50%;
+  border: var(--color-black) solid 3px;
+  border-radius: 50%; // Cercle des controls, ne pas appliquer variable radius
   transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

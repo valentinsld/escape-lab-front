@@ -1,6 +1,6 @@
 <template>
   <div class="userDisconnected">
-    <p>Utilisateur déconnecter</p>
+    <p>Utilisateur déconnecté</p>
     <p>
       Pour se reconnecter utilisez le code : <strong>{{ idRoom }}</strong>
     </p>

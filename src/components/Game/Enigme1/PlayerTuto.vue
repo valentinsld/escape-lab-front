@@ -4,7 +4,7 @@
       <img class="tuto__logo" :src="Logo" />
       <p v-if="text" class="tuto__consigne" v-html="text" />
       <div class="tuto__btn-container">
-        <button :disabled="isReady" class="tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
+        <button :disabled="isReady" class="button tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
       </div>
     </div>
@@ -15,6 +15,7 @@
 import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
 import Sound from '@/helpers/Sound'
+
 export default {
   name: 'PlayerTuto',
   props: {
@@ -85,14 +86,14 @@ export default {
   padding: 1em;
   margin: auto;
   font-weight: bold;
-  color: #f8f8f8;
-  background: #3577f5;
+  color: var(--color-whiteDimmed);
+  background: var(--color-enigme1);
   border: 4px solid var(--color-black);
-  border-radius: 27px;
+  border-radius: var(--box-rounded-radius);
   transition: 200ms var(--custom-bezier);
 
   &:disabled {
-    background: gray;
+    background: var(--color-disabled);
   }
 }
 </style>

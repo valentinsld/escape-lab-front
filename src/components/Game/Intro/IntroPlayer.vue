@@ -98,7 +98,7 @@ export default {
   height: 100%;
   padding: 24px;
   margin: 0;
-  color: #fff;
-  background-color: #000;
+  color: var(--color-white);
+  background-color: var(--color-black);
 }
 </style>
