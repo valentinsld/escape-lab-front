@@ -21,3 +21,16 @@
     }
   }
 }
+
+.vjs-loading-spinner {
+  display: inherit!important;
+  visibility: inherit!important;
+  opacity: 0!important;
+  transition: opacity 500ms 0s ease-in-out;
+  animation: none!important;
+
+  .vjs-waiting & {
+    opacity: 1!important;
+    transition-delay: 800ms;
+  }
+}

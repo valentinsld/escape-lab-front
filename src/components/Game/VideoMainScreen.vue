@@ -15,7 +15,7 @@ import 'video.js/dist/video-js.css'
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
 
-require('videojs-contrib-quality-levels')
+// require('videojs-contrib-quality-levels')
 require('videojs-hls-quality-selector')
 require('@videojs/http-streaming')
 
@@ -59,11 +59,13 @@ const OPTIONS = {
   loadingSpinner: true,
   html5: {
     vhs: {
+      withCredentials: true,
       limitRenditionByPlayerDimensions: false,
-      bandwidth: 6194304
+      bandwidth: 6194304,
+      cacheEncryptionKeys: true,
+      handlePartialData: true
     }
-  },
-  withCredentials: true
+  }
 }
 
 const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
