@@ -10,7 +10,6 @@
 <script>
 import Enigme2MainScreenPopups from '@/components/Game/Enigme2/Enigme2MainScreenPopups.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2MainScreenRestart.vue'
-import { MUTATIONS as M } from '@/store/modules/three/helpers'
 
 export default {
   name: 'Enigme2MainScreen',
@@ -25,8 +24,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.three.camera, 'cam pos')
-    this.$store.commit(M.setCamPosition, { x: 0, y: 0, z: 1 })
     this.$socket.emit('enigme2-sendPopups')
   },
   methods: {

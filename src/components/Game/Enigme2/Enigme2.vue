@@ -1,7 +1,8 @@
 <template>
   <div class="enigme-2">
-    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" />
-    <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" :key="componentKey" />
+    <!--    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" />
+    <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" :key="componentKey" />-->
+    <Components :is="'Enigme2' + typeScreen" v-if="!isStart" :key="componentKey" />
   </div>
 </template>
 

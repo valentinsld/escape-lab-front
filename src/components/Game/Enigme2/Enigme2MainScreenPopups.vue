@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { ACTIONS as A } from '@/store/modules/three/helpers'
+
 import Enigme2MainScreenCard from './Enigme2MainScreenCard.vue'
 
 export default {
@@ -17,6 +19,11 @@ export default {
       type: Array,
       required: true
     }
+  },
+  mounted() {
+    this.$store.dispatch({
+      type: A.addPopup
+    })
   }
 }
 </script>

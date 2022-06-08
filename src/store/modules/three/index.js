@@ -35,16 +35,6 @@ export const actions = {
 
       state.scene = new Three.Scene()
 
-      let loader = new GLTFLoader()
-      loader.load('/assets/models/popup.gltf', (data) => {
-        state.popup = data.scene
-        state.popup.scale.set(1, 1, 1)
-        state.popup.rotation.set(0, Math.PI * 0.5, 0)
-        state.popup.position.set(0, 0, 0)
-        state.scene.add(state.popup)
-        console.log(state.popup, 'popup')
-      })
-
       // Create:
       const myText = new Text()
       state.scene.add(myText)
@@ -81,6 +71,18 @@ export const actions = {
     })
 
     //if (state.popup) state.popup.rotation.y += 0.01
+    state.renderer.render(state.scene, state.camera)
+  },
+  [ACTIONS.addPopup]({ state }) {
+    let loader = new GLTFLoader()
+    loader.load('/assets/models/popup.gltf', (data) => {
+      state.popup = data.scene
+      state.popup.scale.set(1, 1, 1)
+      state.popup.rotation.set(0, Math.PI * 0.5, 0)
+      state.popup.position.set(0, 0, 0)
+      state.scene.add(state.popup)
+      console.log(state.popup, 'popup')
+    })
     state.renderer.render(state.scene, state.camera)
   }
 }
