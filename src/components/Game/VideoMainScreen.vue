@@ -273,6 +273,8 @@ export default {
 
   .vjs-tech {
     object-fit: cover;
+    object-position: center center;
+    max-height: 100vh;
   }
 }
 </style>

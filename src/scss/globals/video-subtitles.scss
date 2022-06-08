@@ -1,4 +1,6 @@
 .vjs-text-track-display {
+  max-height: 100vh;
+
   & > div {
     margin: 3%!important;
   }
