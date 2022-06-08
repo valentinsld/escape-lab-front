@@ -16,7 +16,7 @@
     padding: 16px 16px 16px 8px;
     background-color: var(--color-red);
     border: 2px solid var(--color-black);
-    border-radius: 20px;
+    border-radius: var(--box-rounded-radius);
     animation: shake 1000ms ease-in-out infinite;
 
     .recall {
@@ -49,7 +49,7 @@
     text-align: left;
     background-color: var(--color-whiteDimmed);
     border: 2px solid var(--color-black);
-    border-radius: 20px;
+    border-radius: var(--box-rounded-radius);
 
     .message {
       &__contact {

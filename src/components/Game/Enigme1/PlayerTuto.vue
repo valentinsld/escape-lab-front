@@ -88,7 +88,7 @@ export default {
   color: var(--color-whiteDimmed);
   background: var(--color-enigme1);
   border: 4px solid var(--color-black);
-  border-radius: 27px;
+  border-radius: var(--box-rounded-radius);
   transition: 200ms var(--custom-bezier);
 
   &:disabled {

@@ -1,16 +1,16 @@
 :root {
   // COLORS
-  --color-black: hsl(0, 0, 0, 1);
+  --color-black: hsl(0, 0%, 0%);
   --color-blackDimmed: hsl(0, 0%, 17%);
-  --color-white: hsl(0, 0, 100, 1);
+  --color-white: hsl(0, 0%, 100%);
   --color-whiteDimmed: hsl(0, 0%, 96%);
-  --color-primary: hsl(30, 91, 58, 1);
-  --color-enigme1: hsl(229, 100, 65, 1);
-  --color-enigme2: hsl(251, 54, 49, 1);
-  --color-enigme3: hsl(30, 91, 58, 1);
+  --color-primary: hsl(30, 91%, 58%);
+  --color-enigme1: hsl(229, 100%, 65%);
+  --color-enigme2: hsl(251, 54%, 49%);
+  --color-enigme3: hsl(30, 91%, 58%);
   --color-green: hsl(124, 100%, 39%);
   --color-red: hsl(9, 100%, 65%);
-  --color-blue: hsl(229, 100, 65, 1);
+  --color-blue: hsl(229, 100%, 65%);
   --color-yellow: hsl(53, 100%, 65%);
   --color-disabled: hsl(0, 0%, 85%);
 --color-orange-highlighted: hsl(30, 100%, 70%);
@@ -18,7 +18,10 @@
 --color-purple-highlighted: hsl(251, 100%, 75%);
 
   // BORDER RADIUS
-  --box-rounded-radius: 35px;
+  --box-rounded-radius: 25px;
+  @media screen and (min-width: 992px) { 
+    --box-rounded-radius: 35px;
+  }
   // FONT WEIGHT
   --weight-regular: 300;
   --weight-medium: 400;
@@ -27,6 +30,10 @@
   // BEZIER
   --custom-bezier: cubic-bezier(.2,0,.25,1);
 }
+
+
+
+
 
 // :root {
 //   // COLORS

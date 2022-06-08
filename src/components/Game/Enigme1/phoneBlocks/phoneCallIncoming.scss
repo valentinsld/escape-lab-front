@@ -24,7 +24,7 @@
     margin-top: auto;
     background-color: var(--color-green);
     border: 2px solid var(--color-black);
-    border-radius: 50px;
+    border-radius: var(--box-rounded-radius);
     box-shadow: 2px 2px 0 1px var(--color-black);
 
     img {

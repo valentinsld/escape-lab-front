@@ -224,7 +224,7 @@ p {
   color: var(--color-white);
   background: var(--color-enigme3);
   border: 4px solid var(--color-black);
-  border-radius: 27px;
+  border-radius: var(--box-rounded-radius);
 
   &--strong {
     background: var(--color-blue);
@@ -246,7 +246,7 @@ p {
   padding: 2em 1em;
   background: var(--color-white);
   border: 5px solid var(--color-black);
-  border-radius: 30px;
+  border-radius: var(--box-rounded-radius);
   transform: translate(-50%, -50%);
 }
 
@@ -271,7 +271,7 @@ p {
   color: var(--color-white);
   background: var(--color-blue);
   border: 4px solid var(--color-black);
-  border-radius: 27px;
+  border-radius: var(--box-rounded-radius);
 }
 
 .chat__solution__rules {

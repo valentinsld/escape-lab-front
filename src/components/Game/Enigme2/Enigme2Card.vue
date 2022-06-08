@@ -359,15 +359,7 @@ export default {
   color: var(--color-black);
   background-color: var(--color-whiteDimmed);
   border: var(--color-black) solid 5px;
-  border-radius: 30px;
-  box-shadow: 6px 6px 0 var(--color-black);
-  opacity: 0;
-  will-change: transform;
-
-  &.isCurrent {
-    pointer-events: initial;
-    opacity: 1;
-  }
+  border-radius: var(--box-rounded-radius);
 
   &.-isWrong {
     background-color: var(--color-red);
@@ -423,7 +415,7 @@ export default {
   height: 10px;
   margin-left: 5px;
   border: var(--color-black) solid 3px;
-  border-radius: 50%;
+  border-radius: 50%; // Cercle des controls, ne pas appliquer variable radius
   transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

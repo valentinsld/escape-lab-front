@@ -121,7 +121,7 @@ export default {
   text-align: right;
   background-color: var(--color-enigme3);
   border: 3px solid var(--color-black);
-  border-radius: 10px;
+  border-radius: var(--box-rounded-radius);
   opacity: 0;
 
   &[is-reveal='true'] {

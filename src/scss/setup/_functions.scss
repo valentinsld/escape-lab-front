@@ -1,8 +1,3 @@
-/* Color Sass variables to move to own file */
-
-// $bg-color: $black;
-// $text-color: dynamic-color(bg-color);
-
 /* Fonction sass qui prend en argument la couleur de fond et selon luminosité retourne noir/blanc, utiliser avec valeur HSL dans variables */
 
 @function  dynamic-color($color) {

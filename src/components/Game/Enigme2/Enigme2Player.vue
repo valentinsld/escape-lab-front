@@ -120,15 +120,4 @@ export default {
   font-weight: var(--weight-bold);
   color: var(--color-white);
 }
-
-// .popup {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 400px;
-//   height: 280px;
-//   color: blue;
-//   border: blue solid 3px;
-//   border-radius: 30px;
-// }
 </style>

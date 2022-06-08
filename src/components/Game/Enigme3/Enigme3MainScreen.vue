@@ -134,7 +134,7 @@ export default {
   padding: 2em;
   background: var(--color-white);
   border: 5px solid var(--color-black);
-  border-radius: 30px;
+  border-radius: var(--box-rounded-radius);
 }
 
 .annonce-product__description {
