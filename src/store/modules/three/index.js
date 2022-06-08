@@ -30,7 +30,7 @@ export const mutations = {
 }
 
 export const actions = {
-  [ACTIONS.initScene]({ state, commit, dispatch }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
@@ -63,7 +63,7 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
-      dispatch(ACTIONS.initPopup)
+      //dispatch(ACTIONS.initPopup)
 
       resolve()
     })
@@ -76,18 +76,17 @@ export const actions = {
     //if (state.popup) state.popup.rotation.y += 0.01
     state.renderer.render(state.scene, state.camera)
   },
-  [ACTIONS.initPopup]({ state }) {
+  [ACTIONS.initPopup]({ state }, text) {
     let loader = new GLTFLoader()
     loader.load('/assets/models/popup.gltf', (data) => {
-      /*let popup = data.scene.children[0]
-      popup.scale.set(0.96, 18.351, 29.543)
+      let popup = data.scene
       popup.rotation.set(0, Math.PI * 0.5, 0)
       popup.position.set(0, 0, 0)
       state.popups.push(popup)
       state.scene.add(popup)
-      console.log(popup, state.popups, 'popup')*/
+      console.log(popup, state.popups, text, 'popup')
 
-      let itemCount = 1
+      /*let itemCount = 1
       let dummy = new Three.Object3D()
       let childObject = data.scene.children[0]
       let material = childObject.material
@@ -108,12 +107,10 @@ export const actions = {
       }
 
       state.popup.instanceMatrix.needsUpdate = true
-
       state.popup.castShadow = true
       state.popup.receiveShadow = true
-
       state.scene.add(state.popup)
-      console.log(data.scene, 'mesh')
+      console.log(data.scene, 'mesh')*/
     })
     state.renderer.render(state.scene, state.camera)
   }
