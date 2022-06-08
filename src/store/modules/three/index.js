@@ -72,7 +72,7 @@ export const actions = {
     window.requestAnimationFrame(() => {
       dispatch(ACTIONS.animate)
     })
-
+    if (state.popups[0]?.isTriggered) state.popups[0].position.y -= 0.01
     //if (state.popup) state.popup.rotation.y += 0.01
     state.renderer.render(state.scene, state.camera)
   },
@@ -88,17 +88,22 @@ export const actions = {
       console.log(props, 'content')
 
       // HANDLE TEXT
-      const myText = new Text()
-      state.scene.add(myText)
+      const text = new Text()
+      state.scene.add(text)
 
       // Set properties to configure:
-      myText.text = props.content.text
-      myText.fontSize = 0.4
-      myText.position.z = 1
-      myText.color = 0x000000
+      text.text = props.content.text
+      text.fontSize = 0.4
+      text.position.z = 1
+      text.color = 0x000000
 
       // Update the rendering:
-      myText.sync()
+      text.sync()
+
+      popup.add(obj)
+      popup.add(text)
+
+      popup.isTriggered = false
 
       state.popups.push(popup)
       state.scene.add(popup)
