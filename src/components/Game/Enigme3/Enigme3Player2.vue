@@ -65,7 +65,8 @@ export default {
       activeButtons: [],
       notice: notice,
       showValidation: false,
-      isSuccess: null
+      isSuccess: null,
+      hasDraggedRule: false
     }
   },
   computed: {},
@@ -75,6 +76,9 @@ export default {
 
     const element = this.$refs.interactElement
     interact(element).draggable({
+      onstart: () => {
+        this.hasDraggedRule = true
+      },
       onmove: (event) => {
         if (event.dx > 2 && this.listeningSwipe) {
           this.listeningSwipe = false
@@ -89,14 +93,13 @@ export default {
         this.listeningSwipe = true
       }
     })
+
+    setTimeout(this.initAnimationTuto.bind(this), 3000)
   },
   beforeDestroy() {
     interact(this.$refs.interactElement).unset()
   },
   sockets: {
-    startEnigme: function () {
-      this.start()
-    },
     'enigme3-restart': function () {
       this.currentPage = 1
       this.isSuccess = null
@@ -114,9 +117,6 @@ export default {
     }
   },
   methods: {
-    start() {
-      console.log('START ENIGME')
-    },
     getSource(slug) {
       return require(`@/assets/images/enigme3/notice/${slug}.png`)
     },
@@ -129,8 +129,8 @@ export default {
       if (this.currentPage < this.notice.length) {
         Anime({
           targets: this.$refs?.rule[this.currentPage - 1],
-          translateX: ['-50%', -140],
           rotate: -15,
+          translateX: ['-50%', -140],
           translateY: ['-50%', '-50%'],
           duration: 500,
           easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
@@ -187,6 +187,46 @@ export default {
       console.log(this.activeButtons, this.trueRules)
       this.isSuccess = this.isGoodChoices()
       console.log(this.isSuccess, 'success')
+    },
+
+    // animartion tuto
+    initAnimationTuto() {
+      console.log('ANIMATION', this.hasDraggedRule)
+      if (this.hasDraggedRule) return
+
+      const tl = Anime.timeline({
+        targets: this.$refs.rule[0],
+        easing: 'easeOutBack',
+        duration: 460,
+        update: () => {
+          if (this.hasDraggedRule) tl.pause()
+        }
+      })
+
+      tl.add({
+        rotate: -7,
+        translateX: ['-50%', '-60%'],
+        translateY: ['-50%', '-50%']
+      })
+        .add({
+          rotate: 0,
+          translateX: '-50%',
+          translateY: '-50%'
+        })
+        .add({
+          rotate: -7,
+          translateX: '-60%',
+          translateY: '-50%'
+        })
+        .add({
+          rotate: 0,
+          translateX: '-50%',
+          translateY: '-50%'
+        })
+
+      tl.finished.then(() => {
+        setTimeout(this.initAnimationTuto.bind(this), 2000)
+      })
     }
   }
 }
@@ -194,7 +234,7 @@ export default {
 <style lang="scss" scoped>
 .notice {
   height: calc(100 * var(--vhRes, 1vh));
-  background: #3577f5;
+  background: var(--color-enigme3);
 }
 
 .notice__choices {
@@ -209,7 +249,7 @@ export default {
   top: 50%;
   left: 50%;
   width: 305px;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%) rotate(0deg) translateY(-50%);
 }
 
 .notice__rule__img {

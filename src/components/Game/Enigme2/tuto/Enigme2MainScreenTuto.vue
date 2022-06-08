@@ -27,7 +27,7 @@ export default {
   padding: 2em 3em;
   background: white;
   border: 5px solid var(--color-black);
-  border-radius: 30px;
+  border-radius: var(--box-rounded-radius);
   transform: translate(-50%, -50%);
 
   h2 {

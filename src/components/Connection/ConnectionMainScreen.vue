@@ -13,22 +13,38 @@
       </div>
     </div>
 
-    <div class="connection screenContainer">
-      <div class="connection__qrcode">
-        <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="200" level="H" />
-      </div>
+    <div class="connection">
       <div class="connection__content">
-        <h1 class="content__title">Rejoindre la room</h1>
-        <h2 class="content__idRoom">{{ idRoom }}</h2>
+        <p class="content__notif">1</p>
 
-        <div v-if="!idRoom">Pas de connexion</div>
-        <p>Player 1 : {{ statusPlayer1 }}</p>
-        <p>Player 2 : {{ statusPlayer2 }}</p>
-        <!-- <Button v-if="!seeJoinRoom" :on-click="seeJoinRoomClick" text="Rejoindre une room en cours" /> -->
-        <div v-if="seeJoinRoom">
-          <p>Rejoindre une room</p>
-          <input ref="inputIdRoom" />
-          <Button :on-click="connectToRoom" text="Connect to room" />
+        <p class="content__top">
+          Vous avez reçu un nouveau message ! <br />
+          Connectez vous pour le lire !
+        </p>
+
+        <div class="content__connect">
+          <div class="connect__qrcode">
+            <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="110" level="H" />
+          </div>
+          <p v-if="idRoom" class="connect__text">
+            ou rendez-vous sur<br />
+            <b>{{ url }}</b>
+            <br />
+            et entrez le code <span>{{ idRoom }}</span>
+          </p>
+          <p v-else class="connect__text">Pas de connexion</p>
+
+          <!--
+            <p>Player 1 : {{ statusPlayer1 }}</p>
+            <p>Player 2 : {{ statusPlayer2 }}</p>
+            
+            <Button v-if="!seeJoinRoom" :on-click="seeJoinRoomClick" text="Rejoindre une room en cours" />
+            <div v-if="seeJoinRoom">
+              <p>Rejoindre une room</p>
+              <input ref="inputIdRoom" />
+              <Button :on-click="connectToRoom" text="Connect to room" />
+            </div>
+          -->
         </div>
       </div>
     </div>
@@ -41,6 +57,7 @@ import { mapState } from 'vuex'
 
 import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -57,7 +74,8 @@ export default {
     return {
       Logo,
       seeJoinRoom: false,
-      seeHome: true
+      seeHome: true,
+      url: window.location.host
     }
   },
   computed: mapState({
@@ -99,6 +117,7 @@ export default {
   },
   methods: {
     goToConnection() {
+      new Sound('select-3', { volume: 0.3 })
       this.$data.seeHome = false
     },
 

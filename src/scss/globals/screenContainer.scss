@@ -16,7 +16,7 @@
   margin: auto;
   background-color: var(--color-white);
   border: 5px solid var(--color-black);
-  border-radius: 30px;
+  border-radius: var(--box-rounded-radius);
   box-shadow: 6px 6px 0 var(--color-black);
 
   .-isPlayer & {

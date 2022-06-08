@@ -25,11 +25,15 @@ export default {
       showPopup: false,
       isFirstPlayer: this.$store.state[S.typeScreen] === 'Player1',
       cards: [],
-      showFailure: false
+      showFailure: false,
+      coundtDown: null
     }
   },
   mounted() {
     this.defineIdentity()
+  },
+  beforeDestroy() {
+    clearInterval(this.coundtDown)
   },
   methods: {
     getPopupsData(data) {
@@ -57,13 +61,13 @@ export default {
       //ref to progress inner
       const interval = 100
       let timer = 0
-      let coundtDown = setInterval(() => {
+      this.coundtDown = setInterval(() => {
         timer = timer + interval
         let progressWidth = (timer / time) * 100
         if (timer < time) {
           this.$refs.progress.style.width = `${progressWidth}%`
         } else {
-          clearInterval(coundtDown)
+          clearInterval(this.coundtDown)
           this.$refs.progress.style.width = '0%'
           // alert('enigme terminée')
         }
@@ -93,8 +97,8 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #5d44c7;
-  border: black solid 1px;
+  background-color: var(--color-enigme2);
+  border: var(--color-black) solid 1px;
 }
 
 // .main.progress {
@@ -116,15 +120,4 @@ export default {
   font-weight: var(--weight-bold);
   color: var(--color-white);
 }
-
-// .popup {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 400px;
-//   height: 280px;
-//   color: blue;
-//   border: blue solid 3px;
-//   border-radius: 30px;
-// }
 </style>

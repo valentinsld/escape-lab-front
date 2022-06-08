@@ -1,7 +1,7 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
-    <video ref="videoPlayer" class="video-js" disablePictureInPicture="true" controlslist="nodownload">
-      <source src="/video/testRenduVideo.mp4" type="video/mp4" />
+    <video ref="videoPlayer" class="video-js">
+      <source src="/video/videos.m3u8" type="application/x-mpegURL" />
       <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
     </video>
   </div>
@@ -11,8 +11,13 @@
 // require('!style-loader!css-loader!video.js/dist/video-js.css')
 import 'video.js/dist/video-js.css'
 
+// var VideoJS = require('video.js')
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
+
+// require('videojs-contrib-quality-levels')
+require('videojs-hls-quality-selector')
+require('@videojs/http-streaming')
 
 import { STATE as S } from '@/store/helpers'
 
@@ -48,6 +53,17 @@ const OPTIONS = {
     abLoopPlugin: {
       loopIfBeforeStart: false,
       loopIfAfterEnd: true
+    }
+  },
+
+  loadingSpinner: true,
+  html5: {
+    vhs: {
+      withCredentials: true,
+      limitRenditionByPlayerDimensions: false,
+      bandwidth: 6194304,
+      cacheEncryptionKeys: true,
+      handlePartialData: true
     }
   }
 }
@@ -101,12 +117,12 @@ export default {
   },
   mounted() {
     const THAT = this
-    const VideoJS = videojs
-    abLoopPlugin(window, VideoJS)
+    // const VideoJS = VideoJS
+    abLoopPlugin(window, videojs)
 
     const eventsTime = this.initEventsTime()
 
-    this.player = VideoJS(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
+    this.player = videojs(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
       // console.log('onPlayerReady', this)
 
       this.on('timeupdate', function () {
@@ -123,6 +139,10 @@ export default {
       this.on('ended', function () {
         THAT.endVideo()
       })
+    })
+
+    this.player.hlsQualitySelector({
+      displayCurrentQuality: true
     })
 
     // console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
@@ -255,6 +275,8 @@ export default {
 
   .vjs-tech {
     object-fit: cover;
+    object-position: center center;
+    max-height: 100vh;
   }
 }
 </style>

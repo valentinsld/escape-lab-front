@@ -169,7 +169,7 @@ p {
 
 .chat__popup-end {
   width: 70vw;
-  background: white;
+  background: var(--color-white);
 }
 
 .chat {
@@ -221,14 +221,14 @@ p {
   padding: 1em 1em 1em 4em;
   margin: 1em 0;
   font-weight: bold;
-  color: #f8f8f8;
+  color: var(--color-whiteDimmed);
   text-align: left;
-  background: #f59535 no-repeat center left 15px;
+  background: var(--color-enigme3) no-repeat center left 15px;
   border: 4px solid var(--color-black);
-  border-radius: 27px;
+  border-radius: var(--box-rounded-radius);
 
   &--strong {
-    background: #3577f5;
+    background: var(--color-blue);
   }
 }
 </style>
