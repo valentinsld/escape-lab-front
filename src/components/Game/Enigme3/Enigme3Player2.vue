@@ -234,7 +234,7 @@ export default {
 <style lang="scss" scoped>
 .notice {
   height: calc(100 * var(--vhRes, 1vh));
-  background: var(--color-blue);
+  background: var(--color-enigme3);
 }
 
 .notice__choices {
