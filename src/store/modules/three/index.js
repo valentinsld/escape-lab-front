@@ -19,7 +19,7 @@ export const state = {
 
 export const mutations = {
   [MUTATIONS.initCam](state) {
-    state[STATE.camera] = new Three.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10)
+    state[STATE.camera] = new Three.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 1000)
     state[STATE.camera].position.z = 10
   },
   [MUTATIONS.setCamPosition](state, { x, y, z }) {
@@ -41,11 +41,11 @@ export const actions = {
 
       state.scene = new Three.Scene()
 
-      let lightA = new DirectionalLight(0xffffff, 1.5)
+      let lightA = new DirectionalLight(0xffffff, 0.1)
       lightA.position.set(1, 1, 1)
       state.scene.add(lightA)
 
-      let ambientLight = new AmbientLight(0xffffff, 1.5)
+      let ambientLight = new AmbientLight(0xffffff, 0.1)
       state.scene.add(ambientLight)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
@@ -85,7 +85,8 @@ export const actions = {
       state.scene.add(subject)
       state.scene.add(text)
 
-      from.text = props.content.from
+      from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
+      //from.text = props.content.from
       from.font = FONTS['medium']
       from.fontSize = 0.3
       from.anchorX = 'left'
@@ -94,7 +95,8 @@ export const actions = {
       from.position.y = 2
       from.color = 0x000000
 
-      subject.text = props.content.subject
+      subject.text = 'Déclarez vos revenus trimestriels'
+      //subject.text = props.content.subject
       subject.font = FONTS['medium']
       subject.fontSize = 0.3
       subject.anchorX = 'left'
@@ -103,7 +105,9 @@ export const actions = {
       subject.position.y = 1.4
       subject.color = 0x000000
 
-      text.text = props.content.text
+      //text.text = props.content.text
+      text.text =
+        'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
       text.font = FONTS['medium']
       text.fontSize = 0.35
       text.anchorX = 'left'
@@ -126,8 +130,9 @@ export const actions = {
       popup.add(text)
 
       popup.isTriggered = false
-      popup.triggerId = props.content.id
-      popup.position.set(0, 10, 0)
+      //popup.triggerId = props.content.id
+      popup.position.set(0, 0, 0)
+      popup.rotation.set(0, 0, 0)
 
       state.popups.push(popup)
       state.scene.add(popup)
@@ -142,6 +147,8 @@ export const actions = {
     state.popups.filter((e) => {
       if (e.isTriggered) e.position.y -= 0.05
     })
+    if (state.popups[0]) state.popups[0].rotation.y += 0.01
+    if (state.popups[0]) state.popups[0].rotation.x += 0.01
     state.renderer.render(state.scene, state.camera)
   }
 }
