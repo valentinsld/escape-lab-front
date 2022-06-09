@@ -61,7 +61,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 20px 20px;
+  padding: 60px 20px 20px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
