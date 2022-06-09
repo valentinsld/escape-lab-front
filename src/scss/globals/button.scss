@@ -8,12 +8,12 @@
   border-radius: 50px; // style propre boutons
   box-shadow: 6px 6px 0 var(--color-black);
 
-  &:active {
+  &:active:not(:disabled) {
     box-shadow: 4px 4px 0 var(--color-black);
     transform: translateY(4px) translateX(4px);
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--color-orange-highlighted);
   }
   
@@ -64,6 +64,7 @@
   }
 
   &:disabled {
-    background: var(--color-disabled);
+    pointer-events: none;
+    background: var(--color-disabled)!important;
   }
 }
