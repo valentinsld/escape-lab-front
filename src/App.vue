@@ -7,6 +7,7 @@
 
     <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />-->
     <Canvas />
+    <VideoMainScreen />
   </main>
 </template>
 
@@ -15,6 +16,7 @@ import { mapState } from 'vuex'
 
 import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
 import Canvas from '@/components/Game/Canvas'
+import VideoMainScreen from '@/components/Game/VideoMainScreen'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 
@@ -36,7 +38,8 @@ export default {
   name: 'App',
   components: {
     Canvas,
-    UserDisconnected
+    UserDisconnected,
+    VideoMainScreen
   },
   computed: mapState({
     listUsers: (state) => state[S.listUsers],

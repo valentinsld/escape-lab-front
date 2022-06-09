@@ -1,3 +1,4 @@
+import Anime from 'animejs'
 import * as Three from 'three'
 import { AmbientLight, DirectionalLight } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -20,7 +21,7 @@ export const state = {
 export const mutations = {
   [MUTATIONS.initCam](state) {
     state[STATE.camera] = new Three.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 1000)
-    state[STATE.camera].position.z = 10
+    state[STATE.camera].position.z = 7.5
   },
   [MUTATIONS.setCamPosition](state, { x, y, z }) {
     if (state.camera) {
@@ -48,6 +49,15 @@ export const actions = {
       let ambientLight = new AmbientLight(0xffffff, 0.1)
       state.scene.add(ambientLight)
 
+      const geometry = new Three.PlaneBufferGeometry(17, 8.7, 1, 1)
+
+      const material = new Three.MeshPhongMaterial({
+        colorWrite: false
+      })
+      const plane = new Three.Mesh(geometry, material)
+      plane.position.set(0, 5, 0)
+      state.scene.add(plane)
+
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
       state.renderer.setSize(width, height)
 
@@ -60,7 +70,7 @@ export const actions = {
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state }, props) {
+  [ACTIONS.initPopup]({ state, dispatch }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
@@ -131,14 +141,48 @@ export const actions = {
 
       popup.isTriggered = false
       //popup.triggerId = props.content.id
-      popup.position.set(0, 0, 0)
-      popup.rotation.set(0, 0, 0)
+      popup.position.set(0.2, 3, -8)
+      popup.rotation.set(-Math.PI * 0.5, 0, 0)
 
       state.popups.push(popup)
       state.scene.add(popup)
       console.log(popup, state.popups, 'popup')
+
+      dispatch(ACTIONS.animatePopup)
     })
     state.renderer.render(state.scene, state.camera)
+  },
+  [ACTIONS.animatePopup]({ state }) {
+    let duration = 6000
+    Anime({
+      targets: [state.popups[0].position],
+      keyframes: [
+        // popup descend
+        { y: -2, duration: duration * 0.1, easing: 'easeInOutCubic' },
+        // popup avance et rotate
+        { z: -3, y: -2.5, x: 0.8, duration: duration * 0.3 },
+        // popup descend
+        { y: -6, duration: duration * 0.5 },
+        { y: -13, duration: duration * 0.1, easing: 'easeInExpo' }
+      ],
+      easing: 'linear',
+      duration: duration,
+      loop: true
+    })
+    Anime({
+      targets: [state.popups[0].rotation],
+      keyframes: [
+        // popup descend
+        { duration: duration * 0.1 },
+        // popup avance et rotate
+        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeInQuint' },
+        // popup descend
+        { x: 0, duration: duration * 0.6 }
+      ],
+      easing: 'linear',
+      duration: duration,
+      loop: true
+    })
   },
   [ACTIONS.animate]({ dispatch, state }) {
     window.requestAnimationFrame(() => {
@@ -147,8 +191,8 @@ export const actions = {
     state.popups.filter((e) => {
       if (e.isTriggered) e.position.y -= 0.05
     })
-    if (state.popups[0]) state.popups[0].rotation.y += 0.01
-    if (state.popups[0]) state.popups[0].rotation.x += 0.01
+    //if (state.popups[0]) state.popups[0].rotation.y += 0.01
+    //if (state.popups[0]) state.popups[0].rotation.x += 0.01
     state.renderer.render(state.scene, state.camera)
   }
 }

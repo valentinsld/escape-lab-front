@@ -15,5 +15,6 @@ export const MUTATIONS = {
 export const ACTIONS = {
   initScene: 'A_INIT_SCENE',
   initPopup: 'A_INIT_POPUP',
+  animatePopup: 'A_ANIMATE_POPUP',
   animate: 'A_ANIMATE'
 }
