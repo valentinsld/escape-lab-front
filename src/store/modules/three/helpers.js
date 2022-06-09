@@ -12,6 +12,10 @@ export const MUTATIONS = {
   triggerPopup: 'M_TRIGGER_POPUP'
 }
 
+export const GETTERS = {
+  getPopupArrayIndex: 'G_POPUP_INDEX'
+}
+
 export const ACTIONS = {
   initScene: 'A_INIT_SCENE',
   initPopup: 'A_INIT_POPUP',

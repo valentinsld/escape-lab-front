@@ -8,8 +8,9 @@
 import { mapState } from 'vuex'
 
 import { STATE as S } from '@/store/helpers'
-import { ACTIONS as A } from '@/store/modules/three/helpers'
 import { MUTATIONS as M } from '@/store/modules/three/helpers'
+import { ACTIONS as A } from '@/store/modules/three/helpers'
+import { GETTERS as G } from '@/store/modules/three/helpers'
 
 import Enigme2MainScreenCard from './Enigme2MainScreenCard.vue'
 
@@ -42,9 +43,14 @@ export default {
           })
         }
       } else {
-        this.cards.filter((e) => {
-          if (e.owner === this.typeScreen) {
-            this.$store.commit(M.triggerPopup, e.id)
+        this.cards.filter((card) => {
+          const index = this.$store.getters[G.getPopupArrayIndex](card.id)
+          if (card.owner === this.typeScreen && this.popups[index].isTriggered === false) {
+            this.$store.commit(M.triggerPopup, index)
+            this.$store.dispatch({
+              type: A.animatePopup,
+              id: index
+            })
           }
         })
       }

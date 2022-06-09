@@ -6,7 +6,7 @@ import { Text } from 'troika-three-text'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { ACTIONS, MUTATIONS, STATE } from '@/store/modules/three/helpers'
+import { ACTIONS, GETTERS, MUTATIONS, STATE } from '@/store/modules/three/helpers'
 
 Vue.use(Vuex)
 
@@ -29,14 +29,19 @@ export const mutations = {
     }
   },
   [MUTATIONS.triggerPopup](state, id) {
-    state.popups.filter((e) => {
-      if (e.triggerId === id) e.isTriggered = true
-    })
+    state[STATE.popups][id].isTriggered = true
   }
 }
 
+export const getters = {
+  [GETTERS.getPopupArrayIndex]: (state) => (triggeredId) =>
+    state.popups.findIndex((obj) => {
+      return obj.triggerId === triggeredId
+    })
+}
+
 export const actions = {
-  [ACTIONS.initScene]({ state, commit, dispatch }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
@@ -65,21 +70,21 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
-      dispatch(ACTIONS.initPopup)
+      //dispatch(ACTIONS.initPopup)
 
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state, dispatch }, props) {
+  [ACTIONS.initPopup]({ state }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
       // HANDLE MODEL
       let obj = data.scene
-      obj.rotation.set(0, Math.PI * 0.5, 0)
+      obj.rotation.set(0, -Math.PI * 0.5, 0)
       obj.position.set(0, 0, 0)
-
-      console.log(props, 'content')
+      obj.children[0].receiveShadow = true
+      obj.children[0].castShadow = true
 
       const FONTS = {
         regular: '/fonts/grenadine-regular.otf',
@@ -95,29 +100,28 @@ export const actions = {
       state.scene.add(subject)
       state.scene.add(text)
 
-      from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
-      //from.text = props.content.from
+      //from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
+      from.text = props.content.from
       from.font = FONTS['medium']
       from.fontSize = 0.3
       from.anchorX = 'left'
       from.position.x = -4
       from.position.z = 0.2
-      from.position.y = 2
+      from.position.y = 1.5
       from.color = 0x000000
 
-      subject.text = 'Déclarez vos revenus trimestriels'
-      //subject.text = props.content.subject
+      //subject.text = 'Déclarez vos revenus trimestriels'
+      subject.text = props.content.subject
       subject.font = FONTS['medium']
       subject.fontSize = 0.3
       subject.anchorX = 'left'
       subject.position.x = -4
       subject.position.z = 0.2
-      subject.position.y = 1.4
+      subject.position.y = 0.9
       subject.color = 0x000000
 
-      //text.text = props.content.text
-      text.text =
-        'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
+      text.text = props.content.text
+      //text.text = 'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
       text.font = FONTS['medium']
       text.fontSize = 0.35
       text.anchorX = 'left'
@@ -126,7 +130,7 @@ export const actions = {
       text.position.x = -4
       text.maxWidth = 8
       text.position.z = 0.2
-      text.position.y = 0.5
+      text.position.y = 0
       text.color = 0x000000
 
       // Update the rendering:
@@ -140,22 +144,24 @@ export const actions = {
       popup.add(text)
 
       popup.isTriggered = false
-      //popup.triggerId = props.content.id
+      popup.triggerId = props.content.id
+      /*popup.position.set(0, 0, 0)
+      popup.rotation.set(0, 0, 0)*/
       popup.position.set(0.2, 3, -8)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
 
       state.popups.push(popup)
       state.scene.add(popup)
-      console.log(popup, state.popups, 'popup')
 
-      dispatch(ACTIONS.animatePopup)
+      //dispatch(ACTIONS.animatePopup)
     })
     state.renderer.render(state.scene, state.camera)
   },
-  [ACTIONS.animatePopup]({ state }) {
-    let duration = 6000
+  [ACTIONS.animatePopup]({ state }, props) {
+    console.log(props, state.popups, 'popup animate')
+    let duration = 5000
     Anime({
-      targets: [state.popups[0].position],
+      targets: [state.popups[props.id].position],
       keyframes: [
         // popup descend
         { y: -2, duration: duration * 0.1, easing: 'easeInOutCubic' },
@@ -166,11 +172,10 @@ export const actions = {
         { y: -13, duration: duration * 0.1, easing: 'easeInExpo' }
       ],
       easing: 'linear',
-      duration: duration,
-      loop: true
+      duration: duration
     })
     Anime({
-      targets: [state.popups[0].rotation],
+      targets: [state.popups[props.id].rotation],
       keyframes: [
         // popup descend
         { duration: duration * 0.1 },
@@ -180,19 +185,13 @@ export const actions = {
         { x: 0, duration: duration * 0.6 }
       ],
       easing: 'linear',
-      duration: duration,
-      loop: true
+      duration: duration
     })
   },
   [ACTIONS.animate]({ dispatch, state }) {
     window.requestAnimationFrame(() => {
       dispatch(ACTIONS.animate)
     })
-    state.popups.filter((e) => {
-      if (e.isTriggered) e.position.y -= 0.05
-    })
-    //if (state.popups[0]) state.popups[0].rotation.y += 0.01
-    //if (state.popups[0]) state.popups[0].rotation.x += 0.01
     state.renderer.render(state.scene, state.camera)
   }
 }
@@ -200,5 +199,6 @@ export const actions = {
 export default {
   state: state,
   mutations: mutations,
-  actions: actions
+  actions: actions,
+  getters: getters
 }
