@@ -60,6 +60,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 36px;
+  padding-bottom: 36px;
 
   &__img {
     width: 80%;
@@ -111,6 +113,28 @@
         span {
           color: var(--color-primary);
         }
+      }
+
+      // end
+      &__soundIcon {
+        width: 40px;
+      }
+
+      &__activetext {
+        font-size: 1.05em;
+        font-weight: var(--weight-medium);
+        line-height: 1.4;
+        color: var(--color-primary);
+      }
+
+      &__readyPlayer {
+        margin: 15% 0;
+        font-size: 1.15em;
+        font-weight: var(--weight-medium);
+      }
+
+      &__readyBtn {
+        margin-top: 10%;
       }
     }
   }
