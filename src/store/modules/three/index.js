@@ -71,6 +71,12 @@ export const actions = {
 
       console.log(props, 'content')
 
+      const FONTS = {
+        regular: '/fonts/grenadine-regular.otf',
+        medium: '/fonts/grenadine-medium.otf',
+        bold: '/fonts/grenadine-bold.otf'
+      }
+
       // HANDLE TEXTS
       const from = new Text()
       const subject = new Text()
@@ -80,6 +86,7 @@ export const actions = {
       state.scene.add(text)
 
       from.text = props.content.from
+      from.font = FONTS['medium']
       from.fontSize = 0.3
       from.anchorX = 'left'
       from.position.x = -4
@@ -88,6 +95,7 @@ export const actions = {
       from.color = 0x000000
 
       subject.text = props.content.subject
+      subject.font = FONTS['medium']
       subject.fontSize = 0.3
       subject.anchorX = 'left'
       subject.position.x = -4
@@ -96,6 +104,7 @@ export const actions = {
       subject.color = 0x000000
 
       text.text = props.content.text
+      text.font = FONTS['medium']
       text.fontSize = 0.35
       text.anchorX = 'left'
       text.anchorY = 'top'
