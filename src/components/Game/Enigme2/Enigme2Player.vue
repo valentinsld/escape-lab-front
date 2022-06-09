@@ -84,7 +84,7 @@ export default {
     'enigme2-endSort': function ({ success }) {
       setTimeout(() => {
         this.showFailure = !success
-      }, 800)
+      }, 4500)
     }
   }
 }
@@ -124,7 +124,6 @@ export default {
   width: 100%;
   padding: 8px;
   margin: 0;
-  margin: 0.25em 0;
   font-size: 2em;
   font-weight: var(--weight-bold);
   color: var(--color-white);

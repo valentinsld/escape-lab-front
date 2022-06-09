@@ -41,11 +41,18 @@ export default {
   sockets: {
     'enigme2-endSort': function () {
       this.$data.isEndSort = true
+
+      this.$nextTick(() => {
+        const wrongCard = document.querySelector('.card.-isWrong')
+        console.log(wrongCard)
+
+        if (wrongCard) {
+          console.log(scroll)
+          const scroll = wrongCard.parentElement.offsetTop
+          this.$el.scrollTo(0, scroll)
+        }
+      })
     }
-  },
-  mounted() {
-    console.log(this.cards)
-    console.log(this.typeScreen)
   }
 }
 </script>
