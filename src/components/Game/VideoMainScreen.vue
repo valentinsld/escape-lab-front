@@ -29,11 +29,11 @@ function convertTimeToSeconds(time) {
 
 const MARKERS_PLAYER = {
   introDarkness: '0:14:02',
-  loopEnigme1: { start: '0:17:18', end: '0:19:18' },
-  loopEnigme2: { start: '0:29:18', end: '0:31:20' },
-  loopEnigme3: { start: '0:41:20', end: '0:43:21' },
-  startOutro: '0:54:21',
-  outroStartMessages: '0:59:12'
+  loopEnigme1: { start: '0:16:12', end: '0:22:10' },
+  loopEnigme2: { start: '0:29:22', end: '0:36:00' },
+  loopEnigme3: { start: '0:44:4', end: '0:50:15' },
+  startOutro: '0:56:27',
+  outroStartMessages: '1:02:11'
 }
 
 const OPTIONS = {
