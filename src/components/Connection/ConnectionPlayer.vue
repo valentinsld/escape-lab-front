@@ -8,10 +8,10 @@
     >
       <div class="home screenContainer">
         <img class="home__img" :src="Logo" />
-        <img class="home__fakeVideo" :src="FakeVideo" />
+        <!-- <img class="home__fakeVideo" :src="FakeVideo" /> -->
         <p class="home__text">
-          Clic Clack nécessite un écran principal et deux smartphones : merci de vous connecter aussi sur desktop pour
-          créer une room
+          Clic Clack nécessite <b>un écran principal</b> et <b>deux smartphones</b> :<br />
+          merci de vous connecter aussi sur desktop pour créer une room
         </p>
         <Button text="Commencer l’expérience" :on-click="goToConnection" />
       </div>
@@ -73,7 +73,7 @@ const getIdRoomFromUrl = () => {
   return ''
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
+const IS_DEV = false
 
 export default {
   name: 'ConnectionPlayer',

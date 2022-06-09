@@ -31,10 +31,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
 
   &__img {
-    width: 80%;
-    margin-bottom: 1.5em;
+    width: 86%;
+    // margin-bottom: 1em;
   }
 
   &__fakeVideo {
@@ -43,8 +45,10 @@
   }
 
   &__text {
-    margin-bottom: 1.5em;
-    font-size: 0.85em;
+    padding-bottom: 2em;
+    margin: auto 0;
+    // margin-bottom: 1.5em;
+    font-size: 1em;
     line-height: 1.55;
   }
 }
