@@ -39,9 +39,8 @@ export default {
     typeScreen: (state) => state[S.typeScreen] // Player1 ; Player2 ; MainScreen
   }),
   sockets: {
-    'enigme2-endSort': function ({ success }) {
+    'enigme2-endSort': function () {
       this.$data.isEndSort = true
-      console.log(success)
     }
   },
   mounted() {
