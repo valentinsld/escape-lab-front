@@ -1,7 +1,7 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
-    <video ref="videoPlayer" class="video-js" disablePictureInPicture="true" controlslist="nodownload">
-      <source src="/video/testRenduVideo.mp4" type="video/mp4" />
+    <video ref="videoPlayer" class="video-js">
+      <source src="/video/videos.m3u8" type="application/x-mpegURL" />
       <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
     </video>
   </div>
@@ -11,8 +11,13 @@
 // require('!style-loader!css-loader!video.js/dist/video-js.css')
 import 'video.js/dist/video-js.css'
 
+// var VideoJS = require('video.js')
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
+
+// require('videojs-contrib-quality-levels')
+require('videojs-hls-quality-selector')
+require('@videojs/http-streaming')
 
 import { STATE as S } from '@/store/helpers'
 
@@ -24,11 +29,11 @@ function convertTimeToSeconds(time) {
 
 const MARKERS_PLAYER = {
   introDarkness: '0:14:02',
-  loopEnigme1: { start: '0:17:18', end: '0:19:18' },
-  loopEnigme2: { start: '0:29:18', end: '0:31:20' },
-  loopEnigme3: { start: '0:41:20', end: '0:43:21' },
-  startOutro: '0:54:21',
-  outroStartMessages: '0:59:12'
+  loopEnigme1: { start: '0:16:12', end: '0:22:10' },
+  loopEnigme2: { start: '0:29:22', end: '0:36:00' },
+  loopEnigme3: { start: '0:44:4', end: '0:50:15' },
+  startOutro: '0:56:27',
+  outroStartMessages: '1:02:11'
 }
 
 const OPTIONS = {
@@ -48,6 +53,17 @@ const OPTIONS = {
     abLoopPlugin: {
       loopIfBeforeStart: false,
       loopIfAfterEnd: true
+    }
+  },
+
+  loadingSpinner: true,
+  html5: {
+    vhs: {
+      withCredentials: true,
+      limitRenditionByPlayerDimensions: false,
+      bandwidth: 6194304,
+      cacheEncryptionKeys: true,
+      handlePartialData: true
     }
   }
 }
@@ -101,12 +117,12 @@ export default {
   },
   mounted() {
     const THAT = this
-    const VideoJS = videojs
-    abLoopPlugin(window, VideoJS)
+    // const VideoJS = VideoJS
+    abLoopPlugin(window, videojs)
 
     const eventsTime = this.initEventsTime()
 
-    this.player = VideoJS(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
+    this.player = videojs(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
       // console.log('onPlayerReady', this)
 
       this.on('timeupdate', function () {
@@ -123,6 +139,10 @@ export default {
       this.on('ended', function () {
         THAT.endVideo()
       })
+    })
+
+    this.player.hlsQualitySelector({
+      displayCurrentQuality: true
     })
 
     // console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
@@ -255,6 +275,8 @@ export default {
 
   .vjs-tech {
     object-fit: cover;
+    object-position: center center;
+    max-height: 100vh;
   }
 }
 </style>

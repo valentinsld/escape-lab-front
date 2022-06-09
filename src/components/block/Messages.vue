@@ -1,5 +1,5 @@
 <template>
-  <div class="messages">
+  <div class="messages" :style="`--color-messages: var(--color-${color})`">
     <div
       v-for="(item, index) in messages"
       ref="messages"
@@ -42,6 +42,10 @@ export default {
     duration: {
       type: Object,
       default: () => ({ default: 300, firstMsg: null })
+    },
+    color: {
+      type: String,
+      default: () => 'primary'
     }
   },
   data() {
@@ -119,9 +123,9 @@ export default {
   font-size: 0.9em;
   line-height: 1.6;
   text-align: right;
-  background-color: var(--color-whiteDimmed);
+  background-color: var(--color-messages);
   border: 3px solid var(--color-black);
-  border-radius: 10px;
+  border-radius: var(--box-rounded-radius);
   opacity: 0;
 
   &[is-reveal='true'] {
@@ -141,14 +145,14 @@ export default {
   //
   &::after {
     position: absolute;
-    right: 16px;
-    bottom: -16px;
+    right: 15px;
+    bottom: -15px;
     z-index: 2;
     width: 0;
     height: 0;
     content: '';
-    border-top: 6px solid var(--color-whiteDimmed);
-    border-right: 12px solid var(--color-whiteDimmed);
+    border-top: 7px solid var(--color-messages);
+    border-right: 13px solid var(--color-messages);
     border-bottom: 10px solid transparent;
     border-left: 6px solid transparent;
   }
@@ -156,12 +160,12 @@ export default {
   &::before {
     position: absolute;
     right: 12px;
-    bottom: -24px;
+    bottom: -23px;
     z-index: 1;
     width: 0;
     height: 0;
     content: '';
-    border-top: 9px solid var(--color-black);
+    border-top: 8px solid var(--color-black);
     border-right: 18px solid var(--color-black);
     border-bottom: 15px solid transparent;
     border-left: 9px solid transparent;
@@ -171,11 +175,13 @@ export default {
     margin-right: auto;
     margin-left: 0;
     text-align: left;
+    background-color: var(--color-whiteDimmed);
 
     &::after {
       right: inherit;
       left: 16px;
-      border-right: 6px solid transparent;
+      border-top: 12px solid var(--color-whiteDimmed);
+      border-right: 13px solid transparent;
       border-left: 12px solid var(--color-whiteDimmed);
     }
 
