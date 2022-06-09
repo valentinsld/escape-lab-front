@@ -24,9 +24,11 @@ export default {
         return ''
       }
     },
-    disable: {
+    disabled: {
       type: Boolean,
-      required: true
+      default() {
+        return false
+      }
     }
   }
 }
