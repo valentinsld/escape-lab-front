@@ -30,6 +30,9 @@ export const mutations = {
   },
   [MUTATIONS.triggerPopup](state, id) {
     state[STATE.popups][id].isTriggered = true
+  },
+  [MUTATIONS.resetPopup](state) {
+    state[STATE.popups] = []
   }
 }
 

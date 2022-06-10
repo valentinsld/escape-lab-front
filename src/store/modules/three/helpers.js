@@ -9,7 +9,8 @@ export const STATE = {
 export const MUTATIONS = {
   initCam: 'M_INIT_CAM',
   setCamPosition: 'M_SET_CAM_POSITION',
-  triggerPopup: 'M_TRIGGER_POPUP'
+  triggerPopup: 'M_TRIGGER_POPUP',
+  resetPopup: 'M_RESET_POPUP'
 }
 
 export const GETTERS = {
