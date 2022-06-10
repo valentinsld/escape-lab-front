@@ -1,28 +1,35 @@
 <template>
   <div class="outro" :class="endVideo ? '-see' : ''">
+    <Button class="outro__about" text="À propos de ClicClack" :on-click="showModalAbout" />
+    <About :see="seeAbout" @hide="hideModalAbout" />
+
     <div class="message">
       <p class="message__notif">1</p>
 
       <p class="message__text">Félicitations !!</p>
       <p class="message__text">Vous avez réussi à déjoué les pièges du professeur Aymeriche</p>
     </div>
+
     <Button text="En savoir plus sur les arnaques" :on-click="goToStats" color="white" class="-isFirstBtn" />
     <Button text="Recommencer l'expérience" :on-click="goToStats" color="white" />
   </div>
 </template>
 
 <script>
+import About from '@/components/about'
 import Button from '@/components/block/button'
 import { MUTATIONS as M } from '@/store/helpers'
 
 export default {
   name: 'OutroMainScreen',
   components: {
+    About,
     Button
   },
   data() {
     return {
-      endVideo: false
+      endVideo: false,
+      seeAbout: false
     }
   },
   sockets: {
@@ -49,12 +56,20 @@ export default {
         this.$router.push({ path: '/' })
         window.location.reload()
       })
+    },
+
+    showModalAbout() {
+      console.log('click')
+      this.seeAbout = true
+    },
+    hideModalAbout() {
+      this.seeAbout = false
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .outro {
   display: flex;
   flex-direction: column;
@@ -71,6 +86,18 @@ export default {
   &.-see {
     pointer-events: initial;
     opacity: 1;
+  }
+
+  &__about {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    transform: scale(0.8);
+    transform-origin: top right;
+
+    &:active {
+      transform: translateY(5px) translateX(5px) scale(0.8) !important;
+    }
   }
 
   .message {

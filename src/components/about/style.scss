@@ -1,0 +1,112 @@
+.about {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 450ms var(--custom-bezier);
+
+  &.-see {
+    pointer-events: initial;
+    opacity: 1;
+  }
+
+
+  //
+  // Content
+  //
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: min-content;
+    min-height: inherit;
+    max-height: inherit;
+    padding: 64px 32px;
+    color: var(--color-black);
+
+    &::after {
+      content: inherit;
+    }
+
+    .content {
+      &__close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        font-family: $font;
+        font-size: 40px;
+        font-weight: 500;
+        color: var(--color-white);
+        cursor: pointer;
+        background-color: var(--color-white);
+        border: 3px solid var(--color-black);
+        border-radius: 100px;
+        box-shadow: 4px 4px 0 var(--color-black);
+        transition: all 250ms var(--custom-bezier);
+        transform: rotate(8deg);
+
+        img {
+          transform: scale(1.5);
+        }
+
+        &:hover {
+          background-color: var(--color-disabled);
+        }
+
+        &:active {
+          box-shadow: 0 0 0 var(--color-black);
+          transform: translate3d(4px, 4px, 0);
+        }
+      }
+
+      &__img {
+        max-width: 40%;
+        margin-bottom: 2%;
+      }
+
+      &__presentation {
+        max-width: 700px;
+        margin-bottom: 2em;
+        font-size: 1.25em;
+        font-weight: var(--weight-medium);
+      }
+
+      &__equipe {
+        margin: 0;
+        margin-bottom: 1em;
+        font-size: 1.15em;
+      }
+    }
+  }
+
+  //
+  // GOBELINS LOGO
+  //
+  &__gobelins {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    width: 100px;
+    height: 60px;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
