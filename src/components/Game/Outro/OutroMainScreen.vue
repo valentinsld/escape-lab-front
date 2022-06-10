@@ -1,9 +1,13 @@
 <template>
-  <div class="outro" :class="endVideo ? '-black' : ''">
-    <h2 class="outro__title">Félicitations !!</h2>
-    <p class="outro__text">Vous avez réussi à déjoué les pièges du professeur Aymeriche</p>
-    <Button text="En savoir plus sur les arnaques" :on-click="goToStats" />
-    <Button text="Recommencer l'expérience" :on-click="goToStats" />
+  <div class="outro" :class="endVideo ? '-see' : ''">
+    <div class="message">
+      <p class="message__notif">1</p>
+
+      <p class="message__text">Félicitations !!</p>
+      <p class="message__text">Vous avez réussi à déjoué les pièges du professeur Aymeriche</p>
+    </div>
+    <Button text="En savoir plus sur les arnaques" :on-click="goToStats" color="white" class="-isFirstBtn" />
+    <Button text="Recommencer l'expérience" :on-click="goToStats" color="white" />
   </div>
 </template>
 
@@ -60,29 +64,99 @@ export default {
   height: 100%;
   color: var(--color-white);
   pointer-events: none;
-  background-color: var(--color-black);
+  background-color: var(--color-primary);
   opacity: 0;
   transition: all 500ms var(--custom-bezier);
 
-  &__title {
-    margin-bottom: 0.2em;
-    font-size: 3.5em;
-  }
-
-  &__text {
-    max-width: 600px;
-    margin-top: 0;
-    margin-bottom: 48px;
-    font-size: 1.25em;
-  }
-
-  .button {
-    margin-bottom: 12px;
-  }
-
-  &.-black {
+  &.-see {
     pointer-events: initial;
     opacity: 1;
   }
+
+  .message {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 450px;
+    max-width: 550px;
+    min-height: 290px;
+    max-height: 100%;
+    padding: 50px 40px;
+    margin-bottom: 10%;
+    background-color: var(--color-white);
+    border: 3px solid var(--color-black);
+    border-radius: var(--box-rounded-radius);
+    box-shadow: 6px 6px 0 var(--color-black);
+
+    //
+    // triangle
+    //
+    &::after {
+      position: absolute;
+      right: 19px;
+      bottom: -32px;
+      z-index: 2;
+      width: 0;
+      height: 0;
+      content: '';
+      border-top: 16px solid var(--color-white);
+      border-right: 28px solid var(--color-white);
+      border-bottom: 22px solid transparent;
+      border-left: 18px solid transparent;
+    }
+
+    &::before {
+      position: absolute;
+      right: 14px;
+      bottom: -46px;
+      z-index: 1;
+      width: 0;
+      height: 0;
+      content: '';
+      border-top: 16px solid var(--color-black);
+      border-right: 36px solid var(--color-black);
+      border-bottom: 30px solid transparent;
+      border-left: 18px solid transparent;
+    }
+
+    &__notif {
+      position: absolute;
+      top: 0;
+      right: 0;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      padding-bottom: 10px;
+      margin: 0;
+      font-family: $font;
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--color-white);
+      background-color: var(--color-red);
+      border: 3px solid var(--color-black);
+      border-radius: 100px;
+      box-shadow: 4px 4px 0 var(--color-black);
+      transform: translate3d(30%, -30%, 0) rotate(8deg);
+    }
+
+    // text during messages
+    &__text {
+      margin: 0;
+      font-size: 1.5em;
+      font-weight: var(--weight-medium);
+      line-height: 36px;
+      color: var(--color-black);
+    }
+  }
+}
+
+.-isFirstBtn {
+  margin-bottom: 2%;
 }
 </style>
