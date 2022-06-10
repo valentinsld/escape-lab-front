@@ -16,7 +16,7 @@ Vue.use(
     debug: false, // process.env.NODE_ENV === 'development'
     connection: SocketIO(
       process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
-        ? 'http://localhost:5050/'
+        ? 'http://192.168.1.26:5050/'
         : 'https://escape-lab-sockets.herokuapp.com/',
       optionsSocket
     )

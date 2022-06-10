@@ -1,7 +1,7 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
     <video ref="videoPlayer" class="video-js">
-      <source src="/video/videos.m3u8" type="application/x-mpegURL" />
+      <source :src="highmode ? '/video/videosHighMode.m3u8' : '/video/videos.m3u8'" type="application/x-mpegURL" />
       <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
     </video>
   </div>
@@ -15,9 +15,11 @@ import 'video.js/dist/video-js.css'
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
 
-// require('videojs-contrib-quality-levels')
-require('videojs-hls-quality-selector')
+require('videojs-contrib-quality-levels')
+// require('videojs-hls-quality-selector')
 require('@videojs/http-streaming')
+
+import { mapState } from 'vuex'
 
 import { STATE as S } from '@/store/helpers'
 
@@ -80,6 +82,9 @@ export default {
       isStepGame: false
     }
   },
+  computed: mapState({
+    highmode: (state) => state[S.highmode]
+  }),
   sockets: {
     'intro-startVideo': function () {
       this.startVideo()
@@ -141,9 +146,7 @@ export default {
       })
     })
 
-    this.player.hlsQualitySelector({
-      displayCurrentQuality: true
-    })
+    this.player.qualityLevels()
 
     // console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
     if (this.$store.state[S.stepGame] === 'Intro') {

@@ -41,6 +41,8 @@ export default {
     setTimeout(this.initAutoVh.bind(this), 1000)
 
     this.removePinchOnMobile()
+
+    this.initHighMode()
   },
   sockets: {
     connect: function () {
@@ -97,6 +99,12 @@ export default {
           e.preventDefault()
         })
       })
+    },
+
+    initHighMode() {
+      if (window.location.hash.toLowerCase() === '#highmode') {
+        this.$store.commit(M.highmode, true)
+      }
     }
   }
 }
