@@ -43,7 +43,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
-  muted: true,
+  muted: false,
 
   preload: true,
   controlBar: {
@@ -167,9 +167,9 @@ export default {
       }
       if (stepGame) this.$socket.emit('setStepGame', { stepGame })
     }
-    this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.loopEnigme2.start))
+    /*this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.loopEnigme2.start))
     this.setLoop(MARKERS_PLAYER.loopEnigme2)
-    this.player.play()
+    this.player.play()*/
   },
   beforeDestroy() {
     if (this.player) {
@@ -269,9 +269,9 @@ export default {
   height: 100%;
   transition: opacity 0.3s ease-in-out;
 
-  /* &.-hide {
+  &.-hide {
     opacity: 0;
-  } */
+  }
 
   > video,
   .video-js {
