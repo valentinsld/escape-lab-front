@@ -182,10 +182,8 @@ export const actions = {
       keyframes: [
         // popup descend
         { y: -2.3, duration: duration * 0.1, easing: 'easeInOutCubic' },
-        // popup avance et rotate
-        { z: -3, y: -2.3, x: 0.8, duration: duration * 0.3 },
-        // popup float
-        { z: -3, y: -2.2, x: 0.8, duration: duration * 0.3, easing: 'easeOutBounce' },
+        // popup avance et float
+        { z: -3, y: -2.5, x: 0.8, duration: duration * 0.6, easing: 'easeOutQuart' },
         // popup descend
         { y: -13, duration: duration * 0.3, easing: 'easeInExpo' }
       ],
@@ -198,12 +196,9 @@ export const actions = {
       keyframes: [
         // popup descend
         { duration: duration * 0.1 },
-        // popup avance et rotate
-        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeOutBounce' },
-        // popup float
-        { duration: duration * 0.3 },
-        // popup descend
-        { duration: duration * 0.3 }
+        { x: 0, y: 0.02, duration: duration * 0.5, easing: 'easeInOutCubic' },
+        // popup float et descend
+        { duration: duration * 0.4 }
       ],
       easing: 'linear',
       duration: duration,
