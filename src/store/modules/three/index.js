@@ -181,12 +181,13 @@ export const actions = {
       targets: [state.popups[props.id].position],
       keyframes: [
         // popup descend
-        { y: -2, duration: duration * 0.1, easing: 'easeInOutCubic' },
+        { y: -2.3, duration: duration * 0.1, easing: 'easeInOutCubic' },
         // popup avance et rotate
-        { z: -3, y: -2.5, x: 0.8, duration: duration * 0.3 },
+        { z: -3, y: -2.3, x: 0.8, duration: duration * 0.3 },
+        // popup float
+        { z: -3, y: -2.2, x: 0.8, duration: duration * 0.3, easing: 'easeOutBounce' },
         // popup descend
-        { y: -6, duration: duration * 0.5 },
-        { y: -13, duration: duration * 0.1, easing: 'easeInExpo' }
+        { y: -13, duration: duration * 0.3, easing: 'easeInExpo' }
       ],
       easing: 'linear',
       duration: duration,
@@ -198,9 +199,11 @@ export const actions = {
         // popup descend
         { duration: duration * 0.1 },
         // popup avance et rotate
-        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeInQuint' },
+        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeOutBounce' },
+        // popup float
+        { duration: duration * 0.3 },
         // popup descend
-        { x: 0, duration: duration * 0.6 }
+        { duration: duration * 0.3 }
       ],
       easing: 'linear',
       duration: duration,
