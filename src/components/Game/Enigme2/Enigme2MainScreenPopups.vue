@@ -1,6 +1,6 @@
 <template>
   <div class="cardsContainer">
-    <Enigme2MainScreenCard v-for="card in cards" :key="'card' + card.id" :data="card" />
+    <!--    <Enigme2MainScreenCard v-for="card in cards" :key="'card' + card.id" :data="card" />-->
   </div>
 </template>
 

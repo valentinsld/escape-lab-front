@@ -114,6 +114,7 @@ export const actions = {
       subject.text = props.content.subject
       subject.font = FONTS['medium']
       subject.fontSize = 0.3
+      subject.maxWidth = 8
       subject.anchorX = 'left'
       subject.position.x = -4
       subject.position.z = 0.2
@@ -122,7 +123,7 @@ export const actions = {
 
       text.text = props.content.text
       //text.text = 'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
-      text.font = FONTS['medium']
+      text.font = FONTS['regular']
       text.fontSize = 0.35
       text.anchorX = 'left'
       text.anchorY = 'top'
