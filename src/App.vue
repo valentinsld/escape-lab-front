@@ -1,13 +1,13 @@
 <template>
   <main id="app" class="app">
     <!-- Views -->
-    <transition name="fade-page" mode="out-in">
+    <!--    <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
 
-    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
-    <!--    <Canvas />
-    <VideoMainScreen />-->
+    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />-->
+    <!--        <Canvas />-->
+    <VideoMainScreen />
   </main>
 </template>
 

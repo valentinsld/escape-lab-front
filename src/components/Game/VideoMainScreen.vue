@@ -43,7 +43,7 @@ const OPTIONS = {
   fluid: true,
   autoplay: false,
   controls: false,
-  muted: false,
+  muted: true,
 
   preload: true,
   controlBar: {
@@ -167,9 +167,9 @@ export default {
       }
       if (stepGame) this.$socket.emit('setStepGame', { stepGame })
     }
-    /*this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.loopEnigme2.start))
+    this.player.currentTime(convertTimeToSeconds(MARKERS_PLAYER.loopEnigme2.start))
     this.setLoop(MARKERS_PLAYER.loopEnigme2)
-    this.player.play()*/
+    this.player.play()
   },
   beforeDestroy() {
     if (this.player) {

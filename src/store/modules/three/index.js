@@ -1,6 +1,6 @@
 import Anime from 'animejs'
 import * as Three from 'three'
-import { AmbientLight, DirectionalLight } from 'three'
+import { AmbientLight, DirectionalLight, PointLight } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Text } from 'troika-three-text'
 import Vue from 'vue'
@@ -44,25 +44,33 @@ export const getters = {
 }
 
 export const actions = {
-  [ACTIONS.initScene]({ state, commit }, { width, height, el }) {
+  [ACTIONS.initScene]({ state, commit, dispatch }, { width, height, el }) {
     return new Promise((resolve) => {
       commit(MUTATIONS.initCam)
 
       state.scene = new Three.Scene()
 
-      let lightA = new DirectionalLight(0xffffff, 0.1)
-      lightA.position.set(1, 1, 1)
+      let lightA = new DirectionalLight(0xffffff, 0.15)
+      lightA.position.set(0, 0, 8)
       state.scene.add(lightA)
 
-      let ambientLight = new AmbientLight(0xffffff, 0.1)
+      let lightB = new PointLight(0xffffff, 0.9)
+      lightB.position.set(0, 5, 3)
+      state.scene.add(lightB)
+
+      let lightC = new PointLight(0xffffff, 0.8)
+      lightC.position.set(-1, -4, -2.5)
+      state.scene.add(lightC)
+
+      let ambientLight = new AmbientLight(0xffffff, 0.3)
       state.scene.add(ambientLight)
 
-      const geometry = new Three.PlaneBufferGeometry(17, 8.7, 1, 1)
-
-      const material = new Three.MeshPhongMaterial({
-        colorWrite: false
-      })
-      const plane = new Three.Mesh(geometry, material)
+      const plane = new Three.Mesh(
+        new Three.PlaneBufferGeometry(17, 8.7, 1, 1),
+        new Three.MeshPhongMaterial({
+          colorWrite: false
+        })
+      )
       plane.position.set(0, 5, 0)
       state.scene.add(plane)
 
@@ -73,12 +81,12 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
-      //dispatch(ACTIONS.initPopup)
+      dispatch(ACTIONS.initPopup)
 
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state }, props) {
+  [ACTIONS.initPopup]({ state, dispatch } /*props*/) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
@@ -86,8 +94,7 @@ export const actions = {
       let obj = data.scene
       obj.rotation.set(0, -Math.PI * 0.5, 0)
       obj.position.set(0, 0, 0)
-      obj.children[0].receiveShadow = true
-      obj.children[0].castShadow = true
+      console.log(obj.children[0], 'children')
 
       const FONTS = {
         regular: '/fonts/grenadine-regular.otf',
@@ -103,8 +110,8 @@ export const actions = {
       state.scene.add(subject)
       state.scene.add(text)
 
-      //from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
-      from.text = props.content.from
+      from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
+      //from.text = props.content.from
       from.font = FONTS['medium']
       from.fontSize = 0.3
       from.anchorX = 'left'
@@ -113,8 +120,8 @@ export const actions = {
       from.position.y = 1.5
       from.color = 0x000000
 
-      //subject.text = 'Déclarez vos revenus trimestriels'
-      subject.text = props.content.subject
+      subject.text = 'Déclarez vos revenus trimestriels'
+      //subject.text = props.content.subject
       subject.font = FONTS['medium']
       subject.fontSize = 0.3
       subject.maxWidth = 8
@@ -124,8 +131,9 @@ export const actions = {
       subject.position.y = 0.9
       subject.color = 0x000000
 
-      text.text = props.content.text
-      //text.text = 'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
+      //text.text = props.content.text
+      text.text =
+        'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'
       text.font = FONTS['regular']
       text.fontSize = 0.35
       text.anchorX = 'left'
@@ -148,21 +156,26 @@ export const actions = {
       popup.add(text)
 
       popup.isTriggered = false
-      popup.triggerId = props.content.id
+      //popup.triggerId = props.content.id
       /*popup.position.set(0, 0, 0)
       popup.rotation.set(0, 0, 0)*/
       popup.position.set(0.2, 3, -8)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
 
+      console.log('popup', popup)
+
       state.popups.push(popup)
       state.scene.add(popup)
 
-      //dispatch(ACTIONS.animatePopup)
+      dispatch({
+        type: ACTIONS.animatePopup,
+        id: 0
+      })
     })
     state.renderer.render(state.scene, state.camera)
   },
   [ACTIONS.animatePopup]({ state }, props) {
-    console.log(props, state.popups, 'popup animate')
+    console.log(props, state.popups, 'props')
     let duration = 5000
     Anime({
       targets: [state.popups[props.id].position],
@@ -176,7 +189,8 @@ export const actions = {
         { y: -13, duration: duration * 0.1, easing: 'easeInExpo' }
       ],
       easing: 'linear',
-      duration: duration
+      duration: duration,
+      loop: true
     })
     Anime({
       targets: [state.popups[props.id].rotation],
@@ -189,7 +203,8 @@ export const actions = {
         { x: 0, duration: duration * 0.6 }
       ],
       easing: 'linear',
-      duration: duration
+      duration: duration,
+      loop: true
     })
   },
   [ACTIONS.animate]({ dispatch, state }) {

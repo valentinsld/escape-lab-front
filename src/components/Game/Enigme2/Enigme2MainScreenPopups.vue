@@ -40,7 +40,6 @@ export default {
   },
   watch: {
     cards: function () {
-      console.log('cards', this.cards)
       if (this.cards && this.popups.length === 0) {
         for (let card in this.cards) {
           this.$store.dispatch({
