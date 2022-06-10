@@ -4,15 +4,12 @@
     <transition name="fade-page" mode="out-in">
       <router-view />
     </transition>
-
-    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
   </main>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 
-import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 
@@ -32,9 +29,6 @@ const ERROR_SOCKETS = [
 
 export default {
   name: 'App',
-  components: {
-    UserDisconnected
-  },
   computed: mapState({
     listUsers: (state) => state[S.listUsers],
     isStart: (state) => state[S.isStart],

@@ -1,6 +1,6 @@
 <template>
   <div class="tuto">
-    <div class="screenContainer tuto__container">
+    <div class="screenContainer tuto__container" :class="'-' + colorBackground">
       <img class="tuto__logo" :src="Logo" />
       <p v-if="text" class="tuto__consigne" v-html="text" />
       <div class="tuto__btn-container">
@@ -33,6 +33,12 @@ export default {
       type: String,
       default() {
         return 'Start'
+      }
+    },
+    colorBackground: {
+      type: String,
+      default() {
+        return ''
       }
     }
   },
@@ -87,7 +93,7 @@ export default {
   margin: auto;
   font-weight: bold;
   color: var(--color-whiteDimmed);
-  background: var(--color-enigme1);
+  background: var(--color-primary);
   border: 4px solid var(--color-black);
   border-radius: var(--box-rounded-radius);
   transition: 200ms var(--custom-bezier);

@@ -1,20 +1,20 @@
-$orange: hsl(30, 91, 58, 1);
-$blue: hsl(229, 100, 65, 1);
-$purple: hsl(251, 54, 49, 1);
-$black: hsl(0, 0, 0, 1);
-$white: hsl(0, 0, 100, 1);
+$orange: hsl(30, 91, 58, 1); // #F59535
+$blue: hsl(229, 100, 65, 1); // #4A6CFF
+$purple: hsl(251, 54, 49, 1); // #5D44C7
+$black: hsl(0, 0, 0, 1); // #000
+$white: hsl(0, 0, 100, 1); // #FFF
 
 
-$blackDimmed: hsl(0, 0%, 17%);
-$whiteDimmed: hsl(0, 0%, 96%);
-$primary: hsl(30, 91%, 58%);
-$enigme1: hsl(229, 100%, 65%);
-$enigme2: hsl(251, 54%, 49%);
-$enigme3: hsl(30, 91%, 58%);
-$green: hsl(124, 100%, 39%);
-$red: hsl(9, 100%, 65%);
-$yellow: hsl(53, 100%, 65%);
-$disabled: hsl(0, 0%, 85%);
-$orange-highlighted: hsl(30, 100%, 70%);
-$blue-highlighted: hsl(228, 100%, 72%);
-$purple-highlighted: hsl(251, 100%, 75%);
+$blackDimmed: hsl(0, 0%, 17%); // #2B2B2B
+$whiteDimmed: hsl(0, 0%, 96%); // #F5F5F5
+$primary: hsl(30, 91%, 58%) !default; // #F59535
+$enigme1: hsl(338, 54%, 52%); // #5D44C7
+$enigme2: hsl(229, 100%, 65%); // #4A6CFF
+$enigme3: hsl(251, 54%, 49%); // #5D44C7
+$green: hsl(124, 100%, 39%); // #00C90F
+$red: hsl(9, 100%, 65%); // #FF664A
+$yellow: hsl(53, 100%, 65%); // #FFEA4A
+$disabled: hsl(0, 0%, 85%); // gray
+$orange-highlighted: hsl(30, 100%, 70%); // #FFB366
+$blue-highlighted: hsl(228, 100%, 72%); // #6E8AFF
+$purple-highlighted: hsl(251, 100%, 75%); // #9880FF

@@ -55,7 +55,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 550px;
+    min-width: 650px;
     max-width: 100%;
     min-height: 290px;
     max-height: 100%;

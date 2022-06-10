@@ -122,6 +122,7 @@ export default {
   margin-left: auto;
   font-size: 0.9em;
   line-height: 1.6;
+  color: var(--color-white);
   text-align: right;
   background-color: var(--color-messages);
   border: 3px solid var(--color-black);
@@ -174,6 +175,7 @@ export default {
   &[is-received='true'] {
     margin-right: auto;
     margin-left: 0;
+    color: var(--color-black);
     text-align: left;
     background-color: var(--color-whiteDimmed);
 
