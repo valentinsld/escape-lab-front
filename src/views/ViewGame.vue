@@ -1,7 +1,6 @@
 /* eslint-disable vue/no-multiple-template-root */
 <template>
   <ViewContainer name="game">
-    <Canvas v-if="typeScreen === mainScreen" />
     <Fader v-if="typeScreen !== mainScreen" />
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />

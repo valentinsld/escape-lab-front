@@ -1,5 +1,6 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
+    <Canvas />
     <video ref="videoPlayer" class="video-js">
       <source src="/video/videos.m3u8" type="application/x-mpegURL" />
       <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
@@ -19,6 +20,7 @@ import abLoopPlugin from 'videojs-abloop'
 require('videojs-hls-quality-selector')
 require('@videojs/http-streaming')
 
+import Canvas from '@/components/Game/Canvas'
 import { STATE as S } from '@/store/helpers'
 
 function convertTimeToSeconds(time) {
@@ -72,6 +74,7 @@ const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LO
 
 export default {
   name: 'VideoMainScreen',
+  components: { Canvas },
   data() {
     return {
       player: null,
