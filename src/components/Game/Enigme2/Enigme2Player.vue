@@ -127,6 +127,6 @@ export default {
   font-size: 2em;
   font-weight: var(--weight-bold);
   color: var(--color-white);
-  background-color: hsl(251, 54%, 49%, 0.5);
+  background-color: hsla(229, 100%, 65%, 0.5);
 }
 </style>

@@ -93,7 +93,7 @@ export default {
   margin: auto;
   font-weight: bold;
   color: var(--color-whiteDimmed);
-  background: var(--color-enigme1);
+  background: var(--color-primary);
   border: 4px solid var(--color-black);
   border-radius: var(--box-rounded-radius);
   transition: 200ms var(--custom-bezier);
