@@ -20,6 +20,8 @@
 
 <script>
 /* eslint-disable unused-imports/no-unused-vars, no-unused-vars */
+import Sound from '@/helpers/Sound'
+
 const SOUNDS_ORIGIN = 'soundsEnigme1/'
 const SOUNDS_STEPS = [
   '0-intro',
@@ -86,6 +88,7 @@ export default {
       }, 1000)
     },
     clickPad(number) {
+      new Sound('pad-1', { volume: 1.5 })
       this.$data.numbeEntered.push(number)
       this.$socket.emit('enigme1-enteredNumber', number)
     },
