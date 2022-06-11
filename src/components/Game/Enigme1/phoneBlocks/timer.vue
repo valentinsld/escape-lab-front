@@ -9,6 +9,7 @@
 <script>
 import Notification from '@/components/block/Notification.vue'
 import convertSecondsToTime from '@/helpers/convertSecondToTIme.js'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'Timer',
@@ -56,6 +57,7 @@ export default {
     updateTime() {
       setTimeout(() => {
         this.$data.timer -= 1
+        new Sound('tick-2', { volume: 0.3 })
         this.$emit('onTimeChange:step', this.$data.timer)
 
         if (this.$data.timer > 0) {
