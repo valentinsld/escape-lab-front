@@ -20,6 +20,7 @@ export const state = {
   [STATE.playerIsReady]: [],
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
+  [STATE.highmode]: false,
   // enigme 3
   [STATE.enigme3Config]: null
 }
@@ -66,6 +67,9 @@ export const mutations = {
     state[STATE.listUsers] = {}
     state[STATE.stepGame] = null
     state[STATE.typeScreen] = null
+  },
+  [MUTATIONS.highmode](state, newVal) {
+    state[STATE.highmode] = newVal
   },
   // enigme 3
   [MUTATIONS.enigme3Config](state, newVal) {

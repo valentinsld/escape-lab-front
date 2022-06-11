@@ -22,7 +22,9 @@
 
     <div class="chat" :class="{ '-open': chatIsOpen }">
       <div class="chat__header">
-        <p class="header__retour" @click="closeChat">Retour</p>
+        <div class="header__retour" @click="closeChat">
+          <img :src="BackIon" />
+        </div>
         <p class="header__contact">{{ messages[currentMessage].contact }}</p>
       </div>
       <div class="chat__content">
@@ -35,6 +37,7 @@
 </template>
 
 <script>
+import BackIon from '@/assets/back.svg'
 import Messages from '@/components/block/Messages.vue'
 import Notification from '@/components/block/Notification.vue'
 // data
@@ -62,7 +65,9 @@ export default {
         contact: '',
         message: ''
       },
-      readedMessages: [11, 12, 13, 14, 15, 16, 17, 18]
+      readedMessages: [11, 12, 13, 14, 15, 16, 17, 18],
+      // images
+      BackIon
     }
   },
   computed: {

@@ -12,8 +12,8 @@
     </div>
     <div v-else class="enigme-3__tuto">
       <Enigme3MainScreenTuto v-if="typeScreen === 'MainScreen'" />
-      <PlayerTuto v-if="typeScreen === 'Player1'" :text="textContent.consigne.chat" />
-      <PlayerTuto v-if="typeScreen === 'Player2'" :text="textContent.consigne.notice" />
+      <PlayerTuto v-if="typeScreen === 'Player1'" :text="textContent.consigne.chat" color-background="enigme3" />
+      <PlayerTuto v-if="typeScreen === 'Player2'" :text="textContent.consigne.notice" color-background="enigme3" />
     </div>
   </div>
 </template>

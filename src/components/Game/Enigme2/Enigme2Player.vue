@@ -84,7 +84,7 @@ export default {
     'enigme2-endSort': function ({ success }) {
       setTimeout(() => {
         this.showFailure = !success
-      }, 800)
+      }, 4500)
     }
   }
 }
@@ -115,9 +115,18 @@ export default {
 }
 
 .indicationSPam {
-  margin: 0.25em 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  margin: 0;
   font-size: 2em;
   font-weight: var(--weight-bold);
   color: var(--color-white);
+  background-color: hsla(229, 100%, 65%, 0.5);
 }
 </style>

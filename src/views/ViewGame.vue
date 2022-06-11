@@ -2,6 +2,9 @@
 <template>
   <ViewContainer name="game">
     <Fader v-if="typeScreen !== mainScreen" />
+
+    <UserDisconnected v-if="listUsers.length < 3 && isStart && stepGame !== 'Outro'" />
+
     <Components :is="stepGame" />
     <VideoMainScreen v-if="typeScreen === mainScreen" />
   </ViewContainer>
@@ -12,7 +15,7 @@ import NoSleep from 'nosleep.js'
 import { Pane } from 'tweakpane'
 import { mapState } from 'vuex'
 
-import Canvas from '@/components/Game/Canvas'
+import UserDisconnected from '@/components/Connection/UserDisconnected.vue'
 // enigmes
 import Enigme1 from '@/components/Game/Enigme1/Enigme1'
 import Enigme2 from '@/components/Game/Enigme2/Enigme2'
@@ -35,7 +38,6 @@ const DEBUG = process.env.NODE_ENV === 'development'
 export default {
   name: 'ViewGame',
   components: {
-    Canvas,
     Intro,
     Enigme3,
     Enigme2,
@@ -43,7 +45,15 @@ export default {
     Outro,
     ViewContainer,
     VideoMainScreen,
-    Fader
+    Fader,
+    UserDisconnected
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.path === '/' && this.listUsers.length >= 3) {
+      next(false)
+    } else {
+      next()
+    }
   },
   data() {
     return {
@@ -54,7 +64,9 @@ export default {
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen],
     stepGame: (state) => state[S.stepGame],
-    mainScreen: () => STATE_SCREEN.mainScreen
+    mainScreen: () => STATE_SCREEN.mainScreen,
+    listUsers: (state) => state[S.listUsers],
+    isStart: (state) => state[S.isStart]
   }),
   beforeMount() {
     console.log(this.$store.state[S.idRoom])
@@ -87,7 +99,7 @@ export default {
   },
   methods: {
     initPane() {
-      if (/*!DEBUG || */ this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
+      if (!DEBUG || this.$store.state[S.stateScreen] !== STATE_SCREEN.mainScreen) return
 
       const pane = new Pane()
       this.$data.pane = pane

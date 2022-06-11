@@ -24,7 +24,7 @@ export default {
     duration: {
       type: Number,
       default() {
-        return 3000
+        return 4000
       }
     },
     onClick: {

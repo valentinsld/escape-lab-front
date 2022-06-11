@@ -9,7 +9,7 @@
       <div class="home screenContainer">
         <img class="home__img" :src="Logo" />
         <p class="home__baseline">TODO : Ici une superbe baseline !!</p>
-        <Button text="Commencer l’expérience" :on-click="goToConnection" />
+        <Button class="home__button" text="Commencer l’expérience" :on-click="goToConnection" />
       </div>
     </div>
 

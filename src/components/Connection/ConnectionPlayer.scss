@@ -31,10 +31,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
 
   &__img {
-    width: 80%;
-    margin-bottom: 1.5em;
+    width: 86%;
+    // margin-bottom: 1em;
   }
 
   &__fakeVideo {
@@ -43,8 +45,10 @@
   }
 
   &__text {
-    margin-bottom: 1.5em;
-    font-size: 0.85em;
+    padding-bottom: 2em;
+    margin: auto 0;
+    // margin-bottom: 1.5em;
+    font-size: 1em;
     line-height: 1.55;
   }
 }
@@ -56,6 +60,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 36px;
+  padding-bottom: 36px;
 
   &__img {
     width: 80%;
@@ -107,6 +113,28 @@
         span {
           color: var(--color-primary);
         }
+      }
+
+      // end
+      &__soundIcon {
+        width: 40px;
+      }
+
+      &__activetext {
+        font-size: 1.05em;
+        font-weight: var(--weight-medium);
+        line-height: 1.4;
+        color: var(--color-primary);
+      }
+
+      &__readyPlayer {
+        margin: 15% 0;
+        font-size: 1.15em;
+        font-weight: var(--weight-medium);
+      }
+
+      &__readyBtn {
+        margin-top: 10%;
       }
     }
   }
