@@ -1,5 +1,6 @@
 <template>
   <div class="containerVideoMainScreen" :class="{ '-hide': !seePlayer }">
+    <Canvas />
     <video ref="videoPlayer" class="video-js">
       <source :src="highmode ? '/video/videosHighMode.m3u8' : '/video/videos.m3u8'" type="application/x-mpegURL" />
       <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
@@ -14,21 +15,18 @@ import 'video.js/dist/video-js.css'
 // var VideoJS = require('video.js')
 import videojs from 'video.js'
 import abLoopPlugin from 'videojs-abloop'
-
 require('videojs-contrib-quality-levels')
 // require('videojs-hls-quality-selector')
 require('@videojs/http-streaming')
-
 import { mapState } from 'vuex'
 
+import Canvas from '@/components/Game/Canvas'
 import { STATE as S } from '@/store/helpers'
-
 function convertTimeToSeconds(time) {
   const timeArray = time.split(':').map((t) => parseInt(t), 10)
   const seconds = timeArray[0] * 60 + timeArray[1] + timeArray[2] / 24
   return seconds
 }
-
 const MARKERS_PLAYER = {
   introDarkness: '0:14:02',
   loopEnigme1: { start: '0:16:12', end: '0:22:10' },
@@ -37,27 +35,23 @@ const MARKERS_PLAYER = {
   startOutro: '0:56:27',
   outroStartMessages: '1:02:11'
 }
-
 const OPTIONS = {
   responsive: true,
   fluid: true,
   autoplay: false,
   controls: false,
   muted: false,
-
   preload: true,
   controlBar: {
     liveDisplay: true,
     pictureInPictureToggle: false
   },
-
   plugins: {
     abLoopPlugin: {
       loopIfBeforeStart: false,
       loopIfAfterEnd: true
     }
   },
-
   loadingSpinner: true,
   html5: {
     vhs: {
@@ -69,11 +63,10 @@ const OPTIONS = {
     }
   }
 }
-
 const IS_DEV = process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
-
 export default {
   name: 'VideoMainScreen',
+  components: { Canvas },
   data() {
     return {
       player: null,
@@ -92,7 +85,6 @@ export default {
     },
     setStepGame: function ({ stepGame, stepGameNumber }) {
       console.log('setStepGame', { stepGame, stepGameNumber })
-
       this.$data.isStepGame = true
       this.$data.seePlayer = true
       if (stepGame === 'Outro') {
@@ -101,12 +93,10 @@ export default {
         this.setLoop(MARKERS_PLAYER[`loop${stepGame}`])
         this.player.abLoopPlugin.playLoop()
       }
-
       // reset time for nextEnigme
       for (let i = stepGameNumber; i < this.$data.eventsTime.length; i++) {
         this.$data.eventsTime[i].isPlayed = false
       }
-
       setTimeout(() => {
         this.$data.isStepGame = false
       }, 1000)
@@ -124,15 +114,11 @@ export default {
     const THAT = this
     // const VideoJS = VideoJS
     abLoopPlugin(window, videojs)
-
     const eventsTime = this.initEventsTime()
-
     this.player = videojs(this.$refs.videoPlayer, OPTIONS, function onPlayerReady() {
       // console.log('onPlayerReady', this)
-
       this.on('timeupdate', function () {
         const currentTime = this.currentTime()
-
         for (const time of eventsTime) {
           if (currentTime > time.time && !time.isPlayed) {
             time.isPlayed = true
@@ -140,20 +126,16 @@ export default {
           }
         }
       })
-
       this.on('ended', function () {
         THAT.endVideo()
       })
     })
-
     this.player.qualityLevels()
-
     // console.log(this.$store.state[S.isStart], this.$store.state[S.stepGame])
     if (this.$store.state[S.stepGame] === 'Intro') {
       this.playEnigme1()
     } else if (IS_DEV) {
       let stepGame
-
       switch (this.$store.state[S.stepGame]) {
         case 'Enigme1':
           stepGame = 1
@@ -176,7 +158,6 @@ export default {
   methods: {
     initEventsTime: function () {
       const array = []
-
       for (const [key, value] of Object.entries(MARKERS_PLAYER)) {
         const time = typeof value === 'object' ? value.start : value
         array.push({
@@ -185,7 +166,6 @@ export default {
           key: 'play' + key
         })
       }
-
       this.$data.eventsTime = array
       return this.$data.eventsTime
     },
@@ -195,13 +175,11 @@ export default {
     setLoop: function ({ start, end }) {
       const startSeconds = convertTimeToSeconds(start)
       const endSeconds = convertTimeToSeconds(end)
-
       this.player.abLoopPlugin.setStart(startSeconds).setEnd(endSeconds).enable()
     },
     stopLoop: function () {
       this.player.abLoopPlugin.disable()
     },
-
     playEnigme1() {
       this.setLoop(MARKERS_PLAYER.loopEnigme1)
     },
@@ -224,7 +202,6 @@ export default {
       console.log('END VIDEO')
       this.$socket.emit('endVideo')
     },
-
     // events on playing video
     playintroDarkness() {
       if (this.$data.isStepGame) return
@@ -253,7 +230,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .containerVideoMainScreen {
   position: absolute;

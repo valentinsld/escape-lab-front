@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
+import threeStore from '@/store/modules/three'
 
 Vue.use(Vuex)
 
@@ -34,7 +35,6 @@ export const mutations = {
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
   },
-
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal
   },
@@ -79,6 +79,9 @@ export const mutations = {
 export const getters = {}
 
 export default new Vuex.Store({
+  modules: {
+    three: threeStore
+  },
   state: state,
   mutations: mutations,
   getters: getters

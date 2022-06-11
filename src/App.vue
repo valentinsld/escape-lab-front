@@ -1,5 +1,5 @@
 <template>
-  <main id="app" class="app">
+  <main id="app" className="app">
     <!-- Views -->
     <transition name="fade-page" mode="out-in">
       <router-view />
@@ -26,7 +26,6 @@ const ERROR_SOCKETS = [
   'ping',
   'pong'
 ]
-
 export default {
   name: 'App',
   computed: mapState({
@@ -37,11 +36,8 @@ export default {
   mounted() {
     this.initSubscribeConnexion()
     this.initAutoVh()
-
     setTimeout(this.initAutoVh.bind(this), 1000)
-
     this.removePinchOnMobile()
-
     this.initHighMode()
   },
   sockets: {
@@ -54,13 +50,11 @@ export default {
       this.$store.commit(M.listUsers, listUsers)
       this.$store.commit(M.stepGame, stepGame)
       this.$store.commit(M.isStart, isStart)
-
       // if is you
       // console.log(this.$store.state[S.typeScreen])
       if (!this.$store.state[S.typeScreen]) {
         this.$store.commit(M.typeScreen, newUser.type)
       }
-
       if (isStart) {
         this.$router.push('/game')
       }
@@ -80,7 +74,6 @@ export default {
           window.location.reload()
         }, 100)
       })
-
       ERROR_SOCKETS.forEach((err) => {
         this.$socket.on(err, () => {
           console.error('Socket : ', err)
@@ -100,7 +93,6 @@ export default {
         })
       })
     },
-
     initHighMode() {
       if (window.location.hash.toLowerCase() === '#highmode') {
         this.$store.commit(M.highmode, true)
@@ -112,7 +104,6 @@ export default {
 
 <style lang="scss">
 @import 'scss/app';
-
 // Remove scroll to reload page for ios
 body {
   height: 100%;
