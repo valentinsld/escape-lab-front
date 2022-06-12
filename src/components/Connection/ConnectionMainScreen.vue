@@ -103,6 +103,8 @@ export default {
   mounted() {
     this.$socket.emit('connection')
 
+    new Sound('musics/home', { volume: 0.2, isLoop: true })
+
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
       this.connectToRoom(null, 'dev1')
