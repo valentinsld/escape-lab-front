@@ -75,7 +75,8 @@ export default {
       Logo,
       seeJoinRoom: false,
       seeHome: true,
-      url: window.location.host
+      url: window.location.host,
+      music: null
     }
   },
   computed: mapState({
@@ -103,7 +104,7 @@ export default {
   mounted() {
     this.$socket.emit('connection')
 
-    new Sound('musics/home', { volume: 0.2, isLoop: true })
+    this.music = new Sound('musics/home', { volume: 0.4, isLoop: true })
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
@@ -117,9 +118,13 @@ export default {
     }
     this.$socket.emit('connectToRoom', loginData)
   },
+  beforeDestroy() {
+    console.log('before')
+    this.music.stop()
+  },
   methods: {
     goToConnection() {
-      new Sound('select-3', { volume: 0.3 })
+      new Sound('select-3', { volume: 0.5 })
       this.$data.seeHome = false
     },
 
