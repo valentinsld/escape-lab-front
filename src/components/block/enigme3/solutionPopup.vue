@@ -13,6 +13,7 @@
 
 <script>
 import { solution } from '@/data/enigme3'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'SolutionPopup',
@@ -40,6 +41,7 @@ export default {
   mounted() {},
   methods: {
     nextStep() {
+      new Sound('validation', { volume: 0.3 })
       if (this.isSuccess) {
         this.$socket.emit('nextEnigme')
       } else {

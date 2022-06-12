@@ -48,6 +48,8 @@ import interact from 'interactjs'
 import NoticeChoices from '@/components/block/enigme3/noticeChoices'
 import SolutionPopup from '@/components/block/enigme3/solutionPopup'
 import { notice } from '@/data/enigme3'
+import { randomNum } from '@/helpers/randomNum'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'Enigme3Player2',
@@ -71,7 +73,6 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(this.notice, 'notice')
     this.currentPage = 1
 
     const element = this.$refs.interactElement
@@ -125,6 +126,10 @@ export default {
         zIndex: 100 - i
       }
     },
+    swipeSound() {
+      const index = randomNum(3, 9)
+      new Sound(`page-${index}`, { volume: 0.6 })
+    },
     nextRule() {
       if (this.currentPage < this.notice.length) {
         Anime({
@@ -136,6 +141,7 @@ export default {
           easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
         })
         this.currentPage += 1
+        this.swipeSound()
       }
     },
     prevRule() {
@@ -149,6 +155,7 @@ export default {
           easing: 'cubicBezier(0.12, 0.74, 1.0, 0.99)'
         })
         this.currentPage -= 1
+        this.swipeSound()
       }
     },
     isButtonActive(slug) {
@@ -161,7 +168,10 @@ export default {
       if (this.isButtonActive(slug)) {
         this.removeChoice(slug)
       } else {
-        if (this.activeButtons.length < 3) this.activeButtons.push(slug)
+        if (this.activeButtons.length < 3) {
+          this.activeButtons.push(slug)
+          new Sound('validate', { volume: 0.4 })
+        }
         setTimeout(() => {
           this.showValidation = this.activeButtons.length === 3
         }, 150)
@@ -170,11 +180,13 @@ export default {
     removeChoice(slug) {
       const i = this.activeButtons.indexOf(slug)
       this.activeButtons.splice(i, 1)
+      new Sound('back', { volume: 0.4 })
       setTimeout(() => {
         this.modifyChoices()
       }, 150)
     },
     modifyChoices() {
+      new Sound('select-3', { volume: 0.5 })
       this.showValidation = false
     },
     isGoodChoices() {
@@ -184,9 +196,8 @@ export default {
       return true
     },
     validateChoices() {
-      console.log(this.activeButtons, this.trueRules)
+      new Sound('validation', { volume: 0.3 })
       this.isSuccess = this.isGoodChoices()
-      console.log(this.isSuccess, 'success')
     },
 
     // animartion tuto
