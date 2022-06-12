@@ -76,8 +76,11 @@ export default {
     }
   },
   mounted() {
-    this.updateTime()
-    this.setSound()
+    new Sound('calling', { volume: 0.2 })
+    setTimeout(() => {
+      this.updateTime()
+      this.setSound()
+    }, 5000)
   },
   methods: {
     updateTime() {
@@ -93,6 +96,7 @@ export default {
       this.$socket.emit('enigme1-enteredNumber', number)
     },
     hangUp() {
+      new Sound('select-2', { volume: 0.2 })
       this.$socket.emit('enigme1-end')
       this.$data.sound.pause()
     },

@@ -44,7 +44,7 @@ export default {
   watch: {
     message: function () {
       this.$data.display = true
-      new Sound('notification', { volume: 0.3 })
+      new Sound('notification', { volume: 0.2 })
 
       setTimeout(() => {
         this.$data.display = false
