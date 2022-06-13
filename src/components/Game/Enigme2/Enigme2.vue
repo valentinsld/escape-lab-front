@@ -39,7 +39,6 @@ export default {
       this.isStart = true
     },
     'enigme2-restart': function () {
-      console.log('restart')
       this.componentKey += 1
     }
   },

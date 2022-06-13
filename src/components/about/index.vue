@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     hideModal() {
-      console.log('hide')
       this.$emit('hide')
     }
   }

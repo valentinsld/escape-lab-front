@@ -202,7 +202,6 @@ export default {
 
     // animartion tuto
     initAnimationTuto() {
-      console.log('ANIMATION', this.hasDraggedRule)
       if (this.hasDraggedRule) return
 
       const tl = Anime.timeline({

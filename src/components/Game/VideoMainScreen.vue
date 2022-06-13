@@ -199,7 +199,7 @@ export default {
       this.player.play()
     },
     endVideo() {
-      console.log('END VIDEO')
+      // console.log('END VIDEO')
       this.$socket.emit('endVideo')
     },
     // events on playing video
@@ -224,7 +224,7 @@ export default {
     //   this.$socket.emit('nextEnigme')
     // },
     playoutroStartMessages() {
-      console.log('outro-startMessages')
+      // console.log('outro-startMessages')
       this.$socket.emit('outro-startMessages')
     }
   }

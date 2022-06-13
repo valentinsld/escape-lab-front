@@ -1,6 +1,6 @@
 <template>
-  <div class="screenContainer outro">
-    <div ref="messages" class="outro__messages">
+  <div class="screenContainer outroPlayer">
+    <div ref="messages" class="outroPlayer__messages">
       <Messages
         :messages="messages"
         :delay="{ default: 0, firstMsg: 0 }"
@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div v-if="endVideo" class="outro__end">
+    <div v-if="endVideo" class="outroPlayer__end">
       <Button class="end__stats" text="En savoir plus sur les arnaques" :on-click="goToStats" />
       <Button class="end__restart" text="Recommencer l'expérience" :on-click="goToHome" />
     </div>
@@ -37,7 +37,7 @@ export default {
   },
   sockets: {
     endVideo: function () {
-      console.log('endVideo')
+      // console.log('endVideo')
       // this.endVideo = true
     },
     'outro-startMessages': function () {
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.outro {
+.outroPlayer {
   display: flex;
   // flex-direction: column;
   // align-items: align;

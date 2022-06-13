@@ -174,8 +174,8 @@ export const textContent = {
   sailerName: 'EricDu59',
   consigne: {
     mainScreen:
-      'À l’aide du carnet de notes, trouvez les bugs qui permettent de reconnaitre le robot générateur de fausses annonces du professeur.',
-    notice: 'Vous devez étudier le carnet de notes',
+      'À l’aide du carnet de notes, signalez les 3 bugs qui permettent de reconnaitre le robot générateur de fausses annonces du professeur.',
+    notice: 'Vous devez étudier le carnet de notes et signaler les bugs',
     chat: 'Vous devez chatter avec le robot'
   }
 }

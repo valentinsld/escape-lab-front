@@ -3,6 +3,9 @@
     <div class="screenContainer tuto__container" :class="'-' + colorBackground">
       <img class="tuto__logo" :src="Logo" />
       <p v-if="text" class="tuto__consigne" v-html="text" />
+
+      <img v-if="gif" :src="gif" class="tuto__gif" />
+
       <div class="tuto__btn-container">
         <button :disabled="isReady" class="button tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
@@ -22,6 +25,12 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    gif: {
+      type: String,
+      default() {
+        return ''
+      }
     },
     socketSend: {
       type: String,
@@ -84,6 +93,11 @@ export default {
 .tuto__player-info {
   text-align: center;
   transition: 200ms var(--custom-bezier);
+}
+
+.tuto__gif {
+  max-width: 84%;
+  margin: 0 auto;
 }
 
 .tuto__start-btn {

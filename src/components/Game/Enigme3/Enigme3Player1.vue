@@ -43,9 +43,6 @@ import Sound from '@/helpers/Sound'
 export default {
   name: 'Enigme3player1',
   sockets: {
-    startEnigme: function () {
-      this.start()
-    },
     'enigme3-restart': function () {
       this.reInitData()
     }
@@ -84,9 +81,6 @@ export default {
     })
   },
   methods: {
-    start() {
-      console.log('START ENIGME')
-    },
     generateQuestions() {
       this.questions = questionsData(this.product)
         .sort(() => Math.random() - Math.random())

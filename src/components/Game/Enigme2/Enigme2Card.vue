@@ -158,7 +158,6 @@ export default {
               new Sound('swoosh-2', { volume: 0.2 })
             },
             complete: () => {
-              console.log('END anim left')
               this.resetCardPosition()
               this.isAnimating = false
             }

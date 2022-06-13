@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PlayerTuto from '@/components/Game/Enigme1/PlayerTuto'
+import PlayerTuto from '@/components/block/PlayerTuto'
 import { textContent } from '@/data/enigme1'
 export default {
   name: 'Enigme2PlayerRestart',

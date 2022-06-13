@@ -56,7 +56,6 @@ export default {
     },
     createPopup() {
       this.showPopup = true
-      console.log(this.showPopup)
     },
     startTimer(time) {
       //ref to progress inner
