@@ -1,15 +1,7 @@
 <template>
-  <swiper
-    id="ResultsCardsSlider"
-    class="swiperTest"
-    slides-per-view="1"
-    :scrollbar="{ draggable: true }"
-    mousewheel
-    free-mode
-    navigation
-  >
+  <swiper id="ResultsCardsSlider" class="swiperTest" :scrollbar="{ draggable: true }" mousewheel free-mode navigation>
     <!-- <div class="inner-slider"> -->
-    <swiper-slide style="width: max-content">
+    <swiper-slide style="width: 480px">
       <ResultCard
         :image="Person"
         title="Un problème qui touche aussi les jeunes"
@@ -19,7 +11,7 @@
         tips-text="none"
       />
     </swiper-slide>
-    <swiper-slide style="width: max-content">
+    <swiper-slide style="width: 480px">
       <ResultCard
         :image="Machine"
         title="le Ping Call"
@@ -29,7 +21,7 @@
 des numéros surtaxés."
       />
     </swiper-slide>
-    <swiper-slide style="width: max-content">
+    <swiper-slide style="width: 480px">
       <ResultCard
         :image="Alert"
         title="Le faux courrier"
@@ -39,7 +31,7 @@ Il est aussi important de se rappeler que les faux courriers existent aussi par 
         tips-text="On pense à vérifier les expéditeurs de nos courriers et mails, et on fait attention aux liens pour se connecter."
       />
     </swiper-slide>
-    <swiper-slide style="width: max-content">
+    <swiper-slide style="width: 480px">
       <ResultCard
         :image="Bag"
         title="Les fausses ventes de produits ou services"
@@ -49,7 +41,7 @@ Il est aussi important de se rappeler que les faux courriers existent aussi par 
 et de sa qualité."
       />
     </swiper-slide>
-    <swiper-slide style="width: max-content">
+    <swiper-slide style="width: 480px">
       <ResultCard
         :image="IdCard"
         title="L’usurpation d’identité"
@@ -65,6 +57,8 @@ pensez à ajouter un filigrane
 </template>
 
 <script>
+import 'swiper/swiper-bundle.css'
+
 import { Mousewheel, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperCore, SwiperSlide } from 'swiper-vue2'
 
@@ -74,7 +68,6 @@ import IdCard from '@/assets/images/results/idCard.png'
 import Machine from '@/assets/images/results/machine.png'
 import Person from '@/assets/images/results/person.png'
 import ResultCard from '@/components/block/ResultCard.vue'
-
 SwiperCore.use([Scrollbar, Mousewheel, Navigation])
 
 export default {
@@ -108,11 +101,7 @@ export default {
 </script>
 
 <style scoped>
-/* #ResultsCardsSlider {
-  display: flex;
-  background-color: var(--color-blue);
-  border: greenyellow solid 1px;
-}
+/* 
 .result-card {
   max-width: 580px;
 }
@@ -131,19 +120,46 @@ export default {
   display: flex !important;
   gap: 20px 20px;
 } */
+#ResultsCardsSlider {
+  background-color: var(--color-blue);
+  border: greenyellow solid 1px;
+}
 
 .swiper-slide {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 202px;
+
+  /* width: 400px; */
+
+  /* margin: 0 100px; */
+}
+
+.swiper-slide:first-of-type {
+  margin-left: 300px;
+  border: red solid 3px;
+}
+
+.swiper-slide:last-of-type {
+  margin-right: 600px;
+  border: greenyellow solid 3px;
 }
 
 .swiper-container {
-  display: flex;
-  flex-direction: row;
   width: 100%;
   height: 450px;
-  border: greenyellow solid 1px;
+  border: red solid 2px;
+}
+
+@media screen and (max-width: 767px) {
+  .swiper-slide:first-of-type {
+    margin-left: 0;
+    border: red solid 3px;
+  }
+
+  .swiper-slide:last-of-type {
+    margin-right: 0;
+    border: greenyellow solid 3px;
+  }
 }
 </style>
