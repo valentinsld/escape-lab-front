@@ -4,7 +4,7 @@
 
 <script>
 import { ACTIONS as A } from '@/store/modules/three/helpers'
-
+import { MUTATIONS as M } from '@/store/modules/three/helpers'
 export default {
   name: 'Canvas',
   data() {
@@ -25,6 +25,16 @@ export default {
       })
       .then(() => {
         this.$store.dispatch(A.animate)
+        window.addEventListener(
+          'resize',
+          () => {
+            this.$store.commit(M.resizeScene, {
+              width: this.$refs.scene.clientWidth,
+              height: this.$refs.scene.clientHeight
+            })
+          },
+          true
+        )
       })
   }
 }

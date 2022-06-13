@@ -34,6 +34,12 @@ export const mutations = {
   },
   [MUTATIONS.resetPopup](state) {
     state[STATE.popups] = []
+  },
+  [MUTATIONS.resizeScene](state, { width, height }) {
+    state.camera.aspect = width / height
+    state.camera.updateProjectionMatrix()
+    state.renderer.setSize(width, height)
+    state.renderer.render(state.scene, state.camera)
   }
 }
 
