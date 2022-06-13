@@ -34,19 +34,18 @@ class Sound {
   }
 
   play() {
-    const fadeTime = 1500
+    this.sound.fade(0, this.opts.volume, 0)
     this.sound.play()
-    this.sound.fade(0, this.opts.volume, fadeTime)
   }
 
-  stop() {
-    const fadeTime = 1500
+  stop(fadeDelay) {
+    const fadeTime = fadeDelay >= 0 ? fadeDelay : 1500
     this.sound.fade(this.opts.volume, 0, fadeTime)
     setTimeout(() => this.sound.stop(), fadeTime)
   }
 
-  pause() {
-    const fadeTime = 1500
+  pause(fadeDelay) {
+    const fadeTime = fadeDelay >= 0 ? fadeDelay : 1500
     this.sound.fade(this.opts.volume, 0, fadeTime)
     setTimeout(() => this.sound.pause(), fadeTime)
   }

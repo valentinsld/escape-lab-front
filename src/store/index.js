@@ -41,7 +41,6 @@ export const mutations = {
     if (state[STATE.laboAmbiance] === null) {
       state[STATE.laboAmbiance] = new Sound('labo_ambiance', { volume: 0.2, isLoop: true })
     } else {
-      console.log('play')
       state[STATE.laboAmbiance]?.play()
     }
   },
