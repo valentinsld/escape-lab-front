@@ -4,13 +4,13 @@
     <swiper
       id="ResultsCardsSlider"
       class="swiperTest"
-      slides-per-view="auto"
+      :slides-per-view="getSlidesPerView()"
       :scrollbar="{ draggable: true }"
       mousewheel
       free-mode
     >
       <!-- <div class="inner-slider"> -->
-      <swiper-slide style="width: 480px">
+      <swiper-slide style="width: fit-content">
         <ResultCard
           :image="Person"
           title="Un problème qui touche aussi les jeunes"
@@ -21,7 +21,7 @@
           class="no-tips"
         />
       </swiper-slide>
-      <swiper-slide style="width: 480px">
+      <swiper-slide style="width: fit-content">
         <ResultCard
           :image="Machine"
           title="le Ping Call"
@@ -31,7 +31,7 @@
 des numéros surtaxés."
         />
       </swiper-slide>
-      <swiper-slide style="width: 480px">
+      <swiper-slide style="width: fit-content">
         <ResultCard
           :image="Alert"
           title="Le faux courrier"
@@ -41,7 +41,7 @@ Il est aussi important de se rappeler que les faux courriers existent aussi par 
           tips-text="On pense à vérifier les expéditeurs de nos courriers et mails, et on fait attention aux liens pour se connecter."
         />
       </swiper-slide>
-      <swiper-slide style="width: 480px">
+      <swiper-slide style="width: fit-content">
         <ResultCard
           :image="Bag"
           title="Les fausses ventes de produits ou services"
@@ -51,7 +51,7 @@ Il est aussi important de se rappeler que les faux courriers existent aussi par 
 et de sa qualité."
         />
       </swiper-slide>
-      <swiper-slide style="width: 480px">
+      <swiper-slide style="width: fit-content">
         <ResultCard
           :image="IdCard"
           title="L’usurpation d’identité"
@@ -59,7 +59,7 @@ et de sa qualité."
           :has-tips="true"
           tips-text="Lors d’une visite d’appartement,
 pensez à ajouter un filigrane
-&laquo;document réservé à la recherche de logement&raquo; sur votre dossier."
+'document réservé à la recherche de logement' sur votre dossier."
         />
       </swiper-slide>
       <!-- </div> -->
@@ -94,8 +94,8 @@ export default {
   data() {
     return {
       swiperOptions: {
-        slidesPerView: 'auto',
-        spaceBetween: 0,
+        slidesPerView: this.getSlidesPerView(),
+        spaceBetween: 10,
         freeMode: true,
         scrollbar: true,
         mousewheel: true,
@@ -110,11 +110,28 @@ export default {
       Machine,
       Person
     }
+  },
+  methods: {
+    getSlidesPerView() {
+      let SLIDES_PER_VIEW = 3
+      console.log(window.innerWidth)
+      if (window.innerWidth < 568) {
+        SLIDES_PER_VIEW = 1
+      }
+      if (window.innerWidth > 568 && window.innerWidth < 1024) {
+        SLIDES_PER_VIEW = 2
+      }
+      if (window.innerWidth > 1024) {
+        SLIDES_PER_VIEW = 3
+      }
+
+      return SLIDES_PER_VIEW
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* 
 .result-card {
   max-width: 580px;
@@ -137,12 +154,14 @@ export default {
 
 #dataviz {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--color-blue);
 }
 
 #dataviz h1 {
-  font-size: 75px;
+  margin-top: 0;
+  margin-bottom: 100px;
+  font-size: 65px;
   color: var(--color-white);
   text-shadow: 4px 1px 0 var(--color-black);
   -webkit-text-stroke: 1px var(--color-black);
@@ -156,12 +175,9 @@ export default {
 
 .swiper-slide {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-
-  /* width: 400px; */
-
-  /* margin: 0 100px; */
+  padding: 0 10px;
 }
 
 .swiper-slide:first-of-type {
@@ -182,6 +198,11 @@ export default {
     margin-left: 0;
   }
 
+  .swiper-slide-active {
+    padding-left: 0;
+    margin: 0;
+  }
+
   .swiper-slide:last-of-type {
     margin-right: 0;
   }
@@ -193,7 +214,9 @@ export default {
   }
 
   #dataviz h1 {
-    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 55px;
     color: var(--color-white);
     text-shadow: 4px 1px 0 var(--color-black);
     -webkit-text-stroke: 1px var(--color-black);
@@ -203,6 +226,33 @@ export default {
 
   #ResultsCardsSlider {
     height: 100%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .swiper-container {
+    margin-bottom: 30px;
+  }
+
+  .swiper-slide:first-of-type {
+    margin-left: 0;
+  }
+
+  .swiper-slide:last-of-type {
+    margin-right: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    margin-bottom: 30px;
+  }
+
+  .swiper-slide:first-of-type {
+    margin-left: 0;
+  }
+
+  .swiper-slide:last-of-type {
+    margin-right: 0;
   }
 }
 </style>

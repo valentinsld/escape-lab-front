@@ -66,49 +66,63 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  max-width: 485px;
+  width: 100%;
   height: 695px;
+  padding: 0 32px;
   margin: 0 20px;
   background-color: var(--color-whiteDimmed);
+  border: 5px solid var(--color-black);
   border-radius: var(--box-rounded-radius);
   box-shadow: 6px 6px 0 var(--color-black);
 }
 
 .result__card.no-tips {
   justify-content: flex-start;
+
+  & h3 {
+    padding: 30px;
+  }
 }
 
 .result__card header {
+  width: 170px;
+  height: 170px;
   margin-top: -100px;
   background-color: var(--color-primary);
   border: var(--color-black) solid 4px;
   border-radius: 50%;
+
+  & img {
+    width: auto;
+    height: 100px;
+  }
 }
 
 .result__card .content h3 {
-  padding: 20px 0;
+  padding: 20px 0 !important;
+  margin: 0;
   font-size: 30px;
   font-weight: var(--weight-bold);
   text-align: center;
 }
 
 .result__card .content {
-  padding: 20px;
   text-align: center;
 }
 
 .result__card .content p {
+  margin: 15px 0;
   font-size: 18px;
   font-weight: var(--weight-regular);
 }
 
-footer {
-  padding-bottom: 20px;
-  margin: 0 20px;
+footer h4 {
+  margin-top: 0;
+  text-align: left;
 }
 
-footer h4 {
-  text-align: left;
+footer p {
+  font-weight: var(--weight-regular);
 }
 
 .tips {
@@ -125,14 +139,15 @@ footer h4 {
   margin-top: 0;
   margin-left: 20px;
   font-size: 18px;
+  text-align: left;
 }
 
 .circle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 230px;
-  height: 230px;
+  width: 160px;
+  height: 160px;
 }
 
 @media screen and (max-width: 767px) {
@@ -145,9 +160,9 @@ footer h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     max-width: 95vw;
-    height: 695px;
+    height: 625px;
     // padding: 0 20px;
     margin: 20px;
     background-color: var(--color-whiteDimmed);
@@ -167,10 +182,26 @@ footer h4 {
   }
 
   .result__card .content h3 {
-    padding: 0;
+    padding: 20px 0;
     font-size: 30px;
     font-weight: var(--weight-bold);
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .result__card {
+    height: 600px;
+    margin-bottom: 200px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .result__card {
+    width: 480px;
+    height: 600px;
+    margin-bottom: 200px;
+    transform: scale(1.5);
   }
 }
 </style>
