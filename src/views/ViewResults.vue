@@ -64,8 +64,8 @@ pensez à ajouter un filigrane
       </swiper-slide>
       <!-- </div> -->
       <div slot="scrollbar" class="swiper-scrollbar"></div>
-      <div slot="button-prev" class="swiper-button-prev"></div>
-      <div slot="button-next" class="swiper-button-next"></div>
+      <!-- <div slot="button-prev" class="swiper-button-prev"></div>
+      <div slot="button-next" class="swiper-button-next"></div> -->
     </swiper>
   </div>
 </template>
