@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted() {
-    this.isSuccess ? new Sound('success', { volume: 0.7 }) : new Sound('failure', { volume: 0.8 })
+    this.isSuccess ? new Sound('success', { volume: 0.5 }) : new Sound('failure', { volume: 0.7 })
     console.log(this.isSuccess, 'success')
   },
   methods: {
