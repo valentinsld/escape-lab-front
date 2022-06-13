@@ -12,7 +12,8 @@ export const STATE = {
   playerIsReady: 'playerIsReady',
   highmode: 'highmode',
   // enigme 3
-  enigme3Config: 'enigme3Config'
+  enigme3Config: 'enigme3Config',
+  laboAmbiance: 'laboAmbiance'
 }
 
 export const MUTATIONS = {
@@ -29,6 +30,7 @@ export const MUTATIONS = {
   stepGame: 'M_STEP_GAME',
   resetRoom: 'M_RESET_ROOM',
   highmode: 'M_HEIGH_MODE',
+  laboAmbiance: 'M_LABO_AMBIANCE',
   // enigme 3
   enigme3Config: 'M_ENIGME_3_CONFIG'
 }

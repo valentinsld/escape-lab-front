@@ -21,6 +21,7 @@ export const state = {
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
   [STATE.highmode]: false,
+  [STATE.laboAmbiance]: null,
   // enigme 3
   [STATE.enigme3Config]: null
 }
@@ -34,6 +35,9 @@ export const mutations = {
   },
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
+  },
+  [MUTATIONS.laboAmbiance](state, newVal) {
+    state[STATE.laboAmbiance] = newVal
   },
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal
