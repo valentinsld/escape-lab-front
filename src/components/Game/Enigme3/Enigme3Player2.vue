@@ -197,7 +197,7 @@ export default {
     },
     validateChoices() {
       new Sound('validation', { volume: 0.3 })
-      this.isSuccess = this.isGoodChoices()
+      setTimeout(() => (this.isSuccess = this.isGoodChoices()), 500)
     },
 
     // animartion tuto
