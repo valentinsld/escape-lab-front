@@ -1,8 +1,8 @@
-# Escape Lab
+# ClicClack
 
 Ce projet est développé dans le cadre du master DMII 1ère année de Gobelins.
 
-Version en ligne : https://escape-lab.herokuapp.com/
+Version en ligne : https://clic-clack.herokuapp.com/
 
 ## Setup du projet
 
