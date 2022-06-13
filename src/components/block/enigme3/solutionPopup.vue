@@ -6,7 +6,7 @@
       <div v-if="!isSuccess" class="solution-popup__rules">
         <p v-for="(rule, item) in trueRules" :key="item" v-html="`- ${rule.name}`" />
       </div>
-      <button class="solution-popup__button" @click="nextStep">{{ isSuccess ? 'suivant' : 'recommencer' }}</button>
+      <button class="solution-popup__button" @click="nextStep">{{ isSuccess ? 'Suivant' : 'Recommencer' }}</button>
     </div>
   </div>
 </template>
@@ -98,8 +98,9 @@ export default {
   margin-bottom: 30px;
 
   p {
-    margin: 10px 0;
+    margin: 10px 0 1.5em;
     font-weight: bold;
+    text-align: center;
   }
 }
 </style>

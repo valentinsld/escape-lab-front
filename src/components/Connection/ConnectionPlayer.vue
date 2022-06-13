@@ -8,10 +8,10 @@
     >
       <div class="home screenContainer">
         <img class="home__img" :src="Logo" />
-        <img class="home__fakeVideo" :src="FakeVideo" />
+        <!-- <img class="home__fakeVideo" :src="FakeVideo" /> -->
         <p class="home__text">
-          Clic Clack nécessite un écran principal et deux smartphones : merci de vous connecter aussi sur desktop pour
-          créer une room
+          Clic Clack nécessite <b>un écran principal</b> et <b>deux smartphones</b> :<br />
+          merci de vous connecter aussi sur desktop pour créer une room
         </p>
         <Button text="Commencer l’expérience" :on-click="goToConnection" />
       </div>
@@ -41,12 +41,19 @@
           <p>En attente du second joueur</p>
         </div>
 
-        <div v-else-if="!playerIsReady.includes(socketID)">
-          <p>Etes vous prêt ?</p>
-          <Button text="Je suis prêt !!" :on-click="isReady" />
+        <div v-else>
+          <img class="content__soundIcon" :src="SoundIcon" />
+          <p class="content__activetext">Pensez à désactiver le mode vibreur et activer le son de votre téléphone</p>
+          <p class="content__readyPlayer">
+            {{ playerIsReady.includes(socketID) ? 'En attente de votre coéquipier' : 'Etes vous prêt ?' }}
+          </p>
+          <Button
+            class="content__readyBtn"
+            text="Je suis prêt !!"
+            :on-click="isReady"
+            :disabled="playerIsReady.includes(socketID)"
+          />
         </div>
-
-        <p v-else>En attente de votre coéquipier</p>
       </div>
     </div>
   </div>
@@ -57,6 +64,7 @@ import { mapState } from 'vuex'
 
 import ConnectionCHeck from '@/assets/connection-check.svg'
 import FakeVideo from '@/assets/FakeVideo.svg'
+import SoundIcon from '@/assets/icon-sound-orange.svg'
 import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
 import Sound from '@/helpers/Sound'
@@ -87,7 +95,9 @@ export default {
       ConnectionCHeck,
       idRoomFromUrl: getIdRoomFromUrl(),
       errorId: '',
-      seeHome: true
+      seeHome: true,
+      // image
+      SoundIcon
     }
   },
   computed: mapState({

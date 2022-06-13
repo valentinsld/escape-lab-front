@@ -39,14 +39,20 @@ export default {
     typeScreen: (state) => state[S.typeScreen] // Player1 ; Player2 ; MainScreen
   }),
   sockets: {
-    'enigme2-endSort': function ({ success }) {
+    'enigme2-endSort': function () {
       this.$data.isEndSort = true
-      console.log(success)
+
+      this.$nextTick(() => {
+        const wrongCard = document.querySelector('.card.-isWrong')
+        console.log(wrongCard)
+
+        if (wrongCard) {
+          console.log(scroll)
+          const scroll = wrongCard.parentElement.offsetTop
+          this.$el.scrollTo(0, scroll)
+        }
+      })
     }
-  },
-  mounted() {
-    console.log(this.cards)
-    console.log(this.typeScreen)
   }
 }
 </script>
@@ -61,7 +67,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 20px 20px;
+  padding: 60px 20px 20px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
