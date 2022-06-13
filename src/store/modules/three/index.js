@@ -195,10 +195,7 @@ export const actions = {
         y: -2.5,
         x: 0.8,
         duration: duration * 0.6,
-        easing: 'easeOutQuart',
-        complete: () => {
-          console.log('2')
-        }
+        easing: 'easeOutQuart'
       })
       .add({
         y: -13,

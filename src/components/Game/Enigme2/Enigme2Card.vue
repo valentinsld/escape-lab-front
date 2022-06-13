@@ -40,6 +40,7 @@ import Anime from 'animejs'
 import interact from 'interactjs'
 import { mapState } from 'vuex'
 
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 
 const RIGHT = 'right'
@@ -125,6 +126,9 @@ export default {
             rotate: 0,
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
+            begin: () => {
+              new Sound('swoosh-2', { volume: 0.2 })
+            },
             complete: () => {
               this.resetCardPosition()
               this.isAnimating = false
@@ -150,6 +154,9 @@ export default {
             rotate: 0,
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
+            begin: () => {
+              new Sound('swoosh-2', { volume: 0.2 })
+            },
             complete: () => {
               console.log('END anim left')
               this.resetCardPosition()
@@ -165,6 +172,9 @@ export default {
             rotate: 0,
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
+            begin: () => {
+              new Sound('swoosh-2', { volume: 0.2 })
+            },
             complete: () => {
               this.resetCardPosition()
               this.isAnimating = false
@@ -282,6 +292,9 @@ export default {
         rotate: rotation,
         easing: 'cubicBezier(.2,0,.25,1)',
         duration: 250,
+        begin: () => {
+          new Sound('swoosh-3', { volume: 0.2 })
+        },
         complete: () => {
           this.isAnimating = false
           this.resetCardPosition()
