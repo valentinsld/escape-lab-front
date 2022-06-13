@@ -20,6 +20,8 @@
 
 <script>
 /* eslint-disable unused-imports/no-unused-vars, no-unused-vars */
+import Sound from '@/helpers/Sound'
+
 const SOUNDS_ORIGIN = 'soundsEnigme1/'
 const SOUNDS_STEPS = [
   '0-intro',
@@ -74,8 +76,11 @@ export default {
     }
   },
   mounted() {
-    this.updateTime()
-    this.setSound()
+    new Sound('calling', { volume: 0.2 })
+    setTimeout(() => {
+      this.updateTime()
+      this.setSound()
+    }, 5000)
   },
   methods: {
     updateTime() {
@@ -86,10 +91,12 @@ export default {
       }, 1000)
     },
     clickPad(number) {
+      new Sound('pad-1', { volume: 1.5 })
       this.$data.numbeEntered.push(number)
       this.$socket.emit('enigme1-enteredNumber', number)
     },
     hangUp() {
+      new Sound('select-2', { volume: 0.2 })
       this.$socket.emit('enigme1-end')
       this.$data.sound.pause()
     },

@@ -11,6 +11,7 @@
 
 <script>
 import PhoneIcon from '@/assets/icon-phone.svg'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'PhoneCallIncoming',
@@ -24,16 +25,22 @@ export default {
   },
   data() {
     return {
-      PhoneIcon
+      PhoneIcon,
+      phoneSound: null
     }
   },
   mounted() {
+    this.phoneSound = new Sound('phone', { volume: 0.2, isLoop: true, timeBeforeLoop: 1000 })
     setTimeout(() => {
       this.$emit('onEndCall', true)
     }, this.duration)
   },
+  beforeDestroy() {
+    this.phoneSound?.stop(0)
+  },
   methods: {
     click() {
+      new Sound('select-2', { volume: 0.2 })
       this.$emit('onEndCall', true)
     }
   }

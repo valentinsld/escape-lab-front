@@ -13,6 +13,7 @@
 
 <script>
 import { solution } from '@/data/enigme3'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'SolutionPopup',
@@ -33,13 +34,16 @@ export default {
   },
   computed: {
     getContent() {
-      // console.log(this.isSuccess, 'success')
       return this.isSuccess ? this.solution.success : this.solution.fail
     }
   },
-  mounted() {},
+  mounted() {
+    this.isSuccess ? new Sound('success', { volume: 0.5 }) : new Sound('failure', { volume: 0.7 })
+    console.log(this.isSuccess, 'success')
+  },
   methods: {
     nextStep() {
+      new Sound('validation', { volume: 0.3 })
       if (this.isSuccess) {
         this.$socket.emit('nextEnigme')
       } else {

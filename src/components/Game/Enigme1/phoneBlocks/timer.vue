@@ -9,6 +9,7 @@
 <script>
 import Notification from '@/components/block/Notification.vue'
 import convertSecondsToTime from '@/helpers/convertSecondToTIme.js'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'Timer',
@@ -29,6 +30,7 @@ export default {
     return {
       timer: this.$props.initTime,
       timerStarted: false,
+      timeout: null,
       notification: {
         contact: '',
         message: ''
@@ -52,10 +54,14 @@ export default {
       this.$data.notification = { contact, message }
     }
   },
+  beforeDestroy() {
+    clearTimeout(this.timeout)
+  },
   methods: {
     updateTime() {
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.$data.timer -= 1
+        new Sound('tick-2', { volume: 0.3 })
         this.$emit('onTimeChange:step', this.$data.timer)
 
         if (this.$data.timer > 0) {
