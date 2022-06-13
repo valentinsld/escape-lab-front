@@ -65,14 +65,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   max-width: 485px;
-  height: 795px;
-  padding: 0 30px;
-  margin: 0 30px;
+  height: 695px;
+  margin: 0 20px;
   background-color: var(--color-whiteDimmed);
   border-radius: var(--box-rounded-radius);
   box-shadow: 6px 6px 0 var(--color-black);
+}
+
+.result__card.no-tips {
+  justify-content: flex-start;
 }
 
 .result__card header {
@@ -143,9 +146,9 @@ footer h4 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    max-width: 100%;
-    height: auto;
-    padding: 0 20px;
+    max-width: 95vw;
+    height: 695px;
+    // padding: 0 20px;
     margin: 20px;
     background-color: var(--color-whiteDimmed);
     border-radius: var(--box-rounded-radius);

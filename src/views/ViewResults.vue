@@ -8,7 +8,6 @@
       :scrollbar="{ draggable: true }"
       mousewheel
       free-mode
-      navigation
     >
       <!-- <div class="inner-slider"> -->
       <swiper-slide style="width: 480px">
@@ -19,6 +18,7 @@
           En revanche, les montants escroqués aux +70 ans, les seconds plus arnaqués en France, sont supérieurs à ceux escroqués aux jeunes, alors soyez sympa, protégez vos aînés, passez le mot !"
           :has-tips="false"
           tips-text="none"
+          class="no-tips"
         />
       </swiper-slide>
       <swiper-slide style="width: 480px">
@@ -63,6 +63,9 @@ pensez à ajouter un filigrane
         />
       </swiper-slide>
       <!-- </div> -->
+      <div slot="scrollbar" class="swiper-scrollbar"></div>
+      <div slot="button-prev" class="swiper-button-prev"></div>
+      <div slot="button-next" class="swiper-button-next"></div>
     </swiper>
   </div>
 </template>
@@ -181,6 +184,25 @@ export default {
 
   .swiper-slide:last-of-type {
     margin-right: 0;
+  }
+
+  #dataviz {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-blue);
+  }
+
+  #dataviz h1 {
+    font-size: 25px;
+    color: var(--color-white);
+    text-shadow: 4px 1px 0 var(--color-black);
+    -webkit-text-stroke: 1px var(--color-black);
+
+    /* font-weight: bold; */
+  }
+
+  #ResultsCardsSlider {
+    height: 100%;
   }
 }
 </style>
