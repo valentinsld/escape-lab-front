@@ -176,7 +176,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 10px;
+  // padding: 0 10px;
 }
 
 .swiper-slide:first-of-type {
@@ -252,6 +252,12 @@ export default {
 
   .swiper-slide:last-of-type {
     margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  h1 {
+    margin-bottom: 0;
   }
 }
 </style>

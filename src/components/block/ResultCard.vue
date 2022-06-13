@@ -191,8 +191,15 @@ footer p {
 
 @media screen and (min-width: 768px) {
   .result__card {
-    height: 600px;
+    height: 670px;
     margin-bottom: 200px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .result__card {
+    height: 670px;
+    margin: 0 10px;
   }
 }
 
@@ -201,7 +208,7 @@ footer p {
     width: 480px;
     height: 600px;
     margin-bottom: 200px;
-    transform: scale(1.5);
+    // transform: scale(1.5);
   }
 }
 </style>
