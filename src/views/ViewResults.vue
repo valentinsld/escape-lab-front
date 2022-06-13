@@ -3,7 +3,6 @@
     <h1>Et en vrai ?</h1>
     <swiper
       id="ResultsCardsSlider"
-      class="swiperTest"
       :slides-per-view="getSlidesPerView()"
       :scrollbar="{ draggable: true }"
       mousewheel
