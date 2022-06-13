@@ -34,7 +34,9 @@ class Sound {
   }
 
   play() {
+    const fadeTime = 1500
     this.sound.play()
+    this.sound.fade(0, this.opts.volume, fadeTime)
   }
 
   stop() {
@@ -44,7 +46,9 @@ class Sound {
   }
 
   pause() {
-    this.sound.pause()
+    const fadeTime = 1500
+    this.sound.fade(this.opts.volume, 0, fadeTime)
+    setTimeout(() => this.sound.pause(), fadeTime)
   }
 }
 

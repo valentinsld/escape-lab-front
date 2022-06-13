@@ -32,6 +32,9 @@ export default {
       seeAbout: false
     }
   },
+  mounted() {
+    this.$store.commit(M.stopLaboAmbiance)
+  },
   sockets: {
     'outro-end': function () {
       // console.log('endVideo')

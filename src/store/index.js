@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import Sound from '@/helpers/Sound'
 import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
 import threeStore from '@/store/modules/three'
 
@@ -36,8 +37,19 @@ export const mutations = {
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
   },
-  [MUTATIONS.laboAmbiance](state, newVal) {
-    state[STATE.laboAmbiance] = newVal
+  [MUTATIONS.startLaboAmbiance](state) {
+    if (state[STATE.laboAmbiance] === null) {
+      state[STATE.laboAmbiance] = new Sound('labo_ambiance', { volume: 0.2, isLoop: true })
+    } else {
+      console.log('play')
+      state[STATE.laboAmbiance]?.play()
+    }
+  },
+  [MUTATIONS.stopLaboAmbiance](state) {
+    state[STATE.laboAmbiance]?.stop()
+  },
+  [MUTATIONS.pauseLaboAmbiance](state) {
+    state[STATE.laboAmbiance]?.pause()
   },
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal

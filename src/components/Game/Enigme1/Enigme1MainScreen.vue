@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Sound from '@/helpers/Sound'
 import { MUTATIONS as M } from '@/store/helpers'
 
 export default {
@@ -14,7 +13,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit(M.laboAmbiance, new Sound('labo_ambiance', { volume: 0.2, isLoop: true }))
+    console.log('mounted')
+    this.$store.commit(M.startLaboAmbiance)
   },
   methods: {
     start() {
