@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import NoSleep from 'nosleep.js'
 import { mapState } from 'vuex'
 
 import ConnectionCHeck from '@/assets/connection-check.svg'
@@ -96,6 +97,7 @@ export default {
       idRoomFromUrl: getIdRoomFromUrl(),
       errorId: '',
       seeHome: true,
+      noSleep: null,
       // image
       SoundIcon
     }
@@ -137,6 +139,8 @@ export default {
     goToConnection() {
       new Sound('select-3', { volume: 0.3 })
       this.$data.seeHome = false
+
+      this.initNoSleep()
     },
 
     initInputs() {
@@ -194,6 +198,12 @@ export default {
       console.log('isReady !!!')
       new Sound('validation', { volume: 0.3 })
       this.$socket.emit('isReady')
+    },
+
+    initNoSleep() {
+      this.noSleep = new NoSleep()
+
+      this.noSleep.enable()
     }
   }
 }
