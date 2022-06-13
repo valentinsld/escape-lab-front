@@ -33,13 +33,11 @@ export default {
       if (data.messages.messages.length > 0) this.$data.dataMessages = [data.messages]
     },
     'enigme1-end': function ({ messages }) {
-      console.log('enigme1-end', messages)
       this.$data.dataMessages = messages
     }
   },
   methods: {
     start() {
-      console.log('START ENIGME')
       this.$data.isStart = true
     },
 

@@ -184,14 +184,11 @@ export default {
       return true
     },
     validateChoices() {
-      console.log(this.activeButtons, this.trueRules)
       this.isSuccess = this.isGoodChoices()
-      console.log(this.isSuccess, 'success')
     },
 
     // animartion tuto
     initAnimationTuto() {
-      console.log('ANIMATION', this.hasDraggedRule)
       if (this.hasDraggedRule) return
 
       const tl = Anime.timeline({

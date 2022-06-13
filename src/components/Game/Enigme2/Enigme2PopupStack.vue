@@ -44,10 +44,8 @@ export default {
 
       this.$nextTick(() => {
         const wrongCard = document.querySelector('.card.-isWrong')
-        console.log(wrongCard)
 
         if (wrongCard) {
-          console.log(scroll)
           const scroll = wrongCard.parentElement.offsetTop
           this.$el.scrollTo(0, scroll)
         }

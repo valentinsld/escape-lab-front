@@ -67,9 +67,6 @@ export default {
     this.sailer = this.getSailer()
   },
   sockets: {
-    startEnigme: function () {
-      this.start()
-    },
     'show-fader': function () {
       this.$el.style.opacity = 0
     },
@@ -78,9 +75,6 @@ export default {
     }
   },
   methods: {
-    start() {
-      console.log('START ENIGME')
-    },
     getSailer() {
       const isTrueRule = this.trueRules.filter((e) => e.slug === 'profile').length > 0
       return isTrueRule
