@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     getContent() {
-      console.log(this.isSuccess, 'success')
+      // console.log(this.isSuccess, 'success')
       return this.isSuccess ? this.solution.success : this.solution.fail
     }
   },

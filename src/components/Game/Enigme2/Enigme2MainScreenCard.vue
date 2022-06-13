@@ -60,10 +60,10 @@ export default {
         // translateY: [-this.$el.clientHeight, window.innerHeight + this.$el.clientHeight],
         translateX: ['-50%', '-50%'],
         duration: this.data.duration,
-        easing: 'linear',
-        complete: () => {
-          console.log('END')
-        }
+        easing: 'linear'
+        // complete: () => {
+        //   console.log('END')
+        // }
       })
     }
   }
