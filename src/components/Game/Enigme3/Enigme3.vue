@@ -21,7 +21,7 @@
 <script>
 import { mapState } from 'vuex'
 
-import PlayerTuto from '@/components/Game/Enigme1/PlayerTuto'
+import PlayerTuto from '@/components/block/PlayerTuto'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
