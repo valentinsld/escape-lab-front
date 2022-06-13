@@ -1,5 +1,5 @@
 <template>
-  <div class="screenContainer -blue">
+  <div class="screenContainer -enigme1">
     <PhoneCallIncoming v-if="isFakeCalling" :duration="isFakeCallingDuration" @onEndCall="endFakeCall" />
     <PhoneLocked
       v-else-if="!recalled || callEnd"

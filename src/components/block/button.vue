@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :class="'-' + color" @click="onClick">
+  <button class="button" :class="'-' + color" :disabled="disabled" @click="onClick">
     {{ text }}
   </button>
 </template>
@@ -22,6 +22,12 @@ export default {
       type: String,
       default() {
         return ''
+      }
+    },
+    disabled: {
+      type: Boolean,
+      default() {
+        return false
       }
     }
   }

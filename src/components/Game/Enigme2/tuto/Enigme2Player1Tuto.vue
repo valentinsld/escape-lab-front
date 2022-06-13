@@ -1,5 +1,5 @@
 <template>
-  <PlayerTuto :text="textContent.consigne.player1" />
+  <PlayerTuto :text="textContent.consigne.player1" color-background="enigme2" />
 </template>
 
 <script>
