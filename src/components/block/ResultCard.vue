@@ -67,8 +67,9 @@ export default {
   align-items: center;
   justify-content: flex-start;
   max-width: 485px;
-  height: 720px;
+  height: 795px;
   padding: 0 30px;
+  margin: 0 30px;
   background-color: var(--color-whiteDimmed);
   border-radius: var(--box-rounded-radius);
   box-shadow: 6px 6px 0 var(--color-black);
@@ -82,7 +83,7 @@ export default {
 }
 
 .result__card .content h3 {
-  padding: 20px;
+  padding: 20px 0;
   font-size: 30px;
   font-weight: var(--weight-bold);
   text-align: center;
@@ -101,6 +102,10 @@ export default {
 footer {
   padding-bottom: 20px;
   margin: 0 20px;
+}
+
+footer h4 {
+  text-align: left;
 }
 
 .tips {
@@ -141,6 +146,7 @@ footer {
     max-width: 100%;
     height: auto;
     padding: 0 20px;
+    margin: 20px;
     background-color: var(--color-whiteDimmed);
     border-radius: var(--box-rounded-radius);
     box-shadow: 6px 6px 0 var(--color-black);
