@@ -13,7 +13,8 @@ export const STATE = {
   highmode: 'highmode',
   // enigme 3
   enigme3Config: 'enigme3Config',
-  laboAmbiance: 'laboAmbiance'
+  laboAmbiance: 'laboAmbiance',
+  sounds: 'sounds'
 }
 
 export const MUTATIONS = {
@@ -34,7 +35,8 @@ export const MUTATIONS = {
   stopLaboAmbiance: 'M_STOP_LABO_AMBIANCE',
   pauseLaboAmbiance: 'M_PAUSE_LABO_AMBIANCE',
   // enigme 3
-  enigme3Config: 'M_ENIGME_3_CONFIG'
+  enigme3Config: 'M_ENIGME_3_CONFIG',
+  initSounds: 'M_INIT_SOUNDS'
 }
 
 export const STATE_SCREEN = {

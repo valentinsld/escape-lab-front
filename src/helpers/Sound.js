@@ -18,13 +18,13 @@ class Sound {
   init() {
     this.sound = new Howl({
       src: this.soundSrc(),
+      preload: true,
       onend: () => {
         if (!this.opts.isLoop) return
         setTimeout(() => this.play(), this.opts.timeBeforeLoop)
       },
       ...this.opts
     })
-    this.play()
   }
 
   soundSrc() {
