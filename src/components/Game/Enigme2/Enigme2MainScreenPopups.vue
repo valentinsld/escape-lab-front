@@ -7,6 +7,7 @@
 <script>
 import { mapState } from 'vuex'
 
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/modules/three/helpers'
 import { ACTIONS as A } from '@/store/modules/three/helpers'
@@ -27,7 +28,8 @@ export default {
   },
   data() {
     return {
-      popups: this.$store.state.three.popups
+      popups: this.$store.state.three.popups,
+      music: null
     }
   },
   computed: mapState({
@@ -60,6 +62,12 @@ export default {
         })
       }
     }
+  },
+  mounted() {
+    this.music = new Sound('musics/enigme-speed-up', { volume: 0.4, isLoop: true })
+  },
+  beforeDestroy() {
+    this.music?.stop()
   }
 }
 </script>

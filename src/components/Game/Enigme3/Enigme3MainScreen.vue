@@ -39,6 +39,7 @@
 <script>
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
+import Sound from '@/helpers/Sound'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -55,7 +56,8 @@ export default {
     return {
       criteriaName: criteriaName,
       sailer: null,
-      textContent: textContent
+      textContent: textContent,
+      music: null
     }
   },
   computed: {
@@ -65,6 +67,7 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
+    this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
   },
   sockets: {
     'show-fader': function () {
@@ -73,6 +76,9 @@ export default {
     'enigme3-restart': function () {
       this.$el.style.opacity = 1
     }
+  },
+  beforeDestroy() {
+    this.music?.stop()
   },
   methods: {
     getSailer() {
