@@ -3,6 +3,7 @@
   font-weight: var(--weight-bold);
   color: dynamic-color($primary);
   cursor: pointer;
+  user-select: none;
   background-color: var(--color-primary);
   border: 3px solid var(--color-black);
   border-radius: 50px; // style propre boutons
