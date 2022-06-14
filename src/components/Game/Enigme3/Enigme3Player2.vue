@@ -243,6 +243,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .notice {
+  width: 100%;
   height: calc(100 * var(--vhRes, 1vh));
   background: var(--color-enigme3);
 }

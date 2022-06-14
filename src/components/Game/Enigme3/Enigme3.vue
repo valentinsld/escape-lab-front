@@ -105,6 +105,7 @@ export default {
 }
 
 .enigme-3__game {
+  display: flex;
   height: 100%;
 }
 </style>
