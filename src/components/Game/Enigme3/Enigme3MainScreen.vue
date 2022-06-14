@@ -68,6 +68,7 @@ export default {
   mounted() {
     this.sailer = this.getSailer()
     this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
+    setTimeout(() => new Sound('simlich-rire', { volume: 3.5 }), 15000)
   },
   sockets: {
     'show-fader': function () {
