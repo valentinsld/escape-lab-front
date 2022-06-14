@@ -39,7 +39,7 @@
 <script>
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
-import { MUTATIONS as M, STATE as S } from '@/store/helpers'
+import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -66,7 +66,7 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
-    this.$store.commit(M.startLaboAmbiance)
+    this.$store.state[S.sounds]?.['labo_ambiance'].play()
     this.$store.state[S.sounds]?.['music-enigme'].play()
     setTimeout(() => this.$store.state[S.sounds]?.['simlich-rire'], 15000)
   },
