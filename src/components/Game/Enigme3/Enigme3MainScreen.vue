@@ -40,6 +40,7 @@
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
 import Sound from '@/helpers/Sound'
+import { MUTATIONS as M } from '@/store/helpers'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -67,8 +68,9 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
+    this.$store.commit(M.startLaboAmbiance)
     this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
-    setTimeout(() => new Sound('simlich-rire', { volume: 3.5 }), 15000)
+    setTimeout(() => new Sound('simlich-rire', { volume: 5.5 }), 15000)
   },
   sockets: {
     'show-fader': function () {

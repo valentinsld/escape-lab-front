@@ -54,7 +54,7 @@ export default {
           const index = this.$store.getters[G.getPopupArrayIndex](card.id)
           if (card.owner === this.typeScreen && this.popups[index].isTriggered === false) {
             this.$store.commit(M.triggerPopup, index)
-            if (card.id === 4) new Sound('simlich-rire', { volume: 3.5 })
+            if (card.id === 4) new Sound('simlich-rire', { volume: 5.5 })
             this.$store.dispatch({
               type: A.animatePopup,
               id: index

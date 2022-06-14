@@ -82,6 +82,9 @@ export default {
       this.setSound()
     }, 5000)
   },
+  beforeDestroy() {
+    this.$data.sound?.stop()
+  },
   methods: {
     updateTime() {
       setTimeout(() => {
@@ -91,7 +94,7 @@ export default {
       }, 1000)
     },
     clickPad(number) {
-      new Sound('pad-1', { volume: 1.5 })
+      new Sound('pad-1', { volume: 2 })
       this.$data.numbeEntered.push(number)
       this.$socket.emit('enigme1-enteredNumber', number)
     },
