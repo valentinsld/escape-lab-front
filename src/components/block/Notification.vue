@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Notification',
@@ -44,7 +44,7 @@ export default {
   watch: {
     message: function () {
       this.$data.display = true
-      new Sound('notification', { volume: 0.2 })
+      this.$store.state[S.sounds]?.['notification'].play()
 
       setTimeout(() => {
         this.$data.display = false

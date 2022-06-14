@@ -39,8 +39,7 @@
 <script>
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
-import Sound from '@/helpers/Sound'
-import { MUTATIONS as M } from '@/store/helpers'
+import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -57,8 +56,7 @@ export default {
     return {
       criteriaName: criteriaName,
       sailer: null,
-      textContent: textContent,
-      music: null
+      textContent: textContent
     }
   },
   computed: {
@@ -69,8 +67,8 @@ export default {
   mounted() {
     this.sailer = this.getSailer()
     this.$store.commit(M.startLaboAmbiance)
-    this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
-    setTimeout(() => new Sound('simlich-rire', { volume: 5.5 }), 15000)
+    this.$store.state[S.sounds]?.['music-enigme'].play()
+    setTimeout(() => this.$store.state[S.sounds]?.['simlich-rire'], 15000)
   },
   sockets: {
     'show-fader': function () {
@@ -81,7 +79,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.music?.stop()
+    this.$store.state[S.sounds]?.['music-enigme'].stop()
   },
   methods: {
     getSailer() {

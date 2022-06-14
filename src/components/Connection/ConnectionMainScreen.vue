@@ -57,7 +57,6 @@ import { mapState } from 'vuex'
 
 import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
-import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -75,14 +74,14 @@ export default {
       Logo,
       seeJoinRoom: false,
       seeHome: true,
-      url: window.location.host,
-      music: null
+      url: window.location.host
     }
   },
   computed: mapState({
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
     playerIsReady: (state) => state[S.playerIsReady],
+    sounds: (state) => state[S.sounds],
 
     urlQrCode: () => window.location.origin + '?room=',
     statusPlayer1: function () {
@@ -104,7 +103,7 @@ export default {
   mounted() {
     this.$socket.emit('connection')
 
-    this.music = new Sound('musics/home', { volume: 0.4, isLoop: true })
+    this.sounds?.['music-home'].play()
 
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
@@ -119,12 +118,11 @@ export default {
     this.$socket.emit('connectToRoom', loginData)
   },
   beforeDestroy() {
-    console.log('before')
-    this.music.stop()
+    this.sounds?.['music-home'].stop()
   },
   methods: {
     goToConnection() {
-      new Sound('select-3', { volume: 0.5 })
+      this.sounds?.['select-3'].play()
       this.$data.seeHome = false
     },
 

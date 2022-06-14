@@ -6,7 +6,7 @@ import { Text } from 'troika-three-text'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 import { ACTIONS, GETTERS, MUTATIONS, STATE } from '@/store/modules/three/helpers'
 
 Vue.use(Vuex)
@@ -193,7 +193,7 @@ export const actions = {
         duration: duration * 0.1,
         easing: 'easeInOutCubic',
         begin: () => {
-          new Sound('swoosh-enter', { volume: 0.5 })
+          this.$store.state[S.sounds]?.['swoosh-enter'].play()
         }
       })
       .add({
@@ -207,7 +207,7 @@ export const actions = {
         y: -13,
         duration: duration * 0.3,
         begin: () => {
-          setTimeout(() => new Sound('swoosh-1', { volume: 0.2 }), 150)
+          setTimeout(() => this.$store.state[S.sounds]?.['swoosh-1'].play(), 150)
         }
       })
     Anime({
