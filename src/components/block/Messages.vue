@@ -108,7 +108,7 @@ export default {
   display: flex;
   flex-direction: column;
   //height: 100%;
-  padding: 45px 8px 24px;
+  padding: 45px 0 24px;
   overflow-y: auto;
 }
 

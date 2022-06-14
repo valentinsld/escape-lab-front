@@ -7,7 +7,7 @@
       <p v-if="!isMessageSend" class="chat__messages__helper-message">
         Envoyez une première question pour lancer la discussion avec le vendeur.
       </p>
-      <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
+      <Messages :messages="messages" color="enigme3" @onanimation:iscomplete="handleMessagesComplete" />
     </div>
     <div class="chat__choices-container">
       <div ref="choice-buttons" class="chat__choices">
