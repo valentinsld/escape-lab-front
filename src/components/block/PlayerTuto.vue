@@ -7,7 +7,9 @@
       <img v-if="gif" :src="gif" class="tuto__gif" />
 
       <div class="tuto__btn-container">
-        <button :disabled="isReady" class="button tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
+        <button :disabled="isReady" :class="`button tuto__start-btn -${colorBackground}`" @click="toggleStart">
+          {{ textButton }}
+        </button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
       </div>
     </div>
@@ -114,6 +116,30 @@ export default {
 
   &:disabled {
     background: var(--color-disabled);
+  }
+
+  &.-enigme1 {
+    background-color: $enigme1;
+
+    &:hover {
+      background-color: $orange-highlighted;
+    }
+  }
+
+  &.-enigme2 {
+    background-color: $enigme2;
+
+    &:hover {
+      background-color: $purple-highlighted;
+    }
+  }
+
+  &.-enigme3 {
+    background-color: $enigme3;
+
+    &:hover {
+      background-color: $blue-highlighted;
+    }
   }
 }
 </style>
