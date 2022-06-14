@@ -66,7 +66,7 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
-    this.$store.state[S.sounds]?.['labo_ambiance'].play()
+    //this.$store.state[S.sounds]?.['labo_ambiance'].play()
     this.$store.state[S.sounds]?.['music-enigme'].play()
     setTimeout(() => this.$store.state[S.sounds]?.['simlich-rire'], 15000)
   },

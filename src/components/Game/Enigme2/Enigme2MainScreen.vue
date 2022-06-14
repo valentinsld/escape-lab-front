@@ -10,7 +10,6 @@
 <script>
 import Enigme2MainScreenPopups from '@/components/Game/Enigme2/Enigme2MainScreenPopups.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2MainScreenRestart.vue'
-import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme2MainScreen',
@@ -25,13 +24,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.state[S.sounds]?.['labo_ambiance'].play()
+    //this.$store.state[S.sounds]?.['labo_ambiance'].play()
     this.$socket.emit('enigme2-sendPopups')
   },
   methods: {
     getPopupsData(data) {
       this.cards = data
-      // console.log(JSON.stringify(this.cards))
     },
     start() {
       console.log('START ENIGME')
