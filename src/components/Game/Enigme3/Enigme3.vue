@@ -12,8 +12,18 @@
     </div>
     <div v-else class="enigme-3__tuto">
       <Enigme3MainScreenTuto v-if="typeScreen === 'MainScreen'" />
-      <PlayerTuto v-if="typeScreen === 'Player1'" :text="textContent.consigne.chat" color-background="enigme3" />
-      <PlayerTuto v-if="typeScreen === 'Player2'" :text="textContent.consigne.notice" color-background="enigme3" />
+      <PlayerTuto
+        v-if="typeScreen === 'Player1'"
+        :text="textContent.consigne.chat"
+        color-background="enigme3"
+        :gif="gif_player1"
+      />
+      <PlayerTuto
+        v-if="typeScreen === 'Player2'"
+        :text="textContent.consigne.notice"
+        color-background="enigme3"
+        :gif="gif_player2"
+      />
     </div>
   </div>
 </template>
@@ -21,7 +31,9 @@
 <script>
 import { mapState } from 'vuex'
 
-import PlayerTuto from '@/components/Game/Enigme1/PlayerTuto'
+import gif_player2 from '@/assets/Intro_3_1.gif'
+import gif_player1 from '@/assets/Intro_3_2.gif'
+import PlayerTuto from '@/components/block/PlayerTuto'
 import Enigme3MainScreen from '@/components/Game/Enigme3/Enigme3MainScreen.vue'
 import Enigme3Player1 from '@/components/Game/Enigme3/Enigme3Player1.vue'
 import Enigme3Player2 from '@/components/Game/Enigme3/Enigme3Player2.vue'
@@ -41,7 +53,11 @@ export default {
     return {
       trueRules: null,
       isStart: false,
-      textContent: textContent
+      textContent: textContent,
+
+      // gif
+      gif_player1,
+      gif_player2
     }
   },
   computed: mapState({

@@ -7,6 +7,7 @@
 <script>
 import { mapState } from 'vuex'
 
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/modules/three/helpers'
 import { ACTIONS as A } from '@/store/modules/three/helpers'
@@ -27,7 +28,8 @@ export default {
   },
   data() {
     return {
-      popups: this.$store.state.three.popups
+      popups: this.$store.state.three.popups,
+      music: null
     }
   },
   computed: mapState({
@@ -52,6 +54,7 @@ export default {
           const index = this.$store.getters[G.getPopupArrayIndex](card.id)
           if (card.owner === this.typeScreen && this.popups[index].isTriggered === false) {
             this.$store.commit(M.triggerPopup, index)
+            if (card.id === 4) new Sound('simlich-rire', { volume: 5.5 })
             this.$store.dispatch({
               type: A.animatePopup,
               id: index
@@ -60,6 +63,12 @@ export default {
         })
       }
     }
+  },
+  mounted() {
+    this.music = new Sound('musics/enigme-speed-up', { volume: 0.4, isLoop: true })
+  },
+  beforeDestroy() {
+    this.music?.stop()
   }
 }
 </script>

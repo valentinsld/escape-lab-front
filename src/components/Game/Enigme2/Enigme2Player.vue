@@ -12,6 +12,7 @@
 <script>
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2PlayerRestart.vue'
+import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 
 export default {
@@ -55,7 +56,6 @@ export default {
     },
     createPopup() {
       this.showPopup = true
-      console.log(this.showPopup)
     },
     startTimer(time) {
       //ref to progress inner
@@ -82,6 +82,7 @@ export default {
       this.startTimer(timer)
     },
     'enigme2-endSort': function ({ success }) {
+      success ? new Sound('success', { volume: 0.5 }) : new Sound('failure', { volume: 0.7 })
       setTimeout(() => {
         this.showFailure = !success
       }, 4500)

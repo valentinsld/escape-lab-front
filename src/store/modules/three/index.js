@@ -6,6 +6,7 @@ import { Text } from 'troika-three-text'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import Sound from '@/helpers/Sound'
 import { ACTIONS, GETTERS, MUTATIONS, STATE } from '@/store/modules/three/helpers'
 
 Vue.use(Vuex)
@@ -33,6 +34,12 @@ export const mutations = {
   },
   [MUTATIONS.resetPopup](state) {
     state[STATE.popups] = []
+  },
+  [MUTATIONS.resizeScene](state, { width, height }) {
+    state.camera.aspect = width / height
+    state.camera.updateProjectionMatrix()
+    state.renderer.setSize(width, height)
+    state.renderer.render(state.scene, state.camera)
   }
 }
 
@@ -174,19 +181,35 @@ export const actions = {
   },
   [ACTIONS.animatePopup]({ state }, props) {
     let duration = 5000
-    Anime({
-      targets: [state.popups[props.id].position],
-      keyframes: [
-        // popup descend
-        { y: -2.3, duration: duration * 0.1, easing: 'easeInOutCubic' },
-        // popup avance et float
-        { z: -3, y: -2.5, x: 0.8, duration: duration * 0.6, easing: 'easeOutQuart' },
-        // popup descend
-        { y: -13, duration: duration * 0.3, easing: 'easeInExpo' }
-      ],
-      easing: 'linear',
+
+    const tlPosition = Anime.timeline({
+      targets: state.popups[props.id].position,
       duration: duration
     })
+
+    tlPosition
+      .add({
+        y: -2.3,
+        duration: duration * 0.1,
+        easing: 'easeInOutCubic',
+        begin: () => {
+          new Sound('swoosh-enter', { volume: 0.5 })
+        }
+      })
+      .add({
+        z: -3,
+        y: -2.5,
+        x: 0.8,
+        duration: duration * 0.6,
+        easing: 'easeOutQuart'
+      })
+      .add({
+        y: -13,
+        duration: duration * 0.3,
+        begin: () => {
+          setTimeout(() => new Sound('swoosh-1', { volume: 0.2 }), 150)
+        }
+      })
     Anime({
       targets: [state.popups[props.id].rotation],
       keyframes: [

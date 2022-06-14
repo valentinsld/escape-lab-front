@@ -37,7 +37,7 @@ export default {
   },
   sockets: {
     endVideo: function () {
-      console.log('endVideo')
+      // console.log('endVideo')
       // this.endVideo = true
     },
     'outro-startMessages': function () {

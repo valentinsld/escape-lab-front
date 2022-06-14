@@ -19,6 +19,7 @@
 
 <script>
 import PhoneIcon from '@/assets/icon-phone.svg'
+import Sound from '@/helpers/Sound'
 
 export default {
   name: 'PhoneLocked',
@@ -44,6 +45,7 @@ export default {
   },
   methods: {
     recall() {
+      new Sound('select-2', { volume: 0.2 })
       this.$emit('onRecall', true)
     }
   }

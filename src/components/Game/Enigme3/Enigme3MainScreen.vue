@@ -39,6 +39,8 @@
 <script>
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
+import Sound from '@/helpers/Sound'
+import { MUTATIONS as M } from '@/store/helpers'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -55,7 +57,8 @@ export default {
     return {
       criteriaName: criteriaName,
       sailer: null,
-      textContent: textContent
+      textContent: textContent,
+      music: null
     }
   },
   computed: {
@@ -65,11 +68,11 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
+    this.$store.commit(M.startLaboAmbiance)
+    this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
+    setTimeout(() => new Sound('simlich-rire', { volume: 5.5 }), 15000)
   },
   sockets: {
-    startEnigme: function () {
-      this.start()
-    },
     'show-fader': function () {
       this.$el.style.opacity = 0
     },
@@ -77,10 +80,10 @@ export default {
       this.$el.style.opacity = 1
     }
   },
+  beforeDestroy() {
+    this.music?.stop()
+  },
   methods: {
-    start() {
-      console.log('START ENIGME')
-    },
     getSailer() {
       const isTrueRule = this.trueRules.filter((e) => e.slug === 'profile').length > 0
       return isTrueRule

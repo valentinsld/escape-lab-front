@@ -39,12 +39,10 @@ import Anime from 'animejs'
 
 import Messages from '@/components/block/Messages'
 import { questionsData, textContent } from '@/data/enigme3'
+import Sound from '@/helpers/Sound'
 export default {
   name: 'Enigme3player1',
   sockets: {
-    startEnigme: function () {
-      this.start()
-    },
     'enigme3-restart': function () {
       this.reInitData()
     }
@@ -83,15 +81,13 @@ export default {
     })
   },
   methods: {
-    start() {
-      console.log('START ENIGME')
-    },
     generateQuestions() {
       this.questions = questionsData(this.product)
         .sort(() => Math.random() - Math.random())
         .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
+      new Sound('select-3', { volume: 0.5 })
       this.isMessageSend = true
       this.hideButtons()
       this.choicePos = pos
