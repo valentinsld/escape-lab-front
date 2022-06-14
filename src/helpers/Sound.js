@@ -34,9 +34,9 @@ class Sound {
   }
 
   play() {
-    this.sound.fade(0, this.opts.volume, 0)
-    console.log(this.opts, this.sound, 'opts')
+    this.sound.volume(this.opts.volume)
     this.sound.play()
+    console.log(this.opts, this.sound, 'opts')
   }
 
   stop(fadeDelay) {
