@@ -52,6 +52,21 @@ export default {
     },
     'enigme1-endNotRecall': function ({ contact, message }) {
       this.$data.messageEnd = { contact, message }
+    },
+    'enigme1-restart': function () {
+      this.$data.isFakeCalling = true
+      this.$data.isFakeCallingDuration = 3500
+      this.$data.isStart = false
+      this.$data.recalled = false
+      this.$data.messageEnd = {
+        contact: '',
+        message: ''
+      }
+      this.$data.callEnd = false
+
+      this.$socket.emit('readyTutoEnigme')
+
+      // TODO : remove sounds
     }
   },
   mounted() {
