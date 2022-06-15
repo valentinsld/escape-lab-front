@@ -103,8 +103,6 @@ export default {
   mounted() {
     this.$socket.emit('connection')
 
-    this.sounds?.['music-home'].play()
-
     // Si c'est en developpement se connecter direct à la room
     if (IS_DEV) {
       this.connectToRoom(null, 'dev1')
@@ -116,9 +114,6 @@ export default {
       isPlayer: this.$store.state[S.stateScreen] === STATE_SCREEN.player
     }
     this.$socket.emit('connectToRoom', loginData)
-  },
-  beforeDestroy() {
-    this.sounds?.['music-home'].stop()
   },
   methods: {
     goToConnection() {

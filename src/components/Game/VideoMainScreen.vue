@@ -80,6 +80,7 @@ export default {
   }),
   sockets: {
     'intro-startVideo': function () {
+      this.$store.state[S.sounds]?.['music-home'].stop()
       this.startVideo()
       this.$data.seePlayer = true
     },
