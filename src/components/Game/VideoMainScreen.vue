@@ -28,12 +28,12 @@ function convertTimeToSeconds(time) {
   return seconds
 }
 const MARKERS_PLAYER = {
-  introDarkness: '0:14:02',
-  loopEnigme1: { start: '0:16:12', end: '0:22:10' },
-  loopEnigme2: { start: '0:29:22', end: '0:36:00' },
-  loopEnigme3: { start: '0:44:4', end: '0:50:15' },
-  startOutro: '0:56:27',
-  outroStartMessages: '1:02:11'
+  introDarkness: '0:17:02',
+  loopEnigme1: { start: '0:18:17', end: '0:22:25' },
+  loopEnigme2: { start: '0:37:27', end: '0:43:00' },
+  loopEnigme3: { start: '0:55:14', end: '1:01:26' },
+  startOutro: '1:01:26',
+  outroStartMessages: '1:17:00'
 }
 const OPTIONS = {
   responsive: true,
