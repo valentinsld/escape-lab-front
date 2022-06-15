@@ -12,7 +12,6 @@
 <script>
 import Enigme2PopupStack from '@/components/Game/Enigme2/Enigme2PopupStack.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2PlayerRestart.vue'
-import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 
 export default {
@@ -82,10 +81,13 @@ export default {
       this.startTimer(timer)
     },
     'enigme2-endSort': function ({ success }) {
-      success ? new Sound('success', { volume: 0.5 }) : new Sound('failure', { volume: 0.7 })
+      success ? this.$store.state[S.sounds]?.['success'].play() : this.$store.state[S.sounds]?.['failure'].play()
       setTimeout(() => {
         this.showFailure = !success
       }, 4500)
+    },
+    'enigme2-restart': function () {
+      this.cards = []
     }
   }
 }

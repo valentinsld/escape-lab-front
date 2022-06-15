@@ -99,6 +99,7 @@ export default {
 
   &__messages {
     width: 100%;
+    padding: 0 20px;
   }
 
   &__end {

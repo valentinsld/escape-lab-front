@@ -7,7 +7,9 @@
       <img v-if="gif" :src="gif" class="tuto__gif" />
 
       <div class="tuto__btn-container">
-        <button :disabled="isReady" class="button tuto__start-btn" @click="toggleStart">{{ textButton }}</button>
+        <button :disabled="isReady" :class="`button tuto__start-btn -${colorBackground}`" @click="toggleStart">
+          {{ textButton }}
+        </button>
         <p class="tuto__player-info" :style="`opacity: ${isReady ? 1 : 0}`">En attente de l'autre joueur</p>
       </div>
     </div>
@@ -17,7 +19,7 @@
 <script>
 import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'PlayerTuto',
@@ -60,7 +62,7 @@ export default {
   },
   methods: {
     toggleStart() {
-      new Sound('validation', { volume: 0.3 })
+      this.$store.state[S.sounds]?.['validation'].play()
       this.isReady = true
       this.$socket.emit(this.socketSend)
     }
@@ -114,6 +116,30 @@ export default {
 
   &:disabled {
     background: var(--color-disabled);
+  }
+
+  &.-enigme1 {
+    background-color: $enigme1;
+
+    &:hover {
+      background-color: $orange-highlighted;
+    }
+  }
+
+  &.-enigme2 {
+    background-color: $enigme2;
+
+    &:hover {
+      background-color: $purple-highlighted;
+    }
+  }
+
+  &.-enigme3 {
+    background-color: $enigme3;
+
+    &:hover {
+      background-color: $blue-highlighted;
+    }
   }
 }
 </style>

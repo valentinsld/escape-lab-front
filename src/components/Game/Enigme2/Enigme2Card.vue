@@ -40,7 +40,6 @@ import Anime from 'animejs'
 import interact from 'interactjs'
 import { mapState } from 'vuex'
 
-import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 
 const RIGHT = 'right'
@@ -127,7 +126,7 @@ export default {
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
             begin: () => {
-              new Sound('swoosh-2', { volume: 0.2 })
+              this.$store.state[S.sounds]?.['swoosh-2'].play()
             },
             complete: () => {
               this.resetCardPosition()
@@ -155,7 +154,7 @@ export default {
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
             begin: () => {
-              new Sound('swoosh-2', { volume: 0.2 })
+              this.$store.state[S.sounds]?.['swoosh-2'].play()
             },
             complete: () => {
               this.resetCardPosition()
@@ -172,7 +171,7 @@ export default {
             easing: 'cubicBezier(.2,0,.25,1)',
             duration: 450,
             begin: () => {
-              new Sound('swoosh-2', { volume: 0.2 })
+              this.$store.state[S.sounds]?.['swoosh-2'].play()
             },
             complete: () => {
               this.resetCardPosition()
@@ -292,7 +291,7 @@ export default {
         easing: 'cubicBezier(.2,0,.25,1)',
         duration: 250,
         begin: () => {
-          new Sound('swoosh-3', { volume: 0.2 })
+          this.$store.state[S.sounds]?.['swoosh-3'].play()
         },
         complete: () => {
           this.isAnimating = false

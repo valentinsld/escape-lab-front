@@ -80,7 +80,7 @@ export default {
 
 .introPlayer__messages-container {
   flex: 1;
-  padding: 5px;
+  padding: 0 20px;
   overflow: scroll;
 }
 

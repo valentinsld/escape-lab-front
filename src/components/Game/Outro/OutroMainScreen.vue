@@ -18,7 +18,7 @@
 <script>
 import About from '@/components/about'
 import Button from '@/components/block/button'
-import { MUTATIONS as M } from '@/store/helpers'
+import { MUTATIONS as M, STATE as S } from '@/store/helpers'
 
 export default {
   name: 'OutroMainScreen',
@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit(M.stopLaboAmbiance)
+    this.$store.state[S.sounds]?.['labo_ambiance'].stop()
   },
   sockets: {
     'outro-end': function () {

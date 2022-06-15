@@ -28,7 +28,11 @@
         <p class="header__contact">{{ messages[currentMessage].contact }}</p>
       </div>
       <div class="chat__content">
-        <Messages :is-anim="false" :messages="messages[currentMessage].messages" />
+        <Messages
+          :is-anim="false"
+          :messages="messages[currentMessage].messages"
+          :color="messages[currentMessage].color"
+        />
       </div>
     </div>
 

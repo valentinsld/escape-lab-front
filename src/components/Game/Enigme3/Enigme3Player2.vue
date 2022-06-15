@@ -49,7 +49,7 @@ import NoticeChoices from '@/components/block/enigme3/noticeChoices'
 import SolutionPopup from '@/components/block/enigme3/solutionPopup'
 import { notice } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme3Player2',
@@ -128,7 +128,7 @@ export default {
     },
     swipeSound() {
       const index = randomNum(3, 9)
-      new Sound(`page-${index}`, { volume: 0.6 })
+      this.$store.state[S.sounds]?.[`page-${index}`].play()
     },
     nextRule() {
       if (this.currentPage < this.notice.length) {
@@ -170,7 +170,7 @@ export default {
       } else {
         if (this.activeButtons.length < 3) {
           this.activeButtons.push(slug)
-          new Sound('validate', { volume: 0.4 })
+          this.$store.state[S.sounds]?.['validate'].play()
         }
         setTimeout(() => {
           this.showValidation = this.activeButtons.length === 3
@@ -180,13 +180,13 @@ export default {
     removeChoice(slug) {
       const i = this.activeButtons.indexOf(slug)
       this.activeButtons.splice(i, 1)
-      new Sound('back', { volume: 0.4 })
+      this.$store.state[S.sounds]?.['back'].play()
       setTimeout(() => {
         this.modifyChoices()
       }, 150)
     },
     modifyChoices() {
-      new Sound('select-3', { volume: 0.5 })
+      this.$store.state[S.sounds]?.['select-3'].play()
       this.showValidation = false
     },
     isGoodChoices() {
@@ -196,7 +196,7 @@ export default {
       return true
     },
     validateChoices() {
-      new Sound('validation', { volume: 0.3 })
+      this.$store.state[S.sounds]?.['validation'].play()
       setTimeout(() => (this.isSuccess = this.isGoodChoices()), 500)
     },
 
@@ -243,6 +243,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .notice {
+  width: 100%;
   height: calc(100 * var(--vhRes, 1vh));
   background: var(--color-enigme3);
 }
