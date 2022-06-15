@@ -48,8 +48,7 @@
 <script>
 import { botSailers, criteriaName, normalSailers, textContent } from '@/data/enigme3'
 import { randomNum } from '@/helpers/randomNum'
-import Sound from '@/helpers/Sound'
-import { MUTATIONS as M } from '@/store/helpers'
+import { STATE as S } from '@/store/helpers'
 export default {
   name: 'Enigme3MainScreen',
   props: {
@@ -66,8 +65,7 @@ export default {
     return {
       criteriaName: criteriaName,
       sailer: null,
-      textContent: textContent,
-      music: null
+      textContent: textContent
     }
   },
   computed: {
@@ -77,9 +75,9 @@ export default {
   },
   mounted() {
     this.sailer = this.getSailer()
-    this.$store.commit(M.startLaboAmbiance)
-    this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
-    setTimeout(() => new Sound('simlich-rire', { volume: 5.5 }), 15000)
+    //this.$store.state[S.sounds]?.['labo_ambiance'].play()
+    this.$store.state[S.sounds]?.['music-enigme'].play()
+    setTimeout(() => this.$store.state[S.sounds]?.['simlich-rire'], 15000)
   },
   sockets: {
     'show-fader': function () {
@@ -90,7 +88,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.music?.stop()
+    this.$store.state[S.sounds]?.['music-enigme'].stop()
   },
   methods: {
     getSailer() {
@@ -98,21 +96,7 @@ export default {
       return isTrueRule
         ? botSailers[randomNum(0, botSailers.length)]
         : normalSailers[randomNum(0, normalSailers.length)]
-    } /*,
-    getGlyphDescription(item) {
-      const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
-      let str = item
-      if (isTrueRule) {
-        for (const letter in botGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), botGlyphConverter[letter])
-        }
-      } else {
-        for (const letter in normalGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), normalGlyphConverter[letter])
-        }
-      }
-      return str
-    }*/
+    }
   }
 }
 </script>

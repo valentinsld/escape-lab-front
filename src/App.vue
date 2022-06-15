@@ -39,6 +39,7 @@ export default {
     setTimeout(this.initAutoVh.bind(this), 1000)
     this.removePinchOnMobile()
     this.initHighMode()
+    this.$store.commit(M.initSounds)
   },
   sockets: {
     connect: function () {

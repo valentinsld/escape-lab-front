@@ -11,7 +11,7 @@
 
 <script>
 import PhoneIcon from '@/assets/icon-phone.svg'
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'PhoneCallIncoming',
@@ -25,22 +25,21 @@ export default {
   },
   data() {
     return {
-      PhoneIcon,
-      phoneSound: null
+      PhoneIcon
     }
   },
   mounted() {
-    this.phoneSound = new Sound('phone', { volume: 0.2, isLoop: true, timeBeforeLoop: 1000 })
+    this.$store.state[S.sounds]?.['phone'].play()
     setTimeout(() => {
       this.$emit('onEndCall', true)
     }, this.duration)
   },
   beforeDestroy() {
-    this.phoneSound?.stop(0)
+    this.$store.state[S.sounds]?.['phone'].stop(0)
   },
   methods: {
     click() {
-      new Sound('select-2', { volume: 0.2 })
+      this.$store.state[S.sounds]?.['select-2'].play()
       this.$emit('onEndCall', true)
     }
   }

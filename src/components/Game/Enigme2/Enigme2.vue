@@ -1,8 +1,7 @@
 <template>
   <div class="enigme-2">
-    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" />
+    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" :cards="cards" />
     <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" :key="componentKey" />
-    <!--    <Components :is="'Enigme2' + typeScreen" v-if="!isStart" :key="componentKey" />-->
   </div>
 </template>
 
@@ -15,6 +14,7 @@ import Enigme2MainScreenTuto from '@/components/Game/Enigme2/tuto/Enigme2MainScr
 import Enigme2Player1Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player1Tuto'
 import Enigme2Player2Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player2Tuto'
 import { STATE as S } from '@/store/helpers'
+
 export default {
   name: 'Enigme2',
   components: {
@@ -28,23 +28,39 @@ export default {
   data() {
     return {
       isStart: false,
+      cards: [],
       componentKey: 0
     }
   },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen]
   }),
+  mounted() {
+    this.$socket.emit('enigme2-getPopups')
+  },
+  methods: {
+    getCardsData(data) {
+      this.cards = data
+    }
+  },
   sockets: {
     startEnigme: function () {
       this.isStart = true
+    },
+    'enigme2-getPopups': function (props) {
+      if (this.typeScreen === 'MainScreen') {
+        this.getCardsData(props)
+      }
+    },
+    'enigme2-sendPopups': function (props) {
+      if (this.typeScreen === 'MainScreen') {
+        this.getCardsData(props)
+      }
     },
     'enigme2-restart': function () {
       this.isStart = true
       this.componentKey += 1
     }
-  },
-  mounted() {
-    //this.$socket.emit('readyEnigme')
   }
 }
 </script>

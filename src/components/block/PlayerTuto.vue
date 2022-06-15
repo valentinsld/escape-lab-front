@@ -19,7 +19,7 @@
 <script>
 import Logo from '@/assets/logo.svg'
 import { textContent } from '@/data/enigme3'
-import Sound from '@/helpers/Sound'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'PlayerTuto',
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     toggleStart() {
-      new Sound('validation', { volume: 0.3 })
+      this.$store.state[S.sounds]?.['validation'].play()
       this.isReady = true
       this.$socket.emit(this.socketSend)
     }

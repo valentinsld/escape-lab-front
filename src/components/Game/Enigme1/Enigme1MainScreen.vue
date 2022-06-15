@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import { MUTATIONS as M } from '@/store/helpers'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme1MainScreen',
   mounted() {
-    this.$store.commit(M.startLaboAmbiance)
+    this.$store.state[S.sounds]?.['labo_ambiance'].play()
   }
 }
 </script>

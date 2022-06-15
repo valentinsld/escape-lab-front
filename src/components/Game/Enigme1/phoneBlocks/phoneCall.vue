@@ -20,7 +20,6 @@
 
 <script>
 /* eslint-disable unused-imports/no-unused-vars, no-unused-vars */
-import Sound from '@/helpers/Sound'
 
 const SOUNDS_ORIGIN = 'soundsEnigme1/'
 const SOUNDS_STEPS = [
@@ -46,6 +45,7 @@ import { Howl } from 'howler'
 import PhoneIcon from '@/assets/icon-phone.svg'
 import SoundIcon from '@/assets/icon-sound.svg'
 import convertSecondToTime from '@/helpers/convertSecondToTIme.js'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'PhoneCall',
@@ -77,7 +77,7 @@ export default {
     }
   },
   mounted() {
-    this.$data.callingSound = new Sound('calling', { volume: 0.2 })
+    this.$store.state[S.sounds]?.['calling'].play()
     setTimeout(() => {
       this.updateTime()
       this.setSound()
@@ -85,7 +85,7 @@ export default {
   },
   beforeDestroy() {
     this.$data.sound?.stop()
-    this.$data.callingSound?.stop()
+    this.$store.state[S.sounds]?.['calling'].stop()
   },
   methods: {
     updateTime() {
@@ -96,12 +96,12 @@ export default {
       }, 1000)
     },
     clickPad(number) {
-      new Sound('pad-1', { volume: 2 })
+      this.$store.state[S.sounds]?.['pad-1'].play()
       this.$data.numbeEntered.push(number)
       this.$socket.emit('enigme1-enteredNumber', number)
     },
     hangUp() {
-      new Sound('select-2', { volume: 0.2 })
+      this.$store.state[S.sounds]?.['select-2'].play()
       this.$socket.emit('enigme1-end')
       this.$data.sound.pause()
       this.$data.callingSound?.stop()

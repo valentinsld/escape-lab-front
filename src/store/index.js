@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { Sounds } from '@/data/sounds'
 import Sound from '@/helpers/Sound'
 import { MUTATIONS, STATE, STATE_SCREEN } from '@/store/helpers'
 import threeStore from '@/store/modules/three'
@@ -22,7 +23,7 @@ export const state = {
   [STATE.isStart]: false,
   [STATE.stepGame]: null,
   [STATE.highmode]: false,
-  [STATE.laboAmbiance]: null,
+  [STATE.sounds]: {},
   // enigme 3
   [STATE.enigme3Config]: null
 }
@@ -36,19 +37,6 @@ export const mutations = {
   },
   [MUTATIONS.myState](state, newVal) {
     state[STATE.myState] = newVal
-  },
-  [MUTATIONS.startLaboAmbiance](state) {
-    if (state[STATE.laboAmbiance] === null) {
-      state[STATE.laboAmbiance] = new Sound('labo_ambiance', { volume: 0.2, isLoop: true })
-    } else {
-      state[STATE.laboAmbiance]?.play()
-    }
-  },
-  [MUTATIONS.stopLaboAmbiance](state) {
-    state[STATE.laboAmbiance]?.stop()
-  },
-  [MUTATIONS.pauseLaboAmbiance](state) {
-    state[STATE.laboAmbiance]?.pause()
   },
   [MUTATIONS.stateScreen](state, newVal) {
     state[STATE.stateScreen] = newVal
@@ -85,6 +73,12 @@ export const mutations = {
   },
   [MUTATIONS.highmode](state, newVal) {
     state[STATE.highmode] = newVal
+  },
+  [MUTATIONS.initSounds](state) {
+    for (let sound in Sounds) {
+      const name = Sounds[sound].name
+      state[STATE.sounds][name] = new Sound(name, { ...Sounds[sound].opts })
+    }
   },
   // enigme 3
   [MUTATIONS.enigme3Config](state, newVal) {

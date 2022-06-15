@@ -6,7 +6,6 @@ import { Text } from 'troika-three-text'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Sound from '@/helpers/Sound'
 import { ACTIONS, GETTERS, MUTATIONS, STATE } from '@/store/modules/three/helpers'
 
 Vue.use(Vuex)
@@ -88,12 +87,10 @@ export const actions = {
 
       state.renderer.render(state.scene, state.camera)
 
-      //dispatch(ACTIONS.initPopup)
-
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state /*, dispatch*/ }, props) {
+  [ACTIONS.initPopup]({ state }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
@@ -101,7 +98,6 @@ export const actions = {
       let obj = data.scene
       obj.rotation.set(0, -Math.PI * 0.5, 0)
       obj.position.set(0, 0, 0)
-      /*console.log(obj.children[0], 'children')*/
 
       const FONTS = {
         regular: '/fonts/grenadine-regular.otf',
@@ -164,22 +160,15 @@ export const actions = {
 
       popup.isTriggered = false
       popup.triggerId = props.content.id
-      /*popup.position.set(0, 0, 0)
-      popup.rotation.set(0, 0, 0)*/
       popup.position.set(0.2, 3, -8)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
 
       state.popups.push(popup)
       state.scene.add(popup)
-
-      /*dispatch({
-        type: ACTIONS.animatePopup,
-        id: 0
-      })*/
     })
     state.renderer.render(state.scene, state.camera)
   },
-  [ACTIONS.animatePopup]({ state }, props) {
+  [ACTIONS.animatePopup]({ state, rootState }, props) {
     let duration = 5000
 
     const tlPosition = Anime.timeline({
@@ -193,7 +182,7 @@ export const actions = {
         duration: duration * 0.1,
         easing: 'easeInOutCubic',
         begin: () => {
-          new Sound('swoosh-enter', { volume: 0.5 })
+          rootState.sounds?.['swoosh-enter'].play()
         }
       })
       .add({
@@ -207,7 +196,7 @@ export const actions = {
         y: -13,
         duration: duration * 0.3,
         begin: () => {
-          setTimeout(() => new Sound('swoosh-1', { volume: 0.2 }), 150)
+          setTimeout(() => rootState.sounds?.['swoosh-1'].play(), 150)
         }
       })
     Anime({
