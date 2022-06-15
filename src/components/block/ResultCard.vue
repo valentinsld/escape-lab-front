@@ -67,7 +67,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 695px;
+  height: 595px;
   padding: 0 32px;
   margin: 0 20px;
   background-color: var(--color-whiteDimmed);
