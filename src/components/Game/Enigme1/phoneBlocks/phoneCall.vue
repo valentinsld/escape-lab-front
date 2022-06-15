@@ -58,6 +58,7 @@ export default {
       numbeEntered: [],
       soundLastStep: 0,
       soundStep: 0,
+      callingSound: null,
       sound: null
     }
   },
@@ -76,7 +77,7 @@ export default {
     }
   },
   mounted() {
-    new Sound('calling', { volume: 0.2 })
+    this.$data.callingSound = new Sound('calling', { volume: 0.2 })
     setTimeout(() => {
       this.updateTime()
       this.setSound()
@@ -84,6 +85,7 @@ export default {
   },
   beforeDestroy() {
     this.$data.sound?.stop()
+    this.$data.callingSound?.stop()
   },
   methods: {
     updateTime() {
@@ -102,13 +104,14 @@ export default {
       new Sound('select-2', { volume: 0.2 })
       this.$socket.emit('enigme1-end')
       this.$data.sound.pause()
+      this.$data.callingSound?.stop()
     },
 
     //
     // SOUNDS
     //
     setSound() {
-      this.$data.sound?.pause()
+      this.$data.sound?.stop()
       this.$data.sound = new Howl({
         src: this.soundSrc,
         autoplay: true,

@@ -86,6 +86,9 @@ export default {
       setTimeout(() => {
         this.showFailure = !success
       }, 4500)
+    },
+    'enigme2-restart': function () {
+      this.cards = []
     }
   }
 }

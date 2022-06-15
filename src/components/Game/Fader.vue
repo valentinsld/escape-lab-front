@@ -37,6 +37,9 @@ export default {
     'show-fader': function () {
       this.show = true
     },
+    'enigme1-restart': function () {
+      this.show = false
+    },
     'enigme2-restart': function () {
       this.show = false
     },

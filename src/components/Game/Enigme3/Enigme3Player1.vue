@@ -1,5 +1,5 @@
 <template>
-  <div class="chat">
+  <div class="chat screenContainer -enigme3">
     <div class="chat__header">
       <p v-if="text.sailerName" class="chat__title" v-html="text.sailerName" />
     </div>
@@ -7,7 +7,7 @@
       <p v-if="!isMessageSend" class="chat__messages__helper-message">
         Envoyez une première question pour lancer la discussion avec le vendeur.
       </p>
-      <Messages :messages="messages" @onanimation:iscomplete="handleMessagesComplete" />
+      <Messages :messages="messages" color="enigme3" @onanimation:iscomplete="handleMessagesComplete" />
     </div>
     <div class="chat__choices-container">
       <div ref="choice-buttons" class="chat__choices">
@@ -19,7 +19,7 @@
             @click="chooseQuestion(0)"
             v-html="questions[0].btnLabel"
           ></button>
-          <p v-if="questions[1]">ou</p>
+          <p v-if="questions[1]" class="chat__choices__or">ou</p>
           <button
             v-if="questions[1]"
             class="chat__choices__btn"
@@ -171,12 +171,14 @@ p {
 .chat {
   display: flex;
   flex-direction: column;
-  height: calc(100 * var(--vhRes, 1vh));
-  border: 4px solid var(--color-black);
+  // height: calc(100 * var(--vhRes, 1vh));
+  // border: 4px solid var(--color-black);
+
+  padding: 0;
 }
 
 .chat__header {
-  padding: 2em;
+  padding: 20px;
   text-align: center;
   border-bottom: 4px solid var(--color-black);
 }
@@ -201,7 +203,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30vh;
+  // height: 30vh;
   padding: 1em 2em;
   text-align: center;
   border-top: 4px solid var(--color-black);
@@ -212,10 +214,14 @@ p {
   }
 }
 
+.chat__choices__or {
+  margin: 12px 0;
+}
+
 .chat__choices__btn {
   width: 100%;
   padding: 1em 1em 1em 4em;
-  margin: 1em 0;
+  // margin: 1em 0;
   font-weight: bold;
   color: var(--color-whiteDimmed);
   text-align: left;

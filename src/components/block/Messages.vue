@@ -13,7 +13,7 @@
         <p v-if="item.content.url" class="message__payment__link" v-html="item.content.url" />
         <p v-if="item.content.text" v-html="item.content.text" />
       </div>
-      <p v-else v-html="item.content" />
+      <p v-else :class="{ textDark: color === 'yellow' }" v-html="item.content" />
     </div>
   </div>
 </template>
@@ -108,7 +108,7 @@ export default {
   display: flex;
   flex-direction: column;
   //height: 100%;
-  padding: 45px 8px 24px;
+  padding: 45px 0 24px;
   overflow-y: auto;
 }
 
@@ -193,6 +193,10 @@ export default {
       border-right: 9px solid transparent;
       border-left: 18px solid var(--color-black);
     }
+  }
+
+  .textDark {
+    color: var(--color-black);
   }
 }
 

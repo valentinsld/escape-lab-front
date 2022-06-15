@@ -81,6 +81,7 @@ export default {
     },
     'enigme3-restart': function (config) {
       this.$forceUpdate()
+      this.isStart = true
       this.$store.commit(M.enigme3Config, config)
     }
   },
@@ -105,6 +106,7 @@ export default {
 }
 
 .enigme-3__game {
+  display: flex;
   height: 100%;
 }
 </style>

@@ -34,6 +34,13 @@ export default {
     },
     'enigme1-end': function ({ messages }) {
       this.$data.dataMessages = messages
+    },
+    'enigme1-restart': function () {
+      this.$data.isStart = false
+      this.$data.recalled = false
+      this.$data.dataMessages = []
+
+      this.$socket.emit('readyTutoEnigme')
     }
   },
   methods: {
