@@ -64,9 +64,6 @@ export default {
   },
   mounted() {
     this.$store.state[S.sounds]?.['music-enigme-speed-up'].play()
-  },
-  beforeDestroy() {
-    this.$store.state[S.sounds]?.['music-enigme-speed-up'].stop()
   }
 }
 </script>

@@ -1,6 +1,6 @@
 export const Sounds = [
-  { name: 'music-home', opts: { volume: 0.4, isLoop: true } },
-  { name: 'music-enigme-speed-up', opts: { volume: 0.4, isLoop: true } },
+  { name: 'music-home', opts: { volume: 0.4 } },
+  { name: 'music-enigme-speed-up', opts: { volume: 0.4 } },
   { name: 'music-enigme', opts: { volume: 0.4, isLoop: true } },
   { name: 'labo_ambiance', opts: { volume: 0.2, isLoop: true } },
   { name: 'simlich-rire', opts: { volume: 1 } }, // too low

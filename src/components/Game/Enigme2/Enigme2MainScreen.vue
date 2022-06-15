@@ -10,6 +10,7 @@
 <script>
 import Enigme2MainScreenPopups from '@/components/Game/Enigme2/Enigme2MainScreenPopups.vue'
 import Enigme2Restart from '@/components/Game/Enigme2/restart/Enigme2MainScreenRestart.vue'
+import { STATE as S } from '@/store/helpers'
 
 export default {
   name: 'Enigme2MainScreen',
@@ -45,6 +46,7 @@ export default {
     'enigme2-endSort': function ({ success }) {
       setTimeout(() => {
         this.showFailure = !success
+        this.$store.state[S.sounds]?.['music-enigme-speed-up'].stop()
       }, 800)
     }
   }
