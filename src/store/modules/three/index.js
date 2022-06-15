@@ -90,7 +90,7 @@ export const actions = {
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state /*, dispatch*/ }, props) {
+  [ACTIONS.initPopup]({ state }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
