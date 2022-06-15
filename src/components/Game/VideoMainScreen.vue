@@ -3,7 +3,7 @@
     <Canvas />
     <video ref="videoPlayer" class="video-js">
       <source :src="highmode ? '/video/videosHighMode.m3u8' : '/video/videos.m3u8'" type="application/x-mpegURL" />
-      <track kind="captions" src="/video/Intro.vtt" srclang="en" label="English" default />
+      <track kind="captions" src="/video/Subtitles.vtt" srclang="en" label="English" default />
     </video>
   </div>
 </template>
