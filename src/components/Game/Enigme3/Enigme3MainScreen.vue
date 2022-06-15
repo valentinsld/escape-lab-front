@@ -87,21 +87,7 @@ export default {
       return isTrueRule
         ? botSailers[randomNum(0, botSailers.length)]
         : normalSailers[randomNum(0, normalSailers.length)]
-    } /*,
-    getGlyphDescription(item) {
-      const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
-      let str = item
-      if (isTrueRule) {
-        for (const letter in botGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), botGlyphConverter[letter])
-        }
-      } else {
-        for (const letter in normalGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), normalGlyphConverter[letter])
-        }
-      }
-      return str
-    }*/
+    }
   }
 }
 </script>
