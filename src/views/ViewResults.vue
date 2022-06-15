@@ -1,6 +1,10 @@
 <template>
   <div id="dataviz">
-    <h1>Et en vrai ?</h1>
+    <header>
+      <i></i>
+      <h1>Et en vrai ?</h1>
+      <Button class="button" text="À propos de ClicClack"> </Button>
+    </header>
     <swiper
       id="ResultsCardsSlider"
       :slides-per-view="getSlidesPerView()"
@@ -80,7 +84,9 @@ import Bag from '@/assets/images/results/bag.png'
 import IdCard from '@/assets/images/results/idCard.png'
 import Machine from '@/assets/images/results/machine.png'
 import Person from '@/assets/images/results/person.png'
+import Button from '@/components/block/button.vue'
 import ResultCard from '@/components/block/ResultCard.vue'
+
 SwiperCore.use([Scrollbar, Mousewheel, Navigation])
 
 export default {
@@ -88,7 +94,8 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    ResultCard
+    ResultCard,
+    Button
   },
   data() {
     return {
@@ -151,6 +158,22 @@ export default {
   gap: 20px 20px;
 } */
 
+#dataviz header {
+  // border: red solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#dataviz header i {
+  display: hidden;
+  width: 270px;
+  height: 50px;
+  background-color: transparent;
+}
+
 #dataviz {
   width: 100%;
   height: 100vh;
@@ -159,7 +182,7 @@ export default {
 
 #dataviz h1 {
   margin-top: 0;
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
   font-size: 65px;
   color: var(--color-white);
   text-shadow: 4px 1px 0 var(--color-black);
@@ -256,6 +279,10 @@ export default {
 }
 
 @media screen and (min-width: 992px) {
+  #dataviz header {
+    margin-bottom: 100px;
+  }
+
   h1 {
     margin-bottom: 0;
   }

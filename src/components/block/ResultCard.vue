@@ -69,6 +69,7 @@ export default {
   width: 100%;
   height: 595px;
   padding: 0 32px;
+  padding-bottom: 20px;
   margin: 0 20px;
   background-color: var(--color-whiteDimmed);
   border: 5px solid var(--color-black);
