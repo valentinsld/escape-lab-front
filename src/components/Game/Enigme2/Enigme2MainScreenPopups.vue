@@ -36,18 +36,14 @@ export default {
   sockets: {
     'enigme2-restart': function () {
       this.$store.commit(M.resetPopup)
+      this.$socket.emit('enigme2-getPopups')
+      console.log(this.popups, 'restart')
     }
   },
   watch: {
     cards: function () {
-      if (this.cards && this.popups.length === 0) {
-        for (let card in this.cards) {
-          this.$store.dispatch({
-            type: A.initPopup,
-            content: this.cards[card]
-          })
-        }
-      } else {
+      console.log(this.popups, 'alors')
+      if (this.cards && this.popups.length > 0) {
         this.cards.filter((card) => {
           const index = this.$store.getters[G.getPopupArrayIndex](card.id)
           if (card.owner === this.typeScreen && this.popups[index].isTriggered === false) {

@@ -1,6 +1,6 @@
 <template>
   <div class="enigme-2">
-    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" />
+    <Components :is="'Enigme2' + typeScreen" v-if="isStart" :key="componentKey" :cards="cards" />
     <Components :is="'Enigme2' + typeScreen + 'Tuto'" v-if="!isStart" :key="componentKey" />
     <!--    <Components :is="'Enigme2' + typeScreen" v-if="!isStart" :key="componentKey" />-->
   </div>
@@ -15,6 +15,7 @@ import Enigme2MainScreenTuto from '@/components/Game/Enigme2/tuto/Enigme2MainScr
 import Enigme2Player1Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player1Tuto'
 import Enigme2Player2Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player2Tuto'
 import { STATE as S } from '@/store/helpers'
+import { ACTIONS as A } from '@/store/modules/three/helpers'
 export default {
   name: 'Enigme2',
   components: {
@@ -28,22 +29,52 @@ export default {
   data() {
     return {
       isStart: false,
-      componentKey: 0
+      cards: [],
+      componentKey: 0,
+      popups: this.$store.state.three.popups
     }
   },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen]
   }),
+  watch: {
+    cards: function () {
+      console.log('pas normal', this.popups.length)
+      if (this.cards && this.popups.length === 0 && this.typeScreen === 'MainScreen') {
+        for (let card in this.cards) {
+          this.$store.dispatch({
+            type: A.initPopup,
+            content: this.cards[card]
+          })
+        }
+      }
+    }
+  },
+  mounted() {
+    this.$socket.emit('enigme2-getPopups')
+  },
+  methods: {
+    getPopupsData(data) {
+      this.cards = data
+    }
+  },
   sockets: {
     startEnigme: function () {
       this.isStart = true
     },
+    'enigme2-getPopups': function (props) {
+      if (this.typeScreen === 'MainScreen') {
+        this.getPopupsData(props)
+      }
+    },
+    'enigme2-sendPopups': function (props) {
+      if (this.typeScreen === 'MainScreen') {
+        this.getPopupsData(props)
+      }
+    },
     'enigme2-restart': function () {
       this.componentKey += 1
     }
-  },
-  mounted() {
-    //this.$socket.emit('readyEnigme')
   }
 }
 </script>

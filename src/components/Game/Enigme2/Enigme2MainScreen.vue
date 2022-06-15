@@ -2,7 +2,6 @@
 <template>
   <div class="main enigme2">
     <Enigme2Restart v-if="showFailure" />
-    <!-- <button @click="enigme2GameLoop">Start Enigme 2</button> -->
     <Enigme2MainScreenPopups :cards="cards" />
   </div>
 </template>
@@ -18,20 +17,21 @@ export default {
     Enigme2MainScreenPopups,
     Enigme2Restart
   },
+  props: {
+    cards: {
+      type: Array,
+      required: true
+    }
+  },
   data: function () {
     return {
-      cards: [],
       showFailure: false
     }
   },
   mounted() {
-    //this.$store.state[S.sounds]?.['labo_ambiance'].play()
     this.$socket.emit('enigme2-sendPopups')
   },
   methods: {
-    getPopupsData(data) {
-      this.cards = data
-    },
     start() {
       console.log('START ENIGME')
     }
@@ -39,9 +39,6 @@ export default {
   sockets: {
     startEnigme: function () {
       this.start()
-    },
-    'enigme2-sendPopups': function (props) {
-      this.getPopupsData(props)
     },
     'enigme2-endSort': function ({ success }) {
       setTimeout(() => {
