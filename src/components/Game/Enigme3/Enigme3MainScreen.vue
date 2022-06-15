@@ -1,5 +1,5 @@
 <template>
-  <div class="annonce-product">
+  <div class="annonce-product" :style="`--scale: ${scale}`">
     <div v-if="product" class="annonce-product__wrapper">
       <div class="annonce-product__row">
         <div class="annonce-product__left-column">
@@ -67,7 +67,8 @@ export default {
       criteriaName: criteriaName,
       sailer: null,
       textContent: textContent,
-      music: null
+      music: null,
+      scale: 1
     }
   },
   computed: {
@@ -80,6 +81,8 @@ export default {
     this.$store.commit(M.startLaboAmbiance)
     this.music = new Sound('musics/enigme', { volume: 0.4, isLoop: true })
     setTimeout(() => new Sound('simlich-rire', { volume: 5.5 }), 15000)
+
+    this.initScale()
   },
   sockets: {
     'show-fader': function () {
@@ -98,32 +101,27 @@ export default {
       return isTrueRule
         ? botSailers[randomNum(0, botSailers.length)]
         : normalSailers[randomNum(0, normalSailers.length)]
-    } /*,
-    getGlyphDescription(item) {
-      const isTrueRule = this.trueRules.filter((e) => e.slug === 'special-characters').length > 0
-      let str = item
-      if (isTrueRule) {
-        for (const letter in botGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), botGlyphConverter[letter])
-        }
-      } else {
-        for (const letter in normalGlyphConverter) {
-          str = str.replace(new RegExp(letter, 'g'), normalGlyphConverter[letter])
-        }
-      }
-      return str
-    }*/
+    },
+    initScale() {
+      this.scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.92
+
+      window.addEventListener('resize', () => {
+        this.scale = Math.max(window.innerWidth / 1920, window.innerHeight / 1080) * 0.92
+      })
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 .annonce-product {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60vw;
+  top: 42.5vh;
+  left: 49.33%;
+  width: 986px;
+  height: 560px;
   transition: opacity 400ms var(--custom-bezier);
   transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
 
   p {
     margin: 5px 0;
@@ -146,10 +144,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  height: 100%;
   padding: 2.2em 3em;
+  overflow: hidden;
   background: var(--color-white);
   border: 5px solid var(--color-black);
-  border-radius: var(--box-rounded-radius);
+  border-radius: 170px;
 }
 
 .annonce-product__description {
