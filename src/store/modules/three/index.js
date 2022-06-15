@@ -77,7 +77,7 @@ export const actions = {
           colorWrite: false
         })
       )
-      plane.position.set(0, 5, 0)
+      plane.position.set(0, 6, -1)
       state.scene.add(plane)
 
       state.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
@@ -160,8 +160,10 @@ export const actions = {
 
       popup.isTriggered = false
       popup.triggerId = props.content.id
-      popup.position.set(0.2, 3, -8)
+      //+2 -1
+      popup.position.set(0, 4.5, -9)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
+      popup.scale.set(1.1, 1.1, 1.1)
 
       state.popups.push(popup)
       state.scene.add(popup)
@@ -178,7 +180,7 @@ export const actions = {
 
     tlPosition
       .add({
-        y: -2.3,
+        y: -0.8,
         duration: duration * 0.1,
         easing: 'easeInOutCubic',
         begin: () => {
@@ -186,9 +188,9 @@ export const actions = {
         }
       })
       .add({
-        z: -3,
-        y: -2.5,
-        x: 0.8,
+        z: -4,
+        y: -1,
+        x: 0.5,
         duration: duration * 0.6,
         easing: 'easeOutQuart'
       })
@@ -203,10 +205,10 @@ export const actions = {
       targets: [state.popups[props.id].rotation],
       keyframes: [
         // popup descend
-        { duration: duration * 0.1 },
-        { x: 0, y: 0.02, duration: duration * 0.5, easing: 'easeInOutCubic' },
+        { duration: duration * 0.2 },
+        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeInOutCubic' },
         // popup float et descend
-        { duration: duration * 0.4 }
+        { duration: duration * 0.5 }
       ],
       easing: 'linear',
       duration: duration
