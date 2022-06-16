@@ -3,7 +3,8 @@
     <header>
       <i></i>
       <h1>Et en vrai ?</h1>
-      <Button class="button" text="À propos de ClicClack"> </Button>
+      <Button class="button" text="À propos de ClicClack" :on-click="showModalAbout" />
+      <About :see="seeAbout" @hide="hideModalAbout" />
     </header>
     <swiper
       id="ResultsCardsSlider"
@@ -84,6 +85,7 @@ import Bag from '@/assets/images/results/bag.png'
 import IdCard from '@/assets/images/results/idCard.png'
 import Machine from '@/assets/images/results/machine.png'
 import Person from '@/assets/images/results/person.png'
+import About from '@/components/about'
 import Button from '@/components/block/button.vue'
 import ResultCard from '@/components/block/ResultCard.vue'
 
@@ -95,6 +97,7 @@ export default {
     Swiper,
     SwiperSlide,
     ResultCard,
+    About,
     Button
   },
   data() {
@@ -110,6 +113,9 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
+      seeAbout: false,
+
+      // images
       Alert,
       Bag,
       IdCard,
@@ -132,6 +138,14 @@ export default {
       }
 
       return SLIDES_PER_VIEW
+    },
+
+    showModalAbout() {
+      console.log('click')
+      this.seeAbout = true
+    },
+    hideModalAbout() {
+      this.seeAbout = false
     }
   }
 }
