@@ -23,3 +23,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# package npm
+package-lock.json
