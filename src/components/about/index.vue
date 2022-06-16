@@ -20,6 +20,9 @@
         <a href="https://www.valentinsld.fr/" target="_blank">Valentin Salaud</a> et
         <a href="https://github.com/anorev" target="_blank">Robin Verona</a>
       </p>
+      <p class="content__equipe">
+        <b>Remerciement :</b> <a href="https://adrienmelchior.fr/" target="_blank">Adrien Melchior</a>
+      </p>
     </div>
 
     <img class="about__gobelins" :src="Gobelins" />
