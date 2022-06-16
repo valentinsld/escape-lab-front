@@ -62,7 +62,6 @@ export default {
     },
 
     showModalAbout() {
-      console.log('click')
       this.seeAbout = true
     },
     hideModalAbout() {
