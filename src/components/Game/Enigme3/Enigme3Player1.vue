@@ -145,9 +145,9 @@ export default {
       this.choices = []
       this.allQuestionsAsked = false
 
-      this.generateQuestions()
-
       this.$nextTick(() => {
+        this.generateQuestions()
+
         this.buttons = this.$refs?.['choice-buttons']
       })
     },
