@@ -1,8 +1,12 @@
 # ClicClack
 
-Ce projet est développé dans le cadre du master DMII 1ère année de Gobelins.
+ClicClack est un projet réalisé par une équipe d’étudiants en Master Design et Management de l’Innovation Interactive à Gobelins, l’école de l’Image, pour leur jury de fin d’année.
 
 Version en ligne : https://clic-clack.herokuapp.com/
+
+Design : [Axel Crouilbois](https://www.behance.net/axelcrb) et [Lisa Levavasseur](http://lisalevavasseur.fr/)
+Développement : [Timothée Blanchard](https://www.timblanchard.com/), [Valentin Slaud](https://www.valentinsld.fr/) et [Robin Verona](https://github.com/anorev)
+Remerciement : [Adrien Melchior](https://adrienmelchior.fr/)
 
 ## Setup du projet
 

@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { STATE as S } from '@/store/helpers'
+
 export default {
   name: 'IntroMainScreen',
   data() {
@@ -23,6 +25,9 @@ export default {
     'intro-startVideo': function () {
       this.$data.startVideo = true
     }
+  },
+  mounted() {
+    this.$store.state[S.sounds]?.['music-home'].play()
   },
   methods: {
     sendDarkScene() {

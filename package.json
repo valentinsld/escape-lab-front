@@ -32,6 +32,8 @@
     "socket.io-client": "^4.4.1",
     "three": "^0.139.2",
     "troika-three-text": "^0.46.4",
+    "swiper": "^8.2.2",
+    "swiper-vue2": "^1.0.9",
     "tweakpane": "^3.0.8",
     "video.js": "^7.19.2",
     "videojs-abloop": "^1.2.0",

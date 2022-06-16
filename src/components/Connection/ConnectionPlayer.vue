@@ -68,7 +68,6 @@ import FakeVideo from '@/assets/FakeVideo.svg'
 import SoundIcon from '@/assets/icon-sound-orange.svg'
 import Logo from '@/assets/logo.svg'
 import Button from '@/components/block/button.vue'
-import Sound from '@/helpers/Sound'
 import { STATE as S } from '@/store/helpers'
 import { MUTATIONS as M } from '@/store/helpers'
 import { STATE_SCREEN } from '@/store/helpers'
@@ -106,7 +105,8 @@ export default {
     idRoom: (state) => state[S.idRoom],
     listUsers: (state) => state[S.listUsers],
     socketID: (state) => state[S.socketID],
-    playerIsReady: (state) => state[S.playerIsReady]
+    playerIsReady: (state) => state[S.playerIsReady],
+    sounds: (state) => state[S.sounds]
   }),
   sockets: {
     startGame: function () {
@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     goToConnection() {
-      new Sound('select-3', { volume: 0.3 })
+      this.sounds?.['select-3'].play()
       this.$data.seeHome = false
 
       this.initNoSleep()
@@ -195,8 +195,7 @@ export default {
       this.$socket.emit('connectToRoom', loginData)
     },
     isReady() {
-      console.log('isReady !!!')
-      new Sound('validation', { volume: 0.3 })
+      this.sounds?.['validation'].play()
       this.$socket.emit('isReady')
     },
 
