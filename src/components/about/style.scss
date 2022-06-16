@@ -81,6 +81,10 @@
       &__img {
         max-width: 40%;
         margin-bottom: 2%;
+
+        @include mobile {
+          max-width: 60%;
+        }
       }
 
       &__presentation {
@@ -112,5 +116,9 @@
     width: 100px;
     height: 60px;
     transform: translate3d(-50%, 0, 0);
+
+    @include mobile {
+      display: none;
+    }
   }
 }

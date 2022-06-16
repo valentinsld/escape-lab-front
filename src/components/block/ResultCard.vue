@@ -67,7 +67,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 595px;
+  height: 100%;
   padding: 0 32px;
   padding-bottom: 20px;
   margin: 0 20px;
@@ -118,7 +118,8 @@ export default {
 }
 
 footer h4 {
-  margin-top: 0;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
   text-align: left;
 }
 
@@ -134,6 +135,7 @@ footer p {
 
 .tips img {
   width: fit-content;
+  max-width: 56px;
 }
 
 .tips p {
@@ -163,7 +165,7 @@ footer p {
     align-items: center;
     justify-content: space-between;
     max-width: 95vw;
-    height: 625px;
+    // height: 625px;
     // padding: 0 20px;
     margin: 20px;
     background-color: var(--color-whiteDimmed);
@@ -190,26 +192,10 @@ footer p {
   }
 }
 
-@media screen and (min-width: 768px) {
-  .result__card {
-    height: 670px;
-    margin-bottom: 200px;
-  }
-}
-
 @media screen and (min-width: 992px) {
   .result__card {
-    height: 670px;
+    // height: 670px;
     margin: 0 10px;
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .result__card {
-    width: 480px;
-    height: 600px;
-    margin-bottom: 200px;
-    // transform: scale(1.5);
   }
 }
 </style>
