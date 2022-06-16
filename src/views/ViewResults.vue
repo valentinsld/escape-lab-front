@@ -126,7 +126,7 @@ export default {
   methods: {
     getSlidesPerView() {
       let SLIDES_PER_VIEW = 3
-      console.log(window.innerWidth)
+      // console.log(window.innerWidth)
       if (window.innerWidth < 568) {
         SLIDES_PER_VIEW = 1
       }
@@ -141,7 +141,6 @@ export default {
     },
 
     showModalAbout() {
-      console.log('click')
       this.seeAbout = true
     },
     hideModalAbout() {
