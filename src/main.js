@@ -1,3 +1,5 @@
+import './registerServiceWorker'
+
 import SocketIO from 'socket.io-client'
 import Vue from 'vue'
 import VueSocketIO from 'vue-socket.io'
