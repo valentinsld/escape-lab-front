@@ -6,13 +6,7 @@
       <Button class="button" text="À propos de ClicClack" :on-click="showModalAbout" />
       <About :see="seeAbout" @hide="hideModalAbout" />
     </header>
-    <swiper
-      id="ResultsCardsSlider"
-      :slides-per-view="getSlidesPerView()"
-      :scrollbar="{ draggable: true }"
-      mousewheel
-      free-mode
-    >
+    <swiper id="ResultsCardsSlider" :slides-per-view="getSlidesPerView()" :scrollbar="{ draggable: true }" mousewheel>
       <!-- <div class="inner-slider"> -->
       <swiper-slide style="width: fit-content">
         <ResultCard
