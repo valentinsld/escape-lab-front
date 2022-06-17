@@ -185,7 +185,6 @@ export default {
       this.setLoop(MARKERS_PLAYER.loopEnigme1)
     },
     playEndEnigme1() {
-      // TODO : add forced from PANE
       this.setLoop(MARKERS_PLAYER.loopEnigme2)
     },
     playEndEnigme2() {
