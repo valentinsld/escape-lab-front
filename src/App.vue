@@ -107,6 +107,8 @@ export default {
 @import 'scss/app';
 // Remove scroll to reload page for ios
 body {
+  position: fixed;
+  width: 100%;
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
