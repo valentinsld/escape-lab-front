@@ -93,6 +93,7 @@ export const actions = {
   [ACTIONS.initPopup]({ state }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
+    console.log('props', props)
     loader.load('/assets/models/popup.gltf', (data) => {
       // HANDLE MODEL
       let obj = data.scene
@@ -160,7 +161,6 @@ export const actions = {
 
       popup.isTriggered = false
       popup.triggerId = props.content.id
-      //+2 -1
       popup.position.set(0, 4.5, -9)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
       popup.scale.set(1.1, 1.1, 1.1)

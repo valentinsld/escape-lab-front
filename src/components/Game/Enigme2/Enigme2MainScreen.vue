@@ -34,9 +34,6 @@ export default {
   }),
   watch: {
     cards: function () {
-      if (this.cards && this.popups.length === 0) {
-        this.initThreePopups()
-      }
       if (this.popups.length > 0) {
         this.animThreePopups()
       }
@@ -58,14 +55,6 @@ export default {
     }
   },
   methods: {
-    initThreePopups() {
-      for (let card in this.cards) {
-        this.$store.dispatch({
-          type: A.initPopup,
-          content: this.cards[card]
-        })
-      }
-    },
     animThreePopups() {
       this.cards.filter((card) => {
         const index = this.$store.getters[G.getPopupArrayIndex](card.id)

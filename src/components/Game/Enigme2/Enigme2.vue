@@ -14,6 +14,7 @@ import Enigme2MainScreenTuto from '@/components/Game/Enigme2/tuto/Enigme2MainScr
 import Enigme2Player1Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player1Tuto'
 import Enigme2Player2Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player2Tuto'
 import { STATE as S } from '@/store/helpers'
+import { ACTIONS as A } from '@/store/modules/three/helpers'
 
 export default {
   name: 'Enigme2',
@@ -29,18 +30,36 @@ export default {
     return {
       isStart: false,
       cards: [],
-      componentKey: 0
+      componentKey: 0,
+      isPopupsInit: false,
+      popups: this.$store.state.three.popups
     }
   },
   computed: mapState({
     typeScreen: (state) => state[S.typeScreen]
   }),
+  watch: {
+    cards: function () {
+      if (!this.isPopupsInit && this.typeScreen === 'MainScreen') {
+        this.initThreePopups()
+        this.isPopupsInit = true
+      }
+    }
+  },
   mounted() {
     this.$socket.emit('enigme2-getPopups')
   },
   methods: {
     getCardsData(data) {
       this.cards = data
+    },
+    initThreePopups() {
+      for (let card in this.cards) {
+        this.$store.dispatch({
+          type: A.initPopup,
+          content: this.cards[card]
+        })
+      }
     }
   },
   sockets: {
@@ -58,6 +77,7 @@ export default {
       }
     },
     'enigme2-restart': function () {
+      this.isPopupsInit = false
       this.isStart = true
       this.componentKey += 1
     }
