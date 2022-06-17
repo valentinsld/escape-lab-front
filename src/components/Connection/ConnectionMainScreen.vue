@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <div v-if="highmode" class="highmode" />
+
     <div
       :class="{
         homeContainer: true,
@@ -82,6 +84,7 @@ export default {
     listUsers: (state) => state[S.listUsers],
     playerIsReady: (state) => state[S.playerIsReady],
     sounds: (state) => state[S.sounds],
+    highmode: (state) => state[S.highmode],
 
     urlQrCode: () => window.location.origin + '?room=',
     statusPlayer1: function () {

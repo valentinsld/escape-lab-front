@@ -75,6 +75,10 @@ export default {
   border: 5px solid var(--color-black);
   border-radius: var(--box-rounded-radius);
   box-shadow: 6px 6px 0 var(--color-black);
+
+  @include mobile {
+    font-size: 14px;
+  }
 }
 
 .result__card.no-tips {
@@ -100,9 +104,9 @@ export default {
 }
 
 .result__card .content h3 {
-  padding: 20px 0 !important;
+  padding: 0 0 10px 0 !important;
   margin: 0;
-  font-size: 30px;
+  font-size: 1.875em;
   font-weight: var(--weight-bold);
   text-align: center;
 }
@@ -113,7 +117,7 @@ export default {
 
 .result__card .content p {
   margin: 15px 0;
-  font-size: 18px;
+  font-size: 1.125em;
   font-weight: var(--weight-regular);
 }
 
@@ -135,13 +139,13 @@ footer p {
 
 .tips img {
   width: fit-content;
-  max-width: 56px;
+  max-width: 3.5em;
 }
 
 .tips p {
   margin-top: 0;
-  margin-left: 20px;
-  font-size: 18px;
+  margin-left: 1.25em;
+  font-size: 1.125em;
   text-align: left;
 }
 
@@ -151,6 +155,11 @@ footer p {
   justify-content: center;
   width: 160px;
   height: 160px;
+
+  @include mobile {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -167,7 +176,7 @@ footer p {
     max-width: 95vw;
     // height: 625px;
     // padding: 0 20px;
-    margin: 20px;
+    margin: 1.25em;
     background-color: var(--color-whiteDimmed);
     border-radius: var(--box-rounded-radius);
     box-shadow: 6px 6px 0 var(--color-black);
@@ -185,8 +194,8 @@ footer p {
   }
 
   .result__card .content h3 {
-    padding: 20px 0;
-    font-size: 30px;
+    padding: 1.25em 0;
+    font-size: 1.875em;
     font-weight: var(--weight-bold);
     text-align: center;
   }
