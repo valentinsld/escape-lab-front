@@ -188,7 +188,7 @@ export default {
   align-items: center;
   width: 100%;
   max-width: 1400px;
-  height: calc(100 * var(--vhRez, 1vh));
+  min-height: calc(100 * var(--vhRez, 1vh));
   margin: 0 auto;
   background-color: var(--color-blue);
 
