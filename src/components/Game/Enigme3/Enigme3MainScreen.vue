@@ -104,7 +104,7 @@ export default {
         : normalSailers[randomNum(0, normalSailers.length)]
     },
     initScale() {
-      this.scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.87
+      this.scale = Math.max(window.innerWidth / 1920, window.innerHeight / 1080) * 0.87
 
       window.addEventListener('resize', () => {
         this.scale = Math.max(window.innerWidth / 1920, window.innerHeight / 1080) * 0.87
