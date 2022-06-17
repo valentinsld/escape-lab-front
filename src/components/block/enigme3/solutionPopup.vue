@@ -84,6 +84,7 @@ export default {
 .solution-popup__answer {
   margin-bottom: 20px;
   font-size: 18px;
+  text-align: center;
 }
 
 .solution-popup__button {
