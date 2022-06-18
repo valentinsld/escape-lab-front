@@ -62,7 +62,7 @@ export default {
           this.$store.commit(M.triggerPopup, index)
           if (card.id === 4) this.$store.state[S.sounds]?.['simlich-rire'].play()
           this.$store.dispatch({
-            type: A.animatePopup,
+            type: A.animatePopupEnter,
             id: index
           })
         }

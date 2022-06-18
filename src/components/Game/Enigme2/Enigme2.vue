@@ -13,6 +13,7 @@ import Enigme2Player from '@/components/Game/Enigme2/Enigme2Player.vue'
 import Enigme2MainScreenTuto from '@/components/Game/Enigme2/tuto/Enigme2MainScreenTuto'
 import Enigme2Player1Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player1Tuto'
 import Enigme2Player2Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player2Tuto'
+import { textContent } from '@/data/enigme2'
 import { STATE as S } from '@/store/helpers'
 import { ACTIONS as A } from '@/store/modules/three/helpers'
 
@@ -32,7 +33,8 @@ export default {
       cards: [],
       componentKey: 0,
       isPopupsInit: false,
-      popups: this.$store.state.three.popups
+      popups: this.$store.state.three.popups,
+      textContent: textContent
     }
   },
   computed: mapState({
@@ -54,6 +56,11 @@ export default {
       this.cards = data
     },
     initThreePopups() {
+      // INIT POPUP CONSIGNE
+      this.$store.dispatch({
+        type: A.initPopup,
+        content: { text: textContent.consigne.mainScreen, subject: '', from: 'LE POPUPATOR', isConsigne: true }
+      })
       for (let card in this.cards) {
         this.$store.dispatch({
           type: A.initPopup,
@@ -65,6 +72,12 @@ export default {
   sockets: {
     startEnigme: function () {
       this.isStart = true
+      // Leave popup consigne
+      if (this.typeScreen === 'MainScreen')
+        this.$store.dispatch({
+          type: A.animatePopupLeave,
+          id: 0
+        })
     },
     'enigme2-getPopups': function (props) {
       if (this.typeScreen === 'MainScreen') {
