@@ -3,7 +3,8 @@ export const STATE = {
   scene: 'scene',
   renderer: 'renderer',
   popup: 'popup',
-  popups: 'popups'
+  popups: 'popups',
+  duration: 'duration'
 }
 
 export const MUTATIONS = {
@@ -21,6 +22,7 @@ export const GETTERS = {
 export const ACTIONS = {
   initScene: 'A_INIT_SCENE',
   initPopup: 'A_INIT_POPUP',
-  animatePopup: 'A_ANIMATE_POPUP',
+  animatePopupEnter: 'A_ANIMATE_POPUP_ENTER',
+  animatePopupLeave: 'A_ANIMATE_POPUP_LEAVE',
   animate: 'A_ANIMATE'
 }
