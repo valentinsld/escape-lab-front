@@ -34,5 +34,13 @@
 
   .f-link {
     @include f-link(); }
+
 }
 
+.-enigme2 .highlight {
+  color: $enigme2;
+}
+
+.-enigme3 .highlight {
+  color: $enigme3;
+}
