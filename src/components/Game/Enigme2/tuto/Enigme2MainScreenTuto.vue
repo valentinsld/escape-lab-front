@@ -1,8 +1,5 @@
 <template>
-  <div class="tuto">
-    <h2>Consigne</h2>
-    <h3 v-html="textContent.consigne.mainScreen" />
-  </div>
+  <div class="tuto"></div>
 </template>
 
 <script>
@@ -17,25 +14,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.tuto {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 75%;
-  max-width: 600px;
-  padding: 2em 3em;
-  background: white;
-  border: 5px solid var(--color-black);
-  border-radius: var(--box-rounded-radius);
-  transform: translate(-50%, -50%);
-
-  h2 {
-    text-align: center;
-  }
-
-  h3 {
-    line-height: 1.6rem;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

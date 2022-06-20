@@ -174,8 +174,9 @@ export const textContent = {
   sailerName: 'EricDu59',
   consigne: {
     mainScreen:
-      'À l’aide du carnet de notes, signalez les 3 bugs qui permettent de reconnaitre le robot générateur de fausses annonces du professeur.',
-    notice: 'Vous devez étudier le carnet de notes et signaler les bugs',
-    chat: 'Vous devez chatter avec le robot'
+      'À l’aide du carnet de notes et du chat, signalez les 3 bugs qui permettent de reconnaitre le robot arnaqueur du professeur.',
+    notice:
+      '<b>Vous devez <span class="highlight">étudier le carnet de notes</span></b> pour trouver les 3 bugs du robot.',
+    chat: '<b>Vous devez <span class="highlight">chatter avec le robot</span></b> pour aider l’autre joueur à trouver les 3 bugs.'
   }
 }

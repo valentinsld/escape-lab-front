@@ -15,7 +15,8 @@ export const state = {
   [STATE.scene]: null,
   [STATE.renderer]: null,
   [STATE.popup]: null,
-  [STATE.popups]: []
+  [STATE.popups]: [],
+  [STATE.duration]: 5000
 }
 
 export const mutations = {
@@ -90,7 +91,7 @@ export const actions = {
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state }, props) {
+  [ACTIONS.initPopup]({ state, dispatch }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
@@ -113,17 +114,15 @@ export const actions = {
       state.scene.add(subject)
       state.scene.add(text)
 
-      //from.text = 'Caf de Paris (noreply@emailing.caf.fr)'
       from.text = props.content.from
       from.font = FONTS['medium']
-      from.fontSize = 0.3
+      from.fontSize = props.content.isConsigne ? 0.5 : 0.3
       from.anchorX = 'left'
       from.position.x = -4
       from.position.z = 0.2
       from.position.y = 1.5
       from.color = 0x000000
 
-      //subject.text = 'Déclarez vos revenus trimestriels'
       subject.text = props.content.subject
       subject.font = FONTS['medium']
       subject.fontSize = 0.3
@@ -135,8 +134,6 @@ export const actions = {
       subject.color = 0x000000
 
       text.text = props.content.text
-      /*text.text =
-        'Pour lire ce message en ligne, rendez-vous sur cette page. Ceci est un message automatique, merci de ne pas y répondre…'*/
       text.font = FONTS['regular']
       text.fontSize = 0.35
       text.anchorX = 'left'
@@ -159,29 +156,37 @@ export const actions = {
       popup.add(text)
 
       popup.isTriggered = false
-      popup.triggerId = props.content.id
-      //+2 -1
+      if (props.content.isConsigne) {
+        popup.isConsigne = true
+      } else {
+        popup.triggerId = props.content.id
+      }
+
       popup.position.set(0, 4.5, -9)
       popup.rotation.set(-Math.PI * 0.5, 0, 0)
       popup.scale.set(1.1, 1.1, 1.1)
 
       state.popups.push(popup)
       state.scene.add(popup)
+
+      if (props.content.isConsigne)
+        dispatch({
+          type: ACTIONS.animatePopupEnter,
+          id: 0,
+          noLeave: true
+        })
     })
     state.renderer.render(state.scene, state.camera)
   },
-  [ACTIONS.animatePopup]({ state, rootState }, props) {
-    let duration = 5000
-
+  [ACTIONS.animatePopupEnter]({ state, rootState, dispatch }, props) {
     const tlPosition = Anime.timeline({
-      targets: state.popups[props.id].position,
-      duration: duration
+      targets: state.popups[props.id].position
     })
 
     tlPosition
       .add({
         y: -0.8,
-        duration: duration * 0.1,
+        duration: state.duration * 0.1,
         easing: 'easeInOutCubic',
         begin: () => {
           rootState.sounds?.['swoosh-enter'].play()
@@ -191,27 +196,39 @@ export const actions = {
         z: -4,
         y: -1,
         x: 0.5,
-        duration: duration * 0.6,
-        easing: 'easeOutQuart'
-      })
-      .add({
-        y: -13,
-        duration: duration * 0.3,
-        begin: () => {
-          setTimeout(() => rootState.sounds?.['swoosh-1'].play(), 150)
+        duration: state.duration * 0.6,
+        easing: 'easeOutQuart',
+        complete: () => {
+          if (!props.noLeave)
+            dispatch({
+              type: ACTIONS.animatePopupLeave,
+              id: props.id
+            })
         }
       })
     Anime({
       targets: [state.popups[props.id].rotation],
       keyframes: [
         // popup descend
-        { duration: duration * 0.2 },
-        { x: 0, y: 0.02, duration: duration * 0.3, easing: 'easeInOutCubic' },
+        { duration: state.duration * 0.2 },
+        { x: 0, y: 0.02, duration: state.duration * 0.3, easing: 'easeInOutCubic' },
         // popup float et descend
-        { duration: duration * 0.5 }
+        { duration: state.duration * 0.5 }
       ],
       easing: 'linear',
-      duration: duration
+      duration: state.duration
+    })
+  },
+  [ACTIONS.animatePopupLeave]({ state, rootState }, props) {
+    const tlPosition = Anime.timeline({
+      targets: state.popups[props.id].position
+    })
+    tlPosition.add({
+      y: -13,
+      duration: state.duration * 0.3,
+      begin: () => {
+        setTimeout(() => rootState.sounds?.['swoosh-1'].play(), 150)
+      }
     })
   },
   [ACTIONS.animate]({ dispatch, state }) {

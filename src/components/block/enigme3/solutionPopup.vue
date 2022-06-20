@@ -93,7 +93,7 @@ export default {
   margin: auto;
   font-weight: bold;
   color: #f8f8f8;
-  background: #3577f5;
+  background: var(--color-enigme3);
   border: 4px solid var(--color-black);
   border-radius: 27px;
 }
