@@ -116,7 +116,7 @@ export const actions = {
 
       from.text = props.content.from
       from.font = FONTS['medium']
-      from.fontSize = 0.3
+      from.fontSize = props.content.isConsigne ? 0.5 : 0.3
       from.anchorX = 'left'
       from.position.x = -4
       from.position.z = 0.2

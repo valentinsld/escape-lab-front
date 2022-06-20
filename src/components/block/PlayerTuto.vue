@@ -2,9 +2,9 @@
   <div class="tuto">
     <div class="screenContainer tuto__container" :class="'-' + colorBackground">
       <img class="tuto__logo" :src="Logo" />
-      <p v-if="text" class="tuto__consigne" v-html="text" />
 
       <img v-if="gif" :src="gif" class="tuto__gif" />
+      <p v-if="text" class="tuto__consigne" v-html="text" />
 
       <div class="tuto__btn-container">
         <button :disabled="isReady" :class="`button tuto__start-btn -${colorBackground}`" @click="toggleStart">
@@ -88,7 +88,8 @@ export default {
 }
 
 .tuto__consigne {
-  font-size: 1.3rem;
+  font-size: 1rem;
+  line-height: 1.4;
   text-align: center;
 }
 
@@ -98,7 +99,7 @@ export default {
 }
 
 .tuto__gif {
-  max-width: 84%;
+  max-width: 75%;
   margin: 0 auto;
 }
 
