@@ -303,6 +303,7 @@ export default {
   padding: 0.2em 1em;
   font-size: 20px;
   font-weight: bold;
+  color: var(--color-black);
   background: transparent;
   border: 4px solid var(--color-black);
   border-radius: 8px;
