@@ -26,7 +26,12 @@
 
         <div class="content__connect">
           <div class="connect__qrcode">
-            <QrcodeVue v-if="idRoom" :value="urlQrCode + idRoom" :size="110" level="H" />
+            <QrcodeVue
+              v-if="idRoom"
+              :value="highmode ? 'https://www.twitch.tv/GobelinsLIVE' : urlQrCode + idRoom"
+              :size="110"
+              level="H"
+            />
           </div>
           <p v-if="idRoom" class="connect__text">
             ou rendez-vous sur<br />
