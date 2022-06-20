@@ -59,7 +59,7 @@ export default {
       // INIT POPUP CONSIGNE
       this.$store.dispatch({
         type: A.initPopup,
-        content: { text: textContent.consigne.mainScreen, subject: '', from: 'LE POPUPATOR', isConsigne: true }
+        content: { text: textContent.consigne.mainScreen, subject: '', from: 'Consigne', isConsigne: true }
       })
       for (let card in this.cards) {
         this.$store.dispatch({
