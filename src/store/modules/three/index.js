@@ -47,6 +47,10 @@ export const getters = {
   [GETTERS.getPopupArrayIndex]: (state) => (triggeredId) =>
     state.popups.findIndex((obj) => {
       return obj.triggerId === triggeredId
+    }),
+  [GETTERS.getConsignePopupIndex]: (state) => () =>
+    state.popups.findIndex((obj) => {
+      return obj.isConsigne
     })
 }
 
@@ -91,7 +95,7 @@ export const actions = {
       resolve()
     })
   },
-  [ACTIONS.initPopup]({ state, dispatch }, props) {
+  [ACTIONS.initPopup]({ state, dispatch, getters }, props) {
     let loader = new GLTFLoader()
     const popup = new Three.Group()
     loader.load('/assets/models/popup.gltf', (data) => {
@@ -169,12 +173,14 @@ export const actions = {
       state.popups.push(popup)
       state.scene.add(popup)
 
-      if (props.content.isConsigne)
+      if (props.content.isConsigne) {
+        const index = getters[GETTERS.getConsignePopupIndex]()
         dispatch({
           type: ACTIONS.animatePopupEnter,
-          id: 0,
+          id: index,
           noLeave: true
         })
+      }
     })
     state.renderer.render(state.scene, state.camera)
   },
