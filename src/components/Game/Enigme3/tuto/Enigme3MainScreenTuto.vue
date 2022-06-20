@@ -66,13 +66,14 @@ export default {
   }
 
   h2 {
+    margin-bottom: 0.3em;
     font-size: 3em;
     text-align: center;
   }
 
   h3 {
     font-size: 1.7em;
-    line-height: 2em;
+    line-height: 1.5em;
     text-align: center;
   }
 }
