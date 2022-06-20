@@ -16,7 +16,8 @@ export const MUTATIONS = {
 }
 
 export const GETTERS = {
-  getPopupArrayIndex: 'G_POPUP_INDEX'
+  getPopupArrayIndex: 'G_POPUP_INDEX',
+  getConsignePopupIndex: 'G_CONSIGNE_POPUP_INDEX'
 }
 
 export const ACTIONS = {

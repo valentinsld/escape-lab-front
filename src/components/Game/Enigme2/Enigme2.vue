@@ -15,7 +15,7 @@ import Enigme2Player1Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player1Tut
 import Enigme2Player2Tuto from '@/components/Game/Enigme2/tuto/Enigme2Player2Tuto'
 import { textContent } from '@/data/enigme2'
 import { STATE as S } from '@/store/helpers'
-import { ACTIONS as A } from '@/store/modules/three/helpers'
+import { ACTIONS as A, GETTERS as G } from '@/store/modules/three/helpers'
 
 export default {
   name: 'Enigme2',
@@ -76,7 +76,7 @@ export default {
       if (this.typeScreen === 'MainScreen')
         this.$store.dispatch({
           type: A.animatePopupLeave,
-          id: 0
+          id: this.$store.getters[G.getConsignePopupIndex]()
         })
     },
     'enigme2-getPopups': function (props) {
