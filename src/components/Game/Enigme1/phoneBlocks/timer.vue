@@ -19,7 +19,7 @@ export default {
   props: {
     initTime: {
       type: Number,
-      default: 26
+      default: 36
     },
     isStart: {
       type: Boolean,
