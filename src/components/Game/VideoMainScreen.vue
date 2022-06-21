@@ -29,7 +29,7 @@ function convertTimeToSeconds(time) {
 }
 const MARKERS_PLAYER = {
   introDarkness: '0:24:00',
-  loopEnigme1: { start: '0:27:02', end: '0:32:04' },
+  loopEnigme1: { start: '0:27:02', end: '0:32:09' },
   loopEnigme2: { start: '0:47:02', end: '0:52:00' },
   loopEnigme3: { start: '1:03:14', end: '1:09:18' },
   startOutro: '1:09:18',
