@@ -83,8 +83,8 @@ export default {
   methods: {
     generateQuestions() {
       this.questions = questionsData(this.product)
-      /*.sort(() => Math.random() - Math.random())
-        .slice(0, this.questionsToDisplay)*/
+        .sort(() => Math.random() - Math.random())
+        .slice(0, this.questionsToDisplay)
     },
     chooseQuestion(pos) {
       this.$store.state[S.sounds]?.['select-3'].play()

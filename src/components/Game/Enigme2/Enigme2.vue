@@ -57,10 +57,11 @@ export default {
     },
     initThreePopups() {
       // INIT POPUP CONSIGNE
-      this.$store.dispatch({
-        type: A.initPopup,
-        content: { text: textContent.consigne.mainScreen, subject: '', from: 'Consigne', isConsigne: true }
-      })
+      if (!this.isStart)
+        this.$store.dispatch({
+          type: A.initPopup,
+          content: { text: textContent.consigne.mainScreen, subject: '', from: 'Consigne', isConsigne: true }
+        })
       for (let card in this.cards) {
         this.$store.dispatch({
           type: A.initPopup,
