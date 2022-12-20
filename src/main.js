@@ -19,7 +19,7 @@ Vue.use(
     connection: SocketIO(
       process.env.NODE_ENV === 'development' && !process.env.VUE_APP_LOAD_SOCKETS_FROM_PROD
         ? 'http://localhost:5050/'
-        : 'https://clic-clack-back.herokuapp.com/',
+        : 'https://click-clack-back.onrender.com/',
       optionsSocket
     )
     // vuex: {
